@@ -1,18 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 :root {
-  --bg-color: #f4f0ea;
-  --text-color: #1a1a1a;
+  --bg-color: #FFFCF7;
+  --text-color: #1A1A1A;
   
-  /* Neo Brutalism Colors */
-  --color-primary: #ff5277; /* Vibrant Pink */
-  --color-secondary: #00d2ff; /* Cyan */
-  --color-accent: #ffeb3b; /* Yellow */
-  --color-dark: #1a1a1a;
+  /* Edtech Palette */
+  --color-primary: #FFD166;
+  --color-secondary: #E8D5F5;
+  --color-accent: #D4EAFF;
+  --color-peach: #FFE0D0;
+  --color-mint: #D5F5E3;
+  --color-dark: #1A1A1A;
   --color-white: #ffffff;
+  --color-gray: #6B7280;
+  --color-light-gray: #F3F4F6;
   
-  /* Borders and Shadows */
-  --border-thick: 4px solid var(--color-dark);
-  --shadow-solid: 6px 6px 0px var(--color-dark);
-  --shadow-hover: 2px 2px 0px var(--color-dark);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.08);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
 }
 
 html, body {
@@ -20,9 +30,12 @@ html, body {
   overflow-x: hidden;
   background-color: var(--bg-color);
   color: var(--text-color);
-  font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  font-family: 'Plus Jakarta Sans', var(--font-jakarta), system-ui, -apple-system, sans-serif;
   margin: 0;
   padding: 0;
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
 }
 
 * {
@@ -34,10 +47,13 @@ a {
   text-decoration: none;
 }
 
-/* Base headings */
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: -1px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-dark);
+}
+
+p {
+  margin: 0;
 }
