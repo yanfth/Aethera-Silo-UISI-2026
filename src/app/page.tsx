@@ -34,7 +34,7 @@ export default function Home() {
       <main>
         {/* ===== HERO (2-column like Edtech) ===== */}
         <section className={styles.hero}>
-          <div className={styles.heroContent}>
+          <div className={styles.heroContent} data-aos="fade-right">
             <h1 className={styles.heroTitle}>
               Aethera,
               <br />
@@ -69,7 +69,7 @@ export default function Home() {
           </div>
 
           {/* Hero visual (orbit illustration) */}
-          <div className={styles.heroVisual}>
+          <div className={styles.heroVisual} data-aos="fade-left" data-aos-delay="200">
             {/* Floating badge top-right */}
             <div
               style={{
@@ -186,7 +186,7 @@ export default function Home() {
         <CountdownSection />
 
         {/* ===== ABOUT SILO ===== */}
-        <section id="about" className={styles.section}>
+        <section id="about" className={styles.section} data-aos="fade-up">
           <h2 className={styles.sectionTitle}>Tentang SILO</h2>
           <div className={styles.aboutGrid}>
             <div className={styles.aboutText}>
@@ -260,6 +260,7 @@ export default function Home() {
           id="logo"
           className={styles.section}
           style={{ backgroundColor: "#FFF9EF" }}
+          data-aos="fade-up"
         >
           <h2 className={styles.sectionTitle}>Makna Logo</h2>
           <div className={styles.aboutGrid}>
@@ -334,7 +335,7 @@ export default function Home() {
         </section>
 
         {/* ===== KEBUTUHAN ACARA (course cards style) ===== */}
-        <section id="kebutuhan" className={styles.section}>
+        <section id="kebutuhan" className={styles.section} data-aos="fade-up">
           <h2 className={styles.sectionTitle}>Kebutuhan Acara</h2>
           <p className={styles.sectionSubtitle}>
             Siapkan sebelum hari pertama. Unduh perlengkapan PKKMB.
@@ -456,6 +457,7 @@ export default function Home() {
           id="merch"
           className={styles.section}
           style={{ backgroundColor: "#FFF9EF", overflow: "hidden" }}
+          data-aos="fade-up"
         >
           <h2 className={styles.sectionTitle}>Merchandise</h2>
           <div className={styles.merchCarousel}>
