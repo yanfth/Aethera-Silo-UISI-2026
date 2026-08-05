@@ -49,7 +49,7 @@ function Marker({ location, isActive, label }: { location: number[], isActive: b
     <Html position={[markerPos.x, markerPos.y, markerPos.z]} center zIndexRange={[100, 0]} style={{ opacity: isVisible ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: isVisible ? 'auto' : 'none' }}>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}>
         <div style={{
-          backgroundColor: isActive ? 'var(--color-primary)' : '#ffffff',
+          backgroundColor: isActive ? 'var(--lp-ocean-blue)' : '#ffffff',
           border: isActive ? '3px solid #ffffff' : '2px solid rgba(0,0,0,0.1)',
           borderRadius: '50%',
           width: isActive ? '24px' : '16px',
@@ -61,7 +61,7 @@ function Marker({ location, isActive, label }: { location: number[], isActive: b
           <div style={{
             marginTop: '8px',
             background: '#ffffff',
-            color: 'var(--color-dark)',
+            color: '#1B2838',
             padding: '4px 12px',
             fontWeight: 700,
             borderRadius: '999px',
@@ -101,11 +101,14 @@ export default function GlobeSection() {
   const handlePrev = () => setActiveIdx((i) => (i - 1 + clusters.length) % clusters.length);
 
   return (
-    <section id="kelompok" style={{ padding: '5rem 3rem', backgroundColor: '#FFFCF7', position: 'relative' }} data-aos="fade-up">
+    <section id="kelompok" className={styles.section} data-aos="fade-up">
       
-      <h2 style={{ fontSize: '2rem', marginBottom: '2.5rem', textAlign: 'center', color: '#1A1A1A', fontWeight: 700, letterSpacing: '-0.02em' }}>
+      <h2 style={{ fontSize: '2.25rem', marginBottom: '0.75rem', textAlign: 'center', color: '#1B2838', fontWeight: 800, letterSpacing: '-0.03em' }}>
         Cluster Negara
       </h2>
+      <p style={{ textAlign: 'center', color: '#64748B', fontSize: '0.95rem', marginBottom: '3rem', maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto' }}>
+        Jelajahi kelompok berdasarkan negara di seluruh dunia
+      </p>
 
       <div className={styles.globeGrid}>
         
@@ -113,15 +116,11 @@ export default function GlobeSection() {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
           <div style={{ 
             width: '100%', 
-            maxWidth: '420px', 
+            maxWidth: '480px', 
             aspectRatio: '1/1', 
-            position: 'relative', 
-            borderRadius: '24px', 
-            boxShadow: '0 4px 16px rgba(0,0,0,0.06)', 
-            background: 'linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%)', 
-            overflow: 'hidden' 
+            position: 'relative',
           }}>
-            <Canvas camera={{ position: [0, 0, 3.5], fov: 45 }}>
+            <Canvas camera={{ position: [0, 0, 3.5], fov: 45 }} style={{ background: 'transparent' }} gl={{ alpha: true }}>
               <ambientLight intensity={1.5} />
               <pointLight position={[10, 10, 10]} intensity={2} />
               <directionalLight position={[-5, 5, 5]} intensity={1} />
@@ -144,10 +143,10 @@ export default function GlobeSection() {
           </div>
           
           <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>
-            <button onClick={handlePrev} style={{ fontSize: '0.875rem', fontWeight: 600, padding: '0.6rem 1.5rem', backgroundColor: '#1A1A1A', color: '#ffffff', borderRadius: '999px', border: 'none', cursor: 'pointer', transition: 'all 0.2s' }}>
+            <button onClick={handlePrev} style={{ fontSize: '0.875rem', fontWeight: 600, padding: '0.6rem 1.5rem', background: 'var(--lp-ocean-blue)', color: '#ffffff', borderRadius: '999px', border: 'none', cursor: 'pointer', transition: 'all 0.3s', boxShadow: '0 4px 15px rgba(31,75,93,0.3)' }}>
               ← Prev
             </button>
-            <button onClick={handleNext} style={{ fontSize: '0.875rem', fontWeight: 600, padding: '0.6rem 1.5rem', backgroundColor: '#1A1A1A', color: '#ffffff', borderRadius: '999px', border: 'none', cursor: 'pointer', transition: 'all 0.2s' }}>
+            <button onClick={handleNext} style={{ fontSize: '0.875rem', fontWeight: 600, padding: '0.6rem 1.5rem', background: 'var(--lp-ocean-blue)', color: 'var(--lp-white)', borderRadius: '999px', border: 'none', cursor: 'pointer', transition: 'all 0.3s', boxShadow: '0 4px 15px rgba(31,75,93,0.3)' }}>
               Next →
             </button>
           </div>
@@ -155,19 +154,19 @@ export default function GlobeSection() {
 
         {/* Info Container */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-          <div style={{ backgroundColor: '#ffffff', padding: '2.5rem', borderRadius: '16px', boxShadow: '0 4px 16px rgba(0,0,0,0.06)', border: '1px solid rgba(0,0,0,0.05)' }}>
-            <div style={{ fontWeight: 700, fontSize: '0.75rem', color: '#6B7280', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              CLUSTER · {clusters[activeIdx].id}
+          <div style={{ backgroundColor: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', padding: '2.5rem', borderRadius: '20px', boxShadow: '0 8px 32px rgba(0,0,0,0.06)', border: '1px solid rgba(255,255,255,0.35)' }}>
+            <div style={{ fontWeight: 700, fontSize: '0.75rem', color: 'var(--lp-ocean-blue)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+              🔺 CLUSTER · {clusters[activeIdx].id}
             </div>
-            <h3 style={{ fontSize: '2rem', marginBottom: '0.75rem', lineHeight: 1.2, fontWeight: 700 }}>{clusters[activeIdx].name}</h3>
-            <div style={{ display: 'inline-block', backgroundColor: '#FFD166', padding: '0.4rem 1rem', borderRadius: '999px', fontWeight: 600, marginBottom: '1rem', color: '#1A1A1A', fontSize: '0.8rem' }}>
+            <h3 style={{ fontSize: '2rem', marginBottom: '0.75rem', lineHeight: 1.2, fontWeight: 800, color: 'var(--lp-text)' }}>{clusters[activeIdx].name}</h3>
+            <div style={{ display: 'inline-block', background: 'rgba(31,75,93,0.15)', padding: '0.4rem 1rem', borderRadius: '999px', fontWeight: 600, marginBottom: '1rem', color: 'var(--lp-text)', fontSize: '0.8rem', border: '1px solid rgba(31,75,93,0.2)' }}>
               Negara: {clusters[activeIdx].country}
             </div>
-            <p style={{ fontSize: '0.95rem', lineHeight: 1.65, color: '#6B7280' }}>
+            <p style={{ fontSize: '0.95rem', lineHeight: 1.65, color: 'var(--lp-text-muted)' }}>
               {clusters[activeIdx].desc}
             </p>
             <div style={{ marginTop: '1.5rem' }}>
-              <Link href={`/kelompok?cluster=${clusters[activeIdx].id}`} style={{ display: 'inline-block', backgroundColor: '#1A1A1A', color: '#ffffff', padding: '0.6rem 1.5rem', borderRadius: '999px', fontSize: '0.875rem', fontWeight: 600, textDecoration: 'none', transition: 'background-color 0.2s' }}>
+              <Link href={`/kelompok?cluster=${clusters[activeIdx].id}`} style={{ display: 'inline-block', background: 'var(--lp-ocean-blue)', color: '#ffffff', padding: '0.6rem 1.5rem', borderRadius: '999px', fontSize: '0.875rem', fontWeight: 600, textDecoration: 'none', transition: 'all 0.3s', boxShadow: '0 4px 15px rgba(31,75,93,0.3)' }}>
                 Lihat Kelompok
               </Link>
             </div>
