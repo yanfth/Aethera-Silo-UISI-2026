@@ -20,7 +20,6 @@ function calculateTimeLeft(): TimeLeft {
     return { months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 };
   }
 
-  // Calculate months and remaining days properly
   const nowDate = new Date(now);
   const targetDate = new Date(TARGET_DATE);
 
@@ -28,11 +27,9 @@ function calculateTimeLeft(): TimeLeft {
     (targetDate.getFullYear() - nowDate.getFullYear()) * 12 +
     (targetDate.getMonth() - nowDate.getMonth());
 
-  // Create a date that is `months` months from now
   const tempDate = new Date(nowDate);
   tempDate.setMonth(tempDate.getMonth() + months);
 
-  // If tempDate overshoots target, subtract one month
   if (tempDate.getTime() > TARGET_DATE) {
     months--;
     tempDate.setMonth(tempDate.getMonth() - 1);
@@ -49,65 +46,82 @@ function calculateTimeLeft(): TimeLeft {
   return { months, days, hours, minutes, seconds };
 }
 
-function CountdownUnit({ value, label }: { value: number; label: string }) {
+const gradients = [
+  "var(--lp-ocean-blue)",
+  "var(--lp-aqua)",
+  "var(--lp-charcoal)",
+  "var(--lp-ocean-blue)",
+  "var(--lp-aqua)",
+];
+
+function CountdownUnit({ value, label, gradient }: { value: number; label: string; gradient: string }) {
   const displayValue = String(value).padStart(2, "0");
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "0.75rem",
-      }}
-    >
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.75rem" }}>
       <div
         style={{
           position: "relative",
-          width: "clamp(72px, 12vw, 120px)",
-          height: "clamp(80px, 13vw, 130px)",
-          borderRadius: "16px",
-          background: "linear-gradient(145deg, #1A1A1A 0%, #2D2D2D 100%)",
+          width: "clamp(72px, 12vw, 110px)",
+          height: "clamp(80px, 13vw, 120px)",
+          borderRadius: "20px",
+          background: "rgba(255, 255, 255, 0.6)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+          border: "1px solid rgba(255, 255, 255, 0.4)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          boxShadow:
-            "0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08)",
+          boxShadow: "0 8px 32px rgba(0,0,0,0.06)",
           overflow: "hidden",
         }}
       >
-        {/* Decorative line in the middle */}
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: 0,
-            right: 0,
-            height: "1px",
-            background: "rgba(255,255,255,0.06)",
-            zIndex: 1,
-          }}
-        />
-        {/* Subtle glow on top */}
+        {/* Top gradient accent */}
         <div
           style={{
             position: "absolute",
             top: 0,
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "60%",
-            height: "2px",
-            background:
-              "linear-gradient(90deg, transparent, var(--color-primary), transparent)",
-            borderRadius: "2px",
+            left: 0,
+            right: 0,
+            height: "3px",
+            background: gradient,
+            borderRadius: "20px 20px 0 0",
           }}
         />
+        {/* Center divider */}
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "10%",
+            right: "10%",
+            height: "1px",
+            background: "rgba(0,0,0,0.04)",
+          }}
+        />
+        {/* Low-poly subtle pattern */}
+        <svg
+          width="100%"
+          height="100%"
+          style={{ position: "absolute", top: 0, left: 0, opacity: 0.03 }}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <pattern id="cdPoly" x="0" y="0" width="30" height="26" patternUnits="userSpaceOnUse">
+              <polygon points="15,0 30,26 0,26" fill="none" stroke="currentColor" strokeWidth="0.5" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#cdPoly)" />
+        </svg>
         <span
           style={{
-            fontSize: "clamp(2rem, 5vw, 3.5rem)",
+            fontSize: "clamp(2rem, 5vw, 3.2rem)",
             fontWeight: 800,
-            color: "#ffffff",
-            fontFamily: "'Inter', 'Segoe UI', sans-serif",
+            background: gradient,
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            fontFamily: "'Poppins', sans-serif",
             letterSpacing: "-0.02em",
             lineHeight: 1,
             position: "relative",
@@ -119,11 +133,11 @@ function CountdownUnit({ value, label }: { value: number; label: string }) {
       </div>
       <span
         style={{
-          fontSize: "clamp(0.65rem, 1.2vw, 0.85rem)",
+          fontSize: "clamp(0.65rem, 1.2vw, 0.8rem)",
           fontWeight: 600,
-          color: "#6B7280",
+          color: "var(--lp-text-muted)",
           textTransform: "uppercase",
-          letterSpacing: "0.1em",
+          letterSpacing: "0.12em",
         }}
       >
         {label}
@@ -147,8 +161,9 @@ function Separator() {
         style={{
           width: "6px",
           height: "6px",
-          borderRadius: "50%",
-          backgroundColor: "var(--color-primary)",
+          borderRadius: "2px",
+          transform: "rotate(45deg)",
+          background: "var(--lp-ocean-blue)",
           animation: "countdownPulse 1.5s ease-in-out infinite",
         }}
       />
@@ -156,8 +171,9 @@ function Separator() {
         style={{
           width: "6px",
           height: "6px",
-          borderRadius: "50%",
-          backgroundColor: "var(--color-primary)",
+          borderRadius: "2px",
+          transform: "rotate(45deg)",
+          background: "var(--lp-aqua)",
           animation: "countdownPulse 1.5s ease-in-out infinite 0.3s",
         }}
       />
@@ -176,15 +192,13 @@ export default function CountdownSection() {
     return () => clearInterval(timer);
   }, []);
 
-  // SSR-safe: show nothing until hydrated
   if (!timeLeft) {
     return (
       <section
         id="countdown"
         data-aos="fade-up"
         style={{
-          padding: "5rem 2rem",
-          backgroundColor: "#FFFCF7",
+          padding: "clamp(3rem, 5vw, 5rem) clamp(1rem, 5vw, 2rem)",
           minHeight: "400px",
         }}
       />
@@ -202,98 +216,62 @@ export default function CountdownSection() {
     <>
       <style>{`
         @keyframes countdownPulse {
-          0%, 100% { opacity: 0.3; transform: scale(0.8); }
-          50% { opacity: 1; transform: scale(1.2); }
+          0%, 100% { opacity: 0.3; transform: rotate(45deg) scale(0.8); }
+          50% { opacity: 1; transform: rotate(45deg) scale(1.2); }
         }
         @keyframes countdownFadeIn {
           from { opacity: 0; transform: translateY(24px); }
           to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes shimmer {
-          0% { background-position: -200% center; }
-          100% { background-position: 200% center; }
         }
       `}</style>
 
       <section
         id="countdown"
         style={{
-          padding: "5rem 2rem",
-          backgroundColor: "#FFFCF7",
+          padding: "clamp(3rem, 5vw, 5rem) clamp(1rem, 5vw, 2rem)",
           position: "relative",
           overflow: "hidden",
           animation: "countdownFadeIn 0.8s ease-out",
         }}
       >
-        {/* Background decorative elements */}
-        <div
-          style={{
-            position: "absolute",
-            top: "-60px",
-            right: "-60px",
-            width: "200px",
-            height: "200px",
-            borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(255,209,102,0.15) 0%, transparent 70%)",
-            pointerEvents: "none",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "-40px",
-            left: "-40px",
-            width: "160px",
-            height: "160px",
-            borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(162,210,255,0.12) 0%, transparent 70%)",
-            pointerEvents: "none",
-          }}
-        />
-
-        {/* Label badge */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: "1rem",
-          }}
+        {/* Geometric background decorations */}
+        <svg
+          width="80"
+          height="70"
+          viewBox="0 0 80 70"
+          style={{ position: "absolute", top: "20px", right: "60px", opacity: 0.06 }}
         >
-          {/* <span
-            style={{
-              display: "inline-block",
-              background:
-                "linear-gradient(135deg, var(--color-primary), #FFB347)",
-              color: "#1A1A1A",
-              padding: "0.4rem 1.25rem",
-              borderRadius: "999px",
-              fontSize: "0.75rem",
-              fontWeight: 700,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-            }}
-          ></span> */}
-        </div>
+          <polygon points="40,0 80,70 0,70" fill="var(--lp-aqua)" />
+        </svg>
+        <svg
+          width="50"
+          height="44"
+          viewBox="0 0 50 44"
+          style={{ position: "absolute", bottom: "30px", left: "40px", opacity: 0.06 }}
+        >
+          <polygon points="25,0 50,44 0,44" fill="var(--lp-ocean-blue)" />
+        </svg>
 
         <h2
           style={{
-            fontSize: "clamp(1.5rem, 3vw, 2rem)",
+            fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
             marginBottom: "0.5rem",
             textAlign: "center",
-            color: "#1A1A1A",
-            fontWeight: 700,
-            letterSpacing: "-0.02em",
+            fontWeight: 800,
+            letterSpacing: "-0.03em",
+            background: "linear-gradient(135deg, var(--lp-text), #3B4F6B)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
           }}
         >
-          Menuju Aethera - SILO UISI 2026
+          Menuju Aethera 🔺
         </h2>
 
         <p
           style={{
             textAlign: "center",
-            color: "#6B7280",
+            color: "var(--lp-text-muted)",
             fontSize: "0.95rem",
             marginBottom: "3rem",
             maxWidth: "500px",
@@ -302,26 +280,16 @@ export default function CountdownSection() {
             lineHeight: 1.6,
           }}
         >
-          1 Oktober 2026 — Bersiaplah untuk perjalanan menuju cahaya paling
-          murni.
+          1 Oktober 2026 — Bersiaplah untuk perjalanan menuju cahaya paling murni.
         </p>
 
         {isFinished ? (
-          <div
-            style={{
-              textAlign: "center",
-              padding: "3rem",
-            }}
-          >
+          <div style={{ textAlign: "center", padding: "3rem" }}>
             <h3
               style={{
                 fontSize: "2rem",
-                fontWeight: 700,
-                background:
-                  "linear-gradient(135deg, var(--color-primary), #FF6B6B)",
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                color: "transparent",
+                fontWeight: 800,
+                color: "var(--lp-ocean-blue)",
               }}
             >
               🎉 PKKMB Aethera Dimulai!
@@ -337,35 +305,23 @@ export default function CountdownSection() {
               flexWrap: "wrap",
             }}
           >
-            <CountdownUnit value={timeLeft.months} label="Bulan" />
+            <CountdownUnit value={timeLeft.months} label="Bulan" gradient={gradients[0]} />
             <Separator />
-            <CountdownUnit value={timeLeft.days} label="Hari" />
+            <CountdownUnit value={timeLeft.days} label="Hari" gradient={gradients[1]} />
             <Separator />
-            <CountdownUnit value={timeLeft.hours} label="Jam" />
+            <CountdownUnit value={timeLeft.hours} label="Jam" gradient={gradients[2]} />
             <Separator />
-            <CountdownUnit value={timeLeft.minutes} label="Menit" />
+            <CountdownUnit value={timeLeft.minutes} label="Menit" gradient={gradients[3]} />
             <Separator />
-            <CountdownUnit value={timeLeft.seconds} label="Detik" />
+            <CountdownUnit value={timeLeft.seconds} label="Detik" gradient={gradients[4]} />
           </div>
         )}
 
-        {/* Bottom decorative line */}
-        <div
-          style={{
-            marginTop: "3rem",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <div
-            style={{
-              width: "80px",
-              height: "3px",
-              borderRadius: "2px",
-              background:
-                "linear-gradient(90deg, transparent, var(--color-primary), transparent)",
-            }}
-          />
+        {/* Bottom geometric accent */}
+        <div style={{ marginTop: "3rem", display: "flex", justifyContent: "center", gap: "6px" }}>
+          <div style={{ width: "30px", height: "3px", borderRadius: "2px", background: "var(--lp-ocean-blue)" }} />
+          <div style={{ width: "30px", height: "3px", borderRadius: "2px", background: "var(--lp-aqua)" }} />
+          <div style={{ width: "30px", height: "3px", borderRadius: "2px", background: "var(--lp-charcoal)" }} />
         </div>
       </section>
     </>
