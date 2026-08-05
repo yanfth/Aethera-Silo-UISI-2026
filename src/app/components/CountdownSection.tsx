@@ -181,6 +181,7 @@ export default function CountdownSection() {
     return (
       <section
         id="countdown"
+        data-aos="fade-up"
         style={{
           padding: "5rem 2rem",
           backgroundColor: "#FFFCF7",

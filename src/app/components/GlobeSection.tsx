@@ -101,7 +101,7 @@ export default function GlobeSection() {
   const handlePrev = () => setActiveIdx((i) => (i - 1 + clusters.length) % clusters.length);
 
   return (
-    <section id="kelompok" style={{ padding: '5rem 3rem', backgroundColor: '#FFFCF7', position: 'relative' }}>
+    <section id="kelompok" style={{ padding: '5rem 3rem', backgroundColor: '#FFFCF7', position: 'relative' }} data-aos="fade-up">
       
       <h2 style={{ fontSize: '2rem', marginBottom: '2.5rem', textAlign: 'center', color: '#1A1A1A', fontWeight: 700, letterSpacing: '-0.02em' }}>
         Cluster Negara

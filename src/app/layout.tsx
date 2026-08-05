@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "SIILO UISI 2026",
 };
 
+import AosInit from "./components/AosInit";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -19,7 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={jakarta.variable}>
-      <body>{children}</body>
+      <body>
+        <AosInit />
+        {children}
+      </body>
     </html>
   );
 }
