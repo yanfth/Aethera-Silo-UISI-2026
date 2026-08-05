@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Html, Center } from "@react-three/drei";
 import { getCoordinatesFromLatLng } from "@/utils/coordinates";
 import * as THREE from "three";
+import styles from "../page.module.css";
 
 const clusters = [
   { id: "01", name: "Cluster Japan", country: "Jepang", desc: "Dikenal dengan disiplin dan teknologi tinggi. Cluster ini melambangkan inovasi dan ketelitian.", location: [35.6762, 139.6503] },
@@ -82,8 +84,8 @@ function CameraController({ activeIdx }: { activeIdx: number }) {
     const activeCluster = clusters[activeIdx];
     const { x, y, z } = getCoordinatesFromLatLng(activeCluster.location[0], activeCluster.location[1], EARTH_RADIUS);
     
-    // Jarak kamera dari titik nol adalah 2.5 kali radius
-    const targetPos = new THREE.Vector3(x, y, z).normalize().multiplyScalar(2.5);
+    // Jarak kamera dari titik nol adalah 3.0 kali radius agar globe tidak terpotong
+    const targetPos = new THREE.Vector3(x, y, z).normalize().multiplyScalar(3.0);
     
     camera.position.lerp(targetPos, 0.05);
     camera.lookAt(0, 0, 0);
@@ -105,7 +107,7 @@ export default function GlobeSection() {
         Cluster Negara
       </h2>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center' }}>
+      <div className={styles.globeGrid}>
         
         {/* Globe Container */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
@@ -119,7 +121,7 @@ export default function GlobeSection() {
             background: 'linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%)', 
             overflow: 'hidden' 
           }}>
-            <Canvas camera={{ position: [0, 0, 3], fov: 45 }}>
+            <Canvas camera={{ position: [0, 0, 3.5], fov: 45 }}>
               <ambientLight intensity={1.5} />
               <pointLight position={[10, 10, 10]} intensity={2} />
               <directionalLight position={[-5, 5, 5]} intensity={1} />
@@ -164,6 +166,11 @@ export default function GlobeSection() {
             <p style={{ fontSize: '0.95rem', lineHeight: 1.65, color: '#6B7280' }}>
               {clusters[activeIdx].desc}
             </p>
+            <div style={{ marginTop: '1.5rem' }}>
+              <Link href={`/kelompok?cluster=${clusters[activeIdx].id}`} style={{ display: 'inline-block', backgroundColor: '#1A1A1A', color: '#ffffff', padding: '0.6rem 1.5rem', borderRadius: '999px', fontSize: '0.875rem', fontWeight: 600, textDecoration: 'none', transition: 'background-color 0.2s' }}>
+                Lihat Kelompok
+              </Link>
+            </div>
           </div>
         </div>
 
