@@ -82,8 +82,8 @@ function CameraController({ activeIdx }: { activeIdx: number }) {
     const activeCluster = clusters[activeIdx];
     const { x, y, z } = getCoordinatesFromLatLng(activeCluster.location[0], activeCluster.location[1], EARTH_RADIUS);
     
-    // Jarak kamera dari titik nol adalah 2.5 kali radius
-    const targetPos = new THREE.Vector3(x, y, z).normalize().multiplyScalar(2.5);
+    // Jarak kamera diperjauh agar bumi tidak terpotong (3.2 kali radius)
+    const targetPos = new THREE.Vector3(x, y, z).normalize().multiplyScalar(3.2);
     
     camera.position.lerp(targetPos, 0.05);
     camera.lookAt(0, 0, 0);
@@ -113,11 +113,9 @@ export default function GlobeSection() {
             width: '100%', 
             maxWidth: '420px', 
             aspectRatio: '1/1', 
-            position: 'relative', 
-            borderRadius: '24px', 
-            boxShadow: '0 4px 16px rgba(0,0,0,0.06)', 
-            background: 'linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%)', 
-            overflow: 'hidden' 
+            position: 'relative',
+            borderRadius: '50%',
+            overflow: 'hidden'
           }}>
             <Canvas camera={{ position: [0, 0, 3], fov: 45 }}>
               <ambientLight intensity={1.5} />
