@@ -1,8 +1,12 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
+First, copy this repository to your File Directory 
+```bash
+git clone https://github.com/yanfth/Aethera-Silo-UISI-2026.git
+```
 
-First, run the development server:
+Second, run the development server:
 
 ```bash
 npm run dev
