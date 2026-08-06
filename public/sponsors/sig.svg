@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70" width="240" height="70">
+      <rect width="50" height="50" x="5" y="10" rx="8" fill="#D32F2F" />
+      <path d="M 20 20 L 40 20 L 30 50 Z" fill="#FFFFFF" />
+      <circle cx="30" cy="30" r="5" fill="#111827" />
+      <text x="65" y="42" font-family="'Poppins', sans-serif" font-weight="900" font-size="28" fill="#111827" letter-spacing="1">SIG</text>
+      <text x="65" y="55" font-family="'Inter', sans-serif" font-weight="700" font-size="10" fill="#D32F2F" letter-spacing="0.5">SEMEN INDONESIA GROUP</text>
+    </svg>

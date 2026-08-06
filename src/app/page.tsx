@@ -1,3 +1,4 @@
+import SponsorSection from "./components/SponsorSection";
 import styles from "./page.module.css";
 import Link from "next/link";
 import GlobeSection from "./components/GlobeSection";
@@ -322,6 +323,9 @@ export default function Home() {
             </Link>
           </div>
         </section>
+
+        {/* ===== SPONSOR & MEDIA PARTNER ===== */}
+        <SponsorSection />
 
         {/* ===== CONTACT ===== */}
         <section id="contact" className={styles.section}>
