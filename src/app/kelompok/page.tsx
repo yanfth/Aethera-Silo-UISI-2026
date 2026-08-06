@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { use } from 'react';
 import Link from 'next/link';
 
 export default function KelompokPage({
   searchParams,
 }: {
-  searchParams: { cluster?: string }
+  searchParams: Promise<{ cluster?: string }>;
 }) {
-  const clusterId = searchParams.cluster || '';
+  const resolvedParams = use(searchParams);
+  const clusterId = resolvedParams.cluster || '';
 
   return (
     <main style={{ padding: '4rem 2rem', backgroundColor: '#FFFCF7', minHeight: '100vh', position: 'relative' }}>
