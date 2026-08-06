@@ -10,8 +10,8 @@
 .cardStack {
   position: relative;
   width: 100%;
-  max-width: 1000px;
-  height: 320px;
+  max-width: 1100px;
+  height: 420px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,9 +22,9 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 200px;
-  height: 270px;
-  border-radius: 20px;
+  width: 260px;
+  height: 350px;
+  border-radius: 24px;
   cursor: pointer;
   user-select: none;
   overflow: hidden;
@@ -70,12 +70,12 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 1rem 0.75rem 1.15rem;
+  padding: 1.25rem 1rem 1.4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 0.2rem;
+  gap: 0.25rem;
   z-index: 3;
   box-sizing: border-box;
 }
@@ -83,60 +83,60 @@
 .badgePill {
   background: #000000;
   color: #ffffff;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   font-weight: 800;
-  padding: 0.18rem 0.65rem;
-  border-radius: 5px;
+  padding: 0.22rem 0.75rem;
+  border-radius: 6px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 0.15rem;
+  margin-bottom: 0.2rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .personName {
-  font-size: 1.08rem;
+  font-size: 1.22rem;
   font-weight: 800;
   color: #ffffff;
-  line-height: 1.15;
+  line-height: 1.2;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
   margin: 0;
   letter-spacing: -0.01em;
 }
 
 .personRole {
-  font-size: 0.7rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
   line-height: 1.25;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
   margin: 0;
 }
 
-/* Controls section matching screenshot */
+/* Controls section */
 .controlsWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.85rem;
-  margin-top: 1.5rem;
+  margin-top: 1.75rem;
   z-index: 20;
 }
 
 .btnGroup {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 
 .navBtn {
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.08);
   background: #ffffff;
   color: #1a1a1a;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,41 +148,6 @@
 .navBtn:hover {
   background: #1f4b5d;
   color: #ffffff;
-  transform: scale(1.08);
-  box-shadow: 0 6px 18px rgba(31, 75, 93, 0.3);
-}
-
-.dots {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(139, 92, 246, 0.25);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.dotActive {
-  width: 20px;
-  border-radius: 6px;
-  background: #7c3aed;
-}
-
-@media (max-width: 768px) {
-  .cardStack {
-    height: 300px;
-  }
-  .card {
-    width: 180px;
-    height: 245px;
-    border-radius: 16px;
-  }
-  .personName {
-    font-size: 0.98rem;
-  }
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(31, 75, 93, 0.35);
 }

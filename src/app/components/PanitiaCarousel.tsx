@@ -90,7 +90,7 @@ const PANITIA_PERSONS: PanitiaPerson[] = [
   },
   {
     id: "ko-mk",
-    name: "Muhammad Ivandy Rohman",
+    name: "M Arya Ivandy Rohman",
     role: "Koordinator MK",
     badge: "MK",
     image: "/ivandy_rohman.jpg",
@@ -140,7 +140,7 @@ export default function PanitiaCarousel() {
           const absOffset = Math.abs(offset);
 
           // 3D Coverflow positioning math matching screenshot 1:1
-          const xOffset = offset * 145;
+          const xOffset = offset * 185;
           const yOffset = absOffset * 6;
           const scale = 1 - absOffset * 0.12;
           const rotateY = offset * -12;

@@ -102,24 +102,49 @@ const DOC_ITEMS: DocItem[] = [
   },
 ];
 
+// Duplikasi data agar slider menyambung tanpa henti (infinite seamless loop)
+const EXTENDED_ITEMS = [...DOC_ITEMS, ...DOC_ITEMS];
+
 export default function DokumentasiGallery() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedImage, setSelectedImage] = useState<DocItem | null>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const total = DOC_ITEMS.length;
+  const [isPaused, setIsPaused] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+  const totalOriginal = DOC_ITEMS.length;
+
+  // Auto-play interval (2.5 detik per slide)
+  useEffect(() => {
+    if (isPaused || selectedImage) return;
+
+    const timer = setInterval(() => {
+      handleNext();
+    }, 2800);
+
+    return () => clearInterval(timer);
+  }, [currentIndex, isPaused, selectedImage]);
 
   const handleNext = () => {
-    setCurrentIndex((prev) => Math.min(prev + 1, total - 1));
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => prev + 1);
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => Math.max(prev - 1, 0));
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => (prev <= 0 ? totalOriginal - 1 : prev - 1));
+  };
+
+  // Reset seamless loop saat mencapai bagian duplikat
+  const handleTransitionEnd = () => {
+    if (currentIndex >= totalOriginal) {
+      setIsTransitioning(false);
+      setCurrentIndex(currentIndex % totalOriginal);
+    }
   };
 
   // Keyboard navigation when in view
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (selectedImage) return; // Don't slide if modal open
+      if (selectedImage) return;
       if (e.key === "ArrowRight") handleNext();
       if (e.key === "ArrowLeft") handlePrev();
     };
@@ -127,22 +152,30 @@ export default function DokumentasiGallery() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedImage]);
 
-  // Calculate translate distance based on card width + gap (approx 400px on desktop)
   const cardStep = 400; // 380px card + 20px gap
+
+  const displayIndex = (currentIndex % totalOriginal) + 1;
 
   return (
     <div className={styles.container}>
-      <div className={styles.carouselTrackWrapper}>
+      <div
+        className={styles.carouselTrackWrapper}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
         <div
-          ref={trackRef}
           className={styles.carouselTrack}
+          onTransitionEnd={handleTransitionEnd}
           style={{
             transform: `translateX(-${currentIndex * cardStep}px)`,
+            transition: isTransitioning
+              ? "transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)"
+              : "none",
           }}
         >
-          {DOC_ITEMS.map((item) => (
+          {EXTENDED_ITEMS.map((item, index) => (
             <div
-              key={item.id}
+              key={`${item.id}-${index}`}
               className={styles.slideCard}
               onClick={() => setSelectedImage(item)}
             >
@@ -164,14 +197,28 @@ export default function DokumentasiGallery() {
       {/* Controls Bar */}
       <div className={styles.controlsWrapper}>
         <div className={styles.progressInfo}>
-          Foto <strong>{currentIndex + 1}</strong> dari {total}
+          Foto <strong>{displayIndex}</strong> dari {totalOriginal}
+          {isPaused && (
+            <span
+              style={{
+                marginLeft: "0.75rem",
+                fontSize: "0.75rem",
+                color: "var(--lp-ocean-blue)",
+                background: "rgba(31,75,93,0.1)",
+                padding: "0.2rem 0.6rem",
+                borderRadius: "999px",
+                fontWeight: 700,
+              }}
+            >
+              ⏸ Dihentikan Sementara
+            </span>
+          )}
         </div>
 
         <div className={styles.btnGroup}>
           <button
             className={styles.navBtn}
             onClick={handlePrev}
-            disabled={currentIndex === 0}
             aria-label="Previous documentation slide"
           >
             ‹
@@ -179,7 +226,6 @@ export default function DokumentasiGallery() {
           <button
             className={styles.navBtn}
             onClick={handleNext}
-            disabled={currentIndex === total - 1}
             aria-label="Next documentation slide"
           >
             ›
@@ -189,10 +235,7 @@ export default function DokumentasiGallery() {
 
       {/* Lightbox Modal */}
       {selectedImage && (
-        <div
-          className={styles.modal}
-          onClick={() => setSelectedImage(null)}
-        >
+        <div className={styles.modal} onClick={() => setSelectedImage(null)}>
           <div
             className={styles.modalContent}
             onClick={(e) => e.stopPropagation()}
