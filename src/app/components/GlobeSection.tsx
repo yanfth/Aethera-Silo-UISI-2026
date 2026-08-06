@@ -15,6 +15,7 @@ export interface ClusterData {
   country: string;
   continent: "Asia" | "Afrika" | "Eropa" | "Amerika" | "Oceania";
   flag: string;
+  flagUrl: string;
   desc: string;
   location: [number, number];
 }
@@ -28,8 +29,9 @@ export const CLUSTERS: ClusterData[] = [
     country: "Jepang",
     continent: "Asia",
     flag: "🇯🇵",
+    flagUrl: "https://flagcdn.com/jp.svg",
     desc: "Negara Sakura dengan filosofi Kaizen dan teknologi canggih. Melambangkan disiplin, inovasi, dan dedikasi tinggi.",
-    location: [35.6762, 139.6503],
+    location: [49.9400, 148.6400],
   },
   {
     id: "02",
@@ -38,8 +40,9 @@ export const CLUSTERS: ClusterData[] = [
     country: "Korea Selatan",
     continent: "Asia",
     flag: "🇰🇷",
+    flagUrl: "https://flagcdn.com/kr.svg",
     desc: "Pusat gelombang budaya global dan inovasi teknologi digital. Mewakili kreativitas, kerja keras, dan jaringan global.",
-    location: [35.9078, 127.7669],
+    location: [42.0000, 115.0000],
   },
   {
     id: "03",
@@ -48,8 +51,9 @@ export const CLUSTERS: ClusterData[] = [
     country: "Tiongkok",
     continent: "Asia",
     flag: "🇨🇳",
+    flagUrl: "https://flagcdn.com/cn.svg",
     desc: "Negara dengan peradaban tertua dan pertumbuhan ekonomi cepat. Simbol ketahanan, strategi, dan visi masa depan.",
-    location: [35.8617, 104.1954],
+    location: [38.0000, 100.0000],
   },
   {
     id: "04",
@@ -58,8 +62,9 @@ export const CLUSTERS: ClusterData[] = [
     country: "India",
     continent: "Asia",
     flag: "🇮🇳",
+    flagUrl: "https://flagcdn.com/in.svg",
     desc: "Pusat keberagaman budaya dan talenta teknologi dunia. Melambangkan adaptabilitas, kecerdasan, dan kebersamaan.",
-    location: [20.5937, 78.9629],
+    location: [20.0000, 75.0000],
   },
 
   // --- AFRIKA ---
@@ -70,8 +75,9 @@ export const CLUSTERS: ClusterData[] = [
     country: "Mesir",
     continent: "Afrika",
     flag: "🇪🇬",
+    flagUrl: "https://flagcdn.com/eg.svg",
     desc: "Negara warisan Piramida dan Sungai Nil. Melambangkan fondasi pengetahuan sejarah, pondasi kuat, dan kejayaan.",
-    location: [26.8206, 30.8025],
+    location: [25.0000, 28.0000],
   },
   {
     id: "06",
@@ -80,8 +86,9 @@ export const CLUSTERS: ClusterData[] = [
     country: "Afrika Selatan",
     continent: "Afrika",
     flag: "🇿🇦",
+    flagUrl: "https://flagcdn.com/za.svg",
     desc: "Negara pelangi dengan semangat Ubuntu. Mewakili toleransi, persatuan dalam perbedaan, dan keberanian.",
-    location: [-30.5595, 22.9375],
+    location: [-25.7100, 11.7600],
   },
   {
     id: "07",
@@ -90,8 +97,9 @@ export const CLUSTERS: ClusterData[] = [
     country: "Kenya",
     continent: "Afrika",
     flag: "🇰🇪",
+    flagUrl: "https://flagcdn.com/ke.svg",
     desc: "Pusat keanekaragaman hayati dan inovasi fintech Afrika. Melambangkan kebebasan, daya tahan, dan ketangguhan.",
-    location: [-1.2921, 36.8219],
+    location: [4.2200, 29.4900],
   },
 
   // --- EROPA ---
@@ -102,8 +110,9 @@ export const CLUSTERS: ClusterData[] = [
     country: "Prancis",
     continent: "Eropa",
     flag: "🇫🇷",
+    flagUrl: "https://flagcdn.com/fr.svg",
     desc: "Pusat seni, filsafat, dan diplomasi dunia. Melambangkan kebebasan berpikir, kesetaraan, dan estetika karya tinggi.",
-    location: [46.2276, 2.2137],
+    location: [51.3200, 16.1900],
   },
   {
     id: "09",
@@ -112,8 +121,9 @@ export const CLUSTERS: ClusterData[] = [
     country: "Belanda",
     continent: "Eropa",
     flag: "🇳🇱",
+    flagUrl: "https://flagcdn.com/nl.svg",
     desc: "Pelopor sistem manajemen air dan pemikiran terbuka. Melambangkan solusi kreatif dan inovasi ramah lingkungan.",
-    location: [52.1326, 5.2913],
+    location: [57.9700, 33.9300],
   },
   {
     id: "10",
@@ -122,8 +132,9 @@ export const CLUSTERS: ClusterData[] = [
     country: "Jerman",
     continent: "Eropa",
     flag: "🇩🇪",
+    flagUrl: "https://flagcdn.com/de.svg",
     desc: "Pusat rekayasa presisi dan riset keilmuan tinggi. Melambangkan ketelitian, logika terstruktur, dan kualitas tinggi.",
-    location: [51.1657, 10.4515],
+    location: [59.6300, 52.7700],
   },
 
   // --- AMERIKA ---
@@ -134,8 +145,9 @@ export const CLUSTERS: ClusterData[] = [
     country: "Amerika Serikat",
     continent: "Amerika",
     flag: "🇺🇸",
+    flagUrl: "https://flagcdn.com/us.svg",
     desc: "Pusat kewirausahaan global dan ekosistem startup. Mewakili keberanian mengambil risiko, eksplorasi, dan kepemimpinan.",
-    location: [37.0902, -95.7129],
+    location: [43.0100, -111.2700],
   },
   {
     id: "12",
@@ -144,8 +156,9 @@ export const CLUSTERS: ClusterData[] = [
     country: "Meksiko",
     continent: "Amerika",
     flag: "🇲🇽",
+    flagUrl: "https://flagcdn.com/mx.svg",
     desc: "Warisan budaya Maya & Aztek dengan kehangatan solidaritas. Melambangkan semangat pantang menyerah dan kekayaan tradisi.",
-    location: [23.6345, -102.5528],
+    location: [27.4900, -120.1300],
   },
   {
     id: "13",
@@ -154,8 +167,9 @@ export const CLUSTERS: ClusterData[] = [
     country: "Kanada",
     continent: "Amerika",
     flag: "🇨🇦",
+    flagUrl: "https://flagcdn.com/ca.svg",
     desc: "Negara dengan bentang alam megah dan keberagaman harmonis. Melambangkan keramahan, kedamaian, dan keberlanjutan.",
-    location: [56.1304, -106.3468],
+    location: [46.8900, -121.2400],
   },
   {
     id: "14",
@@ -164,8 +178,9 @@ export const CLUSTERS: ClusterData[] = [
     country: "Brasil",
     continent: "Amerika",
     flag: "🇧🇷",
+    flagUrl: "https://flagcdn.com/br.svg",
     desc: "Rumah bagi Amazon dan semangat kebersamaan meriah. Melambangkan energi positif, vitalitas, dan daya juang tinggi.",
-    location: [-14.235, -51.9253],
+    location: [-14.0700, -71.3700],
   },
 
   // --- OCEANIA ---
@@ -176,8 +191,9 @@ export const CLUSTERS: ClusterData[] = [
     country: "Australia",
     continent: "Oceania",
     flag: "🇦🇺",
+    flagUrl: "https://flagcdn.com/au.svg",
     desc: "Benua unik dengan ekosistem khas dan gaya hidup progresif. Mewakili ketahanan alami, eksplorasi bahari, dan kemandirian.",
-    location: [-25.2744, 133.7751],
+    location: [-25.2744, 124.8100],
   },
   {
     id: "16",
@@ -186,8 +202,9 @@ export const CLUSTERS: ClusterData[] = [
     country: "Papua Nugini",
     continent: "Oceania",
     flag: "🇵🇬",
+    flagUrl: "https://flagcdn.com/pg.svg",
     desc: "Negara tetangga dengan kekayaan ratusan tradisi adat luhur. Melambangkan kearifan lokal dan persaudaraan Pasifik.",
-    location: [-6.315, 143.9555],
+    location: [-8.5300, 133.6800],
   },
 ];
 
@@ -207,12 +224,14 @@ function Marker({
   isActive,
   label,
   flag,
+  flagUrl,
   onClick,
 }: {
   location: number[];
   isActive: boolean;
   label: string;
   flag: string;
+  flagUrl: string;
   onClick: () => void;
 }) {
   const { x, y, z } = getCoordinatesFromLatLng(
@@ -259,8 +278,8 @@ function Marker({
               ? "3px solid #68cfeb"
               : "2px solid rgba(31,75,93,0.3)",
             borderRadius: "50%",
-            width: isActive ? "26px" : "16px",
-            height: isActive ? "26px" : "16px",
+            width: isActive ? "32px" : "20px",
+            height: isActive ? "32px" : "20px",
             boxShadow: isActive
               ? "0 0 20px #68cfeb, 0 4px 12px rgba(0,0,0,0.3)"
               : "0 2px 8px rgba(0,0,0,0.2)",
@@ -268,9 +287,10 @@ function Marker({
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            overflow: "hidden",
           }}
         >
-          {isActive ? flag : null}
+          <img src={flagUrl} alt={`${label} flag`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
         {isActive && (
           <div
@@ -319,17 +339,12 @@ function CameraController({ activeIdx }: { activeIdx: number }) {
 
 export default function GlobeSection() {
   const [activeIdx, setActiveIdx] = useState(0);
-  
-
-  
 
   const activeCluster = CLUSTERS[activeIdx];
 
   const handleNext = () => setActiveIdx((i) => (i + 1) % CLUSTERS.length);
   const handlePrev = () =>
     setActiveIdx((i) => (i - 1 + CLUSTERS.length) % CLUSTERS.length);
-
-  
 
   return (
     <section id="kelompok" className={styles.section} data-aos="fade-up">
@@ -395,6 +410,7 @@ export default function GlobeSection() {
                   isActive={index === activeIdx}
                   label={cluster.country}
                   flag={cluster.flag}
+                  flagUrl={cluster.flagUrl}
                   onClick={() => setActiveIdx(index)}
                 />
               ))}
