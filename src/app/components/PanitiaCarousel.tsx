@@ -1,4 +1,5 @@
-"use client";
+'use client';
+
 import React, { useState, useEffect } from "react";
 import styles from "./PanitiaCarousel.module.css";
 
@@ -61,13 +62,6 @@ const PANITIA_PERSONS: PanitiaPerson[] = [
     image: "/khairun_niza.jpg",
   },
   {
-    id: "ko-ic",
-    name: "Muhammad Daniyal Wahidy",
-    role: "Koordinator IC",
-    badge: "IC",
-    image: "/daniyal_wahidy.jpg",
-  },
-  {
     id: "ko-pdd",
     name: "Alfian Khusnul Fatoni",
     role: "Koordinator PDD",
@@ -106,6 +100,7 @@ const PANITIA_PERSONS: PanitiaPerson[] = [
 
 export default function PanitiaCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const total = PANITIA_PERSONS.length;
 
   const handleNext = () => {
@@ -115,6 +110,17 @@ export default function PanitiaCarousel() {
   const handlePrev = () => {
     setActiveIndex((prev) => (prev - 1 + total) % total);
   };
+
+  // Auto-play animasi pergeseran 3D coverflow otomatis setiap 2.5 detik
+  useEffect(() => {
+    if (isPaused) return;
+
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % total);
+    }, 2500);
+
+    return () => clearInterval(timer);
+  }, [isPaused, total]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -128,7 +134,11 @@ export default function PanitiaCarousel() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.cardStack}>
+      <div
+        className={styles.cardStack}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
         {PANITIA_PERSONS.map((person, i) => {
           let offset = i - activeIndex;
 
@@ -139,7 +149,7 @@ export default function PanitiaCarousel() {
           const isCenter = offset === 0;
           const absOffset = Math.abs(offset);
 
-          // 3D Coverflow positioning math matching screenshot 1:1
+          // 3D Coverflow positioning math
           const xOffset = offset * 185;
           const yOffset = absOffset * 6;
           const scale = 1 - absOffset * 0.12;
@@ -169,7 +179,7 @@ export default function PanitiaCarousel() {
                 boxShadow: shadow,
                 border: border,
                 transition:
-                  "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), filter 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s ease",
+                  "transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.6s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.6s ease",
                 willChange: "transform, opacity, filter",
               }}
             >
@@ -178,18 +188,15 @@ export default function PanitiaCarousel() {
                 src={person.image}
                 alt={person.name}
                 className={styles.cardPhoto}
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = "/nabil_qudsi.jpg";
-                }}
               />
 
-              {/* Bottom Dark Gradient */}
+              {/* Gradient Overlay */}
               <div className={styles.cardGradient} />
 
-              {/* Footer Content Overlay */}
+              {/* Footer Information */}
               <div className={styles.cardFooter}>
                 <span className={styles.badgePill}>{person.badge}</span>
-                <h3 className={styles.personName}>{person.name}</h3>
+                <h4 className={styles.personName}>{person.name}</h4>
                 <p className={styles.personRole}>{person.role}</p>
               </div>
             </div>
@@ -197,35 +204,37 @@ export default function PanitiaCarousel() {
         })}
       </div>
 
-      {/* Controls matching screenshot */}
+      {/* Controls Bar */}
       <div className={styles.controlsWrapper}>
         <div className={styles.btnGroup}>
           <button
             className={styles.navBtn}
             onClick={handlePrev}
-            aria-label="Previous card"
+            aria-label="Panitia sebelumnya"
           >
             ‹
           </button>
+
+          <span
+            style={{
+              fontSize: "0.85rem",
+              fontWeight: 700,
+              color: "#1f4b5d",
+              padding: "0.3rem 0.85rem",
+              background: "rgba(31,75,93,0.08)",
+              borderRadius: "999px",
+            }}
+          >
+            {activeIndex + 1} / {total}
+          </span>
+
           <button
             className={styles.navBtn}
             onClick={handleNext}
-            aria-label="Next card"
+            aria-label="Panitia selanjutnya"
           >
             ›
           </button>
-        </div>
-
-        <div className={styles.dots}>
-          {PANITIA_PERSONS.map((_, idx) => (
-            <div
-              key={idx}
-              className={`${styles.dot} ${
-                idx === activeIndex ? styles.dotActive : ""
-              }`}
-              onClick={() => setActiveIndex(idx)}
-            />
-          ))}
         </div>
       </div>
     </div>
