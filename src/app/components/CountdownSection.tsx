@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
 import React, { useState, useEffect } from "react";
 
-const TARGET_DATE = new Date("2026-10-01T00:00:00+07:00").getTime();
+// Target event date: 6 Oktober 2026
+const TARGET_DATE = new Date("2026-10-06T23:59:59+07:00").getTime();
 
 interface TimeLeft {
   months: number;
@@ -23,27 +24,25 @@ function calculateTimeLeft(): TimeLeft {
   const nowDate = new Date(now);
   const targetDate = new Date(TARGET_DATE);
 
+  // Calendar month difference
   let months =
     (targetDate.getFullYear() - nowDate.getFullYear()) * 12 +
     (targetDate.getMonth() - nowDate.getMonth());
 
-  const tempDate = new Date(nowDate);
-  tempDate.setMonth(tempDate.getMonth() + months);
+  let days = targetDate.getDate() - nowDate.getDate();
 
-  if (tempDate.getTime() > TARGET_DATE) {
+  if (days < 0) {
     months--;
-    tempDate.setMonth(tempDate.getMonth() - 1);
+    // Days in previous month
+    const prevMonth = new Date(nowDate.getFullYear(), nowDate.getMonth() + 1, 0);
+    days += prevMonth.getDate();
   }
 
-  const remainingMs = TARGET_DATE - tempDate.getTime();
-  const days = Math.floor(remainingMs / (1000 * 60 * 60 * 24));
-  const hours = Math.floor(
-    (remainingMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-  );
-  const minutes = Math.floor((remainingMs % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((remainingMs % (1000 * 60)) / 1000);
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-  return { months, days, hours, minutes, seconds };
+  return { months: Math.max(0, months), days: Math.max(0, days), hours, minutes, seconds };
 }
 
 const gradients = [
@@ -65,10 +64,10 @@ function CountdownUnit({ value, label, gradient }: { value: number; label: strin
           width: "clamp(72px, 12vw, 110px)",
           height: "clamp(80px, 13vw, 120px)",
           borderRadius: "20px",
-          background: "rgba(255, 255, 255, 0.6)",
+          background: "rgba(255, 255, 255, 0.75)",
           backdropFilter: "blur(16px)",
           WebkitBackdropFilter: "blur(16px)",
-          border: "1px solid rgba(255, 255, 255, 0.4)",
+          border: "1px solid rgba(255, 255, 255, 0.5)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -83,7 +82,7 @@ function CountdownUnit({ value, label, gradient }: { value: number; label: strin
             top: 0,
             left: 0,
             right: 0,
-            height: "3px",
+            height: "3.5px",
             background: gradient,
             borderRadius: "20px 20px 0 0",
           }}
@@ -134,8 +133,8 @@ function CountdownUnit({ value, label, gradient }: { value: number; label: strin
       <span
         style={{
           fontSize: "clamp(0.65rem, 1.2vw, 0.8rem)",
-          fontWeight: 600,
-          color: "var(--lp-text-muted)",
+          fontWeight: 800,
+          color: "#1f4b5d",
           textTransform: "uppercase",
           letterSpacing: "0.12em",
         }}
@@ -196,7 +195,6 @@ export default function CountdownSection() {
     return (
       <section
         id="countdown"
-        data-aos="fade-up"
         style={{
           padding: "clamp(3rem, 5vw, 5rem) clamp(1rem, 5vw, 2rem)",
           minHeight: "400px",
@@ -265,7 +263,7 @@ export default function CountdownSection() {
             backgroundClip: "text",
           }}
         >
-          Menuju Aethera 🔺
+          Menuju SILO Aethera 2026 🔺
         </h2>
 
         <p
@@ -280,7 +278,7 @@ export default function CountdownSection() {
             lineHeight: 1.6,
           }}
         >
-          1 Oktober 2026 — Bersiaplah untuk perjalanan menuju cahaya paling murni.
+          6 Oktober 2026 — Bersiaplah untuk perjalanan menuju cahaya paling murni.
         </p>
 
         {isFinished ? (
@@ -292,7 +290,7 @@ export default function CountdownSection() {
                 color: "var(--lp-ocean-blue)",
               }}
             >
-              🎉 PKKMB Aethera Dimulai!
+              🎉 SILO AETHERA 2026 Dimulai!
             </h3>
           </div>
         ) : (

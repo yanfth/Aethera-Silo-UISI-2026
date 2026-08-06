@@ -70,7 +70,7 @@ export default function Home() {
               </Link>
             </div>
             <p style={{ fontSize: "0.75rem", color: "var(--lp-text-muted)", marginTop: "0.25rem" }}>
-              *PKKMB 18–22 Agustus 2026 · Bergabung bersama 500+ mahasiswa baru
+              *Pelaksanaan SILO 6 Oktober 2026 · Bergabung bersama 500+ mahasiswa baru
             </p>
           </div>
 
