@@ -3,6 +3,8 @@ import Link from "next/link";
 import GlobeSection from "./components/GlobeSection";
 import CountdownSection from "./components/CountdownSection";
 import LowPolyBackground from "./components/LowPolyBackground";
+import PanitiaCarousel from "./components/PanitiaCarousel";
+import DokumentasiGallery from "./components/DokumentasiGallery";
 
 export default function Home() {
   return (
@@ -18,6 +20,12 @@ export default function Home() {
           </Link>
           <Link href="#logo" className={styles.navLink}>
             Logo
+          </Link>
+          <Link href="#dokumentasi" className={styles.navLink}>
+            Dokumentasi
+          </Link>
+          <Link href="#panitia" className={styles.navLink}>
+            Panitia
           </Link>
           <Link href="#countdown" className={styles.navLink}>
             Countdown
@@ -186,6 +194,26 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ===== DOKUMENTASI TAHUN KEMARIN ===== */}
+        <section id="dokumentasi" className={styles.section} data-aos="fade-up">
+          <h2 className={styles.sectionTitle}>Kilasan Silo Tahun Lalu</h2>
+          <p className={styles.sectionSubtitle}>
+            Kilas Balik Kemeriahan &amp; Momen Berkesan SILO UISI 2025
+          </p>
+
+          <DokumentasiGallery />
+        </section>
+
+        {/* ===== DAFTAR PANITIA ===== */}
+        <section id="panitia" className={styles.section} data-aos="fade-up">
+          <h2 className={styles.sectionTitle}>Daftar Panitia</h2>
+          <p className={styles.sectionSubtitle}>
+            BPH &amp; Koordinator Divisi PKKMB Aethera UISI 2026
+          </p>
+
+          <PanitiaCarousel />
+        </section>
+
         {/* ===== KEBUTUHAN ACARA ===== */}
         <section id="kebutuhan" className={styles.section} data-aos="fade-up">
           <h2 className={styles.sectionTitle}>Kebutuhan Acara</h2>
@@ -331,6 +359,7 @@ export default function Home() {
           <div className={styles.footerLinks}>
             <Link href="#about">Tentang</Link>
             <Link href="#logo">Makna Logo</Link>
+            <Link href="#panitia">Daftar Panitia</Link>
             <Link href="#countdown">Countdown</Link>
             <Link href="#kelompok">Kelompok</Link>
           </div>
