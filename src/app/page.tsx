@@ -8,10 +8,12 @@ import PanitiaCarousel from "./components/PanitiaCarousel";
 import DokumentasiGallery from "./components/DokumentasiGallery";
 import GuidebookSection from "./components/GuidebookSection";
 import Navbar from "./components/Navbar";
+import ClickSpark from "./components/ClickSpark";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <ClickSpark sparkColor="#68CFEB" sparkSize={12} sparkRadius={25} sparkCount={8} duration={400}>
+      <div className={styles.container}>
       <LowPolyBackground />
 
       {/* ===== NAVBAR ===== */}
@@ -326,5 +328,6 @@ export default function Home() {
         </div>
       </footer>
     </div>
+    </ClickSpark>
   );
 }
