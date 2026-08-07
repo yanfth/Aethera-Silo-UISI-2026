@@ -7,6 +7,7 @@ import LowPolyBackground from "./components/LowPolyBackground";
 import PanitiaCarousel from "./components/PanitiaCarousel";
 import DokumentasiGallery from "./components/DokumentasiGallery";
 import GuidebookSection from "./components/GuidebookSection";
+import Navbar from "./components/Navbar";
 
 export default function Home() {
   return (
@@ -14,35 +15,7 @@ export default function Home() {
       <LowPolyBackground />
 
       {/* ===== NAVBAR ===== */}
-      <nav className={styles.navbar}>
-        <div className={styles.logo}>⬡ SILO UISI</div>
-        <div className={styles.navLinks}>
-          <Link href="#about" className={styles.navLink}>
-            Tentang
-          </Link>
-          <Link href="#logo" className={styles.navLink}>
-            Logo
-          </Link>
-          <Link href="#dokumentasi" className={styles.navLink}>
-            Dokumentasi
-          </Link>
-          <Link href="#panitia" className={styles.navLink}>
-            Panitia
-          </Link>
-          <Link href="#guidebook" className={styles.navLink}>
-            Guidebook
-          </Link>
-          <Link href="#penugasan" className={styles.navLink}>
-            Penugasan
-          </Link>
-          <Link href="#kelompok" className={styles.navLink}>
-            Kelompok
-          </Link>
-          <Link href="#merch" className={styles.navLink}>
-            Merchandise
-          </Link>
-        </div>
-      </nav>
+      <Navbar />
 
       <main className={styles.main}>
         {/* ===== HERO ===== */}
