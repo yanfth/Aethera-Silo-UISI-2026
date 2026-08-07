@@ -17,19 +17,7 @@ export default function Home() {
         <div className={styles.logo}>⬡ SILO UISI</div>
         <div className={styles.navLinks}>
           <Link href="#about" className={styles.navLink}>
-            Tentang
-          </Link>
-          <Link href="#logo" className={styles.navLink}>
-            Logo
-          </Link>
-          <Link href="#dokumentasi" className={styles.navLink}>
-            Dokumentasi
-          </Link>
-          <Link href="#panitia" className={styles.navLink}>
-            Panitia
-          </Link>
-          <Link href="#countdown" className={styles.navLink}>
-            Countdown
+            About
           </Link>
           <Link href="#kelompok" className={styles.navLink}>
             Kelompok

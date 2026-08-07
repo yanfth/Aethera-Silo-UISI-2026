@@ -387,13 +387,13 @@ export default function GlobeSection() {
           <div
             style={{
               width: "100%",
-              maxWidth: "480px",
+              maxWidth: "520px",
               aspectRatio: "1/1",
               position: "relative",
             }}
           >
             <Canvas
-              camera={{ position: [0, 0, 3.5], fov: 45 }}
+              camera={{ position: [0, 0, 4.2], fov: 45 }}
               style={{ background: "transparent" }}
               gl={{ alpha: true }}
             >
@@ -568,7 +568,7 @@ export default function GlobeSection() {
                   boxShadow: "0 4px 15px rgba(31,75,93,0.3)",
                 }}
               >
-                Lihat Kelompok →
+                Lihat Kelompok ›
               </Link>
             </div>
           </div>
