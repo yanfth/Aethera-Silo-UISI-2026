@@ -592,17 +592,19 @@
 .neumorphicIcon { font-size: 2rem; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(104,207,235,0.08); }
 
 /* ===== RESPONSIVE ===== */
+/* iPad & Tablet (<= 1024px) */
 @media (max-width: 1024px) {
   .hero {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 2rem;
+    gap: 2.5rem;
+    padding: 3rem 2rem;
   }
   .heroContent {
     align-items: center;
   }
   .heroTitle {
-    font-size: 3rem;
+    font-size: clamp(2.5rem, 6vw, 3.25rem);
   }
   .heroDesc {
     margin-left: auto;
@@ -615,18 +617,175 @@
   .aboutText {
     text-align: center;
   }
+  .aboutImage {
+    max-width: 540px;
+    margin: 0 auto;
+  }
   .servicesGrid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
   .merchCarousel {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
   .footer {
     grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
   }
   .globeGrid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+  .panitiaGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile HP (<= 768px) */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .navLinks {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    justify-content: flex-start;
+    padding: 0.35rem 0.6rem;
+    background: rgba(15, 23, 42, 0.05);
+    border-radius: 9999px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .navLinks::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navLink {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .hero {
+    padding: 2.5rem 1.25rem;
+    gap: 2rem;
+  }
+
+  .heroTitle {
+    font-size: clamp(2rem, 8vw, 2.75rem);
+  }
+
+  .heroDesc {
+    font-size: 0.9rem;
+  }
+
+  .heroButtons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    gap: 0.75rem;
+  }
+
+  .ctaButton,
+  .ctaButtonOutline {
+    text-align: center;
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .heroVisual {
+    min-height: 280px;
+  }
+
+  .heroImageContainer {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .section {
+    padding: 3rem 1.25rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.75rem;
+  }
+
+  .sectionSubtitle {
+    font-size: 0.88rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .servicesGrid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .merchCarousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1.25rem;
+    padding: 0.5rem 0.25rem 1rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .merchCarousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .merchCard {
+    flex: 0 0 85%;
+    scroll-snap-align: center;
+    min-height: 240px;
+  }
+
+  .panitiaGrid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .footer {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+    text-align: center;
+  }
+
+  .footerDesc {
+    margin: 0.5rem auto 0 auto;
+  }
+
+  .footerLinks {
+    align-items: center;
+  }
+
+  .footerNewsletter {
+    align-items: center;
+    max-width: 340px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .footerInput,
+  .footerButton {
+    width: 100%;
+  }
+}
+
+/* Small Mobile HP (<= 480px) */
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 1.85rem;
+  }
+  .merchCard {
+    flex: 0 0 90%;
   }
 }
 
@@ -754,16 +913,3 @@
   font-size: 0.75rem;
   color: var(--lp-text-muted);
 }
-
-@media (max-width: 1024px) {
-  .panitiaGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .panitiaGrid {
-    grid-template-columns: 1fr;
-  }
-}
-

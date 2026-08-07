@@ -58,8 +58,18 @@ export default function GuidebookFlipbook({ pdfUrl = "/guidebook.pdf" }: Guidebo
   const [totalPages, setTotalPages] = useState<number>(0);
   const [zoomLevel, setZoomLevel] = useState<number>(1);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const flipBookRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     let isCancelled = false;
@@ -191,6 +201,9 @@ export default function GuidebookFlipbook({ pdfUrl = "/guidebook.pdf" }: Guidebo
   };
 
   const getViewportTransform = () => {
+    if (isMobile) {
+      return `scale(${zoomLevel})`;
+    }
     let translateX = 0;
     if (currentPage === 0) {
       translateX = -210;
@@ -242,16 +255,17 @@ export default function GuidebookFlipbook({ pdfUrl = "/guidebook.pdf" }: Guidebo
           >
             {/* @ts-ignore */}
             <HTMLFlipBook
-              width={420}
-              height={593}
+              width={isMobile ? 310 : 420}
+              height={isMobile ? 438 : 593}
               size="stretch"
-              minWidth={280}
+              minWidth={260}
               maxWidth={500}
-              minHeight={395}
+              minHeight={360}
               maxHeight={706}
               drawShadow={true}
               maxShadowOpacity={0.3}
               showCover={true}
+              usePortrait={isMobile}
               mobileScrollSupport={true}
               onFlip={handlePageFlip}
               ref={flipBookRef}

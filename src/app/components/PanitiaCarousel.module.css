@@ -151,3 +151,16 @@
   transform: scale(1.1);
   box-shadow: 0 6px 16px rgba(31, 75, 93, 0.35);
 }
+
+@media (max-width: 640px) {
+  .cardStack {
+    height: 380px;
+  }
+  .card {
+    width: 220px;
+    height: 310px;
+  }
+  .personName {
+    font-size: 1.1rem;
+  }
+}
