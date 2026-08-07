@@ -6,6 +6,7 @@ import CountdownSection from "./components/CountdownSection";
 import LowPolyBackground from "./components/LowPolyBackground";
 import PanitiaCarousel from "./components/PanitiaCarousel";
 import DokumentasiGallery from "./components/DokumentasiGallery";
+import GuidebookSection from "./components/GuidebookSection";
 
 export default function Home() {
   return (
@@ -27,6 +28,9 @@ export default function Home() {
           </Link>
           <Link href="#panitia" className={styles.navLink}>
             Panitia
+          </Link>
+          <Link href="#guidebook" className={styles.navLink}>
+            Guidebook
           </Link>
           <Link href="#countdown" className={styles.navLink}>
             Countdown
@@ -214,6 +218,9 @@ export default function Home() {
 
           <PanitiaCarousel />
         </section>
+
+        {/* ===== GUIDEBOOK PDF FLIPBOOK ===== */}
+        <GuidebookSection />
 
         {/* ===== KEBUTUHAN ACARA ===== */}
         <section id="kebutuhan" className={styles.section} data-aos="fade-up">
