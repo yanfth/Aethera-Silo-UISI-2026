@@ -32,14 +32,11 @@ export default function Home() {
           <Link href="#guidebook" className={styles.navLink}>
             Guidebook
           </Link>
-          <Link href="#countdown" className={styles.navLink}>
-            Countdown
+          <Link href="#penugasan" className={styles.navLink}>
+            Penugasan
           </Link>
           <Link href="#kelompok" className={styles.navLink}>
             Kelompok
-          </Link>
-          <Link href="#kebutuhan" className={styles.navLink}>
-            Kebutuhan
           </Link>
           <Link href="#merch" className={styles.navLink}>
             Merchandise
@@ -47,159 +44,107 @@ export default function Home() {
         </div>
       </nav>
 
-      <main>
+      <main className={styles.main}>
         {/* ===== HERO ===== */}
         <section className={styles.hero}>
           <div className={styles.heroContent} data-aos="fade-right">
-            <div className={styles.heroTag}>
-              🔺 PKKMB 2026 · Mahasiswa Baru
-            </div>
+            <span className={styles.heroTag}>⬡ PKKMB UISI 2026</span>
             <h1 className={styles.heroTitle}>
-              Aethera,
-              <br />
-              <span className={styles.heroTitleAccent}>perjalanan menuju</span>
-              <br />
-              cahaya paling murni
+              Selamat Datang <br />
+              <span className={styles.heroTitleAccent}>Mahasiswa Baru</span>
             </h1>
             <p className={styles.heroDesc}>
-              Aethera adalah lapisan udara paling murni dalam mitologi Yunani —
-              tempat cahaya paling terang berada. Begitu juga langkah pertamamu
-              di UISI: awal dari versi dirimu yang paling jernih dan bercahaya.
+              Portal Resmi Informasi dan Layanan Orientasi PKKMB Aethera
+              Universitas Internasional Semen Indonesia. Temukan jadwal,
+              kelompok, dan penugasan lengkap di sini.
             </p>
             <div className={styles.heroButtons}>
-              <Link href="#kebutuhan" className={styles.ctaButton}>
-                Unduh Twibbon ↗
+              <Link href="#about" className={styles.ctaButton}>
+                Jelajahi Aethera
               </Link>
-              <Link href="#about" className={styles.ctaButtonOutline}>
-                Pelajari Lebih
+              <Link href="#penugasan" className={styles.ctaButtonOutline}>
+                Lihat Penugasan
               </Link>
             </div>
-            <p style={{ fontSize: "0.75rem", color: "var(--lp-text-muted)", marginTop: "0.25rem" }}>
-              *Pelaksanaan SILO 6 Oktober 2026 · Bergabung bersama 500+ mahasiswa baru
-            </p>
           </div>
 
-          {/* Hero visual */}
-          <div className={styles.heroVisual} data-aos="fade-left" data-aos-delay="200">
+          <div className={styles.heroVisual} data-aos="fade-left">
+            <div className={styles.heroGeoBg}></div>
             <div className={styles.heroImageContainer}>
-              <div className={styles.heroGeoBg} />
               <img
                 src="/hero_rocket.png"
-                alt="Aethera Illustration"
+                alt="Aethera Rocket Illustration"
+                width={480}
+                height={480}
               />
             </div>
           </div>
         </section>
 
-        {/* ===== COUNTDOWN ===== */}
+        {/* ===== COUNTDOWN SECTION ===== */}
         <CountdownSection />
 
-        {/* ===== TENTANG SILO ===== */}
+        {/* ===== ABOUT SILO ===== */}
         <section id="about" className={styles.section} data-aos="fade-up">
-          <h2 className={styles.sectionTitle}>Tentang SILO</h2>
-          <p className={styles.sectionSubtitle}>
-            Satu portal, seluruh perjalananmu menuju UISI.
-          </p>
           <div className={styles.aboutGrid}>
-            <div className={styles.aboutText}>
-              <p style={{ fontWeight: 700, color: "var(--lp-text)", fontSize: "1.1rem", marginBottom: "1rem" }}>
-                Portal resmi Penerimaan Mahasiswa Baru UISI
-              </p>
-              <p style={{ marginBottom: "1rem" }}>
-                <strong style={{ color: "var(--lp-text)" }}>
-                  SILO (Sistem Informasi &amp; Layanan Orientasi)
-                </strong>{" "}
-                adalah portal resmi yang menaungi seluruh rangkaian Penerimaan
-                Mahasiswa Baru di UISI — mulai dari pendaftaran, pembagian
-                kelompok, informasi jadwal, hingga kebutuhan teknis acara.
-              </p>
-              <p>
-                Untuk PKKMB tahun ini, tema yang diusung adalah{" "}
-                <strong style={{ color: "var(--lp-text)" }}>Aethera</strong> —
-                perjalanan mahasiswa baru diibaratkan sebagai perjalanan menembus
-                atmosfer, dari titik paling dasar menuju cahaya yang paling murni.
+            <div>
+              <h2 className={styles.sectionTitle} style={{ textAlign: "left" }}>
+                Tentang SILO UISI
+              </h2>
+              <p className={styles.aboutText}>
+                <strong>Student Initiation and Learning Orientation (SILO)</strong>{" "}
+                merupakan kegiatan pengenalan kehidupan kampus bagi mahasiswa baru
+                Universitas Internasional Semen Indonesia. Mengusung nama{" "}
+                <strong>Aethera</strong>, PKKMB 2026 hadir sebagai ruang
+                pembinaan awal yang adaptif, inovatif, dan berkarakter.
               </p>
             </div>
             <div className={styles.aboutImage}>
-              {/* Low-poly atom visual */}
-              <svg width="65%" height="65%" viewBox="0 0 200 200">
-                {/* Geometric triangulated sphere */}
-                <polygon points="100,20 140,50 130,90" fill="var(--lp-aqua)" opacity="0.15" stroke="var(--lp-aqua)" strokeWidth="0.5" />
-                <polygon points="100,20 60,50 70,90" fill="var(--lp-ocean-blue)" opacity="0.1" stroke="var(--lp-ocean-blue)" strokeWidth="0.5" />
-                <polygon points="100,20 140,50 60,50" fill="var(--lp-charcoal)" opacity="0.1" stroke="var(--lp-charcoal)" strokeWidth="0.5" />
-                <polygon points="60,50 70,90 40,100" fill="var(--lp-aqua)" opacity="0.08" stroke="var(--lp-aqua)" strokeWidth="0.5" />
-                <polygon points="140,50 130,90 160,100" fill="var(--lp-ocean-blue)" opacity="0.1" stroke="var(--lp-ocean-blue)" strokeWidth="0.5" />
-                <polygon points="70,90 130,90 100,130" fill="var(--lp-charcoal)" opacity="0.12" stroke="var(--lp-charcoal)" strokeWidth="0.5" />
-                <polygon points="40,100 70,90 60,140" fill="var(--lp-ocean-blue)" opacity="0.08" stroke="var(--lp-ocean-blue)" strokeWidth="0.5" />
-                <polygon points="160,100 130,90 140,140" fill="var(--lp-aqua)" opacity="0.08" stroke="var(--lp-aqua)" strokeWidth="0.5" />
-                <polygon points="100,130 60,140 100,180" fill="var(--lp-charcoal)" opacity="0.1" stroke="var(--lp-charcoal)" strokeWidth="0.5" />
-                <polygon points="100,130 140,140 100,180" fill="var(--lp-ocean-blue)" opacity="0.1" stroke="var(--lp-ocean-blue)" strokeWidth="0.5" />
-                {/* Center glow */}
-                <circle cx="100" cy="100" r="8" fill="url(#centerGlow)" />
-                <defs>
-                  <radialGradient id="centerGlow">
-                    <stop offset="0%" stopColor="var(--lp-aqua)" stopOpacity="0.6" />
-                    <stop offset="100%" stopColor="var(--lp-aqua)" stopOpacity="0" />
-                  </radialGradient>
-                </defs>
-              </svg>
+              <img
+                src="/portfolio_phones.png"
+                alt="SILO UISI Preview"
+                style={{ width: "100%", height: "auto", borderRadius: "1.5rem" }}
+              />
             </div>
           </div>
         </section>
 
-        {/* ===== MAKNA LOGO ===== */}
-        <section
-          id="logo"
-          className={styles.section}
-          style={{ background: "var(--lp-surface)" }}
-          data-aos="fade-up"
-        >
-          <h2 className={styles.sectionTitle}>Makna Logo</h2>
+        {/* ===== LOGO PHILOSOPHY ===== */}
+        <section id="logo" className={styles.section} data-aos="fade-up">
+          <h2 className={styles.sectionTitle}>Makna Logo Aethera</h2>
           <p className={styles.sectionSubtitle}>
-            Setiap elemen memiliki filosofi yang dalam
+            Simbol keberanian, inovasi, dan persatuan mahasiswa baru UISI 2026.
           </p>
-          <div className={styles.aboutGrid}>
-            <div className={styles.aboutImage} style={{ background: "rgba(104,207,235,0.1)" }}>
-              <svg width="55%" height="55%" viewBox="0 0 120 120">
-                <circle cx="60" cy="60" r="8" fill="var(--lp-text)" />
-                <ellipse cx="60" cy="60" rx="50" ry="20" stroke="var(--lp-text)" strokeWidth="2" fill="none" opacity="0.3" />
-                <ellipse cx="60" cy="60" rx="50" ry="20" stroke="var(--lp-text)" strokeWidth="2" fill="none" transform="rotate(60 60 60)" opacity="0.3" />
-                <ellipse cx="60" cy="60" rx="50" ry="20" stroke="var(--lp-text)" strokeWidth="2" fill="none" transform="rotate(120 60 60)" opacity="0.3" />
-                <circle cx="110" cy="60" r="5" fill="var(--lp-ocean-blue)" />
-                <circle cx="35" cy="38" r="4" fill="var(--lp-aqua)" />
-                <circle cx="85" cy="82" r="4" fill="var(--lp-charcoal)" />
-              </svg>
+
+          <div className={styles.servicesGrid}>
+            <div className={styles.card}>
+              <div className={styles.cardIcon} style={{ background: "rgba(31,75,93,0.1)", color: "var(--lp-ocean-blue)" }}>⬡</div>
+              <h3 className={styles.cardTitle}>Heksagon Presisi</h3>
+              <p className={styles.cardDesc}>
+                Melambangkan struktur yang kokoh, efisiensi, dan integrasi antar
+                disiplin ilmu di UISI.
+              </p>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-              <div className={styles.logoCard}>
-                <div className={styles.logoCardNumber}>Step 01</div>
-                <div className={styles.logoCardTitle}>🔆 Titik Cahaya</div>
-                <div className={styles.logoCardDesc}>
-                  Melambangkan mahasiswa baru — sumber semangat dan potensi baru
-                  yang dibawa masuk ke ekosistem UISI.
-                </div>
-              </div>
-              <div className={styles.logoCard}>
-                <div className={styles.logoCardNumber}>Step 02</div>
-                <div className={styles.logoCardTitle}>🔗 Tiga Cincin</div>
-                <div className={styles.logoCardDesc}>
-                  Mewakili tiga tahap perjalanan PKKMB: Beradaptasi, Bertumbuh,
-                  dan Bersinar.
-                </div>
-              </div>
-              <div className={styles.logoCard}>
-                <div className={styles.logoCardNumber}>Step 03</div>
-                <div className={styles.logoCardTitle}>🌀 Bentuk Elips</div>
-                <div className={styles.logoCardDesc}>
-                  Orbit yang tidak simetris melambangkan bahwa perjalanan setiap
-                  mahasiswa unik dan tidak seragam.
-                </div>
-              </div>
+            <div className={styles.card}>
+              <div className={styles.cardIcon} style={{ background: "rgba(104,207,235,0.1)", color: "var(--lp-aqua)" }}>✨</div>
+              <h3 className={styles.cardTitle}>Inti Aether</h3>
+              <p className={styles.cardDesc}>
+                Energi tak terbatas dan semangat membara yang mendorong mahasiswa
+                mencapai puncak prestasi.
+              </p>
+            </div>
+            <div className={styles.card}>
+              <div className={styles.cardIcon} style={{ background: "rgba(31,30,25,0.1)", color: "var(--lp-charcoal)" }}>🌊</div>
+              <h3 className={styles.cardTitle}>Gelombang Adaptif</h3>
+              <p className={styles.cardDesc}>
+                Fleksibilitas dan ketahanan mahasiswa baru dalam menghadapi tantangan
+                dunia industri global.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* ===== DOKUMENTASI TAHUN KEMARIN ===== */}
+        {/* ===== DOKUMENTASI TAHUN LALU ===== */}
         <section id="dokumentasi" className={styles.section} data-aos="fade-up">
           <h2 className={styles.sectionTitle}>Kilasan Silo Tahun Lalu</h2>
           <p className={styles.sectionSubtitle}>
@@ -222,60 +167,60 @@ export default function Home() {
         {/* ===== GUIDEBOOK PDF FLIPBOOK ===== */}
         <GuidebookSection />
 
-        {/* ===== KEBUTUHAN ACARA ===== */}
-        <section id="kebutuhan" className={styles.section} data-aos="fade-up">
-          <h2 className={styles.sectionTitle}>Kebutuhan Acara</h2>
+        {/* ===== DAFTAR PENUGASAN ===== */}
+        <section id="penugasan" className={styles.section} data-aos="fade-up">
+          <h2 className={styles.sectionTitle}>Daftar Penugasan</h2>
           <p className={styles.sectionSubtitle}>
-            Siapkan sebelum hari pertama. Unduh perlengkapan PKKMB.
+            Selesaikan penugasan harian dan kelompok sesuai ketentuan &amp; tenggat waktu SILO UISI 2026.
           </p>
+
           <div className={styles.servicesGrid}>
             <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(31,75,93,0.1)", color: "var(--lp-ocean-blue)" }}>🖼️</div>
-              <h3 className={styles.cardTitle}>Twibbon Aethera</h3>
+              <div className={styles.cardIcon} style={{ background: "rgba(31,75,93,0.1)", color: "var(--lp-ocean-blue)" }}>🎥</div>
+              <h3 className={styles.cardTitle}>Video Perkenalan</h3>
               <p className={styles.cardDesc}>
-                Bingkai foto resmi untuk diunggah di media sosial sebagai tanda
-                kamu bagian dari Aethera.
+                Video perkenalan kelompok berdurasi minimal 5 menit berisi filosofi nama dan anggota rasi.
               </p>
             </div>
             <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(104,207,235,0.1)", color: "var(--lp-aqua)" }}>📅</div>
-              <h3 className={styles.cardTitle}>Rundown Acara</h3>
+              <div className={styles.cardIcon} style={{ background: "rgba(104,207,235,0.1)", color: "var(--lp-aqua)" }}>🖼️</div>
+              <h3 className={styles.cardTitle}>Twibbon &amp; Video Bio</h3>
               <p className={styles.cardDesc}>
-                Jadwal lengkap kegiatan PKKMB dari hari pertama hingga penutupan.
+                Unggah foto Twibbon resmi &amp; video perkenalan individu dengan nada lagu daerah di Instagram.
               </p>
             </div>
             <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(31,30,25,0.1)", color: "var(--lp-charcoal)" }}>👕</div>
-              <h3 className={styles.cardTitle}>Panduan Pakaian</h3>
+              <div className={styles.cardIcon} style={{ background: "rgba(31,30,25,0.1)", color: "var(--lp-charcoal)" }}>🎨</div>
+              <h3 className={styles.cardTitle}>Persiapan Tampah Show</h3>
               <p className={styles.cardDesc}>
-                Ketentuan dress code, atribut wajib, dan tata tertib setiap harinya.
+                Mengecat tampah kayu diameter 50cm dengan kombinasi warna Orange Crush &amp; Blue Brooch.
               </p>
             </div>
             <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(104,207,235,0.1)", color: "var(--lp-aqua)" }}>🏷️</div>
-              <h3 className={styles.cardTitle}>Template Nametag</h3>
+              <div className={styles.cardIcon} style={{ background: "rgba(104,207,235,0.1)", color: "var(--lp-aqua)" }}>📝</div>
+              <h3 className={styles.cardTitle}>Resume Materi</h3>
               <p className={styles.cardDesc}>
-                Templat name tag resmi lengkap dengan warna kelompok rasi masing-masing.
+                Merangkum materi Pra-SILO dan Core-SILO tulis tangan di kertas A5 bolak-balik dalam format PDF.
               </p>
             </div>
             <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(31,75,93,0.1)", color: "var(--lp-ocean-blue)" }}>🤝</div>
-              <h3 className={styles.cardTitle}>Tata Tertib</h3>
+              <div className={styles.cardIcon} style={{ background: "rgba(31,75,93,0.1)", color: "var(--lp-ocean-blue)" }}>🎵</div>
+              <h3 className={styles.cardTitle}>Hafalan Lagu Mars</h3>
               <p className={styles.cardDesc}>
-                Peraturan yang harus ditaati selama rangkaian acara PKKMB berlangsung.
+                Menghafalkan dan memposting video lagu Mars UISI, Jingle Branara, Buruh Tani, &amp; Darah Juang.
               </p>
             </div>
             <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(31,30,25,0.1)", color: "var(--lp-charcoal)" }}>🚀</div>
-              <h3 className={styles.cardTitle}>Materi Panduan</h3>
+              <div className={styles.cardIcon} style={{ background: "rgba(31,30,25,0.1)", color: "var(--lp-charcoal)" }}>📢</div>
+              <h3 className={styles.cardTitle}>Kampanye Edukatif</h3>
               <p className={styles.cardDesc}>
-                Buku panduan lengkap tentang pengenalan kehidupan kampus bagi mahasiswa baru.
+                Membuat video kampanye edukasi isu sosial secara berkelompok sesuai arahan panitia.
               </p>
             </div>
           </div>
           <div className={styles.viewAllBtn}>
-            <Link href="#" className={styles.ctaButton}>
-              Lihat Semua Unduhan →
+            <Link href="#guidebook" className={styles.ctaButton}>
+              Lihat Detail Ketentuan &rarr;
             </Link>
           </div>
         </section>
@@ -371,7 +316,7 @@ export default function Home() {
             <Link href="#about">Tentang</Link>
             <Link href="#logo">Makna Logo</Link>
             <Link href="#panitia">Daftar Panitia</Link>
-            <Link href="#countdown">Countdown</Link>
+            <Link href="#penugasan">Penugasan</Link>
             <Link href="#kelompok">Kelompok</Link>
           </div>
         </div>
