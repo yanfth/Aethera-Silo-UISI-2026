@@ -198,21 +198,6 @@ export default function DokumentasiGallery() {
       <div className={styles.controlsWrapper}>
         <div className={styles.progressInfo}>
           Foto <strong>{displayIndex}</strong> dari {totalOriginal}
-          {isPaused && (
-            <span
-              style={{
-                marginLeft: "0.75rem",
-                fontSize: "0.75rem",
-                color: "var(--lp-ocean-blue)",
-                background: "rgba(31,75,93,0.1)",
-                padding: "0.2rem 0.6rem",
-                borderRadius: "999px",
-                fontWeight: 700,
-              }}
-            >
-              ⏸ Dihentikan Sementara
-            </span>
-          )}
         </div>
 
         <div className={styles.btnGroup}>

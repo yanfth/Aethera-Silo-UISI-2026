@@ -1,6 +1,5 @@
-'use client';
-
 import React from "react";
+import { Crown, Award, ShieldCheck, Gem, Radio } from "lucide-react";
 
 interface SponsorItem {
   name: string;
@@ -155,7 +154,7 @@ export default function SponsorSection() {
               boxShadow: "0 4px 15px rgba(31,75,93,0.2)",
             }}
           >
-            <span>💎</span> PLATINUM SPONSOR
+            <span><Gem size={15} style={{ verticalAlign: "middle" }} /></span> PLATINUM SPONSOR
           </div>
 
           <div
@@ -244,7 +243,7 @@ export default function SponsorSection() {
               marginBottom: "2rem",
             }}
           >
-            <span>🥇</span> GOLD SPONSOR
+            <span><Award size={15} style={{ verticalAlign: "middle" }} /></span> GOLD SPONSOR
           </div>
 
           <div
@@ -331,7 +330,7 @@ export default function SponsorSection() {
               marginBottom: "1.75rem",
             }}
           >
-            <span>🥈</span> SILVER SPONSOR
+            <span><ShieldCheck size={15} style={{ verticalAlign: "middle" }} /></span> SILVER SPONSOR
           </div>
 
           <div
@@ -419,7 +418,7 @@ export default function SponsorSection() {
               marginBottom: "1.75rem",
             }}
           >
-            <span>📻</span> MEDIA PARTNER
+            <span><Radio size={15} style={{ verticalAlign: "middle" }} /></span> MEDIA PARTNER
           </div>
 
           <div
@@ -440,7 +439,9 @@ export default function SponsorSection() {
                   gap: "0.75rem",
                 }}
               >
-                <span style={{ fontSize: "1.1rem", color: "#1f4b5d" }}>📻</span>
+                <span style={{ display: "inline-flex", alignItems: "center", color: "#1f4b5d" }}>
+                  <Radio size={18} />
+                </span>
                 <div style={{ textAlign: "left" }}>
                   <div
                     style={{
