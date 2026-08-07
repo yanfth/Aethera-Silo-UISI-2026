@@ -7,6 +7,26 @@ import LowPolyBackground from "./components/LowPolyBackground";
 import PanitiaCarousel from "./components/PanitiaCarousel";
 import DokumentasiGallery from "./components/DokumentasiGallery";
 import GuidebookSection from "./components/GuidebookSection";
+import { 
+  Hexagon, 
+  Sparkles, 
+  Zap, 
+  Waves, 
+  Video, 
+  Image as ImageIcon, 
+  Palette, 
+  FileText, 
+  Music, 
+  Megaphone, 
+  Shirt, 
+  ShoppingBag, 
+  Award, 
+  Camera, 
+  MessageCircle, 
+  Mail, 
+  Send,
+  ArrowRight
+} from "lucide-react";
 
 export default function Home() {
   return (
@@ -15,7 +35,9 @@ export default function Home() {
 
       {/* ===== NAVBAR ===== */}
       <nav className={styles.navbar}>
-        <div className={styles.logo}>⬡ SILO UISI</div>
+        <div className={styles.logo}>
+          <Hexagon style={{ display: "inline-block", verticalAlign: "middle", marginRight: "6px" }} size={20} color="var(--lp-aqua)" /> SILO UISI
+        </div>
         <div className={styles.navLinks}>
           <Link href="#about" className={styles.navLink}>
             Tentang
@@ -48,7 +70,9 @@ export default function Home() {
         {/* ===== HERO ===== */}
         <section className={styles.hero}>
           <div className={styles.heroContent} data-aos="fade-right">
-            <span className={styles.heroTag}>⬡ PKKMB UISI 2026</span>
+            <span className={styles.heroTag}>
+              <Sparkles style={{ display: "inline-block", verticalAlign: "middle", marginRight: "6px" }} size={14} /> PKKMB UISI 2026
+            </span>
             <h1 className={styles.heroTitle}>
               Selamat Datang <br />
               <span className={styles.heroTitleAccent}>Mahasiswa Baru</span>
@@ -118,7 +142,9 @@ export default function Home() {
 
           <div className={styles.servicesGrid}>
             <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(31,75,93,0.1)", color: "var(--lp-ocean-blue)" }}>⬡</div>
+              <div className={styles.cardIcon} style={{ background: "rgba(31,75,93,0.1)", color: "var(--lp-ocean-blue)" }}>
+                <Hexagon size={24} />
+              </div>
               <h3 className={styles.cardTitle}>Heksagon Presisi</h3>
               <p className={styles.cardDesc}>
                 Melambangkan struktur yang kokoh, efisiensi, dan integrasi antar
@@ -126,7 +152,9 @@ export default function Home() {
               </p>
             </div>
             <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(104,207,235,0.1)", color: "var(--lp-aqua)" }}>✨</div>
+              <div className={styles.cardIcon} style={{ background: "rgba(104,207,235,0.1)", color: "var(--lp-aqua)" }}>
+                <Zap size={24} />
+              </div>
               <h3 className={styles.cardTitle}>Inti Aether</h3>
               <p className={styles.cardDesc}>
                 Energi tak terbatas dan semangat membara yang mendorong mahasiswa
@@ -134,7 +162,9 @@ export default function Home() {
               </p>
             </div>
             <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(31,30,25,0.1)", color: "var(--lp-charcoal)" }}>🌊</div>
+              <div className={styles.cardIcon} style={{ background: "rgba(31,30,25,0.1)", color: "var(--lp-charcoal)" }}>
+                <Waves size={24} />
+              </div>
               <h3 className={styles.cardTitle}>Gelombang Adaptif</h3>
               <p className={styles.cardDesc}>
                 Fleksibilitas dan ketahanan mahasiswa baru dalam menghadapi tantangan
@@ -176,42 +206,54 @@ export default function Home() {
 
           <div className={styles.servicesGrid}>
             <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(31,75,93,0.1)", color: "var(--lp-ocean-blue)" }}>🎥</div>
+              <div className={styles.cardIcon} style={{ background: "rgba(31,75,93,0.1)", color: "var(--lp-ocean-blue)" }}>
+                <Video size={24} />
+              </div>
               <h3 className={styles.cardTitle}>Video Perkenalan</h3>
               <p className={styles.cardDesc}>
                 Video perkenalan kelompok berdurasi minimal 5 menit berisi filosofi nama dan anggota rasi.
               </p>
             </div>
             <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(104,207,235,0.1)", color: "var(--lp-aqua)" }}>🖼️</div>
+              <div className={styles.cardIcon} style={{ background: "rgba(104,207,235,0.1)", color: "var(--lp-aqua)" }}>
+                <ImageIcon size={24} />
+              </div>
               <h3 className={styles.cardTitle}>Twibbon &amp; Video Bio</h3>
               <p className={styles.cardDesc}>
                 Unggah foto Twibbon resmi &amp; video perkenalan individu dengan nada lagu daerah di Instagram.
               </p>
             </div>
             <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(31,30,25,0.1)", color: "var(--lp-charcoal)" }}>🎨</div>
+              <div className={styles.cardIcon} style={{ background: "rgba(31,30,25,0.1)", color: "var(--lp-charcoal)" }}>
+                <Palette size={24} />
+              </div>
               <h3 className={styles.cardTitle}>Persiapan Tampah Show</h3>
               <p className={styles.cardDesc}>
                 Mengecat tampah kayu diameter 50cm dengan kombinasi warna Orange Crush &amp; Blue Brooch.
               </p>
             </div>
             <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(104,207,235,0.1)", color: "var(--lp-aqua)" }}>📝</div>
+              <div className={styles.cardIcon} style={{ background: "rgba(104,207,235,0.1)", color: "var(--lp-aqua)" }}>
+                <FileText size={24} />
+              </div>
               <h3 className={styles.cardTitle}>Resume Materi</h3>
               <p className={styles.cardDesc}>
                 Merangkum materi Pra-SILO dan Core-SILO tulis tangan di kertas A5 bolak-balik dalam format PDF.
               </p>
             </div>
             <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(31,75,93,0.1)", color: "var(--lp-ocean-blue)" }}>🎵</div>
+              <div className={styles.cardIcon} style={{ background: "rgba(31,75,93,0.1)", color: "var(--lp-ocean-blue)" }}>
+                <Music size={24} />
+              </div>
               <h3 className={styles.cardTitle}>Hafalan Lagu Mars</h3>
               <p className={styles.cardDesc}>
                 Menghafalkan dan memposting video lagu Mars UISI, Jingle Branara, Buruh Tani, &amp; Darah Juang.
               </p>
             </div>
             <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(31,30,25,0.1)", color: "var(--lp-charcoal)" }}>📢</div>
+              <div className={styles.cardIcon} style={{ background: "rgba(31,30,25,0.1)", color: "var(--lp-charcoal)" }}>
+                <Megaphone size={24} />
+              </div>
               <h3 className={styles.cardTitle}>Kampanye Edukatif</h3>
               <p className={styles.cardDesc}>
                 Membuat video kampanye edukasi isu sosial secara berkelompok sesuai arahan panitia.
@@ -241,28 +283,36 @@ export default function Home() {
           </p>
           <div className={styles.merchCarousel}>
             <div className={styles.merchCard} style={{ background: "var(--lp-ocean-blue)" }}>
-              <h3 className={styles.merchCardTitle}>👕 Kaos Aethera</h3>
+              <h3 className={styles.merchCardTitle}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}><Shirt size={22} /> Kaos Aethera</span>
+              </h3>
               <p className={styles.merchCardPrice}>
                 Combed 30s · Hitam
               </p>
               <p style={{ marginTop: "auto", fontSize: "1.5rem", fontWeight: 800, color: "var(--lp-white)" }}>Rp 95.000</p>
             </div>
             <div className={styles.merchCard} style={{ background: "var(--lp-aqua)" }}>
-              <h3 className={styles.merchCardTitle}>✨ Sticker Pack</h3>
+              <h3 className={styles.merchCardTitle}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}><Sparkles size={22} /> Sticker Pack</span>
+              </h3>
               <p className={styles.merchCardPrice}>
                 8 Rasi · Vinyl Anti Air
               </p>
               <p style={{ marginTop: "auto", fontSize: "1.5rem", fontWeight: 800, color: "var(--lp-white)" }}>Rp 20.000</p>
             </div>
             <div className={styles.merchCard} style={{ background: "var(--lp-charcoal)" }}>
-              <h3 className={styles.merchCardTitle}>🛍️ Totebag Orbit</h3>
+              <h3 className={styles.merchCardTitle}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}><ShoppingBag size={22} /> Totebag Orbit</span>
+              </h3>
               <p className={styles.merchCardPrice}>
                 Kanvas Tebal · Putih Tulang
               </p>
               <p style={{ marginTop: "auto", fontSize: "1.5rem", fontWeight: 800, color: "var(--lp-white)" }}>Rp 55.000</p>
             </div>
             <div className={styles.merchCard} style={{ background: "var(--lp-ocean-blue)" }}>
-              <h3 className={styles.merchCardTitle}>🎖️ Pin Enamel</h3>
+              <h3 className={styles.merchCardTitle}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}><Award size={22} /> Pin Enamel</span>
+              </h3>
               <p className={styles.merchCardPrice}>
                 Logam Premium · Aethera Logo
               </p>
@@ -271,7 +321,7 @@ export default function Home() {
           </div>
           <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
             <Link href="/merch" className={styles.merchButtonLink}>
-              Lihat Selengkapnya →
+              Lihat Selengkapnya &rarr;
             </Link>
           </div>
         </section>
@@ -298,15 +348,17 @@ export default function Home() {
       {/* ===== FOOTER ===== */}
       <footer className={styles.footer}>
         <div>
-          <div className={styles.footerLogo}>⬡ SILO UISI</div>
+          <div className={styles.footerLogo}>
+            <Hexagon style={{ display: "inline-block", verticalAlign: "middle", marginRight: "6px" }} size={18} color="var(--lp-aqua)" /> SILO UISI
+          </div>
           <p className={styles.footerDesc}>
             Sistem Informasi & Layanan Orientasi — Portal resmi PKKMB
             Universitas Internasional Semen Indonesia.
           </p>
-          <div style={{ display: "flex", gap: "0.75rem", marginTop: "1rem" }}>
-            <span style={{ fontSize: "1rem", opacity: 0.6, cursor: "pointer", transition: "opacity 0.2s" }}>📷</span>
-            <span style={{ fontSize: "1rem", opacity: 0.6, cursor: "pointer", transition: "opacity 0.2s" }}>💬</span>
-            <span style={{ fontSize: "1rem", opacity: 0.6, cursor: "pointer", transition: "opacity 0.2s" }}>✉️</span>
+          <div style={{ display: "flex", gap: "0.85rem", marginTop: "1rem", color: "rgba(255,255,255,0.7)" }}>
+            <span style={{ cursor: "pointer", transition: "color 0.2s" }}><Camera size={18} /></span>
+            <span style={{ cursor: "pointer", transition: "color 0.2s" }}><MessageCircle size={18} /></span>
+            <span style={{ cursor: "pointer", transition: "color 0.2s" }}><Mail size={18} /></span>
           </div>
         </div>
 
@@ -349,7 +401,11 @@ export default function Home() {
             placeholder="Email kamu..."
             className={styles.footerInput}
           />
-          <button className={styles.footerButton}>Subscribe 🚀</button>
+          <button className={styles.footerButton}>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}>
+              Subscribe <Send size={15} />
+            </span>
+          </button>
         </div>
       </footer>
     </div>

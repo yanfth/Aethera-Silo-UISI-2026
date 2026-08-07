@@ -4,6 +4,15 @@ import React, { useEffect, useState, useRef } from "react";
 import HTMLFlipBook from "react-pageflip";
 import * as pdfjsLib from "pdfjs-dist";
 import styles from "./GuidebookSection.module.css";
+import { 
+  ChevronLeft, 
+  ChevronRight, 
+  ZoomIn, 
+  ZoomOut, 
+  Maximize2, 
+  Minimize2, 
+  Download 
+} from "lucide-react";
 
 // Configure local worker path for pdfjs-dist v3
 if (typeof window !== "undefined") {
@@ -258,25 +267,32 @@ export default function GuidebookFlipbook({ pdfUrl = "/guidebook.pdf" }: Guidebo
           <div className={styles.toolbar}>
             <div className={styles.toolbarGroup}>
               <button
-                className={styles.toolBtn}
+                className={styles.toolBtnIcon}
                 onClick={handlePrevPage}
                 title="Halaman Sebelumnya"
                 disabled={currentPage === 0}
               >
-                ◀ SEBELUMNYA
+                <ChevronLeft size={18} />
               </button>
-              <span className={styles.pageInfoText}>
-                Halaman <strong>{currentPage + 1}</strong> dari <strong>{totalPages}</strong>
-              </span>
+
+              <div className={styles.pageInfoBadge}>
+                <span>Halaman</span>
+                <strong className={styles.pageInfoNum}>{currentPage + 1}</strong>
+                <span className={styles.pageInfoSeparator}>/</span>
+                <strong className={styles.pageInfoTotal}>{totalPages}</strong>
+              </div>
+
               <button
-                className={styles.toolBtn}
+                className={styles.toolBtnIcon}
                 onClick={handleNextPage}
                 title="Halaman Selanjutnya"
                 disabled={currentPage >= totalPages - 1}
               >
-                SELANJUTNYA ▶
+                <ChevronRight size={18} />
               </button>
             </div>
+
+            <div className={styles.toolbarDivider} />
 
             <div className={styles.toolbarGroup}>
               <button
@@ -285,7 +301,7 @@ export default function GuidebookFlipbook({ pdfUrl = "/guidebook.pdf" }: Guidebo
                 title="Perkecil"
                 disabled={zoomLevel <= 0.8}
               >
-                🔍-
+                <ZoomOut size={16} />
               </button>
               <span className={styles.zoomBadge}>{Math.round(zoomLevel * 100)}%</span>
               <button
@@ -294,14 +310,14 @@ export default function GuidebookFlipbook({ pdfUrl = "/guidebook.pdf" }: Guidebo
                 title="Perbesar"
                 disabled={zoomLevel >= 1.6}
               >
-                🔍+
+                <ZoomIn size={16} />
               </button>
               <button
                 className={styles.toolBtnIcon}
                 onClick={toggleFullscreen}
-                title="Layar Penuh"
+                title={isFullscreen ? "Keluar Layar Penuh" : "Layar Penuh"}
               >
-                {isFullscreen ? "🗗" : "⛶"}
+                {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
               </button>
               <a
                 href={pdfUrl}
@@ -309,7 +325,8 @@ export default function GuidebookFlipbook({ pdfUrl = "/guidebook.pdf" }: Guidebo
                 className={styles.downloadBtn}
                 title="Unduh PDF Asli"
               >
-                📥 Unduh PDF
+                <Download size={15} />
+                <span>Unduh PDF</span>
               </a>
             </div>
           </div>

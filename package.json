@@ -15,6 +15,7 @@
     "@types/react-simple-maps": "^3.0.6",
     "aos": "^2.3.4",
     "cobe": "^2.0.1",
+    "lucide-react": "^1.30.0",
     "next": "16.2.12",
     "page-flip": "^2.0.7",
     "pdfjs-dist": "^3.11.174",

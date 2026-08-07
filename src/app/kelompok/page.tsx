@@ -4,6 +4,7 @@ import React, { use, useState } from "react";
 import Link from "next/link";
 import { CLUSTERS } from "../components/GlobeSection";
 import { KELOMPOK_DETAILS } from "../data/kelompokData";
+import { MessageCircle } from "lucide-react";
 
 export default function KelompokPage({
   searchParams,
@@ -213,7 +214,7 @@ export default function KelompokPage({
                       transition: "all 0.2s ease",
                     }}
                   >
-                    <span>💬 Hubungi Mentor</span>
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem" }}><MessageCircle size={15} /> Hubungi Mentor</span>
                   </a>
                 </div>
               </div>

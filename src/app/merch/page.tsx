@@ -1,13 +1,26 @@
 import React from "react";
 import Link from "next/link";
 import styles from "../page.module.css";
+import { 
+  Shirt, 
+  Sparkles, 
+  ShoppingBag, 
+  Award, 
+  Tag, 
+  Coffee, 
+  Hexagon, 
+  Camera, 
+  MessageCircle, 
+  Mail, 
+  ArrowLeft 
+} from "lucide-react";
 
 const merchandiseList = [
   {
     id: 1,
     name: "Kaos Aethera (Hitam)",
     price: "Rp 95.000",
-    icon: "👕",
+    icon: <Shirt size={54} color="#1F4B5D" />,
     desc: "Bahan cotton combed 30s, nyaman dipakai. Desain eksklusif PKKMB 2026.",
     colorStart: "#FFE0D0",
     colorEnd: "#FFD166"
@@ -16,7 +29,7 @@ const merchandiseList = [
     id: 2,
     name: "Sticker Pack Rasi",
     price: "Rp 20.000",
-    icon: "✨",
+    icon: <Sparkles size={54} color="#1F4B5D" />,
     desc: "Kumpulan stiker vinyl anti air dengan logo masing-masing kelompok rasi.",
     colorStart: "#E8D5F5",
     colorEnd: "#D4EAFF"
@@ -25,7 +38,7 @@ const merchandiseList = [
     id: 3,
     name: "Totebag Orbit",
     price: "Rp 55.000",
-    icon: "🛍️",
+    icon: <ShoppingBag size={54} color="#1F4B5D" />,
     desc: "Kanvas tebal dengan sablon logo Aethera. Cocok untuk membawa laptop dan buku.",
     colorStart: "#D4EAFF",
     colorEnd: "#D5F5E3"
@@ -34,7 +47,7 @@ const merchandiseList = [
     id: 4,
     name: "Pin Enamel Aethera",
     price: "Rp 15.000",
-    icon: "🎖️",
+    icon: <Award size={54} color="#1F4B5D" />,
     desc: "Pin enamel premium untuk disematkan di lanyard atau tas.",
     colorStart: "#D5F5E3",
     colorEnd: "#FFD166"
@@ -43,7 +56,7 @@ const merchandiseList = [
     id: 5,
     name: "Lanyard Eksklusif",
     price: "Rp 35.000",
-    icon: "🎗️",
+    icon: <Tag size={54} color="#1F4B5D" />,
     desc: "Lanyard tebal 2cm dengan desain Aethera 2026 dan ID card holder.",
     colorStart: "#FFD166",
     colorEnd: "#FFE0D0"
@@ -52,7 +65,7 @@ const merchandiseList = [
     id: 6,
     name: "Tumbler Aethera",
     price: "Rp 75.000",
-    icon: "🥤",
+    icon: <Coffee size={54} color="#1F4B5D" />,
     desc: "Tumbler stainless steel 500ml untuk menemanimu selama kegiatan kampus.",
     colorStart: "#A2D2FF",
     colorEnd: "#E8D5F5"
@@ -181,15 +194,17 @@ export default function MerchPage() {
       {/* ===== FOOTER ===== */}
       <footer className={styles.footer}>
         <div>
-          <div className={styles.footerLogo}>SILO UISI.</div>
+          <div className={styles.footerLogo}>
+            <Hexagon style={{ display: "inline-block", verticalAlign: "middle", marginRight: "6px" }} size={18} color="var(--lp-aqua)" /> SILO UISI
+          </div>
           <p className={styles.footerDesc}>
             Sistem Informasi & Layanan Orientasi — Portal resmi PKKMB
             Universitas Internasional Semen Indonesia.
           </p>
-          <div style={{ display: "flex", gap: "0.75rem", marginTop: "1rem" }}>
-            <span style={{ fontSize: "0.8rem", opacity: 0.6 }}>📷</span>
-            <span style={{ fontSize: "0.8rem", opacity: 0.6 }}>💬</span>
-            <span style={{ fontSize: "0.8rem", opacity: 0.6 }}>✉️</span>
+          <div style={{ display: "flex", gap: "0.85rem", marginTop: "1rem", color: "rgba(255,255,255,0.7)" }}>
+            <span style={{ cursor: "pointer" }}><Camera size={18} /></span>
+            <span style={{ cursor: "pointer" }}><MessageCircle size={18} /></span>
+            <span style={{ cursor: "pointer" }}><Mail size={18} /></span>
           </div>
         </div>
 
