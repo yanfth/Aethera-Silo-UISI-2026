@@ -212,7 +212,7 @@ export default function MerchPage() {
           <div className={styles.footerColTitle}>Menu</div>
           <div className={styles.footerLinks}>
             <Link href="/#about">Tentang</Link>
-            <Link href="/#logo">Makna Logo</Link>
+            <Link href="/#logo">Filosofi Logo</Link>
             <Link href="/#countdown">Countdown</Link>
           </div>
         </div>

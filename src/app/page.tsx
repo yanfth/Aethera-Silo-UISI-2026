@@ -135,7 +135,7 @@ export default function Home() {
 
         {/* ===== LOGO PHILOSOPHY ===== */}
         <section id="logo" className={styles.section} data-aos="fade-up">
-          <h2 className={styles.sectionTitle}>Makna Logo Aethera</h2>
+          <h2 className={styles.sectionTitle}>Filosofi Logo Aethera</h2>
           <p className={styles.sectionSubtitle}>
             Simbol keberanian, inovasi, dan persatuan mahasiswa baru UISI 2026.
           </p>
@@ -366,7 +366,7 @@ export default function Home() {
           <div className={styles.footerColTitle}>Menu</div>
           <div className={styles.footerLinks}>
             <Link href="#about">Tentang</Link>
-            <Link href="#logo">Makna Logo</Link>
+            <Link href="#logo">Filosofi Logo</Link>
             <Link href="#panitia">Daftar Panitia</Link>
             <Link href="#penugasan">Penugasan</Link>
             <Link href="#kelompok">Kelompok</Link>
