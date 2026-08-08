@@ -387,9 +387,12 @@ export default function GlobeSection() {
           <div
             style={{
               width: "100%",
-              maxWidth: "480px",
+              maxWidth: "420px",
               aspectRatio: "1/1",
               position: "relative",
+              margin: "0 auto",
+              borderRadius: "50%",
+              overflow: "hidden",
             }}
           >
             <Canvas
@@ -427,7 +430,7 @@ export default function GlobeSection() {
           </div>
 
           <div
-            style={{ display: "flex", gap: "0.75rem", marginTop: "1.25rem" }}
+            style={{ display: "flex", gap: "0.75rem", marginTop: "1.25rem", flexWrap: "wrap", justifyContent: "center", width: "100%" }}
           >
             <button
               onClick={handlePrev}

@@ -1,32 +1,63 @@
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.1rem 2.5rem;
   width: 100%;
   box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--lp-glass-border);
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 4px 20px rgba(31, 75, 93, 0.06);
+  box-shadow: 0 4px 20px rgba(31, 75, 93, 0.08);
+  transition: all 0.3s ease;
+}
+
+.navContainer {
+  max-width: 100%;
+  padding: 0.9rem clamp(1.5rem, 4vw, 3.5rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .logo {
   font-weight: 800;
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   color: var(--lp-ocean-blue);
   letter-spacing: -0.02em;
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.75rem;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
-.navLinks {
+.logoImg {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover .logoImg {
+  transform: scale(1.05);
+}
+
+.logoTextFull {
+  display: inline-block;
+}
+
+.logoTextMedium {
+  display: none;
+}
+
+.logoTextShort {
+  display: none;
+}
+
+.navLinksDesktop {
   display: flex;
   gap: 0.5rem;
   align-items: center;
@@ -34,15 +65,22 @@
 
 .navLink {
   font-weight: 600;
-  font-size: 1.02rem;
+  font-size: 1rem;
   padding: 0.6rem 1.25rem;
   color: var(--lp-text-muted);
   border-radius: var(--radius-pill);
   transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.5rem;
   text-decoration: none;
+}
+
+.dropdownTrigger {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .navLink:hover, .activeNavLink {
@@ -55,7 +93,15 @@
   background: rgba(31, 75, 93, 0.12);
 }
 
-/* Dropdown Menu Jelajah */
+.chevron {
+  transition: transform 0.25s ease;
+}
+
+.chevronRotated {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Menu Jelajah Desktop */
 .dropdownWrapper {
   position: relative;
   display: inline-block;
@@ -66,17 +112,17 @@
   top: 100%;
   right: 0;
   margin-top: 0.5rem;
-  width: 230px;
+  width: 240px;
   background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(104, 207, 235, 0.4);
   border-radius: var(--radius-lg);
-  box-shadow: 0 16px 40px rgba(31, 75, 93, 0.2);
-  padding: 0.5rem;
+  box-shadow: 0 16px 40px rgba(31, 75, 93, 0.18);
+  padding: 0.6rem;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.3rem;
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
@@ -85,7 +131,7 @@
 }
 
 .dropdownWrapper:hover .dropdownMenu,
-.dropdownWrapper:focus-within .dropdownMenu {
+.dropdownShow {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -94,8 +140,8 @@
 .dropdownItem {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  padding: 0.65rem 0.95rem;
+  gap: 0.75rem;
+  padding: 0.7rem 1rem;
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--lp-ocean-blue);
@@ -105,20 +151,245 @@
 }
 
 .dropdownItem:hover {
-  background: rgba(104, 207, 235, 0.18);
+  background: rgba(104, 207, 235, 0.2);
   transform: translateX(4px);
   color: #143542;
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    padding: 1rem 1.25rem;
+.dropdownIcon {
+  color: var(--lp-ocean-blue);
+  flex-shrink: 0;
+}
+
+/* Mobile Toggle Button */
+.mobileToggleBtn {
+  display: none;
+  background: rgba(104, 207, 235, 0.15);
+  border: 1px solid rgba(104, 207, 235, 0.4);
+  color: var(--lp-ocean-blue);
+  padding: 0.55rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobileToggleBtn:hover,
+.mobileToggleBtn:active {
+  background: rgba(104, 207, 235, 0.28);
+  transform: scale(1.05);
+}
+
+/* Mobile Overlay Drawer */
+.mobileMenuOverlay {
+  display: none;
+  position: fixed;
+  top: 68px; /* Height of header */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(100vh - 68px);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.mobileMenuShow {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.mobileMenuContent {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.mobileNavGroup {
+  background: rgba(245, 249, 251, 0.85);
+  border: 1px solid rgba(104, 207, 235, 0.35);
+  border-radius: 18px;
+  padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 8px 24px rgba(31, 75, 93, 0.04);
+}
+
+.mobileGroupLabel {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--lp-ocean-blue);
+  opacity: 0.75;
+  margin-bottom: 0.4rem;
+  padding-left: 0.4rem;
+}
+
+.mobileGroupTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--lp-ocean-blue);
+}
+
+.mobileNavLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--lp-ocean-blue);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.mobileNavLink:hover,
+.mobileNavLink:active,
+.mobileActiveLink {
+  background: var(--lp-ocean-blue);
+  color: #ffffff;
+}
+
+.mobileAccordionHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding: 0.4rem 0.4rem;
+  cursor: pointer;
+  font-family: inherit;
+  margin-bottom: 0.2rem;
+}
+
+.mobileSubLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+  padding-left: 0.2rem;
+}
+
+.mobileSubLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--lp-ocean-blue);
+  border-radius: 12px;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(104, 207, 235, 0.25);
+  transition: all 0.2s ease;
+}
+
+.mobileSubLink:hover,
+.mobileSubLink:active,
+.mobileActiveSubLink {
+  background: rgba(104, 207, 235, 0.25);
+  transform: translateX(4px);
+  color: #143542;
+  font-weight: 700;
+}
+
+/* ===== RESPONSIVE MEDIA QUERIES ===== */
+
+/* iPad and Tablet Screens (768px - 1024px) */
+@media (max-width: 1024px) {
+  .navContainer {
+    padding: 0.8rem 1.5rem;
   }
-  .navLinks {
-    gap: 0.15rem;
+  
+  .logoTextFull {
+    display: none;
   }
-  .navLink {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.75rem;
+  
+  .logoTextMedium {
+    display: inline-block;
+    font-size: 1.15rem;
+  }
+
+  .navLinksDesktop {
+    display: none;
+  }
+
+  .mobileToggleBtn {
+    display: flex;
+  }
+
+  .mobileMenuOverlay {
+    display: block;
+  }
+}
+
+/* Mobile Phones / Small Screens (< 640px) */
+@media (max-width: 640px) {
+  .navContainer {
+    padding: 0.75rem 1rem;
+  }
+
+  .logo {
+    gap: 0.5rem;
+  }
+
+  .logoImg {
+    height: 36px;
+  }
+
+  .logoTextMedium {
+    display: none;
+  }
+
+  .logoTextShort {
+    display: inline-block;
+    font-size: 1.05rem;
+  }
+
+  .mobileMenuOverlay {
+    top: 60px;
+    height: calc(100vh - 60px);
+  }
+
+  .mobileMenuContent {
+    padding: 1.2rem 1rem 3rem 1rem;
+    gap: 1rem;
+  }
+
+  .mobileNavLink {
+    font-size: 1rem;
+    padding: 0.75rem 0.9rem;
+  }
+
+  .mobileSubLink {
+    font-size: 0.92rem;
+    padding: 0.7rem 0.85rem;
+  }
+}
+
+/* Extra Small Phones (< 380px) */
+@media (max-width: 380px) {
+  .logoTextShort {
+    font-size: 0.95rem;
   }
 }

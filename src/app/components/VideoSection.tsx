@@ -2,12 +2,14 @@
 
 import React from "react";
 import styles from "./VideoSection.module.css";
+import { Film, Flame } from "lucide-react";
 
 interface VideoRow {
   id: string;
   youtubeId: string;
   title: string;
   hashtag: string;
+  badge: string;
   videoPosition: "left" | "right";
 }
 
@@ -17,6 +19,7 @@ const VIDEO_ROWS: VideoRow[] = [
     youtubeId: "xtugHXaFhLY",
     title: "Aftermovie & Highlight Keseruan SILO UISI",
     hashtag: "#SalamAethera",
+    badge: "Official Aftermovie",
     videoPosition: "right"
   },
   {
@@ -24,6 +27,7 @@ const VIDEO_ROWS: VideoRow[] = [
     youtubeId: "03zyuX-I3yo",
     title: "Dokumentasi Momen Spektakuler SILO UISI",
     hashtag: "#KsatriaAethera",
+    badge: "Opening Ceremony",
     videoPosition: "left"
   },
   {
@@ -31,6 +35,7 @@ const VIDEO_ROWS: VideoRow[] = [
     youtubeId: "bN5Opq9PO9k",
     title: "Kilas Balik Euforia & Kemeriahan Ksatria SILO",
     hashtag: "#BranaraAethera",
+    badge: "Euforia SILO",
     videoPosition: "right"
   }
 ];
@@ -48,55 +53,43 @@ export default function VideoSection() {
         </p>
       </div>
 
-      {/* Staggered Rows */}
+      {/* Rows */}
       <div className={styles.rowsContainer}>
         {VIDEO_ROWS.map((row) => (
-          <div key={row.id} className={styles.row}>
-            {row.videoPosition === "left" ? (
-              <>
-                {/* Video Left */}
-                <div className={styles.videoCol}>
-                  <div className={styles.videoCard}>
-                    <div className={styles.iframeWrapper}>
-                      <iframe
-                        className={styles.iframe}
-                        src={`https://www.youtube.com/embed/${row.youtubeId}`}
-                        title={row.title}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen={true}
-                      />
-                    </div>
-                  </div>
+          <div
+            key={row.id}
+            className={`${styles.row} ${
+              row.videoPosition === "left" ? styles.rowImageLeft : ""
+            }`}
+          >
+            {/* Video Column */}
+            <div className={styles.videoCol}>
+              <div className={styles.videoCard}>
+                <div className={styles.iframeWrapper}>
+                  <iframe
+                    className={styles.iframe}
+                    src={`https://www.youtube.com/embed/${row.youtubeId}`}
+                    title={row.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen={true}
+                  />
                 </div>
+              </div>
+            </div>
 
-                {/* Hashtag Right */}
-                <div className={styles.hashtagCol}>
+            {/* Info & Hashtag Column */}
+            <div className={styles.infoCol}>
+              <div className={styles.infoCard}>
+                <span className={styles.badgePill}>
+                  <Film size={14} /> {row.badge}
+                </span>
+                <h3 className={styles.videoTitle}>{row.title}</h3>
+                <div className={styles.hashtagBox}>
+                  <Flame size={20} className={styles.flameIcon} />
                   <span className={styles.hashtagText}>{row.hashtag}</span>
                 </div>
-              </>
-            ) : (
-              <>
-                {/* Hashtag Left */}
-                <div className={styles.hashtagCol}>
-                  <span className={styles.hashtagText}>{row.hashtag}</span>
-                </div>
-
-                {/* Video Right */}
-                <div className={styles.videoCol}>
-                  <div className={styles.videoCard}>
-                    <div className={styles.iframeWrapper}>
-                      <iframe
-                        className={styles.iframe}
-                        src={`https://www.youtube.com/embed/${row.youtubeId}`}
-                        title={row.title}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen={true}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
+              </div>
+            </div>
           </div>
         ))}
       </div>

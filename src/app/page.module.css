@@ -12,9 +12,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem clamp(1.5rem, 3vw, 2.5rem);
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 100;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  max-width: 1400px;
+  margin: 0 auto;
   width: 100%;
 }
 
@@ -122,9 +126,70 @@
   color: #143542;
 }
 
+.mobileMenuBtn {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--lp-text);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.menuIconWrapper {
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.mobileMenuBtnOpen .menuIconWrapper {
+  transform: rotate(180deg) scale(1.1);
+}
+
+@media (max-width: 1024px) {
+  .mobileMenuBtn {
+    display: block;
+  }
+
+  .navLinks {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--lp-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--lp-glass-border);
+    flex-direction: column;
+    padding: 1rem 0;
+    box-shadow: var(--lp-shadow-md);
+    
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  .navLinksOpen {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .navLink {
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 0;
+  }
+}
+
 /* ===== HERO ===== */
 .hero {
-  padding: clamp(3rem, 5vw, 5rem) clamp(1.5rem, 5vw, 3rem);
+  padding: clamp(6rem, 8vw, 8rem) clamp(1.5rem, 5vw, 3rem) clamp(3rem, 5vw, 5rem);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(1.5rem, 4vw, 3rem);

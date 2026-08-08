@@ -152,8 +152,9 @@ function Separator() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        justifyContent: "center",
         gap: "8px",
-        paddingBottom: "2rem",
+        height: "clamp(80px, 13vw, 120px)",
       }}
     >
       <div

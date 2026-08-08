@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import styles from "./DokumentasiGallery.module.css";
 
 interface DocItem {
@@ -112,6 +112,16 @@ export default function DokumentasiGallery() {
   const [isTransitioning, setIsTransitioning] = useState(true);
   const totalOriginal = DOC_ITEMS.length;
 
+  const handleNext = useCallback(() => {
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => prev + 1);
+  }, []);
+
+  const handlePrev = useCallback(() => {
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => (prev <= 0 ? totalOriginal - 1 : prev - 1));
+  }, [totalOriginal]);
+
   // Auto-play interval (2.5 detik per slide)
   useEffect(() => {
     if (isPaused || selectedImage) return;
@@ -121,17 +131,7 @@ export default function DokumentasiGallery() {
     }, 2800);
 
     return () => clearInterval(timer);
-  }, [currentIndex, isPaused, selectedImage]);
-
-  const handleNext = () => {
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => prev + 1);
-  };
-
-  const handlePrev = () => {
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => (prev <= 0 ? totalOriginal - 1 : prev - 1));
-  };
+  }, [currentIndex, isPaused, selectedImage, handleNext]);
 
   // Reset seamless loop saat mencapai bagian duplikat
   const handleTransitionEnd = () => {

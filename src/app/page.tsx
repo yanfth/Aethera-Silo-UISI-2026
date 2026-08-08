@@ -1,45 +1,30 @@
 import SponsorSection from "./components/SponsorSection";
 import styles from "./page.module.css";
 import Link from "next/link";
-import GlobeSection from "./components/GlobeSection";
+import Image from "next/image";
 import CountdownSection from "./components/CountdownSection";
 import LowPolyBackground from "./components/LowPolyBackground";
-import PanitiaCarousel from "./components/PanitiaCarousel";
 import DokumentasiGallery from "./components/DokumentasiGallery";
-import GuidebookSection from "./components/GuidebookSection";
+import Navbar from "./components/Navbar";
+import ClickSpark from "./components/ClickSpark";
 import SambutanSection from "./components/SambutanSection";
-import AnggotaDivisi from "./components/AnggotaDivisi";
 import MapsSection from "./components/MapsSection";
 import VideoSection from "./components/VideoSection";
-import Navbar from "./components/Navbar";
 import { 
-  Hexagon, 
   Sparkles, 
-  Zap, 
-  Waves, 
-  Video, 
-  Image as ImageIcon, 
-  Palette, 
-  FileText, 
-  Music, 
-  Megaphone, 
-  Shirt, 
-  ShoppingBag, 
-  Award, 
   Camera, 
   MessageCircle, 
   Mail, 
-  Send,
-  ArrowRight,
-  Compass,
-  ChevronDown
+  Send
 } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <ClickSpark sparkColor="#68CFEB" sparkSize={12} sparkRadius={25} sparkCount={8} duration={400}>
+      <div className={styles.container}>
       <LowPolyBackground />
 
+      {/* ===== NAVBAR ===== */}
       <Navbar />
 
       <main className={styles.main}>
@@ -71,7 +56,7 @@ export default function Home() {
           <div className={styles.heroVisual} data-aos="fade-left">
             <div className={styles.heroGeoBg}></div>
             <div className={styles.heroImageContainer}>
-              <img
+              <Image
                 src="/hero_rocket.png"
                 alt="Aethera Rocket Illustration"
                 width={480}
@@ -101,9 +86,11 @@ export default function Home() {
               </p>
             </div>
             <div className={styles.aboutImage}>
-              <img
+              <Image
                 src="/portfolio_phones.png"
                 alt="AETHERA SILO UISI 2026 Preview"
+                width={800}
+                height={600}
                 style={{ width: "100%", height: "auto", borderRadius: "1.5rem" }}
               />
             </div>
@@ -153,7 +140,7 @@ export default function Home() {
       <footer className={styles.footer}>
         <div>
           <div className={styles.footerLogo} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <img src="/logo_aethera.png?v=3" alt="Aethera Logo" style={{ height: "26px", width: "auto" }} />
+            <Image src="/logo_aethera.png" alt="Aethera Logo" width={26} height={26} style={{ height: "26px", width: "auto" }} />
             <span>AETHERA SILO UISI 2026</span>
           </div>
           <p className={styles.footerDesc}>
@@ -218,5 +205,6 @@ export default function Home() {
         </div>
       </footer>
     </div>
+    </ClickSpark>
   );
 }

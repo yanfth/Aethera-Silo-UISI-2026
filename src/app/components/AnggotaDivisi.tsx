@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import styles from "./AnggotaDivisi.module.css";
 import {
   Users,
@@ -14,7 +14,9 @@ import {
   Sparkles,
   User,
   GraduationCap,
-  Megaphone
+  Megaphone,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 
 interface Member {
@@ -51,14 +53,6 @@ const DIVISIONS: Division[] = [
     icon: <Sparkles size={16} />,
     description: "Merancang konsep, alur rundown acara, tata panggung, dan eksekusi seluruh kegiatan AETHERA SILO UISI 2026.",
     koordinator: "Jefranda Dinata (Koordinator SC & Acara)"
-  },
-  {
-    id: "ic",
-    name: "Divisi Instructor Committee (IC)",
-    shortName: "Instructor",
-    icon: <GraduationCap size={16} />,
-    description: "Memandu kedisiplinan, mengarahkan instruksi lapangan, dan mendampingi pelaksanaan penugasan peserta.",
-    koordinator: "Muhammad Daniyal Wahidy"
   },
   {
     id: "pdd",
@@ -125,18 +119,6 @@ const MEMBERS: Member[] = [
   { id: "17", name: "Jevamya Chelcie Wicaksana", prodi: "Teknik Kimia", role: "Anggota Acara", divisionId: "acara", divisionName: "SC & Acara" },
   { id: "18", name: "Muhammad Hanif Raja I", prodi: "Manajemen", role: "Anggota Acara", divisionId: "acara", divisionName: "SC & Acara" },
   { id: "19", name: "Dhea Safira Rahmawati", prodi: "Teknologi Industri Pertanian", role: "Anggota Acara", divisionId: "acara", divisionName: "SC & Acara" },
-
-  // Instructor Committee
-  { id: "20", name: "Muhammad Daniyal Wahidy", prodi: "Manajemen", role: "Koordinator Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
-  { id: "21", name: "Febriana Dwi Anggraini", prodi: "Akuntansi", role: "Anggota Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
-  { id: "22", name: "Gita Nur Arif", prodi: "Teknik Logistik", role: "Anggota Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
-  { id: "23", name: "Permata Citra Afrilia", prodi: "Ekonomi Syariah", role: "Anggota Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
-  { id: "24", name: "Rahma Cahyani Salsabila", prodi: "Manajemen", role: "Anggota Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
-  { id: "25", name: "Anggi Fadilah Pratiwi", prodi: "Manajemen", role: "Anggota Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
-  { id: "26", name: "Saiqu Rafly Aldavy", prodi: "Manajemen", role: "Anggota Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
-  { id: "27", name: "Bunga Ismananda Sari", prodi: "Teknik Logistik", role: "Anggota Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
-  { id: "28", name: "Aulia Putra Akbar", prodi: "Teknik Kimia", role: "Anggota Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
-  { id: "29", name: "Mochammad Naufal Abimanyu", prodi: "Teknik Kimia", role: "Anggota Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
 
   // PDD
   { id: "30", name: "Alfian Khusnul Fatoni", prodi: "Informatika", role: "Koordinator PDD", divisionId: "pdd", divisionName: "PDD" },
@@ -236,6 +218,15 @@ const MEMBERS: Member[] = [
 export default function AnggotaDivisi() {
   const [selectedDivisionId, setSelectedDivisionId] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 640);
+    handleResize(); // set on initial render
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const activeDivision = useMemo(() => {
     return DIVISIONS.find((d) => d.id === selectedDivisionId) || null;
@@ -253,6 +244,22 @@ export default function AnggotaDivisi() {
       return matchDivision && matchSearch;
     });
   }, [selectedDivisionId, searchQuery]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrentPage(1);
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [selectedDivisionId, searchQuery]);
+
+  const itemsPerPage = 10;
+  const totalPages = Math.ceil(filteredMembers.length / itemsPerPage);
+
+  const displayedMembers = useMemo(() => {
+    if (!isMobile) return filteredMembers;
+    const start = (currentPage - 1) * itemsPerPage;
+    return filteredMembers.slice(start, start + itemsPerPage);
+  }, [filteredMembers, isMobile, currentPage]);
 
   return (
     <div className={styles.wrapper}>
@@ -314,8 +321,8 @@ export default function AnggotaDivisi() {
 
       {/* Members Grid */}
       <div className={styles.membersGrid}>
-        {filteredMembers.length > 0 ? (
-          filteredMembers.map((member) => (
+        {displayedMembers.length > 0 ? (
+          displayedMembers.map((member) => (
             <div key={member.id} className={styles.memberCard}>
               <div className={styles.memberIconBox}>
                 <User size={18} />
@@ -336,6 +343,37 @@ export default function AnggotaDivisi() {
           </div>
         )}
       </div>
+
+      {/* Pagination Controls (Mobile only) */}
+      {isMobile && totalPages > 1 && (
+        <div className={styles.pagination}>
+          <button 
+            className={`${styles.pageBtn} ${styles.btnPrev}`} 
+            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+            disabled={currentPage === 1}
+          >
+            <ChevronLeft size={20} />
+          </button>
+          
+          <div className={styles.dotsWrapper}>
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <span 
+                key={i} 
+                className={`${styles.dot} ${currentPage === i + 1 ? styles.dotActive : ""}`}
+                onClick={() => setCurrentPage(i + 1)}
+              />
+            ))}
+          </div>
+
+          <button 
+            className={`${styles.pageBtn} ${styles.btnNext}`} 
+            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+            disabled={currentPage === totalPages}
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
