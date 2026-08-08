@@ -152,8 +152,9 @@ export default function Home() {
       {/* ===== FOOTER ===== */}
       <footer className={styles.footer}>
         <div>
-          <div className={styles.footerLogo}>
-            <Hexagon style={{ display: "inline-block", verticalAlign: "middle", marginRight: "6px" }} size={18} color="var(--lp-aqua)" /> AETHERA SILO UISI 2026
+          <div className={styles.footerLogo} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <img src="/logo_aethera.png?v=3" alt="Aethera Logo" style={{ height: "26px", width: "auto" }} />
+            <span>AETHERA SILO UISI 2026</span>
           </div>
           <p className={styles.footerDesc}>
             Sistem Informasi & Layanan Orientasi — Portal resmi AETHERA SILO UISI 2026

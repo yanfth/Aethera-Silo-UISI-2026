@@ -18,7 +18,15 @@ export default function Navbar() {
   return (
     <nav className={styles.navbar}>
       <Link href="/" className={styles.logo}>
-        <Hexagon size={20} color="var(--lp-aqua)" />
+        <img 
+          src="/logo_aethera.png?v=3" 
+          alt="AETHERA Logo" 
+          style={{ 
+            height: "44px", 
+            width: "auto", 
+            objectFit: "contain" 
+          }} 
+        />
         <span>AETHERA SILO UISI 2026</span>
       </Link>
 

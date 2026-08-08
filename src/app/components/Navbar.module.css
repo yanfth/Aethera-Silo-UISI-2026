@@ -17,42 +17,42 @@
 
 .logo {
   font-weight: 800;
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   color: var(--lp-ocean-blue);
   letter-spacing: -0.02em;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.65rem;
   text-decoration: none;
 }
 
 .navLinks {
   display: flex;
-  gap: 0.35rem;
+  gap: 0.5rem;
   align-items: center;
 }
 
 .navLink {
   font-weight: 600;
-  font-size: 0.88rem;
-  padding: 0.5rem 1rem;
+  font-size: 1.02rem;
+  padding: 0.6rem 1.25rem;
   color: var(--lp-text-muted);
   border-radius: var(--radius-pill);
   transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.45rem;
   text-decoration: none;
 }
 
 .navLink:hover, .activeNavLink {
   color: var(--lp-ocean-blue);
-  background: rgba(104, 207, 235, 0.15);
+  background: rgba(104, 207, 235, 0.18);
 }
 
 .activeNavLink {
   font-weight: 700;
-  background: rgba(31, 75, 93, 0.1);
+  background: rgba(31, 75, 93, 0.12);
 }
 
 /* Dropdown Menu Jelajah */
@@ -66,7 +66,7 @@
   top: 100%;
   right: 0;
   margin-top: 0.5rem;
-  width: 210px;
+  width: 230px;
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -94,9 +94,9 @@
 .dropdownItem {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  padding: 0.6rem 0.85rem;
-  font-size: 0.85rem;
+  gap: 0.7rem;
+  padding: 0.65rem 0.95rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: var(--lp-ocean-blue);
   border-radius: var(--radius-md);

@@ -41,7 +41,16 @@ export default function LogoPage() {
             }}
           >
             <div style={{ textAlign: "center" }}>
-              <Hexagon size={120} color="var(--lp-ocean-blue)" style={{ filter: "drop-shadow(0 10px 20px rgba(104, 207, 235, 0.4))" }} />
+              <img 
+                src="/logo_aethera.png?v=3" 
+                alt="Logo Resmi AETHERA SILO UISI 2026" 
+                style={{ 
+                  width: "260px", 
+                  height: "auto", 
+                  filter: "drop-shadow(0 12px 30px rgba(104, 207, 235, 0.45))",
+                  transition: "transform 0.3s ease"
+                }} 
+              />
               <h3 style={{ marginTop: "1.5rem", fontSize: "1.6rem", fontWeight: 800, color: "var(--lp-ocean-blue)" }}>
                 AETHERA SILO UISI 2026
               </h3>

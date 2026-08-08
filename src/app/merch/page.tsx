@@ -81,12 +81,6 @@ export default function MerchPage() {
 
       <main style={{ padding: "4rem 3rem", backgroundColor: "#FFFCF7", minHeight: "80vh" }}>
         
-        {/* Breadcrumb / Back button */}
-        <div style={{ marginBottom: "2rem" }}>
-          <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", fontSize: "0.9rem", color: "var(--color-gray)", textDecoration: "none", fontWeight: 600 }}>
-            <span>←</span> Kembali ke Beranda
-          </Link>
-        </div>
 
         <div style={{ textAlign: "center", marginBottom: "4rem", maxWidth: "600px", marginInline: "auto" }}>
           <span style={{ 
