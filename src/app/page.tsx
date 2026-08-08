@@ -10,6 +10,7 @@ import GuidebookSection from "./components/GuidebookSection";
 import SambutanSection from "./components/SambutanSection";
 import AnggotaDivisi from "./components/AnggotaDivisi";
 import MapsSection from "./components/MapsSection";
+import VideoSection from "./components/VideoSection";
 import { 
   Hexagon, 
   Sparkles, 
@@ -53,6 +54,9 @@ export default function Home() {
           </Link>
           <Link href="#dokumentasi" className={styles.navLink}>
             Dokumentasi
+          </Link>
+          <Link href="#video" className={styles.navLink}>
+            Video
           </Link>
           <Link href="#panitia" className={styles.navLink}>
             Panitia
@@ -199,6 +203,9 @@ export default function Home() {
 
           <DokumentasiGallery />
         </section>
+
+        {/* ===== VIDEO DOKUMENTASI SILO ===== */}
+        <VideoSection />
 
         {/* ===== DAFTAR PANITIA ===== */}
         <section id="panitia" className={styles.section} data-aos="fade-up">
@@ -394,10 +401,12 @@ export default function Home() {
             <Link href="#about">Tentang</Link>
             <Link href="#sambutan">Sambutan</Link>
             <Link href="#logo">Filosofi Logo</Link>
+            <Link href="#dokumentasi">Dokumentasi</Link>
+            <Link href="#video">Video</Link>
             <Link href="#panitia">Daftar Panitia</Link>
             <Link href="#penugasan">Penugasan</Link>
             <Link href="#kelompok">Kelompok</Link>
-            <Link href="#lokasi">Lokasi Kampus B</Link>
+            <Link href="#lokasi">Lokasi Kampus</Link>
           </div>
         </div>
 
