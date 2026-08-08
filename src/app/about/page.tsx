@@ -37,7 +37,7 @@ export default function AboutPage() {
             </div>
             <div className={styles.aboutImage}>
               <img
-                src="/portfolio_phones.png"
+                src="/portfolio_phones.webp"
                 alt="AETHERA SILO UISI 2026 Preview"
                 style={{ width: "100%", height: "auto", borderRadius: "1.5rem" }}
               />

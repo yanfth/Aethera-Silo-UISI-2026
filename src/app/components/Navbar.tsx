@@ -80,7 +80,7 @@ export default function Navbar() {
         {/* Brand Logo */}
         <Link href="/" className={styles.logo} onClick={() => setMobileMenuOpen(false)}>
           <img 
-            src="/logo_aethera.png?v=3" 
+            src="/logo_aethera.webp?v=3" 
             alt="AETHERA Logo" 
             className={styles.logoImg}
           />

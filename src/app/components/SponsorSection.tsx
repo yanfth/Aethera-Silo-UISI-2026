@@ -11,12 +11,12 @@ const PLATINUM_SPONSORS: SponsorItem[] = [
   {
     name: "PT Semen Indonesia (Persero) Tbk (SIG)",
     category: "Main Platinum Sponsor",
-    logoSrc: "/sponsors/sig.png",
+    logoSrc: "/sponsors/sig.webp",
   },
   {
     name: "Bank Mandiri",
     category: "Official Banking Partner",
-    logoSrc: "/sponsors/mandiri.png",
+    logoSrc: "/sponsors/mandiri.webp",
   },
 ];
 

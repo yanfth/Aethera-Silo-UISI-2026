@@ -22,7 +22,7 @@ const SAMBUTAN_DATA: SambutanItem[] = [
     badgeBanner: "REKTOR UISI",
     name: "Dr. Eka Ananta Sidharta, S.E., M.M., Ak., CA.",
     title: "Rektor Universitas Internasional Semen Indonesia (UISI)",
-    image: "/ketua_dosen.png",
+    image: "/ketua_dosen.webp",
     paragraphs: [
       "Assalamualaikum warahmatullahi wabarakatuh, Selamat Pagi dan Salam Sejahtera bagi Kita Semua.",
       "Selamat datang Generasi Muda Aethera di Kampus Perjuangan dan Karya, Universitas Internasional Semen Indonesia (UISI). SILO 2026 merupakan gerbang pembuka perjalanan akademis dan pembentukan karakter dalam lingkungan perguruan tinggi yang adaptif, unggul, dan berintegritas tinggi.",
@@ -37,7 +37,7 @@ const SAMBUTAN_DATA: SambutanItem[] = [
     badgeBanner: "KETUA PELAKSANA MAHASISWA",
     name: "Nabil Qudsi Mas'ud",
     title: "Ketua Pelaksana Panitia Mahasiswa AETHERA SILO UISI 2026",
-    image: "/nabil_qudsi.jpg?v=2",
+    image: "/nabil_qudsi.webp?v=2",
     paragraphs: [
       "Salam Semangat Ksatria Aethera 2026!",
       "Selamat datang di kampus pergerakan dan karya, Universitas Internasional Semen Indonesia (UISI)! Kami atas nama seluruh jajaran Panitia Mahasiswa AETHERA SILO UISI 2026 mengucapkan selamat atas keberhasilan rekan-rekan sekalian menembus gerbang perguruan tinggi ini.",
