@@ -53,14 +53,6 @@ const DIVISIONS: Division[] = [
     koordinator: "Jefranda Dinata (Koordinator SC & Acara)"
   },
   {
-    id: "ic",
-    name: "Divisi Instructor Committee (IC)",
-    shortName: "Instructor",
-    icon: <GraduationCap size={16} />,
-    description: "Memandu kedisiplinan, mengarahkan instruksi lapangan, dan mendampingi pelaksanaan penugasan peserta.",
-    koordinator: "Muhammad Daniyal Wahidy"
-  },
-  {
     id: "pdd",
     name: "Divisi Publikasi, Dekorasi & Dokumentasi (PDD)",
     shortName: "PDD",
@@ -125,18 +117,6 @@ const MEMBERS: Member[] = [
   { id: "17", name: "Jevamya Chelcie Wicaksana", prodi: "Teknik Kimia", role: "Anggota Acara", divisionId: "acara", divisionName: "SC & Acara" },
   { id: "18", name: "Muhammad Hanif Raja I", prodi: "Manajemen", role: "Anggota Acara", divisionId: "acara", divisionName: "SC & Acara" },
   { id: "19", name: "Dhea Safira Rahmawati", prodi: "Teknologi Industri Pertanian", role: "Anggota Acara", divisionId: "acara", divisionName: "SC & Acara" },
-
-  // Instructor Committee
-  { id: "20", name: "Muhammad Daniyal Wahidy", prodi: "Manajemen", role: "Koordinator Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
-  { id: "21", name: "Febriana Dwi Anggraini", prodi: "Akuntansi", role: "Anggota Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
-  { id: "22", name: "Gita Nur Arif", prodi: "Teknik Logistik", role: "Anggota Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
-  { id: "23", name: "Permata Citra Afrilia", prodi: "Ekonomi Syariah", role: "Anggota Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
-  { id: "24", name: "Rahma Cahyani Salsabila", prodi: "Manajemen", role: "Anggota Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
-  { id: "25", name: "Anggi Fadilah Pratiwi", prodi: "Manajemen", role: "Anggota Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
-  { id: "26", name: "Saiqu Rafly Aldavy", prodi: "Manajemen", role: "Anggota Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
-  { id: "27", name: "Bunga Ismananda Sari", prodi: "Teknik Logistik", role: "Anggota Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
-  { id: "28", name: "Aulia Putra Akbar", prodi: "Teknik Kimia", role: "Anggota Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
-  { id: "29", name: "Mochammad Naufal Abimanyu", prodi: "Teknik Kimia", role: "Anggota Instructor Committee", divisionId: "ic", divisionName: "Instructor" },
 
   // PDD
   { id: "30", name: "Alfian Khusnul Fatoni", prodi: "Informatika", role: "Koordinator PDD", divisionId: "pdd", divisionName: "PDD" },
