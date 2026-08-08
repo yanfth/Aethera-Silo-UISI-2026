@@ -11,6 +11,7 @@ import SambutanSection from "./components/SambutanSection";
 import AnggotaDivisi from "./components/AnggotaDivisi";
 import MapsSection from "./components/MapsSection";
 import VideoSection from "./components/VideoSection";
+import Navbar from "./components/Navbar";
 import { 
   Hexagon, 
   Sparkles, 
@@ -29,7 +30,9 @@ import {
   MessageCircle, 
   Mail, 
   Send,
-  ArrowRight
+  ArrowRight,
+  Compass,
+  ChevronDown
 } from "lucide-react";
 
 export default function Home() {
@@ -37,47 +40,7 @@ export default function Home() {
     <div className={styles.container}>
       <LowPolyBackground />
 
-      {/* ===== NAVBAR ===== */}
-      <nav className={styles.navbar}>
-        <div className={styles.logo}>
-          <Hexagon style={{ display: "inline-block", verticalAlign: "middle", marginRight: "6px" }} size={20} color="var(--lp-aqua)" /> AETHERA SILO UISI 2026
-        </div>
-        <div className={styles.navLinks}>
-          <Link href="#about" className={styles.navLink}>
-            Tentang
-          </Link>
-          <Link href="#sambutan" className={styles.navLink}>
-            Sambutan
-          </Link>
-          <Link href="#logo" className={styles.navLink}>
-            Logo
-          </Link>
-          <Link href="#dokumentasi" className={styles.navLink}>
-            Dokumentasi
-          </Link>
-          <Link href="#video" className={styles.navLink}>
-            Video
-          </Link>
-          <Link href="#panitia" className={styles.navLink}>
-            Panitia
-          </Link>
-          <Link href="#guidebook" className={styles.navLink}>
-            Guidebook
-          </Link>
-          <Link href="#penugasan" className={styles.navLink}>
-            Penugasan
-          </Link>
-          <Link href="#kelompok" className={styles.navLink}>
-            Kelompok
-          </Link>
-          <Link href="#merch" className={styles.navLink}>
-            Merchandise
-          </Link>
-          <Link href="#lokasi" className={styles.navLink}>
-            Lokasi
-          </Link>
-        </div>
-      </nav>
+      <Navbar />
 
       <main className={styles.main}>
         {/* ===== HERO ===== */}
@@ -121,6 +84,7 @@ export default function Home() {
         {/* ===== COUNTDOWN SECTION ===== */}
         <CountdownSection />
 
+
         {/* ===== ABOUT SILO ===== */}
         <section id="about" className={styles.section} data-aos="fade-up">
           <div className={styles.aboutGrid}>
@@ -149,48 +113,6 @@ export default function Home() {
         {/* ===== SAMBUTAN KETUA PELAKSANA ===== */}
         <SambutanSection />
 
-        {/* ===== LOGO PHILOSOPHY ===== */}
-        <section id="logo" className={styles.section} data-aos="fade-up">
-          <h2 className={styles.sectionTitle}>
-            Filosofi <span className={styles.titleGradient}>Logo Aethera</span>
-          </h2>
-          <p className={styles.sectionSubtitle}>
-            Simbol keberanian, inovasi, dan persatuan Satya Ismaya 14 UISI 2026.
-          </p>
-
-          <div className={styles.servicesGrid}>
-            <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(31,75,93,0.1)", color: "var(--lp-ocean-blue)" }}>
-                <Hexagon size={24} />
-              </div>
-              <h3 className={styles.cardTitle}>Heksagon Presisi</h3>
-              <p className={styles.cardDesc}>
-                Melambangkan struktur yang kokoh, efisiensi, dan integrasi antar
-                disiplin ilmu di UISI.
-              </p>
-            </div>
-            <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(104,207,235,0.1)", color: "var(--lp-aqua)" }}>
-                <Zap size={24} />
-              </div>
-              <h3 className={styles.cardTitle}>Inti Aether</h3>
-              <p className={styles.cardDesc}>
-                Energi tak terbatas dan semangat membara yang mendorong mahasiswa
-                mencapai puncak prestasi.
-              </p>
-            </div>
-            <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(31,30,25,0.1)", color: "var(--lp-charcoal)" }}>
-                <Waves size={24} />
-              </div>
-              <h3 className={styles.cardTitle}>Gelombang Adaptif</h3>
-              <p className={styles.cardDesc}>
-                Fleksibilitas dan ketahanan mahasiswa baru dalam menghadapi tantangan
-                dunia industri global.
-              </p>
-            </div>
-          </div>
-        </section>
 
         {/* ===== DOKUMENTASI TAHUN LALU ===== */}
         <section id="dokumentasi" className={styles.section} data-aos="fade-up">
@@ -206,157 +128,6 @@ export default function Home() {
 
         {/* ===== VIDEO DOKUMENTASI SILO ===== */}
         <VideoSection />
-
-        {/* ===== DAFTAR PANITIA ===== */}
-        <section id="panitia" className={styles.section} data-aos="fade-up">
-          <h2 className={styles.sectionTitle}>
-            Daftar <span className={styles.titleGradient}>Panitia</span>
-          </h2>
-          <p className={styles.sectionSubtitle}>
-            BPH &amp; Koordinator Divisi AETHERA SILO UISI 2026
-          </p>
-
-          <PanitiaCarousel />
-
-          {/* ===== DAFTAR ANGGOTA TIAP DIVISI ===== */}
-          <AnggotaDivisi />
-        </section>
-
-        {/* ===== GUIDEBOOK PDF FLIPBOOK ===== */}
-        <GuidebookSection />
-
-        {/* ===== DAFTAR PENUGASAN ===== */}
-        <section id="penugasan" className={styles.section} data-aos="fade-up">
-          <h2 className={styles.sectionTitle}>
-            Daftar <span className={styles.titleGradient}>Penugasan</span>
-          </h2>
-          <p className={styles.sectionSubtitle}>
-            Selesaikan penugasan harian dan kelompok sesuai ketentuan &amp; tenggat waktu AETHERA SILO UISI 2026.
-          </p>
-
-          <div className={styles.servicesGrid}>
-            <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(31,75,93,0.1)", color: "var(--lp-ocean-blue)" }}>
-                <Video size={24} />
-              </div>
-              <h3 className={styles.cardTitle}>Video Perkenalan</h3>
-              <p className={styles.cardDesc}>
-                Video perkenalan kelompok berdurasi minimal 5 menit berisi filosofi nama dan anggota rasi.
-              </p>
-            </div>
-            <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(104,207,235,0.1)", color: "var(--lp-aqua)" }}>
-                <ImageIcon size={24} />
-              </div>
-              <h3 className={styles.cardTitle}>Twibbon &amp; Video Bio</h3>
-              <p className={styles.cardDesc}>
-                Unggah foto Twibbon resmi &amp; video perkenalan individu dengan nada lagu daerah di Instagram.
-              </p>
-            </div>
-            <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(31,30,25,0.1)", color: "var(--lp-charcoal)" }}>
-                <Palette size={24} />
-              </div>
-              <h3 className={styles.cardTitle}>Persiapan Tampah Show</h3>
-              <p className={styles.cardDesc}>
-                Mengecat tampah kayu diameter 50cm dengan kombinasi warna Orange Crush &amp; Blue Brooch.
-              </p>
-            </div>
-            <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(104,207,235,0.1)", color: "var(--lp-aqua)" }}>
-                <FileText size={24} />
-              </div>
-              <h3 className={styles.cardTitle}>Resume Materi</h3>
-              <p className={styles.cardDesc}>
-                Merangkum materi Pra-SILO dan Core-SILO tulis tangan di kertas A5 bolak-balik dalam format PDF.
-              </p>
-            </div>
-            <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(31,75,93,0.1)", color: "var(--lp-ocean-blue)" }}>
-                <Music size={24} />
-              </div>
-              <h3 className={styles.cardTitle}>Hafalan Lagu Mars</h3>
-              <p className={styles.cardDesc}>
-                Menghafalkan dan memposting video lagu Mars UISI, Jingle Branara, Buruh Tani, &amp; Darah Juang.
-              </p>
-            </div>
-            <div className={styles.card}>
-              <div className={styles.cardIcon} style={{ background: "rgba(31,30,25,0.1)", color: "var(--lp-charcoal)" }}>
-                <Megaphone size={24} />
-              </div>
-              <h3 className={styles.cardTitle}>Kampanye Edukatif</h3>
-              <p className={styles.cardDesc}>
-                Membuat video kampanye edukasi isu sosial secara berkelompok sesuai arahan panitia.
-              </p>
-            </div>
-          </div>
-          <div className={styles.viewAllBtn}>
-            <Link href="#guidebook" className={styles.ctaButton}>
-              Lihat Detail Ketentuan &rarr;
-            </Link>
-          </div>
-        </section>
-
-        {/* ===== KELOMPOK (3D GLOBE) ===== */}
-        <GlobeSection />
-
-        {/* ===== MERCHANDISE ===== */}
-        <section
-          id="merch"
-          className={styles.section}
-          style={{ overflow: "hidden" }}
-          data-aos="fade-up"
-        >
-          <h2 className={styles.sectionTitle}>
-            Katalog <span className={styles.titleGradient}>Merchandise</span>
-          </h2>
-          <p className={styles.sectionSubtitle}>
-            Koleksi resmi AETHERA SILO UISI 2026 — tampil keren dari hari pertama!
-          </p>
-          <div className={styles.merchCarousel}>
-            <div className={styles.merchCard} style={{ background: "var(--lp-ocean-blue)" }}>
-              <h3 className={styles.merchCardTitle}>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}><Shirt size={22} /> Kaos Aethera</span>
-              </h3>
-              <p className={styles.merchCardPrice}>
-                Combed 30s · Hitam
-              </p>
-              <p style={{ marginTop: "auto", fontSize: "1.5rem", fontWeight: 800, color: "var(--lp-white)" }}>Rp 95.000</p>
-            </div>
-            <div className={styles.merchCard} style={{ background: "var(--lp-aqua)" }}>
-              <h3 className={styles.merchCardTitle}>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}><Sparkles size={22} /> Sticker Pack</span>
-              </h3>
-              <p className={styles.merchCardPrice}>
-                8 Rasi · Vinyl Anti Air
-              </p>
-              <p style={{ marginTop: "auto", fontSize: "1.5rem", fontWeight: 800, color: "var(--lp-white)" }}>Rp 20.000</p>
-            </div>
-            <div className={styles.merchCard} style={{ background: "var(--lp-charcoal)" }}>
-              <h3 className={styles.merchCardTitle}>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}><ShoppingBag size={22} /> Totebag Orbit</span>
-              </h3>
-              <p className={styles.merchCardPrice}>
-                Kanvas Tebal · Putih Tulang
-              </p>
-              <p style={{ marginTop: "auto", fontSize: "1.5rem", fontWeight: 800, color: "var(--lp-white)" }}>Rp 55.000</p>
-            </div>
-            <div className={styles.merchCard} style={{ background: "var(--lp-ocean-blue)" }}>
-              <h3 className={styles.merchCardTitle}>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}><Award size={22} /> Pin Enamel</span>
-              </h3>
-              <p className={styles.merchCardPrice}>
-                Logam Premium · Aethera Logo
-              </p>
-              <p style={{ marginTop: "auto", fontSize: "1.5rem", fontWeight: 800 }}>Rp 15.000</p>
-            </div>
-          </div>
-          <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
-            <Link href="/merch" className={styles.merchButtonLink}>
-              Lihat Selengkapnya &rarr;
-            </Link>
-          </div>
-        </section>
 
         {/* ===== SPONSOR & MEDIA PARTNER ===== */}
         <SponsorSection />

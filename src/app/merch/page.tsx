@@ -15,6 +15,8 @@ import {
   ArrowLeft 
 } from "lucide-react";
 
+import Navbar from "../components/Navbar";
+
 const merchandiseList = [
   {
     id: 1,
@@ -75,17 +77,7 @@ const merchandiseList = [
 export default function MerchPage() {
   return (
     <div className={styles.container}>
-      {/* ===== NAVBAR ===== */}
-      <nav className={styles.navbar}>
-        <div className={styles.logo}>AETHERA SILO UISI 2026</div>
-        <div className={styles.navLinks}>
-          <Link href="/#about" className={styles.navLink}>Tentang</Link>
-          <Link href="/#logo" className={styles.navLink}>Logo</Link>
-          <Link href="/#countdown" className={styles.navLink}>Countdown</Link>
-          <Link href="/#kebutuhan" className={styles.navLink}>Kebutuhan</Link>
-          <Link href="/merch" className={styles.navLink} style={{ color: "var(--color-dark)", fontWeight: 700 }}>Merchandise</Link>
-        </div>
-      </nav>
+      <Navbar />
 
       <main style={{ padding: "4rem 3rem", backgroundColor: "#FFFCF7", minHeight: "80vh" }}>
         

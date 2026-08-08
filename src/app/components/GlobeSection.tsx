@@ -554,7 +554,7 @@ export default function GlobeSection() {
 
             <div>
               <Link
-                href={`/kelompok?cluster=${activeCluster.id}`}
+                href={`/kelompok/detail?cluster=${activeCluster.id}`}
                 style={{
                   display: "inline-block",
                   background: "var(--lp-ocean-blue)",

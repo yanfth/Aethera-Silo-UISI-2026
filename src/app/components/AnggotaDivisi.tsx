@@ -13,7 +13,8 @@ import {
   Search,
   Sparkles,
   User,
-  GraduationCap
+  GraduationCap,
+  Megaphone
 } from "lucide-react";
 
 interface Member {
@@ -69,10 +70,10 @@ const DIVISIONS: Division[] = [
   },
   {
     id: "logtrans",
-    name: "Divisi Logistik & Transportasi (Logtrans)",
-    shortName: "Logtrans",
+    name: "Divisi Logistik, Transportasi & Konsumsi (Logtrans & Konsumsi)",
+    shortName: "Logtrans & Konsumsi",
     icon: <Truck size={16} />,
-    description: "Menyiapkan perlengkapan teknis, prasarana kegiatan, serta mobilisasi transportasi.",
+    description: "Menyiapkan perlengkapan teknis, prasarana kegiatan, transportasi, serta pengolahan kebutuhan konsumsi panitia dan peserta.",
     koordinator: "Muhammad Faidza Airlangga"
   },
   {
@@ -92,12 +93,12 @@ const DIVISIONS: Division[] = [
     koordinator: "Muhammad Ivandy Rohman (Koordinator Mentor)"
   },
   {
-    id: "humas_konsumsi",
-    name: "Divisi Humas, Sponsorship & Konsumsi",
-    shortName: "Humas & Konsumsi",
-    icon: <Coffee size={16} />,
-    description: "Komunikasi eksternal, kemitraan sponsor, serta pengelolaan kebutuhan konsumsi.",
-    koordinator: "Tim Humas, Sponsorship & Konsumsi"
+    id: "humas",
+    name: "Divisi Humas & Sponsorship",
+    shortName: "Humas & Sponsorship",
+    icon: <Megaphone size={16} />,
+    description: "Mengelola komunikasi publik, jaringan eksternal, publikasi media partner, dan kemitraan sponsorship AETHERA SILO UISI 2026.",
+    koordinator: "Tim Humas & Sponsorship"
   }
 ];
 
@@ -221,15 +222,15 @@ const MEMBERS: Member[] = [
   { id: "104", name: "Novatimah Dewi Maharani", prodi: "Sistem Informasi", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" },
   { id: "105", name: "Calista Alysia Ramadhani", prodi: "Teknik Kimia", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" },
 
-  // Humas, Sponsorship & Konsumsi
-  { id: "106", name: "Rizqina Kautsarina", prodi: "Teknologi Industri Pertanian", role: "Anggota Konsumsi", divisionId: "humas_konsumsi", divisionName: "Konsumsi" },
-  { id: "107", name: "Farah Nisyafira", prodi: "Ekonomi Syariah", role: "Anggota Konsumsi", divisionId: "humas_konsumsi", divisionName: "Konsumsi" },
-  { id: "108", name: "Nisriina Naura Maulina", prodi: "Ekonomi Syariah", role: "Anggota Konsumsi", divisionId: "humas_konsumsi", divisionName: "Konsumsi" },
-  { id: "109", name: "Lidya Oktavia", prodi: "Manajemen", role: "Anggota Konsumsi", divisionId: "humas_konsumsi", divisionName: "Konsumsi" },
-  { id: "110", name: "Raya Kiran Ambhieya", prodi: "Teknik Kimia", role: "Anggota Konsumsi", divisionId: "humas_konsumsi", divisionName: "Konsumsi" },
-  { id: "111", name: "Shelia Dwi Faradina", prodi: "Teknik Logistik", role: "Anggota Humas & Sponsorship", divisionId: "humas_konsumsi", divisionName: "Humas & Sponsor" },
-  { id: "112", name: "Faisal Dwi Herlambang", prodi: "Manajemen", role: "Anggota Humas & Sponsorship", divisionId: "humas_konsumsi", divisionName: "Humas & Sponsor" },
-  { id: "113", name: "M. Aliefta Rizky Alvansyah", prodi: "Informatika", role: "Anggota Humas & Sponsorship", divisionId: "humas_konsumsi", divisionName: "Humas & Sponsor" }
+  // Humas & Sponsorship
+  { id: "106", name: "Rizqina Kautsarina", prodi: "Teknologi Industri Pertanian", role: "Anggota Konsumsi", divisionId: "logtrans", divisionName: "Logtrans & Konsumsi" },
+  { id: "107", name: "Farah Nisyafira", prodi: "Ekonomi Syariah", role: "Anggota Konsumsi", divisionId: "logtrans", divisionName: "Logtrans & Konsumsi" },
+  { id: "108", name: "Nisriina Naura Maulina", prodi: "Ekonomi Syariah", role: "Anggota Konsumsi", divisionId: "logtrans", divisionName: "Logtrans & Konsumsi" },
+  { id: "109", name: "Lidya Oktavia", prodi: "Manajemen", role: "Anggota Konsumsi", divisionId: "logtrans", divisionName: "Logtrans & Konsumsi" },
+  { id: "110", name: "Raya Kiran Ambhieya", prodi: "Teknik Kimia", role: "Anggota Konsumsi", divisionId: "logtrans", divisionName: "Logtrans & Konsumsi" },
+  { id: "111", name: "Shelia Dwi Faradina", prodi: "Teknik Logistik", role: "Anggota Humas & Sponsorship", divisionId: "humas", divisionName: "Humas & Sponsor" },
+  { id: "112", name: "Faisal Dwi Herlambang", prodi: "Manajemen", role: "Anggota Humas & Sponsorship", divisionId: "humas", divisionName: "Humas & Sponsor" },
+  { id: "113", name: "M. Aliefta Rizky Alvansyah", prodi: "Informatika", role: "Anggota Humas & Sponsorship", divisionId: "humas", divisionName: "Humas & Sponsor" }
 ];
 
 export default function AnggotaDivisi() {
