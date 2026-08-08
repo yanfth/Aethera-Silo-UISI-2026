@@ -2,8 +2,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  max-width: 1400px;
-  margin: 0 auto;
+  width: 100%;
   position: relative;
 }
 
@@ -55,17 +54,76 @@
 }
 
 .navLink {
-  font-weight: 500;
-  font-size: 0.85rem;
-  padding: 0.5rem 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.55rem 1.1rem;
   color: var(--lp-text-muted);
   border-radius: var(--radius-pill);
   transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration: none;
 }
 
 .navLink:hover {
-  color: var(--lp-text);
-  background: rgba(104, 207, 235, 0.08); /* Aqua */
+  color: var(--lp-ocean-blue);
+  background: rgba(104, 207, 235, 0.15);
+}
+
+/* Dropdown Menu Jelajah */
+.dropdownWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  width: 220px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(104, 207, 235, 0.4);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 16px 40px rgba(31, 75, 93, 0.2);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropdownWrapper:hover .dropdownMenu,
+.dropdownWrapper:focus-within .dropdownMenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--lp-ocean-blue);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.dropdownItem:hover {
+  background: rgba(104, 207, 235, 0.18);
+  transform: translateX(4px);
+  color: #143542;
 }
 
 .mobileMenuBtn {
@@ -280,10 +338,17 @@
 .sectionTitle {
   font-size: 2.25rem;
   margin-bottom: 1rem;
-  color: var(--lp-text);
+  color: var(--lp-ocean-blue);
   text-align: center;
   font-weight: 800;
   letter-spacing: -0.03em;
+}
+
+.titleGradient {
+  background: linear-gradient(135deg, var(--lp-ocean-blue), var(--lp-aqua));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .sectionSubtitle {
@@ -655,17 +720,19 @@
 .neumorphicIcon { font-size: 2rem; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(104,207,235,0.08); }
 
 /* ===== RESPONSIVE ===== */
+/* iPad & Tablet (<= 1024px) */
 @media (max-width: 1024px) {
   .hero {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 2rem;
+    gap: 2.5rem;
+    padding: 3rem 2rem;
   }
   .heroContent {
     align-items: center;
   }
   .heroTitle {
-    font-size: 3rem;
+    font-size: clamp(2.5rem, 6vw, 3.25rem);
   }
   .heroDesc {
     margin-left: auto;
@@ -678,18 +745,175 @@
   .aboutText {
     text-align: center;
   }
+  .aboutImage {
+    max-width: 540px;
+    margin: 0 auto;
+  }
   .servicesGrid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
   .merchCarousel {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
   .footer {
     grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
   }
   .globeGrid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+  .panitiaGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile HP (<= 768px) */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .navLinks {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    justify-content: flex-start;
+    padding: 0.35rem 0.6rem;
+    background: rgba(15, 23, 42, 0.05);
+    border-radius: 9999px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .navLinks::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navLink {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .hero {
+    padding: 2.5rem 1.25rem;
+    gap: 2rem;
+  }
+
+  .heroTitle {
+    font-size: clamp(2rem, 8vw, 2.75rem);
+  }
+
+  .heroDesc {
+    font-size: 0.9rem;
+  }
+
+  .heroButtons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    gap: 0.75rem;
+  }
+
+  .ctaButton,
+  .ctaButtonOutline {
+    text-align: center;
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .heroVisual {
+    min-height: 280px;
+  }
+
+  .heroImageContainer {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .section {
+    padding: 3rem 1.25rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.75rem;
+  }
+
+  .sectionSubtitle {
+    font-size: 0.88rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .servicesGrid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .merchCarousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1.25rem;
+    padding: 0.5rem 0.25rem 1rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .merchCarousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .merchCard {
+    flex: 0 0 85%;
+    scroll-snap-align: center;
+    min-height: 240px;
+  }
+
+  .panitiaGrid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .footer {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+    text-align: center;
+  }
+
+  .footerDesc {
+    margin: 0.5rem auto 0 auto;
+  }
+
+  .footerLinks {
+    align-items: center;
+  }
+
+  .footerNewsletter {
+    align-items: center;
+    max-width: 340px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .footerInput,
+  .footerButton {
+    width: 100%;
+  }
+}
+
+/* Small Mobile HP (<= 480px) */
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 1.85rem;
+  }
+  .merchCard {
+    flex: 0 0 90%;
   }
 }
 
@@ -817,16 +1041,3 @@
   font-size: 0.75rem;
   color: var(--lp-text-muted);
 }
-
-@media (max-width: 1024px) {
-  .panitiaGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .panitiaGrid {
-    grid-template-columns: 1fr;
-  }
-}
-

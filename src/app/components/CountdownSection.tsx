@@ -264,7 +264,7 @@ export default function CountdownSection() {
             backgroundClip: "text",
           }}
         >
-          Menuju SILO Aethera 2026 🔺
+          Menuju AETHERA SILO UISI 2026 🔺
         </h2>
 
         <p
@@ -291,7 +291,7 @@ export default function CountdownSection() {
                 color: "var(--lp-ocean-blue)",
               }}
             >
-              🎉 SILO AETHERA 2026 Dimulai!
+              🎉 AETHERA SILO UISI 2026 Dimulai!
             </h3>
           </div>
         ) : (

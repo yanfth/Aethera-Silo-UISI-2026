@@ -1,6 +1,5 @@
-'use client';
-
 import React from "react";
+import { Crown, Award, ShieldCheck, Gem, Radio } from "lucide-react";
 
 interface SponsorItem {
   name: string;
@@ -94,23 +93,6 @@ export default function SponsorSection() {
       <div style={{ maxWidth: "1150px", margin: "0 auto" }}>
         {/* Section Header */}
         <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-          <div
-            style={{
-              display: "inline-block",
-              background: "rgba(31,75,93,0.08)",
-              color: "#1f4b5d",
-              padding: "0.35rem 0.95rem",
-              borderRadius: "999px",
-              fontSize: "0.8rem",
-              fontWeight: 800,
-              marginBottom: "0.85rem",
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-            }}
-          >
-            Sponsorship & Media Partner
-          </div>
-
           <h2
             style={{
               fontSize: "clamp(1.85rem, 4vw, 2.75rem)",
@@ -120,19 +102,19 @@ export default function SponsorSection() {
               letterSpacing: "-0.02em",
             }}
           >
-            Mitra & Sponsor SILO 2026
+            Mitra &amp; <span style={{ background: "linear-gradient(135deg, var(--lp-ocean-blue), var(--lp-aqua))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Sponsor AETHERA SILO UISI 2026</span>
           </h2>
 
           <p
             style={{
-              color: "#64748B",
+              color: "var(--lp-text-muted)",
               fontSize: "1rem",
               maxWidth: "620px",
               margin: "0 auto",
               lineHeight: 1.6,
             }}
           >
-            Terima kasih kepada para mitra dan perusahaan terkemuka yang mendukung kesuksesan seluruh rangkaian kegiatan SILO AETHERA 2026.
+            Terima kasih kepada para mitra dan perusahaan terkemuka yang mendukung kesuksesan seluruh rangkaian kegiatan AETHERA SILO UISI 2026.
           </p>
         </div>
 
@@ -155,7 +137,7 @@ export default function SponsorSection() {
               boxShadow: "0 4px 15px rgba(31,75,93,0.2)",
             }}
           >
-            <span>💎</span> PLATINUM SPONSOR
+            <span><Gem size={15} style={{ verticalAlign: "middle" }} /></span> PLATINUM SPONSOR
           </div>
 
           <div
@@ -244,7 +226,7 @@ export default function SponsorSection() {
               marginBottom: "2rem",
             }}
           >
-            <span>🥇</span> GOLD SPONSOR
+            <span><Award size={15} style={{ verticalAlign: "middle" }} /></span> GOLD SPONSOR
           </div>
 
           <div
@@ -331,7 +313,7 @@ export default function SponsorSection() {
               marginBottom: "1.75rem",
             }}
           >
-            <span>🥈</span> SILVER SPONSOR
+            <span><ShieldCheck size={15} style={{ verticalAlign: "middle" }} /></span> SILVER SPONSOR
           </div>
 
           <div
@@ -419,7 +401,7 @@ export default function SponsorSection() {
               marginBottom: "1.75rem",
             }}
           >
-            <span>📻</span> MEDIA PARTNER
+            <span><Radio size={15} style={{ verticalAlign: "middle" }} /></span> MEDIA PARTNER
           </div>
 
           <div
@@ -440,7 +422,9 @@ export default function SponsorSection() {
                   gap: "0.75rem",
                 }}
               >
-                <span style={{ fontSize: "1.1rem", color: "#1f4b5d" }}>📻</span>
+                <span style={{ display: "inline-flex", alignItems: "center", color: "#1f4b5d" }}>
+                  <Radio size={18} />
+                </span>
                 <div style={{ textAlign: "left" }}>
                   <div
                     style={{

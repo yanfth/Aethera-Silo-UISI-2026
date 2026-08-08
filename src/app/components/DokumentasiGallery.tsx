@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import styles from "./DokumentasiGallery.module.css";
 
 interface DocItem {
@@ -19,7 +19,7 @@ const DOC_ITEMS: DocItem[] = [
   {
     id: "doc-2",
     src: "/dokumentasi/doc_2.jpg",
-    title: "Upacara Pembukaan PKKMB SILO 2025 di Lapangan",
+    title: "Upacara Pembukaan SILO 2025 di Lapangan",
     tag: "Upacara Utama",
   },
   {
@@ -112,6 +112,16 @@ export default function DokumentasiGallery() {
   const [isTransitioning, setIsTransitioning] = useState(true);
   const totalOriginal = DOC_ITEMS.length;
 
+  const handleNext = useCallback(() => {
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => prev + 1);
+  }, []);
+
+  const handlePrev = useCallback(() => {
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => (prev <= 0 ? totalOriginal - 1 : prev - 1));
+  }, [totalOriginal]);
+
   // Auto-play interval (2.5 detik per slide)
   useEffect(() => {
     if (isPaused || selectedImage) return;
@@ -121,17 +131,7 @@ export default function DokumentasiGallery() {
     }, 2800);
 
     return () => clearInterval(timer);
-  }, [currentIndex, isPaused, selectedImage]);
-
-  const handleNext = () => {
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => prev + 1);
-  };
-
-  const handlePrev = () => {
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => (prev <= 0 ? totalOriginal - 1 : prev - 1));
-  };
+  }, [currentIndex, isPaused, selectedImage, handleNext]);
 
   // Reset seamless loop saat mencapai bagian duplikat
   const handleTransitionEnd = () => {
@@ -198,21 +198,6 @@ export default function DokumentasiGallery() {
       <div className={styles.controlsWrapper}>
         <div className={styles.progressInfo}>
           Foto <strong>{displayIndex}</strong> dari {totalOriginal}
-          {isPaused && (
-            <span
-              style={{
-                marginLeft: "0.75rem",
-                fontSize: "0.75rem",
-                color: "var(--lp-ocean-blue)",
-                background: "rgba(31,75,93,0.1)",
-                padding: "0.2rem 0.6rem",
-                borderRadius: "999px",
-                fontWeight: 700,
-              }}
-            >
-              ⏸ Dihentikan Sementara
-            </span>
-          )}
         </div>
 
         <div className={styles.btnGroup}>
