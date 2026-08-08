@@ -7,29 +7,34 @@ import LowPolyBackground from "./components/LowPolyBackground";
 import PanitiaCarousel from "./components/PanitiaCarousel";
 import DokumentasiGallery from "./components/DokumentasiGallery";
 import GuidebookSection from "./components/GuidebookSection";
+import SambutanSection from "./components/SambutanSection";
+import AnggotaDivisi from "./components/AnggotaDivisi";
+import MapsSection from "./components/MapsSection";
+import VideoSection from "./components/VideoSection";
+import Navbar from "./components/Navbar";
 import MerchCarousel from "./components/MerchCarousel";
-import {
-  Hexagon,
-  Sparkles,
-  Zap,
-  Waves,
-  Video,
-  Image as ImageIcon,
-  Palette,
-  FileText,
-  Music,
-  Megaphone,
-  Shirt,
-  ShoppingBag,
-  Award,
-  Camera,
-  MessageCircle,
-  Mail,
+
+import { 
+  Hexagon, 
+  Sparkles, 
+  Zap, 
+  Waves, 
+  Video, 
+  Image as ImageIcon, 
+  Palette, 
+  FileText, 
+  Music, 
+  Megaphone, 
+  Shirt, 
+  ShoppingBag, 
+  Award, 
+  Camera, 
+  MessageCircle, 
+  Mail, 
   Send,
   ArrowRight,
-  Download,
-  Book,
-  Folder
+  Compass,
+  ChevronDown
 } from "lucide-react";
 
 export default function Home() {
@@ -37,61 +42,21 @@ export default function Home() {
     <div className={styles.container}>
       <LowPolyBackground />
 
-      {/* ===== NAVBAR ===== */}
-      <nav className={styles.navbar}>
-        <div className={styles.logo}>
-          <Hexagon
-            style={{
-              display: "inline-block",
-              verticalAlign: "middle",
-              marginRight: "6px",
-            }}
-            size={20}
-            color="var(--lp-aqua)"
-          />{" "}
-          Aethera SILO UISI
-        </div>
-        <div className={styles.navLinks}>
-          <Link href="#about" className={styles.navLink}>
-            Tentang
-          </Link>
-
-          <Link href="#guidebook" className={styles.navLink}>
-            Guidebook
-          </Link>
-          <Link href="#kebutuhan-acara" className={styles.navLink}>
-            Kebutuhan Acara
-          </Link>
-          <Link href="#kelompok" className={styles.navLink}>
-            Kelompok
-          </Link>
-          <Link href="#merch" className={styles.navLink}>
-            Merchandise
-          </Link>
-        </div>
-      </nav>
+      <Navbar />
 
       <main className={styles.main}>
         {/* ===== HERO ===== */}
         <section className={styles.hero}>
           <div className={styles.heroContent} data-aos="fade-right">
             <span className={styles.heroTag}>
-              <Sparkles
-                style={{
-                  display: "inline-block",
-                  verticalAlign: "middle",
-                  marginRight: "6px",
-                }}
-                size={14}
-              />{" "}
-              PKKMB UISI 2026
+              <Sparkles style={{ display: "inline-block", verticalAlign: "middle", marginRight: "6px" }} size={14} /> AETHERA SILO UISI 2026
             </span>
             <h1 className={styles.heroTitle}>
               Selamat Datang <br />
-              <span className={styles.heroTitleAccent}>Mahasiswa Baru</span>
+              <span className={styles.heroTitleAccent}>Satya Ismaya 14</span>
             </h1>
             <p className={styles.heroDesc}>
-              Portal Resmi Informasi dan Layanan Orientasi PKKMB Aethera
+              Portal Resmi Informasi dan Layanan Orientasi AETHERA SILO UISI 2026
               Universitas Internasional Semen Indonesia. Temukan jadwal,
               kelompok, dan penugasan lengkap di sini.
             </p>
@@ -121,99 +86,41 @@ export default function Home() {
         {/* ===== COUNTDOWN SECTION ===== */}
         <CountdownSection />
 
+
         {/* ===== ABOUT SILO ===== */}
         <section id="about" className={styles.section} data-aos="fade-up">
           <div className={styles.aboutGrid}>
             <div>
               <h2 className={styles.sectionTitle} style={{ textAlign: "left" }}>
-                Tentang SILO UISI
+                Tentang <span className={styles.titleGradient}>AETHERA SILO UISI 2026</span>
               </h2>
               <p className={styles.aboutText}>
-                <strong>
-                  Student Initiation and Learning Orientation (SILO)
-                </strong>{" "}
-                merupakan kegiatan pengenalan kehidupan kampus bagi mahasiswa
-                baru Universitas Internasional Semen Indonesia. Mengusung nama{" "}
-                <strong>Aethera</strong>, PKKMB 2026 hadir sebagai ruang
-                pembinaan awal yang adaptif, inovatif, dan berkarakter.
+                <strong>AETHERA SILO UISI 2026</strong>{" "}
+                (Student Initiation and Learning Orientation) merupakan kegiatan
+                pengenalan kehidupan kampus bagi mahasiswa baru Universitas
+                Internasional Semen Indonesia. AETHERA SILO UISI 2026 hadir sebagai
+                ruang pembinaan awal yang adaptif, inovatif, dan berkarakter.
               </p>
             </div>
             <div className={styles.aboutImage}>
               <img
                 src="/portfolio_phones.png"
-                alt="SILO UISI Preview"
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  borderRadius: "1.5rem",
-                }}
+                alt="AETHERA SILO UISI 2026 Preview"
+                style={{ width: "100%", height: "auto", borderRadius: "1.5rem" }}
               />
             </div>
           </div>
         </section>
 
-        {/* ===== LOGO PHILOSOPHY ===== */}
-        <section id="logo" className={styles.section} data-aos="fade-up">
-          <h2 className={styles.sectionTitle}>Filosofi Logo Aethera</h2>
-          <p className={styles.sectionSubtitle}>
-            Simbol keberanian, inovasi, dan persatuan mahasiswa baru UISI 2026.
-          </p>
+        {/* ===== SAMBUTAN KETUA PELAKSANA ===== */}
+        <SambutanSection />
 
-          <div className={styles.servicesGrid}>
-            <div className={styles.card}>
-              <div
-                className={styles.cardIcon}
-                style={{
-                  background: "rgba(31,75,93,0.1)",
-                  color: "var(--lp-ocean-blue)",
-                }}
-              >
-                <Hexagon size={24} />
-              </div>
-              <h3 className={styles.cardTitle}>Heksagon Presisi</h3>
-              <p className={styles.cardDesc}>
-                Melambangkan struktur yang kokoh, efisiensi, dan integrasi antar
-                disiplin ilmu di UISI.
-              </p>
-            </div>
-            <div className={styles.card}>
-              <div
-                className={styles.cardIcon}
-                style={{
-                  background: "rgba(104,207,235,0.1)",
-                  color: "var(--lp-aqua)",
-                }}
-              >
-                <Zap size={24} />
-              </div>
-              <h3 className={styles.cardTitle}>Inti Aether</h3>
-              <p className={styles.cardDesc}>
-                Energi tak terbatas dan semangat membara yang mendorong
-                mahasiswa mencapai puncak prestasi.
-              </p>
-            </div>
-            <div className={styles.card}>
-              <div
-                className={styles.cardIcon}
-                style={{
-                  background: "rgba(31,30,25,0.1)",
-                  color: "var(--lp-charcoal)",
-                }}
-              >
-                <Waves size={24} />
-              </div>
-              <h3 className={styles.cardTitle}>Gelombang Adaptif</h3>
-              <p className={styles.cardDesc}>
-                Fleksibilitas dan ketahanan mahasiswa baru dalam menghadapi
-                tantangan dunia industri global.
-              </p>
-            </div>
-          </div>
-        </section>
 
         {/* ===== DOKUMENTASI TAHUN LALU ===== */}
         <section id="dokumentasi" className={styles.section} data-aos="fade-up">
-          <h2 className={styles.sectionTitle}>Kilasan Silo Tahun Lalu</h2>
+          <h2 className={styles.sectionTitle}>
+            Kilasan <span className={styles.titleGradient}>SILO Tahun Lalu</span>
+          </h2>
           <p className={styles.sectionSubtitle}>
             Kilas Balik Kemeriahan &amp; Momen Berkesan SILO UISI 2025
           </p>
@@ -221,18 +128,8 @@ export default function Home() {
           <DokumentasiGallery />
         </section>
 
-        {/* ===== DAFTAR PANITIA ===== */}
-        <section id="panitia" className={styles.section} data-aos="fade-up">
-          <h2 className={styles.sectionTitle}>Daftar Panitia</h2>
-          <p className={styles.sectionSubtitle}>
-            BPH &amp; Koordinator Divisi PKKMB Aethera UISI 2026
-          </p>
-
-          <PanitiaCarousel />
-        </section>
-
-        {/* ===== GUIDEBOOK PDF FLIPBOOK ===== */}
-        <GuidebookSection />
+        {/* ===== VIDEO DOKUMENTASI SILO ===== */}
+        <VideoSection />
 
         {/* ===== KEBUTUHAN ACARA ===== */}
         <section id="kebutuhan-acara" className={styles.section} data-aos="fade-up">
@@ -365,9 +262,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ===== KELOMPOK (3D GLOBE) ===== */}
-        <GlobeSection />
-
         {/* ===== MERCHANDISE ===== */}
         <section
           id="merch"
@@ -392,19 +286,18 @@ export default function Home() {
         {/* ===== SPONSOR & MEDIA PARTNER ===== */}
         <SponsorSection />
 
+        {/* ===== MAPS LOKASI KAMPUS B UISI GRESIK ===== */}
+        <MapsSection />
+
         {/* ===== CONTACT ===== */}
         <section id="contact" className={styles.section}>
-          <div
-            style={{ textAlign: "center", maxWidth: "700px", margin: "0 auto" }}
-          >
+          <div style={{ textAlign: "center", maxWidth: "700px", margin: "0 auto" }}>
             <p className={styles.aboutText}>
-              <strong style={{ color: "var(--lp-text)" }}>SILO UISI</strong>{" "}
+              <strong style={{ color: "var(--lp-text)" }}>AETHERA SILO UISI 2026</strong>{" "}
               adalah unit yang mengelola seluruh rangkaian informasi dan layanan
               Penerimaan Mahasiswa Baru di Universitas Internasional Semen
-              Indonesia. PKKMB{" "}
-              <strong style={{ color: "var(--lp-text)" }}>Aethera</strong>{" "}
-              diselenggarakan sebagai program pengenalan kampus, nilai, dan
-              komunitas bagi mahasiswa baru angkatan 2026.
+              Indonesia. Program ini diselenggarakan sebagai pengenalan kampus,
+              nilai, dan komunitas bagi mahasiswa baru angkatan 2026.
             </p>
           </div>
         </section>
@@ -413,39 +306,18 @@ export default function Home() {
       {/* ===== FOOTER ===== */}
       <footer className={styles.footer}>
         <div>
-          <div className={styles.footerLogo}>
-            <Hexagon
-              style={{
-                display: "inline-block",
-                verticalAlign: "middle",
-                marginRight: "6px",
-              }}
-              size={18}
-              color="var(--lp-aqua)"
-            />{" "}
-            SILO UISI
+          <div className={styles.footerLogo} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <img src="/logo_aethera.png?v=3" alt="Aethera Logo" style={{ height: "26px", width: "auto" }} />
+            <span>AETHERA SILO UISI 2026</span>
           </div>
           <p className={styles.footerDesc}>
-            Sistem Informasi & Layanan Orientasi — Portal resmi PKKMB
+            Sistem Informasi & Layanan Orientasi — Portal resmi AETHERA SILO UISI 2026
             Universitas Internasional Semen Indonesia.
           </p>
-          <div
-            style={{
-              display: "flex",
-              gap: "0.85rem",
-              marginTop: "1rem",
-              color: "rgba(255,255,255,0.7)",
-            }}
-          >
-            <span style={{ cursor: "pointer", transition: "color 0.2s" }}>
-              <Camera size={18} />
-            </span>
-            <span style={{ cursor: "pointer", transition: "color 0.2s" }}>
-              <MessageCircle size={18} />
-            </span>
-            <span style={{ cursor: "pointer", transition: "color 0.2s" }}>
-              <Mail size={18} />
-            </span>
+          <div style={{ display: "flex", gap: "0.85rem", marginTop: "1rem", color: "rgba(255,255,255,0.7)" }}>
+            <span style={{ cursor: "pointer", transition: "color 0.2s" }}><Camera size={18} /></span>
+            <span style={{ cursor: "pointer", transition: "color 0.2s" }}><MessageCircle size={18} /></span>
+            <span style={{ cursor: "pointer", transition: "color 0.2s" }}><Mail size={18} /></span>
           </div>
         </div>
 
@@ -453,9 +325,14 @@ export default function Home() {
           <div className={styles.footerColTitle}>Menu</div>
           <div className={styles.footerLinks}>
             <Link href="#about">Tentang</Link>
-
+            <Link href="#sambutan">Sambutan</Link>
+            <Link href="#logo">Filosofi Logo</Link>
+            <Link href="#dokumentasi">Dokumentasi</Link>
+            <Link href="#video">Video</Link>
+            <Link href="#panitia">Daftar Panitia</Link>
             <Link href="#kebutuhan-acara">Kebutuhan Acara</Link>
             <Link href="#kelompok">Kelompok</Link>
+            <Link href="#lokasi">Lokasi Kampus</Link>
           </div>
         </div>
 
@@ -480,7 +357,7 @@ export default function Home() {
         <div className={styles.footerNewsletter}>
           <div className={styles.footerColTitle}>Info Terbaru</div>
           <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.5)" }}>
-            Dapatkan update terbaru seputar PKKMB Aethera 2026.
+            Dapatkan update terbaru seputar AETHERA SILO UISI 2026.
           </p>
           <input
             type="email"
@@ -488,13 +365,7 @@ export default function Home() {
             className={styles.footerInput}
           />
           <button className={styles.footerButton}>
-            <span
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.4rem",
-              }}
-            >
+            <span style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}>
               Subscribe <Send size={15} />
             </span>
           </button>

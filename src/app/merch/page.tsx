@@ -15,13 +15,15 @@ import {
   ArrowLeft 
 } from "lucide-react";
 
+import Navbar from "../components/Navbar";
+
 const merchandiseList = [
   {
     id: 1,
     name: "Kaos Aethera (Hitam)",
     price: "Rp 95.000",
     icon: <Shirt size={54} color="#1F4B5D" />,
-    desc: "Bahan cotton combed 30s, nyaman dipakai. Desain eksklusif PKKMB 2026.",
+    desc: "Bahan cotton combed 30s, nyaman dipakai. Desain eksklusif AETHERA SILO UISI 2026.",
     colorStart: "#FFE0D0",
     colorEnd: "#FFD166"
   },
@@ -75,26 +77,10 @@ const merchandiseList = [
 export default function MerchPage() {
   return (
     <div className={styles.container}>
-      {/* ===== NAVBAR ===== */}
-      <nav className={styles.navbar}>
-        <div className={styles.logo}>AETHERA SILO UISI</div>
-        <div className={styles.navLinks}>
-          <Link href="/#about" className={styles.navLink}>Tentang</Link>
-          <Link href="/#logo" className={styles.navLink}>Logo</Link>
-          <Link href="/#countdown" className={styles.navLink}>Countdown</Link>
-          <Link href="/#kebutuhan" className={styles.navLink}>Kebutuhan</Link>
-          <Link href="/merch" className={styles.navLink} style={{ color: "var(--color-dark)", fontWeight: 700 }}>Merchandise</Link>
-        </div>
-      </nav>
+      <Navbar />
 
       <main style={{ padding: "4rem 3rem", backgroundColor: "#FFFCF7", minHeight: "80vh" }}>
         
-        {/* Breadcrumb / Back button */}
-        <div style={{ marginBottom: "2rem" }}>
-          <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", fontSize: "0.9rem", color: "var(--color-gray)", textDecoration: "none", fontWeight: 600 }}>
-            <span>←</span> Kembali ke Beranda
-          </Link>
-        </div>
 
         <div style={{ textAlign: "center", marginBottom: "4rem", maxWidth: "600px", marginInline: "auto" }}>
           <span style={{ 
@@ -113,7 +99,7 @@ export default function MerchPage() {
             Aethera Collection
           </h1>
           <p style={{ color: "var(--color-gray)", lineHeight: 1.6 }}>
-            Dukung perjalanan barumu di UISI dengan merchandise resmi PKKMB Aethera 2026. Pilih item favoritmu sebelum kehabisan!
+            Dukung perjalanan barumu di UISI dengan merchandise resmi AETHERA SILO UISI 2026. Pilih item favoritmu sebelum kehabisan!
           </p>
         </div>
 
@@ -195,10 +181,10 @@ export default function MerchPage() {
       <footer className={styles.footer}>
         <div>
           <div className={styles.footerLogo}>
-            <Hexagon style={{ display: "inline-block", verticalAlign: "middle", marginRight: "6px" }} size={18} color="var(--lp-aqua)" /> SILO UISI
+            <Hexagon style={{ display: "inline-block", verticalAlign: "middle", marginRight: "6px" }} size={18} color="var(--lp-aqua)" /> AETHERA SILO UISI 2026
           </div>
           <p className={styles.footerDesc}>
-            Sistem Informasi & Layanan Orientasi — Portal resmi PKKMB
+            Sistem Informasi & Layanan Orientasi — Portal resmi AETHERA SILO UISI 2026
             Universitas Internasional Semen Indonesia.
           </p>
           <div style={{ display: "flex", gap: "0.85rem", marginTop: "1rem", color: "rgba(255,255,255,0.7)" }}>

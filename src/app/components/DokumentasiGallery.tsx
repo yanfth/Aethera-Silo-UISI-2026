@@ -19,7 +19,7 @@ const DOC_ITEMS: DocItem[] = [
   {
     id: "doc-2",
     src: "/dokumentasi/doc_2.jpg",
-    title: "Upacara Pembukaan PKKMB SILO 2025 di Lapangan",
+    title: "Upacara Pembukaan SILO 2025 di Lapangan",
     tag: "Upacara Utama",
   },
   {

@@ -119,19 +119,19 @@ export default function SponsorSection() {
               letterSpacing: "-0.02em",
             }}
           >
-            Mitra & Sponsor SILO 2026
+            Mitra &amp; <span style={{ background: "linear-gradient(135deg, var(--lp-ocean-blue), var(--lp-aqua))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Sponsor AETHERA SILO UISI 2026</span>
           </h2>
 
           <p
             style={{
-              color: "#64748B",
+              color: "var(--lp-text-muted)",
               fontSize: "1rem",
               maxWidth: "620px",
               margin: "0 auto",
               lineHeight: 1.6,
             }}
           >
-            Terima kasih kepada para mitra dan perusahaan terkemuka yang mendukung kesuksesan seluruh rangkaian kegiatan SILO AETHERA 2026.
+            Terima kasih kepada para mitra dan perusahaan terkemuka yang mendukung kesuksesan seluruh rangkaian kegiatan AETHERA SILO UISI 2026.
           </p>
         </div>
 
