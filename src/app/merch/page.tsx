@@ -21,7 +21,7 @@ const merchandiseList = [
     name: "Kaos Aethera (Hitam)",
     price: "Rp 95.000",
     icon: <Shirt size={54} color="#1F4B5D" />,
-    desc: "Bahan cotton combed 30s, nyaman dipakai. Desain eksklusif PKKMB 2026.",
+    desc: "Bahan cotton combed 30s, nyaman dipakai. Desain eksklusif AETHERA SILO UISI 2026.",
     colorStart: "#FFE0D0",
     colorEnd: "#FFD166"
   },
@@ -77,7 +77,7 @@ export default function MerchPage() {
     <div className={styles.container}>
       {/* ===== NAVBAR ===== */}
       <nav className={styles.navbar}>
-        <div className={styles.logo}>SILO UISI</div>
+        <div className={styles.logo}>AETHERA SILO UISI 2026</div>
         <div className={styles.navLinks}>
           <Link href="/#about" className={styles.navLink}>Tentang</Link>
           <Link href="/#logo" className={styles.navLink}>Logo</Link>
@@ -113,7 +113,7 @@ export default function MerchPage() {
             Aethera Collection
           </h1>
           <p style={{ color: "var(--color-gray)", lineHeight: 1.6 }}>
-            Dukung perjalanan barumu di UISI dengan merchandise resmi PKKMB Aethera 2026. Pilih item favoritmu sebelum kehabisan!
+            Dukung perjalanan barumu di UISI dengan merchandise resmi AETHERA SILO UISI 2026. Pilih item favoritmu sebelum kehabisan!
           </p>
         </div>
 
@@ -195,10 +195,10 @@ export default function MerchPage() {
       <footer className={styles.footer}>
         <div>
           <div className={styles.footerLogo}>
-            <Hexagon style={{ display: "inline-block", verticalAlign: "middle", marginRight: "6px" }} size={18} color="var(--lp-aqua)" /> SILO UISI
+            <Hexagon style={{ display: "inline-block", verticalAlign: "middle", marginRight: "6px" }} size={18} color="var(--lp-aqua)" /> AETHERA SILO UISI 2026
           </div>
           <p className={styles.footerDesc}>
-            Sistem Informasi & Layanan Orientasi — Portal resmi PKKMB
+            Sistem Informasi & Layanan Orientasi — Portal resmi AETHERA SILO UISI 2026
             Universitas Internasional Semen Indonesia.
           </p>
           <div style={{ display: "flex", gap: "0.85rem", marginTop: "1rem", color: "rgba(255,255,255,0.7)" }}>

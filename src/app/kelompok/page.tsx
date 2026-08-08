@@ -254,7 +254,7 @@ export default function KelompokPage({
                 Daftar Anggota Kelompok {selectedCluster.no}
               </h2>
               <p style={{ color: "#64748B", fontSize: "0.875rem", margin: 0 }}>
-                Total {groupDetails.anggota.length} Mahasiswa Peserta SILO AETHERA 2026
+                Total {groupDetails.anggota.length} Mahasiswa Peserta AETHERA SILO UISI 2026
               </p>
             </div>
 

@@ -358,7 +358,7 @@ export default function GlobeSection() {
           letterSpacing: "-0.03em",
         }}
       >
-        Cluster Negara SILO 2026
+        Cluster Negara AETHERA SILO UISI 2026
       </h2>
       <p
         style={{

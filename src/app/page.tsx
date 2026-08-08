@@ -7,6 +7,7 @@ import LowPolyBackground from "./components/LowPolyBackground";
 import PanitiaCarousel from "./components/PanitiaCarousel";
 import DokumentasiGallery from "./components/DokumentasiGallery";
 import GuidebookSection from "./components/GuidebookSection";
+import SambutanSection from "./components/SambutanSection";
 import { 
   Hexagon, 
   Sparkles, 
@@ -36,11 +37,14 @@ export default function Home() {
       {/* ===== NAVBAR ===== */}
       <nav className={styles.navbar}>
         <div className={styles.logo}>
-          <Hexagon style={{ display: "inline-block", verticalAlign: "middle", marginRight: "6px" }} size={20} color="var(--lp-aqua)" /> SILO UISI
+          <Hexagon style={{ display: "inline-block", verticalAlign: "middle", marginRight: "6px" }} size={20} color="var(--lp-aqua)" /> AETHERA SILO UISI 2026
         </div>
         <div className={styles.navLinks}>
           <Link href="#about" className={styles.navLink}>
             Tentang
+          </Link>
+          <Link href="#sambutan" className={styles.navLink}>
+            Sambutan
           </Link>
           <Link href="#logo" className={styles.navLink}>
             Logo
@@ -71,14 +75,14 @@ export default function Home() {
         <section className={styles.hero}>
           <div className={styles.heroContent} data-aos="fade-right">
             <span className={styles.heroTag}>
-              <Sparkles style={{ display: "inline-block", verticalAlign: "middle", marginRight: "6px" }} size={14} /> PKKMB UISI 2026
+              <Sparkles style={{ display: "inline-block", verticalAlign: "middle", marginRight: "6px" }} size={14} /> AETHERA SILO UISI 2026
             </span>
             <h1 className={styles.heroTitle}>
               Selamat Datang <br />
-              <span className={styles.heroTitleAccent}>Mahasiswa Baru</span>
+              <span className={styles.heroTitleAccent}>Satya Ismaya 14</span>
             </h1>
             <p className={styles.heroDesc}>
-              Portal Resmi Informasi dan Layanan Orientasi PKKMB Aethera
+              Portal Resmi Informasi dan Layanan Orientasi AETHERA SILO UISI 2026
               Universitas Internasional Semen Indonesia. Temukan jadwal,
               kelompok, dan penugasan lengkap di sini.
             </p>
@@ -113,31 +117,34 @@ export default function Home() {
           <div className={styles.aboutGrid}>
             <div>
               <h2 className={styles.sectionTitle} style={{ textAlign: "left" }}>
-                Tentang SILO UISI
+                Tentang AETHERA SILO UISI 2026
               </h2>
               <p className={styles.aboutText}>
-                <strong>Student Initiation and Learning Orientation (SILO)</strong>{" "}
-                merupakan kegiatan pengenalan kehidupan kampus bagi mahasiswa baru
-                Universitas Internasional Semen Indonesia. Mengusung nama{" "}
-                <strong>Aethera</strong>, PKKMB 2026 hadir sebagai ruang
-                pembinaan awal yang adaptif, inovatif, dan berkarakter.
+                <strong>AETHERA SILO UISI 2026</strong>{" "}
+                (Student Initiation and Learning Orientation) merupakan kegiatan
+                pengenalan kehidupan kampus bagi mahasiswa baru Universitas
+                Internasional Semen Indonesia. AETHERA SILO UISI 2026 hadir sebagai
+                ruang pembinaan awal yang adaptif, inovatif, dan berkarakter.
               </p>
             </div>
             <div className={styles.aboutImage}>
               <img
                 src="/portfolio_phones.png"
-                alt="SILO UISI Preview"
+                alt="AETHERA SILO UISI 2026 Preview"
                 style={{ width: "100%", height: "auto", borderRadius: "1.5rem" }}
               />
             </div>
           </div>
         </section>
 
+        {/* ===== SAMBUTAN KETUA PELAKSANA ===== */}
+        <SambutanSection />
+
         {/* ===== LOGO PHILOSOPHY ===== */}
         <section id="logo" className={styles.section} data-aos="fade-up">
           <h2 className={styles.sectionTitle}>Filosofi Logo Aethera</h2>
           <p className={styles.sectionSubtitle}>
-            Simbol keberanian, inovasi, dan persatuan mahasiswa baru UISI 2026.
+            Simbol keberanian, inovasi, dan persatuan Satya Ismaya 14 UISI 2026.
           </p>
 
           <div className={styles.servicesGrid}>
@@ -188,7 +195,7 @@ export default function Home() {
         <section id="panitia" className={styles.section} data-aos="fade-up">
           <h2 className={styles.sectionTitle}>Daftar Panitia</h2>
           <p className={styles.sectionSubtitle}>
-            BPH &amp; Koordinator Divisi PKKMB Aethera UISI 2026
+            BPH &amp; Koordinator Divisi AETHERA SILO UISI 2026
           </p>
 
           <PanitiaCarousel />
@@ -201,7 +208,7 @@ export default function Home() {
         <section id="penugasan" className={styles.section} data-aos="fade-up">
           <h2 className={styles.sectionTitle}>Daftar Penugasan</h2>
           <p className={styles.sectionSubtitle}>
-            Selesaikan penugasan harian dan kelompok sesuai ketentuan &amp; tenggat waktu SILO UISI 2026.
+            Selesaikan penugasan harian dan kelompok sesuai ketentuan &amp; tenggat waktu AETHERA SILO UISI 2026.
           </p>
 
           <div className={styles.servicesGrid}>
@@ -279,7 +286,7 @@ export default function Home() {
         >
           <h2 className={styles.sectionTitle}>Merchandise</h2>
           <p className={styles.sectionSubtitle}>
-            Koleksi resmi PKKMB Aethera 2026 — tampil keren dari hari pertama!
+            Koleksi resmi AETHERA SILO UISI 2026 — tampil keren dari hari pertama!
           </p>
           <div className={styles.merchCarousel}>
             <div className={styles.merchCard} style={{ background: "var(--lp-ocean-blue)" }}>
@@ -333,13 +340,11 @@ export default function Home() {
         <section id="contact" className={styles.section}>
           <div style={{ textAlign: "center", maxWidth: "700px", margin: "0 auto" }}>
             <p className={styles.aboutText}>
-              <strong style={{ color: "var(--lp-text)" }}>SILO UISI</strong>{" "}
+              <strong style={{ color: "var(--lp-text)" }}>AETHERA SILO UISI 2026</strong>{" "}
               adalah unit yang mengelola seluruh rangkaian informasi dan layanan
               Penerimaan Mahasiswa Baru di Universitas Internasional Semen
-              Indonesia. PKKMB{" "}
-              <strong style={{ color: "var(--lp-text)" }}>Aethera</strong>{" "}
-              diselenggarakan sebagai program pengenalan kampus, nilai, dan
-              komunitas bagi mahasiswa baru angkatan 2026.
+              Indonesia. Program ini diselenggarakan sebagai pengenalan kampus,
+              nilai, dan komunitas bagi mahasiswa baru angkatan 2026.
             </p>
           </div>
         </section>
@@ -349,10 +354,10 @@ export default function Home() {
       <footer className={styles.footer}>
         <div>
           <div className={styles.footerLogo}>
-            <Hexagon style={{ display: "inline-block", verticalAlign: "middle", marginRight: "6px" }} size={18} color="var(--lp-aqua)" /> SILO UISI
+            <Hexagon style={{ display: "inline-block", verticalAlign: "middle", marginRight: "6px" }} size={18} color="var(--lp-aqua)" /> AETHERA SILO UISI 2026
           </div>
           <p className={styles.footerDesc}>
-            Sistem Informasi & Layanan Orientasi — Portal resmi PKKMB
+            Sistem Informasi & Layanan Orientasi — Portal resmi AETHERA SILO UISI 2026
             Universitas Internasional Semen Indonesia.
           </p>
           <div style={{ display: "flex", gap: "0.85rem", marginTop: "1rem", color: "rgba(255,255,255,0.7)" }}>
@@ -366,6 +371,7 @@ export default function Home() {
           <div className={styles.footerColTitle}>Menu</div>
           <div className={styles.footerLinks}>
             <Link href="#about">Tentang</Link>
+            <Link href="#sambutan">Sambutan</Link>
             <Link href="#logo">Filosofi Logo</Link>
             <Link href="#panitia">Daftar Panitia</Link>
             <Link href="#penugasan">Penugasan</Link>
@@ -394,7 +400,7 @@ export default function Home() {
         <div className={styles.footerNewsletter}>
           <div className={styles.footerColTitle}>Info Terbaru</div>
           <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.5)" }}>
-            Dapatkan update terbaru seputar PKKMB Aethera 2026.
+            Dapatkan update terbaru seputar AETHERA SILO UISI 2026.
           </p>
           <input
             type="email"

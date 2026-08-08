@@ -119,7 +119,7 @@ export default function SponsorSection() {
               letterSpacing: "-0.02em",
             }}
           >
-            Mitra & Sponsor SILO 2026
+            Mitra & Sponsor AETHERA SILO UISI 2026
           </h2>
 
           <p
@@ -131,7 +131,7 @@ export default function SponsorSection() {
               lineHeight: 1.6,
             }}
           >
-            Terima kasih kepada para mitra dan perusahaan terkemuka yang mendukung kesuksesan seluruh rangkaian kegiatan SILO AETHERA 2026.
+            Terima kasih kepada para mitra dan perusahaan terkemuka yang mendukung kesuksesan seluruh rangkaian kegiatan AETHERA SILO UISI 2026.
           </p>
         </div>
 
