@@ -185,8 +185,8 @@
 }
 
 .memberIconBox {
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   background: rgba(31, 75, 93, 0.08);
   color: var(--lp-ocean-blue);
@@ -194,14 +194,22 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 1px solid rgba(31, 75, 93, 0.15);
+  border: 2px solid rgba(104, 207, 235, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.memberAvatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .memberCard:hover .memberIconBox {
-  background: var(--lp-ocean-blue);
-  color: var(--lp-white);
-  border-color: var(--lp-ocean-blue);
+  border-color: var(--lp-aqua);
+  box-shadow: 0 0 12px rgba(104, 207, 235, 0.4);
 }
 
 .memberInfo {
