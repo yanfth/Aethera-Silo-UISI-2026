@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "SILO UISI 2026",
-  description: "Portal Resmi SILO UISI 2026",
+  title: "AETHERA SILO UISI 2026",
+  description: "Portal Resmi AETHERA SILO UISI 2026 — Universitas Internasional Semen Indonesia",
 };
 
 import AosInit from "./components/AosInit";
