@@ -248,6 +248,27 @@
   color: var(--lp-text-muted);
 }
 
+.downloadBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--lp-ocean-blue);
+  background: rgba(31, 75, 93, 0.08);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.downloadBtn:hover {
+  background: var(--lp-ocean-blue);
+  color: white;
+  transform: translateY(-2px);
+}
+
 .aboutImage {
   position: relative;
   border-radius: var(--radius-2xl);

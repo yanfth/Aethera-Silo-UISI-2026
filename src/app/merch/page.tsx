@@ -77,7 +77,7 @@ export default function MerchPage() {
     <div className={styles.container}>
       {/* ===== NAVBAR ===== */}
       <nav className={styles.navbar}>
-        <div className={styles.logo}>SILO UISI</div>
+        <div className={styles.logo}>AETHERA SILO UISI</div>
         <div className={styles.navLinks}>
           <Link href="/#about" className={styles.navLink}>Tentang</Link>
           <Link href="/#logo" className={styles.navLink}>Logo</Link>
