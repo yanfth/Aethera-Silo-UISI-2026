@@ -20,6 +20,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id">
+      <head>
+        <link rel="icon" href="/logo_aethera.png?v=99" type="image/png" sizes="any" />
+        <link rel="shortcut icon" href="/logo_aethera.png?v=99" type="image/png" />
+        <link rel="apple-touch-icon" href="/logo_aethera.png?v=99" />
+      </head>
       <body>
         <AosInit />
         {children}
