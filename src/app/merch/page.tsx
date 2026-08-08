@@ -215,9 +215,10 @@ export default function MerchPage() {
         <div>
           <div className={styles.footerColTitle}>Kontak</div>
           <div className={styles.footerLinks}>
-            <Link href="#">Instagram</Link>
-            <Link href="#">Line</Link>
-            <Link href="#">WhatsApp</Link>
+            <a href="https://www.instagram.com/silouisi2026?igsh=MThqZ2Z1YXAzcng1ZA==" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.tiktok.com/@branarasilouisi2025?_r=1&_t=ZS-98iD5zNgHEi" target="_blank" rel="noopener noreferrer">TikTok</a>
+            <a href="https://wa.me/6289667151265" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a href="mailto:pkkmb@uisi.ac.id">Email</a>
           </div>
         </div>
       </footer>

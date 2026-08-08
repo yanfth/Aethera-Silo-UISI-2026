@@ -145,9 +145,10 @@ export default function LogoPage() {
         <div>
           <div className={styles.footerColTitle}>Kontak</div>
           <div className={styles.footerLinks}>
-            <span>Humas AETHERA SILO UISI 2026</span>
-            <span>Kampus UISI Gresik</span>
-            <span>Email: silo@uisi.ac.id</span>
+            <a href="https://www.instagram.com/silouisi2026?igsh=MThqZ2Z1YXAzcng1ZA==" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.tiktok.com/@branarasilouisi2025?_r=1&_t=ZS-98iD5zNgHEi" target="_blank" rel="noopener noreferrer">TikTok</a>
+            <a href="https://wa.me/6289667151265" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a href="mailto:pkkmb@uisi.ac.id">Email</a>
           </div>
         </div>
       </footer>
