@@ -8,6 +8,7 @@ import PanitiaCarousel from "./components/PanitiaCarousel";
 import DokumentasiGallery from "./components/DokumentasiGallery";
 import GuidebookSection from "./components/GuidebookSection";
 import SambutanSection from "./components/SambutanSection";
+import AnggotaDivisi from "./components/AnggotaDivisi";
 import { 
   Hexagon, 
   Sparkles, 
@@ -199,6 +200,9 @@ export default function Home() {
           </p>
 
           <PanitiaCarousel />
+
+          {/* ===== DAFTAR ANGGOTA TIAP DIVISI ===== */}
+          <AnggotaDivisi />
         </section>
 
         {/* ===== GUIDEBOOK PDF FLIPBOOK ===== */}
