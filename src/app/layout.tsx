@@ -5,9 +5,9 @@ export const metadata: Metadata = {
   title: "AETHERA SILO UISI 2026",
   description: "Portal Resmi AETHERA SILO UISI 2026 — Universitas Internasional Semen Indonesia",
   icons: {
-    icon: "/icon.png?v=3",
-    shortcut: "/favicon.ico?v=3",
-    apple: "/apple-icon.png?v=3",
+    icon: "/logo_aethera.png?v=99",
+    shortcut: "/logo_aethera.png?v=99",
+    apple: "/logo_aethera.png?v=99",
   },
 };
 
