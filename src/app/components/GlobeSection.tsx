@@ -358,12 +358,12 @@ export default function GlobeSection() {
           letterSpacing: "-0.03em",
         }}
       >
-        Cluster Negara AETHERA SILO UISI 2026
+        Cluster Negara <span style={{ background: "linear-gradient(135deg, var(--lp-ocean-blue), var(--lp-aqua))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>AETHERA SILO UISI 2026</span>
       </h2>
       <p
         style={{
           textAlign: "center",
-          color: "#64748B",
+          color: "var(--lp-text-muted)",
           fontSize: "0.95rem",
           marginBottom: "2rem",
           maxWidth: "550px",

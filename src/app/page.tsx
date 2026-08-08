@@ -9,6 +9,7 @@ import DokumentasiGallery from "./components/DokumentasiGallery";
 import GuidebookSection from "./components/GuidebookSection";
 import SambutanSection from "./components/SambutanSection";
 import AnggotaDivisi from "./components/AnggotaDivisi";
+import MapsSection from "./components/MapsSection";
 import { 
   Hexagon, 
   Sparkles, 
@@ -68,6 +69,9 @@ export default function Home() {
           <Link href="#merch" className={styles.navLink}>
             Merchandise
           </Link>
+          <Link href="#lokasi" className={styles.navLink}>
+            Lokasi
+          </Link>
         </div>
       </nav>
 
@@ -118,7 +122,7 @@ export default function Home() {
           <div className={styles.aboutGrid}>
             <div>
               <h2 className={styles.sectionTitle} style={{ textAlign: "left" }}>
-                Tentang AETHERA SILO UISI 2026
+                Tentang <span className={styles.titleGradient}>AETHERA SILO UISI 2026</span>
               </h2>
               <p className={styles.aboutText}>
                 <strong>AETHERA SILO UISI 2026</strong>{" "}
@@ -143,7 +147,9 @@ export default function Home() {
 
         {/* ===== LOGO PHILOSOPHY ===== */}
         <section id="logo" className={styles.section} data-aos="fade-up">
-          <h2 className={styles.sectionTitle}>Filosofi Logo Aethera</h2>
+          <h2 className={styles.sectionTitle}>
+            Filosofi <span className={styles.titleGradient}>Logo Aethera</span>
+          </h2>
           <p className={styles.sectionSubtitle}>
             Simbol keberanian, inovasi, dan persatuan Satya Ismaya 14 UISI 2026.
           </p>
@@ -184,7 +190,9 @@ export default function Home() {
 
         {/* ===== DOKUMENTASI TAHUN LALU ===== */}
         <section id="dokumentasi" className={styles.section} data-aos="fade-up">
-          <h2 className={styles.sectionTitle}>Kilasan Silo Tahun Lalu</h2>
+          <h2 className={styles.sectionTitle}>
+            Kilasan <span className={styles.titleGradient}>SILO Tahun Lalu</span>
+          </h2>
           <p className={styles.sectionSubtitle}>
             Kilas Balik Kemeriahan &amp; Momen Berkesan SILO UISI 2025
           </p>
@@ -194,7 +202,9 @@ export default function Home() {
 
         {/* ===== DAFTAR PANITIA ===== */}
         <section id="panitia" className={styles.section} data-aos="fade-up">
-          <h2 className={styles.sectionTitle}>Daftar Panitia</h2>
+          <h2 className={styles.sectionTitle}>
+            Daftar <span className={styles.titleGradient}>Panitia</span>
+          </h2>
           <p className={styles.sectionSubtitle}>
             BPH &amp; Koordinator Divisi AETHERA SILO UISI 2026
           </p>
@@ -210,7 +220,9 @@ export default function Home() {
 
         {/* ===== DAFTAR PENUGASAN ===== */}
         <section id="penugasan" className={styles.section} data-aos="fade-up">
-          <h2 className={styles.sectionTitle}>Daftar Penugasan</h2>
+          <h2 className={styles.sectionTitle}>
+            Daftar <span className={styles.titleGradient}>Penugasan</span>
+          </h2>
           <p className={styles.sectionSubtitle}>
             Selesaikan penugasan harian dan kelompok sesuai ketentuan &amp; tenggat waktu AETHERA SILO UISI 2026.
           </p>
@@ -288,7 +300,9 @@ export default function Home() {
           style={{ overflow: "hidden" }}
           data-aos="fade-up"
         >
-          <h2 className={styles.sectionTitle}>Merchandise</h2>
+          <h2 className={styles.sectionTitle}>
+            Katalog <span className={styles.titleGradient}>Merchandise</span>
+          </h2>
           <p className={styles.sectionSubtitle}>
             Koleksi resmi AETHERA SILO UISI 2026 — tampil keren dari hari pertama!
           </p>
@@ -340,6 +354,9 @@ export default function Home() {
         {/* ===== SPONSOR & MEDIA PARTNER ===== */}
         <SponsorSection />
 
+        {/* ===== MAPS LOKASI KAMPUS B UISI GRESIK ===== */}
+        <MapsSection />
+
         {/* ===== CONTACT ===== */}
         <section id="contact" className={styles.section}>
           <div style={{ textAlign: "center", maxWidth: "700px", margin: "0 auto" }}>
@@ -380,6 +397,7 @@ export default function Home() {
             <Link href="#panitia">Daftar Panitia</Link>
             <Link href="#penugasan">Penugasan</Link>
             <Link href="#kelompok">Kelompok</Link>
+            <Link href="#lokasi">Lokasi Kampus B</Link>
           </div>
         </div>
 
