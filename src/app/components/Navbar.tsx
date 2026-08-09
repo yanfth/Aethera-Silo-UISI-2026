@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./Navbar.module.css";
+import { getCloudinaryUrl } from "@/utils/cloudinary";
 import { 
   Menu, 
   X, 
@@ -80,7 +81,7 @@ export default function Navbar() {
         {/* Brand Logo */}
         <Link href="/" className={styles.logo} onClick={() => setMobileMenuOpen(false)}>
           <img 
-            src="/logo_aethera.webp?v=3" 
+            src={getCloudinaryUrl("/logo_aethera.webp")} 
             alt="AETHERA Logo" 
             className={styles.logoImg}
           />

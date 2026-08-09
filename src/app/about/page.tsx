@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../page.module.css";
+import { getCloudinaryUrl } from "@/utils/cloudinary";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import LowPolyBackground from "../components/LowPolyBackground";
@@ -37,7 +38,7 @@ export default function AboutPage() {
             </div>
             <div className={styles.aboutImage}>
               <img
-                src="/portfolio_phones.webp"
+                src={getCloudinaryUrl("/portfolio_phones.webp")}
                 alt="AETHERA SILO UISI 2026 Preview"
                 style={{ width: "100%", height: "auto", borderRadius: "1.5rem" }}
               />

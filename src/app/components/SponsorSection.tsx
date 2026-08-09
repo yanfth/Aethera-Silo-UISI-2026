@@ -1,5 +1,6 @@
 import React from "react";
 import { Crown, Award, ShieldCheck, Gem, Radio } from "lucide-react";
+import { getCloudinaryUrl } from "@/utils/cloudinary";
 
 interface SponsorItem {
   name: string;
@@ -162,7 +163,7 @@ export default function SponsorSection() {
               >
                 {/* Logo Besar Platinum (Height ~70px) */}
                 <img
-                  src={item.logoSrc}
+                  src={getCloudinaryUrl(item.logoSrc)}
                   alt={item.name}
                   style={{
                     height: "70px",
@@ -250,7 +251,7 @@ export default function SponsorSection() {
               >
                 {/* Logo Sedang Gold (Height ~48px) */}
                 <img
-                  src={item.logoSrc}
+                  src={getCloudinaryUrl(item.logoSrc)}
                   alt={item.name}
                   style={{
                     height: "48px",
@@ -337,7 +338,7 @@ export default function SponsorSection() {
               >
                 {/* Logo Kecil Silver (Height ~32px) */}
                 <img
-                  src={item.logoSrc}
+                  src={getCloudinaryUrl(item.logoSrc)}
                   alt={item.name}
                   style={{
                     height: "34px",

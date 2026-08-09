@@ -2,6 +2,7 @@
 
 import React from "react";
 import styles from "./SambutanSection.module.css";
+import { getCloudinaryUrl } from "@/utils/cloudinary";
 
 interface SambutanItem {
   id: string;
@@ -74,7 +75,7 @@ export default function SambutanSection() {
                 <div className={styles.photoBoxWrapper}>
                   <div className={styles.photoFrame}>
                     <img
-                      src={item.image}
+                      src={getCloudinaryUrl(item.image)}
                       alt={item.name}
                       className={styles.portraitPhoto}
                     />
@@ -132,7 +133,7 @@ export default function SambutanSection() {
                 <div className={styles.photoBoxWrapper}>
                   <div className={styles.photoFrame}>
                     <img
-                      src={item.image}
+                      src={getCloudinaryUrl(item.image)}
                       alt={item.name}
                       className={styles.portraitPhoto}
                     />

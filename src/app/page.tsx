@@ -1,5 +1,6 @@
 import SponsorSection from "./components/SponsorSection";
 import styles from "./page.module.css";
+import { getCloudinaryUrl } from "@/utils/cloudinary";
 import Link from "next/link";
 import GlobeSection from "./components/GlobeSection";
 import CountdownSection from "./components/CountdownSection";
@@ -72,7 +73,7 @@ export default function Home() {
             <div className={styles.heroGeoBg}></div>
             <div className={styles.heroImageContainer}>
               <img
-                src="/hero_rocket.webp"
+                src={getCloudinaryUrl("/hero_rocket.webp")}
                 alt="Aethera Rocket Illustration"
                 width={480}
                 height={480}
@@ -102,7 +103,7 @@ export default function Home() {
             </div>
             <div className={styles.aboutImage}>
               <img
-                src="/portfolio_phones.webp"
+                src={getCloudinaryUrl("/portfolio_phones.webp")}
                 alt="AETHERA SILO UISI 2026 Preview"
                 style={{ width: "100%", height: "auto", borderRadius: "1.5rem" }}
               />
@@ -153,7 +154,7 @@ export default function Home() {
       <footer className={styles.footer}>
         <div>
           <div className={styles.footerLogo} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <img src="/logo_aethera.webp?v=3" alt="Aethera Logo" style={{ height: "26px", width: "auto" }} />
+            <img src={getCloudinaryUrl("/logo_aethera.webp")} alt="Aethera Logo" style={{ height: "26px", width: "auto" }} />
             <span>AETHERA SILO UISI 2026</span>
           </div>
           <p className={styles.footerDesc}>

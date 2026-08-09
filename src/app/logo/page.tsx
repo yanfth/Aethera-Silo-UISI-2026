@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../page.module.css";
+import { getCloudinaryUrl } from "@/utils/cloudinary";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import LowPolyBackground from "../components/LowPolyBackground";
@@ -42,7 +43,7 @@ export default function LogoPage() {
           >
             <div style={{ textAlign: "center" }}>
               <img 
-                src="/logo_aethera.webp?v=3" 
+                src={getCloudinaryUrl("/logo_aethera.webp")} 
                 alt="Logo Resmi AETHERA SILO UISI 2026" 
                 style={{ 
                   width: "260px", 

@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 import styles from "./AnggotaDivisi.module.css";
+import { getCloudinaryUrl } from "@/utils/cloudinary";
 import {
   Users,
   Shield,
@@ -310,10 +311,11 @@ export default function AnggotaDivisi() {
               <div className={styles.memberIconBox}>
                 <img
                   src={
-                    member.image ||
-                    `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                      member.name
-                    )}&background=183a48&color=68cfeb&bold=true&size=128`
+                    member.image
+                      ? getCloudinaryUrl(member.image)
+                      : `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                          member.name
+                        )}&background=183a48&color=68cfeb&bold=true&size=128`
                   }
                   alt={member.name}
                   className={styles.memberAvatarImg}

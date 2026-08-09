@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./DokumentasiGallery.module.css";
+import { getCloudinaryUrl } from "@/utils/cloudinary";
 
 interface DocItem {
   id: string;
@@ -162,7 +163,7 @@ export default function DokumentasiGallery() {
               onClick={() => setSelectedImage(item)}
             >
               <img
-                src={item.src}
+                src={getCloudinaryUrl(item.src)}
                 alt={item.title}
                 className={styles.slideImage}
                 loading="lazy"
@@ -215,7 +216,7 @@ export default function DokumentasiGallery() {
               ×
             </button>
             <img
-              src={selectedImage.src}
+              src={getCloudinaryUrl(selectedImage.src)}
               alt={selectedImage.title}
               className={styles.modalImage}
             />

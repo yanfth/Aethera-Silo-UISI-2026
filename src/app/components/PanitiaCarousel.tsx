@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "./PanitiaCarousel.module.css";
+import { getCloudinaryUrl } from "@/utils/cloudinary";
 
 interface PanitiaPerson {
   id: string;
@@ -185,7 +186,7 @@ export default function PanitiaCarousel() {
             >
               {/* Background Photo */}
               <img
-                src={person.image}
+                src={getCloudinaryUrl(person.image)}
                 alt={person.name}
                 className={styles.cardPhoto}
               />
