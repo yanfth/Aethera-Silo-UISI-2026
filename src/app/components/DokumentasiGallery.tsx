@@ -163,10 +163,11 @@ export default function DokumentasiGallery() {
               onClick={() => setSelectedImage(item)}
             >
               <img
-                src={getCloudinaryUrl(item.src)}
+                src={getCloudinaryUrl(item.src, 600)}
                 alt={item.title}
                 className={styles.slideImage}
                 loading="lazy"
+                decoding="async"
               />
               <div className={styles.overlay}>
                 <span className={styles.itemTag}>{item.tag}</span>

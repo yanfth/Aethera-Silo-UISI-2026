@@ -312,13 +312,15 @@ export default function AnggotaDivisi() {
                 <img
                   src={
                     member.image
-                      ? getCloudinaryUrl(member.image)
+                      ? getCloudinaryUrl(member.image, 350)
                       : `https://ui-avatars.com/api/?name=${encodeURIComponent(
                           member.name
                         )}&background=183a48&color=68cfeb&bold=true&size=128`
                   }
                   alt={member.name}
                   className={styles.memberAvatarImg}
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className={styles.memberInfo}>

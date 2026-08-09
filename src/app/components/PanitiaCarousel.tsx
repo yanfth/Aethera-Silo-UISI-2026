@@ -186,9 +186,11 @@ export default function PanitiaCarousel() {
             >
               {/* Background Photo */}
               <img
-                src={getCloudinaryUrl(person.image)}
+                src={getCloudinaryUrl(person.image, 450)}
                 alt={person.name}
                 className={styles.cardPhoto}
+                loading="lazy"
+                decoding="async"
               />
 
               {/* Gradient Overlay */}

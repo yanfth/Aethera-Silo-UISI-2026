@@ -75,9 +75,11 @@ export default function SambutanSection() {
                 <div className={styles.photoBoxWrapper}>
                   <div className={styles.photoFrame}>
                     <img
-                      src={getCloudinaryUrl(item.image)}
+                      src={getCloudinaryUrl(item.image, 500)}
                       alt={item.name}
                       className={styles.portraitPhoto}
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
 
@@ -133,9 +135,11 @@ export default function SambutanSection() {
                 <div className={styles.photoBoxWrapper}>
                   <div className={styles.photoFrame}>
                     <img
-                      src={getCloudinaryUrl(item.image)}
+                      src={getCloudinaryUrl(item.image, 500)}
                       alt={item.name}
                       className={styles.portraitPhoto}
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
 
