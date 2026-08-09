@@ -23,14 +23,23 @@ export function getCloudinaryUrl(path: string, options?: CloudinaryOptions | num
     return path;
   }
 
-  const targetWidth = typeof options === "number" ? options : options?.width ?? 500;
   const cloudName = CLOUDINARY_CLOUD_NAME;
   const pathWithoutQuery = path.split("?")[0];
   const cleanPath = pathWithoutQuery.startsWith("/") ? pathWithoutQuery.slice(1) : pathWithoutQuery;
 
+  if (options === 0) {
+    if (cloudName) {
+      const folderPath = encodeURIComponent(CLOUDINARY_FOLDER);
+      return `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_100/${folderPath}/${cleanPath}`;
+    }
+  }
+
+  const targetWidth = typeof options === "number" ? options : options?.width ?? 600;
+  const quality = typeof options === "object" ? options?.quality ?? "auto:best" : "auto:best";
+
   if (cloudName) {
     const folderPath = encodeURIComponent(CLOUDINARY_FOLDER);
-    const transform = targetWidth ? `c_limit,w_${targetWidth},f_auto,q_auto` : `f_auto,q_auto`;
+    const transform = targetWidth ? `c_limit,w_${targetWidth},f_auto,q_${quality}` : `f_auto,q_${quality}`;
     return `https://res.cloudinary.com/${cloudName}/image/upload/${transform}/${folderPath}/${cleanPath}`;
   }
 

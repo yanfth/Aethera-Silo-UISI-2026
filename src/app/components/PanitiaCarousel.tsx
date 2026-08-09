@@ -186,7 +186,7 @@ export default function PanitiaCarousel() {
             >
               {/* Background Photo */}
               <img
-                src={getCloudinaryUrl(person.image, 450)}
+                src={getCloudinaryUrl(person.image, 0)}
                 alt={person.name}
                 className={styles.cardPhoto}
                 loading="lazy"

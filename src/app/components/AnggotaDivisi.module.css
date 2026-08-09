@@ -270,6 +270,120 @@
   grid-column: 1 / -1;
 }
 
+/* Modal Pop Up Profile */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 1.5rem;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.modalContent {
+  position: relative;
+  background: #ffffff;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(104, 207, 235, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2.25rem 1.75rem 2rem 1.75rem;
+  animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(31, 75, 93, 0.08);
+  border: none;
+  color: var(--lp-ocean-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.closeBtn:hover {
+  background: var(--lp-ocean-blue);
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.modalImgContainer {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, var(--lp-ocean-blue), var(--lp-aqua));
+  box-shadow: 0 10px 25px rgba(31, 75, 93, 0.25);
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+}
+
+.modalImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--lp-white);
+}
+
+.modalInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modalName {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--lp-ocean-blue);
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+}
+
+.modalRole {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--lp-text-muted);
+  margin-bottom: 1rem;
+}
+
+.modalTags {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.9) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
 @media (max-width: 640px) {
   .divisionBanner {
     padding: 1.25rem;
@@ -278,5 +392,9 @@
   }
   .membersGrid {
     grid-template-columns: 1fr;
+  }
+  .modalImgContainer {
+    width: 170px;
+    height: 170px;
   }
 }

@@ -16,7 +16,8 @@ import {
   User,
   GraduationCap,
   Megaphone,
-  ShieldAlert
+  ShieldAlert,
+  X
 } from "lucide-react";
 
 interface Member {
@@ -232,6 +233,7 @@ const MEMBERS: Member[] = [
 export default function AnggotaDivisi() {
   const [selectedDivisionId, setSelectedDivisionId] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [modalMember, setModalMember] = useState<Member | null>(null);
 
   const activeDivision = useMemo(() => {
     return DIVISIONS.find((d) => d.id === selectedDivisionId) || null;
@@ -315,7 +317,12 @@ export default function AnggotaDivisi() {
       <div className={styles.membersGrid}>
         {filteredMembers.length > 0 ? (
           filteredMembers.map((member) => (
-            <div key={member.id} className={styles.memberCard}>
+            <div
+              key={member.id}
+              className={styles.memberCard}
+              onClick={() => setModalMember(member)}
+              style={{ cursor: "pointer" }}
+            >
               <div className={styles.memberIconBox}>
                 <img
                   src={
@@ -349,6 +356,44 @@ export default function AnggotaDivisi() {
           </div>
         )}
       </div>
+
+      {/* Modal Profile Pop Up */}
+      {modalMember && (
+        <div className={styles.modalOverlay} onClick={() => setModalMember(null)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <button
+              className={styles.closeBtn}
+              onClick={() => setModalMember(null)}
+              aria-label="Tutup"
+            >
+              <X size={20} />
+            </button>
+
+            <div className={styles.modalImgContainer}>
+              <img
+                src={
+                  modalMember.image
+                    ? getCloudinaryUrl(modalMember.image, 800)
+                    : `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                        modalMember.name
+                      )}&background=183a48&color=68cfeb&bold=true&size=512`
+                }
+                alt={modalMember.name}
+                className={styles.modalImg}
+              />
+            </div>
+
+            <div className={styles.modalInfo}>
+              <h3 className={styles.modalName}>{modalMember.name}</h3>
+              <p className={styles.modalRole}>{modalMember.role}</p>
+              <div className={styles.modalTags}>
+                <span className={styles.prodiTag}>{modalMember.prodi}</span>
+                <span className={styles.divisionTag}>{modalMember.divisionName}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
