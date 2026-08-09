@@ -297,9 +297,6 @@ export default function AnggotaDivisi() {
             <h4 className={styles.bannerTitle}>{activeDivision.name}</h4>
             <p className={styles.bannerDesc}>{activeDivision.description}</p>
           </div>
-          <span className={styles.bannerBadge}>
-            {activeDivision.koordinator}
-          </span>
         </div>
       )}
 
