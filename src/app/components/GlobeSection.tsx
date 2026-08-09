@@ -25,7 +25,7 @@ export const CLUSTERS: ClusterData[] = [
   {
     id: "01",
     no: 1,
-    name: "Kelompok 1 - Jepang",
+    name: "NEGARA JEPANG",
     country: "Jepang",
     continent: "Asia",
     flag: "🇯🇵",
@@ -36,7 +36,7 @@ export const CLUSTERS: ClusterData[] = [
   {
     id: "02",
     no: 2,
-    name: "Kelompok 2 - Korea Selatan",
+    name: "NEGARA KOREA SELATAN",
     country: "Korea Selatan",
     continent: "Asia",
     flag: "🇰🇷",
@@ -47,7 +47,7 @@ export const CLUSTERS: ClusterData[] = [
   {
     id: "03",
     no: 3,
-    name: "Kelompok 3 - Tiongkok",
+    name: "NEGARA TIONGKOK",
     country: "Tiongkok",
     continent: "Asia",
     flag: "🇨🇳",
@@ -58,7 +58,7 @@ export const CLUSTERS: ClusterData[] = [
   {
     id: "04",
     no: 4,
-    name: "Kelompok 4 - India",
+    name: "NEGARA INDIA",
     country: "India",
     continent: "Asia",
     flag: "🇮🇳",
@@ -71,7 +71,7 @@ export const CLUSTERS: ClusterData[] = [
   {
     id: "05",
     no: 5,
-    name: "Kelompok 5 - Mesir",
+    name: "NEGARA MESIR",
     country: "Mesir",
     continent: "Afrika",
     flag: "🇪🇬",
@@ -82,7 +82,7 @@ export const CLUSTERS: ClusterData[] = [
   {
     id: "06",
     no: 6,
-    name: "Kelompok 6 - Afrika Selatan",
+    name: "NEGARA AFRIKA SELATAN",
     country: "Afrika Selatan",
     continent: "Afrika",
     flag: "🇿🇦",
@@ -93,7 +93,7 @@ export const CLUSTERS: ClusterData[] = [
   {
     id: "07",
     no: 7,
-    name: "Kelompok 7 - Kenya",
+    name: "NEGARA KENYA",
     country: "Kenya",
     continent: "Afrika",
     flag: "🇰🇪",
@@ -106,7 +106,7 @@ export const CLUSTERS: ClusterData[] = [
   {
     id: "08",
     no: 8,
-    name: "Kelompok 8 - Prancis",
+    name: "NEGARA PRANCIS",
     country: "Prancis",
     continent: "Eropa",
     flag: "🇫🇷",
@@ -117,7 +117,7 @@ export const CLUSTERS: ClusterData[] = [
   {
     id: "09",
     no: 9,
-    name: "Kelompok 9 - Belanda",
+    name: "NEGARA BELANDA",
     country: "Belanda",
     continent: "Eropa",
     flag: "🇳🇱",
@@ -128,7 +128,7 @@ export const CLUSTERS: ClusterData[] = [
   {
     id: "10",
     no: 10,
-    name: "Kelompok 10 - Jerman",
+    name: "NEGARA JERMAN",
     country: "Jerman",
     continent: "Eropa",
     flag: "🇩🇪",
@@ -141,7 +141,7 @@ export const CLUSTERS: ClusterData[] = [
   {
     id: "11",
     no: 11,
-    name: "Kelompok 11 - Amerika Serikat",
+    name: "NEGARA AMERIKA SERIKAT",
     country: "Amerika Serikat",
     continent: "Amerika",
     flag: "🇺🇸",
@@ -152,7 +152,7 @@ export const CLUSTERS: ClusterData[] = [
   {
     id: "12",
     no: 12,
-    name: "Kelompok 12 - Meksiko",
+    name: "NEGARA MEKSIKO",
     country: "Meksiko",
     continent: "Amerika",
     flag: "🇲🇽",
@@ -163,7 +163,7 @@ export const CLUSTERS: ClusterData[] = [
   {
     id: "13",
     no: 13,
-    name: "Kelompok 13 - Kanada",
+    name: "NEGARA KANADA",
     country: "Kanada",
     continent: "Amerika",
     flag: "🇨🇦",
@@ -174,7 +174,7 @@ export const CLUSTERS: ClusterData[] = [
   {
     id: "14",
     no: 14,
-    name: "Kelompok 14 - Brasil",
+    name: "NEGARA BRASIL",
     country: "Brasil",
     continent: "Amerika",
     flag: "🇧🇷",
@@ -187,7 +187,7 @@ export const CLUSTERS: ClusterData[] = [
   {
     id: "15",
     no: 15,
-    name: "Kelompok 15 - Australia",
+    name: "NEGARA AUSTRALIA",
     country: "Australia",
     continent: "Oceania",
     flag: "🇦🇺",
@@ -198,7 +198,7 @@ export const CLUSTERS: ClusterData[] = [
   {
     id: "16",
     no: 16,
-    name: "Kelompok 16 - Papua Nugini",
+    name: "NEGARA PAPUA NUGINI",
     country: "Papua Nugini",
     continent: "Oceania",
     flag: "🇵🇬",
@@ -227,110 +227,97 @@ function Marker({
   flagUrl,
   onClick,
 }: {
-  location: number[];
+  location: [number, number];
   isActive: boolean;
   label: string;
   flag: string;
-  flagUrl: string;
+  flagUrl?: string;
   onClick: () => void;
 }) {
-  const { x, y, z } = getCoordinatesFromLatLng(
-    location[0],
-    location[1],
-    EARTH_RADIUS
-  );
-  const markerPos = new THREE.Vector3(x, y, z).multiplyScalar(1.05);
-
-  const { camera } = useThree();
-  const [isVisible, setIsVisible] = useState(true);
-
-  useFrame(() => {
-    const directionToMarker = markerPos.clone().normalize();
-    const directionToCamera = camera.position.clone().normalize();
-    setIsVisible(directionToMarker.dot(directionToCamera) > 0.08);
-  });
+  const coords = getCoordinatesFromLatLng(location[0], location[1], EARTH_RADIUS);
+  const position = new THREE.Vector3(coords.x, coords.y, coords.z);
 
   return (
-    <Html
-      position={[markerPos.x, markerPos.y, markerPos.z]}
-      center
-      zIndexRange={[100, 0]}
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transition: "opacity 0.25s ease",
-        pointerEvents: isVisible ? "auto" : "none",
-        cursor: "pointer",
-      }}
-    >
-      <div
-        onClick={onClick}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          pointerEvents: "auto",
-        }}
-      >
+    <group position={position}>
+      <mesh onClick={onClick}>
+        <sphereGeometry args={[isActive ? 0.05 : 0.03, 16, 16]} />
+        <meshBasicMaterial color={isActive ? "#FF3B30" : "#68cfeb"} />
+      </mesh>
+
+      <Html distanceFactor={3.5} zIndexRange={[100, 0]}>
         <div
+          onClick={onClick}
           style={{
-            backgroundColor: isActive ? "#1f4b5d" : "#ffffff",
-            border: isActive
-              ? "3px solid #68cfeb"
-              : "2px solid rgba(31,75,93,0.3)",
-            borderRadius: "50%",
-            width: isActive ? "32px" : "20px",
-            height: isActive ? "32px" : "20px",
-            boxShadow: isActive
-              ? "0 0 20px #68cfeb, 0 4px 12px rgba(0,0,0,0.3)"
-              : "0 2px 8px rgba(0,0,0,0.2)",
-            transition: "all 0.3s ease",
+            transform: "translate(-50%, -100%)",
+            cursor: "pointer",
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
-            overflow: "hidden",
+            gap: "2px",
+            transition: "all 0.3s ease",
+            transformOrigin: "bottom center",
           }}
         >
-          <img src={flagUrl} alt={`${label} flag`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          {flagUrl ? (
+            <img
+              src={flagUrl}
+              alt={label}
+              style={{
+                width: isActive ? "26px" : "18px",
+                height: isActive ? "26px" : "18px",
+                borderRadius: "50%",
+                objectFit: "cover",
+                border: isActive ? "2px solid #ffffff" : "1.5px solid rgba(255,255,255,0.8)",
+                boxShadow: isActive ? "0 0 12px rgba(255,59,48,0.8)" : "0 2px 6px rgba(0,0,0,0.3)",
+                transition: "all 0.3s ease",
+              }}
+            />
+          ) : (
+            <span style={{ fontSize: isActive ? "1.5rem" : "1rem" }}>{flag}</span>
+          )}
+
+          {isActive && (
+            <div
+              style={{
+                background: "rgba(27, 40, 56, 0.9)",
+                color: "#ffffff",
+                padding: "2px 8px",
+                borderRadius: "12px",
+                fontSize: "0.65rem",
+                fontWeight: 700,
+                whiteSpace: "nowrap",
+                border: "1px solid rgba(104, 207, 235, 0.5)",
+                boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
+                display: "flex",
+                alignItems: "center",
+                gap: "4px",
+              }}
+            >
+              <span>{flag}</span> {label}
+            </div>
+          )}
         </div>
-        {isActive && (
-          <div
-            style={{
-              marginTop: "6px",
-              background: "rgba(15, 23, 42, 0.9)",
-              color: "#ffffff",
-              padding: "4px 10px",
-              fontWeight: 700,
-              borderRadius: "999px",
-              boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
-              fontSize: "0.8rem",
-              whiteSpace: "nowrap",
-              border: "1px solid rgba(104, 207, 235, 0.4)",
-            }}
-          >
-            {flag} {label}
-          </div>
-        )}
-      </div>
-    </Html>
+      </Html>
+    </group>
   );
 }
 
 function CameraController({ activeIdx }: { activeIdx: number }) {
   const { camera } = useThree();
+  const targetPosRef = React.useRef(new THREE.Vector3(0, 0, 3.5));
 
-  useFrame(() => {
+  React.useEffect(() => {
     const activeCluster = CLUSTERS[activeIdx];
-    const { x, y, z } = getCoordinatesFromLatLng(
+    const coords = getCoordinatesFromLatLng(
       activeCluster.location[0],
       activeCluster.location[1],
-      EARTH_RADIUS
+      3.2
     );
+    targetPosRef.current.set(coords.x, coords.y, coords.z);
+  }, [activeIdx]);
 
-    const targetPos = new THREE.Vector3(x, y, z)
-      .normalize()
-      .multiplyScalar(3.0);
-
-    camera.position.lerp(targetPos, 0.05);
+  useFrame(() => {
+    camera.position.lerp(targetPosRef.current, 0.05);
     camera.lookAt(0, 0, 0);
   });
 
@@ -358,7 +345,7 @@ export default function GlobeSection() {
           letterSpacing: "-0.03em",
         }}
       >
-        Cluster Negara <span style={{ background: "linear-gradient(135deg, var(--lp-ocean-blue), var(--lp-aqua))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>AETHERA SILO UISI 2026</span>
+        NEGARA-NEGARA <span style={{ background: "linear-gradient(135deg, var(--lp-ocean-blue), var(--lp-aqua))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>AETHERA SILO UISI 2026</span>
       </h2>
       <p
         style={{
@@ -371,7 +358,7 @@ export default function GlobeSection() {
           marginRight: "auto",
         }}
       >
-        16 Kelompok Berdasarkan Negara dari 5 Benua di Seluruh Dunia
+        16 Negara dari 5 Benua di Seluruh Dunia
       </p>
 
       <div className={styles.globeGrid}>
@@ -444,7 +431,7 @@ export default function GlobeSection() {
                 boxShadow: "0 4px 15px rgba(31,75,93,0.3)",
               }}
             >
-              ‹ Kelompok Sebelum
+              ‹ Negara Sebelumnya
             </button>
             <button
               onClick={handleNext}
@@ -461,7 +448,7 @@ export default function GlobeSection() {
                 boxShadow: "0 4px 15px rgba(31,75,93,0.3)",
               }}
             >
-              Kelompok Berikut ›
+              Negara Selanjutnya ›
             </button>
           </div>
         </div>
@@ -497,7 +484,7 @@ export default function GlobeSection() {
                   letterSpacing: "0.08em",
                 }}
               >
-                BENUA {activeCluster.continent.toUpperCase()} · KELOMPOK {activeCluster.no}
+                BENUA {activeCluster.continent.toUpperCase()}
               </span>
               <span
                 style={{
@@ -568,7 +555,7 @@ export default function GlobeSection() {
                   boxShadow: "0 4px 15px rgba(31,75,93,0.3)",
                 }}
               >
-                Lihat Kelompok →
+                Lihat Negara →
               </Link>
             </div>
           </div>

@@ -127,7 +127,7 @@ export default function Navbar() {
                 <BookOpen size={16} className={styles.dropdownIcon} /> Penugasan &amp; Guidebook
               </Link>
               <Link href="/kelompok" className={styles.dropdownItem} onClick={() => setJelajahDropdownOpen(false)}>
-                <Globe size={16} className={styles.dropdownIcon} /> Cluster Kelompok
+                <Globe size={16} className={styles.dropdownIcon} /> Cluster Negara
               </Link>
             </div>
           </div>
@@ -209,7 +209,7 @@ export default function Navbar() {
                   className={`${styles.mobileSubLink} ${isActive("/kelompok") ? styles.mobileActiveSubLink : ""}`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <Globe size={17} style={{ color: "var(--lp-aqua)" }} /> Cluster Kelompok
+                  <Globe size={17} style={{ color: "var(--lp-aqua)" }} /> Cluster Negara
                 </Link>
               </div>
             )}

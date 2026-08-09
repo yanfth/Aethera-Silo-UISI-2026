@@ -26,6 +26,7 @@ interface Member {
   role: string;
   divisionId: string;
   divisionName: string;
+  subGroup?: string;
   image?: string;
 }
 
@@ -36,6 +37,7 @@ interface Division {
   icon: React.ReactNode;
   description: string;
   koordinator: string;
+  totalMembersCount?: number;
 }
 
 const DIVISIONS: Division[] = [
@@ -101,7 +103,8 @@ const DIVISIONS: Division[] = [
     shortName: "IC",
     icon: <ShieldAlert size={16} />,
     description: "Divisi Initiator & Control (IC) bertugas menjaga ketertiban, kedisiplinan, serta mengarahkan alur kegiatan AETHERA SILO UISI 2026.",
-    koordinator: "Tim IC"
+    koordinator: "Tim IC",
+    totalMembersCount: 10
   }
 ];
 
@@ -114,20 +117,20 @@ const MEMBERS: Member[] = [
   { id: "5", name: "Putri Fara Diba", prodi: "Ekonomi Syariah", role: "Bendahara 2", divisionId: "bph", divisionName: "BPH", image: "/putri_fara.webp" },
 
   // SC & Acara
-  { id: "6", name: "Jefranda Dinata", prodi: "Ekonomi Syariah", role: "Koordinator SC & Acara", divisionId: "acara", divisionName: "SC & Acara", image: "/jefranda_dinata.webp" },
-  { id: "7", name: "Khairun Niza", prodi: "Manajemen", role: "Wakil Koordinator SC & Acara", divisionId: "acara", divisionName: "SC & Acara", image: "/khairun_niza.webp" },
-  { id: "8", name: "Melly Mutiara", prodi: "Manajemen", role: "Anggota SC", divisionId: "acara", divisionName: "SC & Acara", image: "/melly_mutiara.webp" },
-  { id: "9", name: "Muhaemit", prodi: "Manajemen", role: "Anggota SC", divisionId: "acara", divisionName: "SC & Acara", image: "/muhaemit.webp" },
-  { id: "10", name: "Novi Risma Ameliasari", prodi: "Teknik Kimia", role: "Anggota SC", divisionId: "acara", divisionName: "SC & Acara", image: "/novi_risma.webp" },
-  { id: "11", name: "Regitha Eka Purwananditha Candraningtyas", prodi: "Sistem Informasi", role: "Anggota SC", divisionId: "acara", divisionName: "SC & Acara", image: "/regitha_eka.webp" },
-  { id: "12", name: "Sneha Naafi' Amrulloh", prodi: "Teknik Logistik", role: "Anggota SC", divisionId: "acara", divisionName: "SC & Acara", image: "/sneha_naafi.webp" },
-  { id: "13", name: "Valentino Zaky", prodi: "Manajemen", role: "Anggota SC", divisionId: "acara", divisionName: "SC & Acara", image: "/valentino_zaky.webp" },
-  { id: "14", name: "Chelsea Aurelia Manihuruk", prodi: "Akuntansi", role: "Anggota Acara", divisionId: "acara", divisionName: "SC & Acara", image: "/chelsea_aurelia.webp" },
-  { id: "15", name: "Nisa Dzakiatul Fikriyah", prodi: "Akuntansi", role: "Anggota Acara", divisionId: "acara", divisionName: "SC & Acara", image: "/nisa_dzakiatul.webp" },
-  { id: "16", name: "Rendy Alfiansyah", prodi: "Informatika", role: "Anggota Acara", divisionId: "acara", divisionName: "SC & Acara", image: "/rendy_alfiansyah.webp" },
-  { id: "17", name: "Jevamya Chelcie Wicaksana", prodi: "Teknik Kimia", role: "Anggota Acara", divisionId: "acara", divisionName: "SC & Acara", image: "/jevamya_chelcie.webp" },
-  { id: "18", name: "Muhammad Hanif Raja I", prodi: "Manajemen", role: "Anggota Acara", divisionId: "acara", divisionName: "SC & Acara", image: "/muhammad_hanif.webp" },
-  { id: "19", name: "Dhea Safira Rahmawati", prodi: "Teknologi Industri Pertanian", role: "Anggota Acara", divisionId: "acara", divisionName: "SC & Acara", image: "/dhea_safira.webp" },
+  { id: "6", name: "Jefranda Dinata", prodi: "Ekonomi Syariah", role: "Koordinator SC & Acara", divisionId: "acara", divisionName: "SC & Acara", subGroup: "Steering Committee (SC)", image: "/jefranda_dinata.webp" },
+  { id: "7", name: "Khairun Niza", prodi: "Manajemen", role: "Wakil Koordinator SC & Acara", divisionId: "acara", divisionName: "SC & Acara", subGroup: "Steering Committee (SC)", image: "/khairun_niza.webp" },
+  { id: "8", name: "Melly Mutiara", prodi: "Manajemen", role: "Anggota SC", divisionId: "acara", divisionName: "SC", subGroup: "Steering Committee (SC)", image: "/melly_mutiara.webp" },
+  { id: "9", name: "Muhaemit", prodi: "Manajemen", role: "Anggota SC", divisionId: "acara", divisionName: "SC", subGroup: "Steering Committee (SC)", image: "/muhaemit.webp" },
+  { id: "10", name: "Novi Risma Ameliasari", prodi: "Teknik Kimia", role: "Anggota SC", divisionId: "acara", divisionName: "SC", subGroup: "Steering Committee (SC)", image: "/novi_risma.webp" },
+  { id: "11", name: "Regitha Eka Purwananditha Candraningtyas", prodi: "Sistem Informasi", role: "Anggota SC", divisionId: "acara", divisionName: "SC", subGroup: "Steering Committee (SC)", image: "/regitha_eka.webp" },
+  { id: "12", name: "Sneha Naafi' Amrulloh", prodi: "Teknik Logistik", role: "Anggota SC", divisionId: "acara", divisionName: "SC", subGroup: "Steering Committee (SC)", image: "/sneha_naafi.webp" },
+  { id: "13", name: "Valentino Zaky", prodi: "Manajemen", role: "Anggota SC", divisionId: "acara", divisionName: "SC", subGroup: "Steering Committee (SC)", image: "/valentino_zaky.webp" },
+  { id: "14", name: "Chelsea Aurelia Manihuruk", prodi: "Akuntansi", role: "Anggota Acara", divisionId: "acara", divisionName: "Acara", subGroup: "Tim Acara", image: "/chelsea_aurelia.webp" },
+  { id: "15", name: "Nisa Dzakiatul Fikriyah", prodi: "Akuntansi", role: "Anggota Acara", divisionId: "acara", divisionName: "Acara", subGroup: "Tim Acara", image: "/nisa_dzakiatul.webp" },
+  { id: "16", name: "Rendy Alfiansyah", prodi: "Informatika", role: "Anggota Acara", divisionId: "acara", divisionName: "Acara", subGroup: "Tim Acara", image: "/rendy_alfiansyah.webp" },
+  { id: "17", name: "Jevamya Chelcie Wicaksana", prodi: "Teknik Kimia", role: "Anggota Acara", divisionId: "acara", divisionName: "Acara", subGroup: "Tim Acara", image: "/jevamya_chelcie.webp" },
+  { id: "18", name: "Muhammad Hanif Raja I", prodi: "Manajemen", role: "Anggota Acara", divisionId: "acara", divisionName: "Acara", subGroup: "Tim Acara", image: "/muhammad_hanif.webp" },
+  { id: "19", name: "Dhea Safira Rahmawati", prodi: "Teknologi Industri Pertanian", role: "Anggota Acara", divisionId: "acara", divisionName: "Acara", subGroup: "Tim Acara", image: "/dhea_safira.webp" },
 
   // PDD
   { id: "30", name: "Alfian Khusnul Fatoni", prodi: "Informatika", role: "Koordinator PDD", divisionId: "pdd", divisionName: "PDD", image: "/alfian_fatoni.webp" },
@@ -234,6 +237,13 @@ export default function AnggotaDivisi() {
     return DIVISIONS.find((d) => d.id === selectedDivisionId) || null;
   }, [selectedDivisionId]);
 
+  const totalAllMembers = useMemo(() => {
+    return DIVISIONS.reduce((acc, div) => {
+      const actual = MEMBERS.filter((m) => m.divisionId === div.id).length;
+      return acc + (div.totalMembersCount ?? actual);
+    }, 0);
+  }, []);
+
   const filteredMembers = useMemo(() => {
     return MEMBERS.filter((m) => {
       const matchDivision =
@@ -270,11 +280,12 @@ export default function AnggotaDivisi() {
             onClick={() => setSelectedDivisionId("all")}
           >
             <Users size={16} /> Semua Divisi
-            <span className={styles.badgeCount}>{MEMBERS.length}</span>
+            <span className={styles.badgeCount}>{totalAllMembers}</span>
           </button>
 
           {DIVISIONS.map((div) => {
-            const count = MEMBERS.filter((m) => m.divisionId === div.id).length;
+            const actualCount = MEMBERS.filter((m) => m.divisionId === div.id).length;
+            const displayCount = div.totalMembersCount ?? actualCount;
             return (
               <button
                 key={div.id}
@@ -283,7 +294,7 @@ export default function AnggotaDivisi() {
                 onClick={() => setSelectedDivisionId(div.id)}
               >
                 {div.icon} {div.shortName}
-                <span className={styles.badgeCount}>{count}</span>
+                <span className={styles.badgeCount}>{displayCount}</span>
               </button>
             );
           })}
@@ -332,7 +343,9 @@ export default function AnggotaDivisi() {
           ))
         ) : (
           <div className={styles.emptySearch}>
-            Tidak ditemukan panitia dengan kata kunci &ldquo;{searchQuery}&rdquo;.
+            {searchQuery
+              ? `Tidak ditemukan panitia dengan kata kunci "${searchQuery}".`
+              : "Data anggota untuk divisi ini belum dipublikasikan."}
           </div>
         )}
       </div>
