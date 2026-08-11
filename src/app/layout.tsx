@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
+    <html lang="id" data-scroll-behavior="smooth">
       <head>
         <link rel="icon" href="/logo_aethera.png?v=99" type="image/png" sizes="any" />
         <link rel="shortcut icon" href="/logo_aethera.png?v=99" type="image/png" />

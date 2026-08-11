@@ -23,6 +23,9 @@ import {
   Image as ImageIcon, 
   Palette, 
   FileText, 
+  Book,
+  Download,
+  Folder,
   Music, 
   Megaphone, 
   Shirt, 
@@ -322,35 +325,22 @@ export default function Home() {
         </div>
 
         <div>
-          <div className={styles.footerColTitle}>Menu</div>
+          <div className={styles.footerColTitle}>Tautan Cepat</div>
           <div className={styles.footerLinks}>
-            <Link href="#about">Tentang</Link>
-            <Link href="#sambutan">Sambutan</Link>
-            <Link href="#logo">Filosofi Logo</Link>
-            <Link href="#dokumentasi">Dokumentasi</Link>
-            <Link href="#video">Video</Link>
+            <Link href="#about">Tentang Kami</Link>
             <Link href="#panitia">Daftar Panitia</Link>
             <Link href="#kebutuhan-acara">Kebutuhan Acara</Link>
             <Link href="#kelompok">Kelompok</Link>
-            <Link href="#lokasi">Lokasi Kampus</Link>
           </div>
         </div>
 
         <div>
-          <div className={styles.footerColTitle}>Unduhan</div>
+          <div className={styles.footerColTitle}>Layanan &amp; Kontak</div>
           <div className={styles.footerLinks}>
-            <Link href="#">Twibbon</Link>
-            <Link href="#">Rundown</Link>
-            <Link href="#">Nametag</Link>
-          </div>
-        </div>
-
-        <div>
-          <div className={styles.footerColTitle}>Kontak</div>
-          <div className={styles.footerLinks}>
-            <Link href="#">Instagram</Link>
-            <Link href="#">Line</Link>
-            <Link href="#">WhatsApp</Link>
+            <Link href="#">Twibbon &amp; Panduan</Link>
+            <Link href="#">Rundown Acara</Link>
+            <Link href="#">WhatsApp Hubungi Kami</Link>
+            <Link href="#">Instagram Resmi</Link>
           </div>
         </div>
 

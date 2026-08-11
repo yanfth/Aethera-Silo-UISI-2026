@@ -37,12 +37,7 @@ export default function Navbar() {
         >
           Beranda
         </Link>
-        <Link
-          href="/merch"
-          className={`${styles.navLink} ${isActive("/merch") ? styles.activeNavLink : ""}`}
-        >
-          Merchandise
-        </Link>
+
 
         {/* Dropdown Menu Jelajah */}
         <div className={styles.dropdownWrapper}>

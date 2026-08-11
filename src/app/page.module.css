@@ -573,7 +573,7 @@
   background: var(--lp-dark);
   color: var(--lp-text-light);
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr 1.5fr;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
   gap: 2rem;
   border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
   margin-top: 2rem;
