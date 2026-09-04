@@ -71,11 +71,12 @@ export default function Home() {
           <div className={styles.heroVisual} data-aos="fade-left">
             <div className={styles.heroGeoBg}></div>
             <div className={styles.heroImageContainer}>
-              <Image
+              <img
                 src="/hero_rocket.png"
                 alt="Aethera Rocket Illustration"
                 width={480}
                 height={480}
+                style={{ width: "100%", height: "auto" }}
               />
             </div>
           </div>
@@ -305,7 +306,7 @@ export default function Home() {
       <footer className={styles.footer}>
         <div>
           <div className={styles.footerLogo} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <Image src="/logo_aethera.png" alt="Aethera Logo" width={26} height={26} style={{ height: "26px", width: "auto" }} />
+            <img src="/logo_aethera.png?v=4" alt="Aethera Logo" width={26} height={26} style={{ height: "26px", width: "auto" }} />
             <span>AETHERA SILO UISI 2026</span>
           </div>
           <p className={styles.footerDesc}>

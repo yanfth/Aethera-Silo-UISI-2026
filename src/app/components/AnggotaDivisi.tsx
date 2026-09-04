@@ -26,6 +26,7 @@ interface Member {
   role: string;
   divisionId: string;
   divisionName: string;
+  image?: string;
 }
 
 interface Division {
@@ -98,15 +99,15 @@ const DIVISIONS: Division[] = [
 
 const MEMBERS: Member[] = [
   // BPH
-  { id: "1", name: "Nabil Qudsi Mas’ud", prodi: "Ekonomi Syariah", role: "Ketua Pelaksana", divisionId: "bph", divisionName: "BPH" },
-  { id: "2", name: "M. Rosyid Ridlo", prodi: "Teknik Logistik", role: "Sekretaris 1", divisionId: "bph", divisionName: "BPH" },
-  { id: "3", name: "Hillyatut Taqiya", prodi: "Ekonomi Syariah", role: "Sekretaris 2", divisionId: "bph", divisionName: "BPH" },
-  { id: "4", name: "Zahra Naila Supriyono Putri", prodi: "Akuntansi", role: "Bendahara 1", divisionId: "bph", divisionName: "BPH" },
-  { id: "5", name: "Putri Fara Diba", prodi: "Ekonomi Syariah", role: "Bendahara 2", divisionId: "bph", divisionName: "BPH" },
+  { id: "1", name: "Nabil Qudsi Mas’ud", prodi: "Ekonomi Syariah", role: "Ketua Pelaksana", divisionId: "bph", divisionName: "BPH", image: "/nabil_qudsi.jpg" },
+  { id: "2", name: "M. Rosyid Ridlo", prodi: "Teknik Logistik", role: "Sekretaris 1", divisionId: "bph", divisionName: "BPH", image: "/rosyid_ridlo.jpg" },
+  { id: "3", name: "Hillyatut Taqiya", prodi: "Ekonomi Syariah", role: "Sekretaris 2", divisionId: "bph", divisionName: "BPH", image: "/hillyatut_taqiya.jpg" },
+  { id: "4", name: "Zahra Naila Supriyono Putri", prodi: "Akuntansi", role: "Bendahara 1", divisionId: "bph", divisionName: "BPH", image: "/zahra_naila.jpg" },
+  { id: "5", name: "Putri Fara Diba", prodi: "Ekonomi Syariah", role: "Bendahara 2", divisionId: "bph", divisionName: "BPH", image: "/putri_fara.jpg" },
 
   // SC & Acara
-  { id: "6", name: "Jefranda Dinata", prodi: "Ekonomi Syariah", role: "Koordinator SC & Acara", divisionId: "acara", divisionName: "SC & Acara" },
-  { id: "7", name: "Khairun Niza", prodi: "Manajemen", role: "Wakil Koordinator SC & Acara", divisionId: "acara", divisionName: "SC & Acara" },
+  { id: "6", name: "Jefranda Dinata", prodi: "Ekonomi Syariah", role: "Koordinator SC & Acara", divisionId: "acara", divisionName: "SC & Acara", image: "/jefranda_dinata.jpg" },
+  { id: "7", name: "Khairun Niza", prodi: "Manajemen", role: "Wakil Koordinator SC & Acara", divisionId: "acara", divisionName: "SC & Acara", image: "/khairun_niza.jpg" },
   { id: "8", name: "Melly Mutiara", prodi: "Manajemen", role: "Anggota SC", divisionId: "acara", divisionName: "SC & Acara" },
   { id: "9", name: "Muhaemit", prodi: "Manajemen", role: "Anggota SC", divisionId: "acara", divisionName: "SC & Acara" },
   { id: "10", name: "Novi Risma Ameliasari", prodi: "Teknik Kimia", role: "Anggota SC", divisionId: "acara", divisionName: "SC & Acara" },
@@ -121,7 +122,7 @@ const MEMBERS: Member[] = [
   { id: "19", name: "Dhea Safira Rahmawati", prodi: "Teknologi Industri Pertanian", role: "Anggota Acara", divisionId: "acara", divisionName: "SC & Acara" },
 
   // PDD
-  { id: "30", name: "Alfian Khusnul Fatoni", prodi: "Informatika", role: "Koordinator PDD", divisionId: "pdd", divisionName: "PDD" },
+  { id: "30", name: "Alfian Khusnul Fatoni", prodi: "Informatika", role: "Koordinator PDD", divisionId: "pdd", divisionName: "PDD", image: "/alfian_fatoni.jpg" },
   { id: "31", name: "Wanda Adelya Pratiwi", prodi: "Akuntansi", role: "Anggota PDD", divisionId: "pdd", divisionName: "PDD" },
   { id: "32", name: "Salwa Mufidah Hayati", prodi: "Eksyar", role: "Anggota PDD", divisionId: "pdd", divisionName: "PDD" },
   { id: "33", name: "Mohammad Fathir Ubaidillah Al Azubi", prodi: "Manajemen", role: "Anggota PDD", divisionId: "pdd", divisionName: "PDD" },
@@ -131,7 +132,7 @@ const MEMBERS: Member[] = [
   { id: "37", name: "Lelly Michela Aprilindo", prodi: "DKV", role: "Anggota PDD", divisionId: "pdd", divisionName: "PDD" },
 
   // Logtrans
-  { id: "38", name: "Muhammad Faidza Airlangga", prodi: "Informatika", role: "Koordinator Logtrans", divisionId: "logtrans", divisionName: "Logtrans" },
+  { id: "38", name: "Muhammad Faidza Airlangga", prodi: "Informatika", role: "Koordinator Logtrans", divisionId: "logtrans", divisionName: "Logtrans", image: "/faidza_airlangga.jpg" },
   { id: "39", name: "Agil Boy Ahmada", prodi: "DKV", role: "Anggota Logtrans", divisionId: "logtrans", divisionName: "Logtrans" },
   { id: "40", name: "Galan Gantari", prodi: "Ekonomi Syariah", role: "Anggota Logtrans", divisionId: "logtrans", divisionName: "Logtrans" },
   { id: "41", name: "M. Abdillah Malik", prodi: "Ekonomi Syariah", role: "Anggota Logtrans", divisionId: "logtrans", divisionName: "Logtrans" },
@@ -151,7 +152,7 @@ const MEMBERS: Member[] = [
   { id: "55", name: "Rio Al Kaseno", prodi: "Informatika", role: "Anggota Logtrans", divisionId: "logtrans", divisionName: "Logtrans" },
 
   // Medis
-  { id: "56", name: "Callysta Goesti Annayla Sumarlin", prodi: "Akuntansi", role: "Kepala Divisi Medis", divisionId: "medis", divisionName: "Medis" },
+  { id: "56", name: "Callysta Goesti Annayla Sumarlin", prodi: "Akuntansi", role: "Kepala Divisi Medis", divisionId: "medis", divisionName: "Medis", image: "/callysta_goesti.jpg" },
   { id: "57", name: "Faza Sazkiyah", prodi: "Akuntansi", role: "Anggota Medis", divisionId: "medis", divisionName: "Medis" },
   { id: "58", name: "Reynata Hartani", prodi: "Teknik Kimia", role: "Anggota Medis", divisionId: "medis", divisionName: "Medis" },
   { id: "59", name: "Raditya Fahrezi Putra Ahsan", prodi: "Informatika", role: "Anggota Medis", divisionId: "medis", divisionName: "Medis" },
@@ -169,8 +170,8 @@ const MEMBERS: Member[] = [
   { id: "71", name: "Amirul Hakim", prodi: "Teknik Kimia", role: "Anggota Medis", divisionId: "medis", divisionName: "Medis" },
 
   // Mentor Kelompok
-  { id: "72", name: "Muhammad Ivandy Rohman", prodi: "Informatika", role: "Koordinator Mentor kelompok", divisionId: "mentor", divisionName: "Mentor" },
-  { id: "73", name: "Dealova Fransisca Ferlianti", prodi: "Teknik Logistik", role: "Wakil Koordinator Mentor kelompok", divisionId: "mentor", divisionName: "Mentor" },
+  { id: "72", name: "Muhammad Ivandy Rohman", prodi: "Informatika", role: "Koordinator Mentor kelompok", divisionId: "mentor", divisionName: "Mentor", image: "/ivandy_rohman.jpg" },
+  { id: "73", name: "Dealova Fransisca Ferlianti", prodi: "Teknik Logistik", role: "Wakil Koordinator Mentor kelompok", divisionId: "mentor", divisionName: "Mentor", image: "/dealova_fransisca.jpg" },
   { id: "74", name: "Achmad Ricky Hariono", prodi: "Informatika", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" },
   { id: "75", name: "Isnanda Saputra", prodi: "Teknologi Industri Pertanian", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" },
   { id: "76", name: "In’am Faadilah Ramadhani Tavisyach", prodi: "Sistem Informasi", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" },
@@ -324,8 +325,12 @@ export default function AnggotaDivisi() {
         {displayedMembers.length > 0 ? (
           displayedMembers.map((member) => (
             <div key={member.id} className={styles.memberCard}>
-              <div className={styles.memberIconBox}>
-                <User size={18} />
+              <div className={styles.memberIconBox} style={member.image ? { padding: 0, overflow: 'hidden', border: 'none' } : {}}>
+                {member.image ? (
+                  <img src={member.image} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+                ) : (
+                  <User size={18} />
+                )}
               </div>
               <div className={styles.memberInfo}>
                 <h5 className={styles.memberName}>{member.name}</h5>
