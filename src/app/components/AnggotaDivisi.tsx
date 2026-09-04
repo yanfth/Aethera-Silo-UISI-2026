@@ -123,8 +123,8 @@ const MEMBERS: Member[] = [
 
   // PDD
   { id: "30", name: "Alfian Khusnul Fatoni", prodi: "Informatika", role: "Koordinator PDD", divisionId: "pdd", divisionName: "PDD", image: "/alfian_fatoni.jpg" },
-  { id: "31", name: "Wanda Adelya Pratiwi", prodi: "Akuntansi", role: "Anggota PDD", divisionId: "pdd", divisionName: "PDD" , image: "/fotoAnggota/PDD/Wanda Adelya Pratiwi.JPG" },
-  { id: "32", name: "Salwa Mufidah Hayati", prodi: "Eksyar", role: "Anggota PDD", divisionId: "pdd", divisionName: "PDD" , image: "/fotoAnggota/PDD/Salwa Mufidah Hayati.JPG" },
+  { id: "31", name: "Salwa Mufidah Hayati", prodi: "Eksyar", role: "Anggota PDD", divisionId: "pdd", divisionName: "PDD" , image: "/fotoAnggota/PDD/Salwa Mufidah Hayati.JPG" },
+  { id: "32", name: "Wanda Adelya Pratiwi", prodi: "Akuntansi", role: "Anggota PDD", divisionId: "pdd", divisionName: "PDD" , image: "/fotoAnggota/PDD/Wanda Adelya Pratiwi.JPG" },
   { id: "33", name: "Mohammad Fathir Ubaidillah Al Azubi", prodi: "Manajemen", role: "Anggota PDD", divisionId: "pdd", divisionName: "PDD" , image: "/fotoAnggota/PDD/Mohammad Fathir Ubaidillah Al Azubi.JPG" },
   { id: "34", name: "Athallah Yahya Armadhanu", prodi: "DKV", role: "Anggota PDD", divisionId: "pdd", divisionName: "PDD" , image: "/fotoAnggota/PDD/Athallah Yahya Armadhanu.JPG" },
   { id: "35", name: "Encik Thuffayl Izzatul Syamsi", prodi: "DKV", role: "Anggota PDD", divisionId: "pdd", divisionName: "PDD" , image: "/fotoAnggota/PDD/Encik Thuffayl Izzatul Syamsi.JPG" },
