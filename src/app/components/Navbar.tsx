@@ -15,7 +15,8 @@ import {
   Sparkles, 
   Users, 
   BookOpen, 
-  Globe 
+  Globe,
+  LogIn 
 } from "lucide-react";
 
 export default function Navbar() {
@@ -136,6 +137,15 @@ export default function Navbar() {
               </Link>
             </div>
           </div>
+
+          {/* Tombol Login Header Paling Kanan */}
+          <Link
+            href="/login"
+            className={`${styles.loginBtn} ${isActive("/login") ? styles.activeLoginBtn : ""}`}
+          >
+            <LogIn size={16} />
+            <span>Masuk</span>
+          </Link>
         </div>
 
         {/* Mobile / Tablet Toggle Button (<= 1024px) */}
@@ -218,6 +228,18 @@ export default function Navbar() {
                 </Link>
               </div>
             )}
+          </div>
+
+          {/* Tombol Login Mobile */}
+          <div className={styles.mobileLoginWrapper}>
+            <Link
+              href="/login"
+              className={styles.mobileLoginBtn}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <LogIn size={19} />
+              <span>Masuk ke Akun</span>
+            </Link>
           </div>
         </div>
       </div>
