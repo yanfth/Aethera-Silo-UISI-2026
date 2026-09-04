@@ -107,9 +107,9 @@ export default function Home() {
             </div>
             <div className={styles.aboutImage}>
               <img
-                src="/portfolio_phones.png"
-                alt="AETHERA SILO UISI 2026 Preview"
-                style={{ width: "100%", height: "auto", borderRadius: "1.5rem" }}
+                src="/logo_aethera_title.png"
+                alt="AETHERA SILO UISI 2026 Logo"
+                style={{ width: "80%", height: "auto", objectFit: "contain", borderRadius: "1.5rem" }}
               />
             </div>
           </div>
