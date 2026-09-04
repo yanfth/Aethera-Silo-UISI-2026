@@ -61,6 +61,31 @@ export default function GuidebookFlipbook({ pdfUrl = "/guidebook.pdf" }: Guidebo
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const flipBookRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const [viewportHeight, setViewportHeight] = useState<number>(600);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const handleResize = () => setIsMobile(window.innerWidth <= 768);
+      handleResize();
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (viewportRef.current) {
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          if (entry.contentRect.height > 0) {
+            setViewportHeight(entry.contentRect.height);
+          }
+        }
+      });
+      resizeObserver.observe(viewportRef.current);
+      return () => resizeObserver.disconnect();
+    }
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -205,10 +230,12 @@ export default function GuidebookFlipbook({ pdfUrl = "/guidebook.pdf" }: Guidebo
       return `scale(${zoomLevel})`;
     }
     let translateX = 0;
-    if (currentPage === 0) {
-      translateX = -210;
-    } else if (currentPage >= totalPages - 1 && totalPages > 0) {
-      translateX = 210;
+    if (!isMobile) {
+      if (currentPage === 0) {
+        translateX = -210;
+      } else if (currentPage >= totalPages - 1 && totalPages > 0) {
+        translateX = 210;
+      }
     }
     return `scale(${zoomLevel}) translateX(${translateX}px)`;
   };
@@ -246,11 +273,13 @@ export default function GuidebookFlipbook({ pdfUrl = "/guidebook.pdf" }: Guidebo
         <>
           {/* Flipbook Container */}
           <div
+            ref={viewportRef}
             className={styles.bookViewport}
             style={{
               transform: getViewportTransform(),
-              transition: "transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
+              transition: "transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), margin-bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
               transformOrigin: "top center",
+              marginBottom: zoomLevel > 1 ? `${viewportHeight * (zoomLevel - 1)}px` : '0px'
             }}
           >
             {/* @ts-ignore */}
@@ -317,7 +346,14 @@ export default function GuidebookFlipbook({ pdfUrl = "/guidebook.pdf" }: Guidebo
               >
                 <ZoomOut size={16} />
               </button>
-              <span className={styles.zoomBadge}>{Math.round(zoomLevel * 100)}%</span>
+              <span 
+                className={styles.zoomBadge}
+                onClick={() => setZoomLevel(1)}
+                title="Klik untuk kembali ke ukuran asli"
+                style={{ cursor: "pointer" }}
+              >
+                {Math.round(zoomLevel * 100)}%
+              </span>
               <button
                 className={styles.toolBtnIcon}
                 onClick={handleZoomIn}

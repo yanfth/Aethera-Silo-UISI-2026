@@ -93,23 +93,6 @@ export default function SponsorSection() {
       <div style={{ maxWidth: "1150px", margin: "0 auto" }}>
         {/* Section Header */}
         <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-          <div
-            style={{
-              display: "inline-block",
-              background: "rgba(31,75,93,0.08)",
-              color: "#1f4b5d",
-              padding: "0.35rem 0.95rem",
-              borderRadius: "999px",
-              fontSize: "0.8rem",
-              fontWeight: 800,
-              marginBottom: "0.85rem",
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-            }}
-          >
-            Sponsorship & Media Partner
-          </div>
-
           <h2
             style={{
               fontSize: "clamp(1.85rem, 4vw, 2.75rem)",
