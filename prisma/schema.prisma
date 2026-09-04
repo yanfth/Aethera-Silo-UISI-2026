@@ -61,6 +61,10 @@ model User {
   attendancesAsMaba   Attendance[]  @relation("AttendanceMaba")
   attendancesScanned  Attendance[]  @relation("AttendanceScanner")
 
+  assignmentsCreated  Assignment[]  @relation("AssignmentCreator")
+  submissionsAsMaba   Submission[]  @relation("SubmissionMaba")
+  submissionsReviewed Submission[]  @relation("SubmissionReviewer")
+
   @@index([mGroupsId], map: "idx_users_m_groups_id")
   @@map("m_users")
 }
@@ -103,4 +107,52 @@ model Attendance {
   @@index([groupsId], map: "idx_attendances_groups_id")
   @@index([scannedBy], map: "idx_attendances_scanned_by")
   @@map("t_attendances")
+}
+
+// 6. Tabel: m_assignments (Daftar Tugas yang dibuat oleh Admin/Panitia)
+model Assignment {
+  id            Int          @id @default(autoincrement())
+  title         String       @db.VarChar(100)
+  description   String?      @db.Text
+  attachmentUrl String?      @map("attachment_url") @db.Text
+  dueDate       DateTime     @map("due_date") @db.Timestamp(6)
+  createdBy     Int?         @map("created_by")
+  createdAt     DateTime     @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt     DateTime     @default(now()) @updatedAt @map("updated_at") @db.Timestamp(6)
+  deletedAt     DateTime?    @map("deleted_at") @db.Timestamp(6)
+
+  creator       User?        @relation("AssignmentCreator", fields: [createdBy], references: [id], onDelete: SetNull)
+  submissions   Submission[]
+
+  @@index([createdBy], map: "idx_assignments_created_by")
+  @@map("m_assignments")
+}
+
+// 7. Tabel: t_submissions (Data Pengumpulan Tugas oleh Maba & Review Mentor/Admin)
+model Submission {
+  id           Int        @id @default(autoincrement())
+  assignmentId Int        @map("assignment_id")
+  mabaId       Int        @map("maba_id")
+  fileUrl      String     @map("file_url") @db.Text
+  notes        String?    @db.Text
+  submittedAt  DateTime?  @default(now()) @map("submitted_at") @db.Timestamp(6)
+  status       String     @default("submitted") @db.VarChar(45) // 'submitted', 'late', 'graded', 'resubmit'
+  score        Decimal?   @db.Decimal(5, 2)
+  feedback     String?    @db.Text
+  reviewedBy   Int?       @map("reviewed_by")
+  reviewedAt   DateTime?  @map("reviewed_at") @db.Timestamp(6)
+  createdAt    DateTime   @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt    DateTime   @default(now()) @updatedAt @map("updated_at") @db.Timestamp(6)
+  deletedAt    DateTime?  @map("deleted_at") @db.Timestamp(6)
+
+  assignment   Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  maba         User       @relation("SubmissionMaba", fields: [mabaId], references: [id], onDelete: Cascade)
+  reviewer     User?      @relation("SubmissionReviewer", fields: [reviewedBy], references: [id], onDelete: SetNull)
+
+  @@unique([assignmentId, mabaId], map: "uq_maba_assignment")
+  @@index([assignmentId], map: "idx_submissions_assignment_id")
+  @@index([mabaId], map: "idx_submissions_maba_id")
+  @@index([reviewedBy], map: "idx_submissions_reviewed_by")
+  @@index([status], map: "idx_submissions_status")
+  @@map("t_submissions")
 }
