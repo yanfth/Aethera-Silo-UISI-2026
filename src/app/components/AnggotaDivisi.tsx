@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo, useEffect } from "react";
+import Image from "next/image";
 import styles from "./AnggotaDivisi.module.css";
 import {
   Users,
@@ -113,7 +114,7 @@ const MEMBERS: Member[] = [
   { id: "10", name: "Novi Risma Ameliasari", prodi: "Teknik Kimia", role: "Anggota SC", divisionId: "acara", divisionName: "SC & Acara" , image: "/fotoAnggota/SC&Acara/Novi Risma Amelia Sari.jpg" },
   { id: "11", name: "Regitha Eka Purwananditha Candraningtyas", prodi: "Sistem Informasi", role: "Anggota SC", divisionId: "acara", divisionName: "SC & Acara" , image: "/fotoAnggota/SC&Acara/Regitha Eka Purwananditha Candraningtyas.jpg" },
   { id: "12", name: "Sneha Naafi' Amrulloh", prodi: "Teknik Logistik", role: "Anggota SC", divisionId: "acara", divisionName: "SC & Acara" , image: "/fotoAnggota/SC&Acara/Sneha Naafi' Amrulloh.jpg" },
-  { id: "13", name: "Valentino Zaky", prodi: "Manajemen", role: "Anggota SC", divisionId: "acara", divisionName: "SC & Acara" },
+  { id: "13", name: "Valentino Zaky", prodi: "Manajemen", role: "Anggota SC", divisionId: "acara", divisionName: "SC & Acara", image: "/fotoAnggota/SC&Acara/IMG_0124.jpg" },
   { id: "14", name: "Chelsea Aurelia Manihuruk", prodi: "Akuntansi", role: "Anggota Acara", divisionId: "acara", divisionName: "SC & Acara" , image: "/fotoAnggota/SC&Acara/Chelsea Aurelia Manihuruk.JPG" },
   { id: "15", name: "Nisa Dzakiatul Fikriyah", prodi: "Akuntansi", role: "Anggota Acara", divisionId: "acara", divisionName: "SC & Acara" , image: "/fotoAnggota/SC&Acara/Nisa Dzakiyatul Fikriyah.JPG" },
   { id: "16", name: "Rendy Alfiansyah", prodi: "Informatika", role: "Anggota Acara", divisionId: "acara", divisionName: "SC & Acara" , image: "/fotoAnggota/SC&Acara/Rendy Alfiansyah.JPG" },
@@ -148,7 +149,7 @@ const MEMBERS: Member[] = [
   { id: "51", name: "Aqil Ilham Anandra", prodi: "Teknik Kimia", role: "Anggota Logtrans", divisionId: "logtrans", divisionName: "Logtrans" , image: "/fotoAnggota/Logtrans/Aqil Ilham Anandra.jpg" },
   { id: "52", name: "Didin Khoiruddin Amin", prodi: "Teknik Logistik", role: "Anggota Logtrans", divisionId: "logtrans", divisionName: "Logtrans" , image: "/fotoAnggota/Logtrans/Didin Khoiruddin Amin.jpg" },
   { id: "53", name: "Gading Najha Rahadiananto", prodi: "Teknik Logistik", role: "Anggota Logtrans", divisionId: "logtrans", divisionName: "Logtrans" , image: "/fotoAnggota/Logtrans/Gading Najha Rahadiana.jpg" },
-  { id: "54", name: "Erlangga Harsyawardhana Aria Purwadi", prodi: "Teknik Logistik", role: "Anggota Logtrans", divisionId: "logtrans", divisionName: "Logtrans" },
+  { id: "54", name: "Erlangga Harsyawardhana Aria Purwadi", prodi: "Teknik Logistik", role: "Anggota Logtrans", divisionId: "logtrans", divisionName: "Logtrans", image: "/fotoAnggota/Logtrans/Erlangga Harsyawardhana.jpg" },
   { id: "55", name: "Rio Al Kaseno", prodi: "Informatika", role: "Anggota Logtrans", divisionId: "logtrans", divisionName: "Logtrans" , image: "/fotoAnggota/Logtrans/Rio Al Kaseno.jpg" },
 
   // Medis
@@ -193,15 +194,15 @@ const MEMBERS: Member[] = [
   { id: "92", name: "Muhammad Fata Azzaki", prodi: "Informatika", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Muhammad Fata Azzaki.jpg" },
   { id: "93", name: "Moses Farel Cristian", prodi: "Manajemen", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Moses Farel Cristian.jpg" },
   { id: "94", name: "Maulana Firyalfasya Alifianto", prodi: "Teknik Logistik", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Maulana Firyalfasya Alifianto.jpg" },
-  { id: "95", name: "Tegar Adidtya Pratama", prodi: "Informatika", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Tegar Adidtya Pratama.jpg" },
+  { id: "95", name: "Tegar Adidtya Pratama", prodi: "Informatika", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Tegar Adidtya Pratama_v2.jpg" },
   { id: "96", name: "Ahmad Fajri Kusuma", prodi: "Teknik Kimia", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Ahmad Fajri Kusuma.jpg" },
-  { id: "97", name: "Berlian Paramita Pawestri", prodi: "Teknik Logistik", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Berlian Paramita Pawestri.jpg" },
-  { id: "98", name: "Aura Hyunarisasi", prodi: "Manajemen", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Aura Hyunarisasi.jpg" },
+  { id: "97", name: "Berlian Paramita Pawestri", prodi: "Teknik Logistik", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Berlian Paramita Pawestri_v2.jpg" },
+  { id: "98", name: "Aura Hyunarisasi", prodi: "Manajemen", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Aura Hyunarisasi_v2.jpg" },
   { id: "99", name: "Jihan Salwa Putri Syarifuddin", prodi: "Akuntansi", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Jihan Salwa Puti Syariffudin.jpg" },
-  { id: "100", name: "Bunga Hisanah Dyandra Rahmatullah", prodi: "Manajemen Rekayasa", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Bunga Hisanah Dyandra Rahmatullah.jpg" },
+  { id: "100", name: "Bunga Hisanah Dyandra Rahmatullah", prodi: "Manajemen Rekayasa", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Bunga Hisanah Dyandra Rahmatullah_v2.jpg" },
   { id: "101", name: "Hilda Zana Yogya Nugrahaini", prodi: "Manajemen", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Hilda Zana Yogya Nugrahaini.jpg" },
   { id: "102", name: "Nadya Shafwah Al Qibthiyah", prodi: "Sistem Informasi", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Nadya Shafwah Al Qibthiya.jpg" },
-  { id: "103", name: "Alya Fadhilatun Nisa", prodi: "Teknik Kimia", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Alya Fadhilatun Nisa.jpg" },
+  { id: "103", name: "Alya Fadhilatun Nisa", prodi: "Teknik Kimia", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Alya Fadhilatun Nisa_v2.jpg" },
   { id: "104", name: "Novatimah Dewi Maharani", prodi: "Sistem Informasi", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Novatimah Dewi Maharani.jpg" },
   { id: "105", name: "Calista Alysia Ramadhani", prodi: "Teknik Kimia", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Calista Alysia Ramadhani.jpg" },
 
@@ -327,7 +328,7 @@ export default function AnggotaDivisi() {
             <div key={member.id} className={styles.memberCard}>
               <div className={styles.memberIconBox} style={member.image ? { padding: 0, overflow: 'hidden', border: 'none' } : {}}>
                 {member.image ? (
-                  <img src={member.image} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+                  <Image src={member.image} alt={member.name} width={200} height={200} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
                 ) : (
                   <User size={18} />
                 )}
