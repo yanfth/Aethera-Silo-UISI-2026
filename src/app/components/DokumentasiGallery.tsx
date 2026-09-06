@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import styles from "./DokumentasiGallery.module.css";
+import { getCloudinaryUrl } from "@/utils/cloudinary";
 
 interface DocItem {
   id: string;
@@ -12,93 +13,75 @@ interface DocItem {
 const DOC_ITEMS: DocItem[] = [
   {
     id: "doc-1",
-    src: "/dokumentasi/doc_1.jpg",
-    title: "Suasana Sesi Pembekalan & Materi Mahasiswa Baru",
-    tag: "Kegiatan Ruangan",
-  },
-  {
-    id: "doc-2",
-    src: "/dokumentasi/doc_2.jpg",
-    title: "Upacara Pembukaan SILO 2025 di Lapangan",
-    tag: "Upacara Utama",
-  },
-  {
-    id: "doc-3",
-    src: "/dokumentasi/doc_3.jpg",
-    title: "Sesi Diskusi & Tanya Jawab Interaktif",
-    tag: "Forum Mahasiswa",
-  },
-  {
-    id: "doc-4",
-    src: "/dokumentasi/doc_4.jpg",
-    title: "Kerjasama & Work Group Kelompok Mahasiswa",
-    tag: "Kelompok Mentor",
-  },
-  {
-    id: "doc-5",
-    src: "/dokumentasi/doc_5.jpg",
-    title: "Foto Bersama Panggung Utama BRANARA SILO 2025",
-    tag: "Seremonial",
-  },
-  {
-    id: "doc-6",
-    src: "/dokumentasi/doc_6.jpg",
-    title: "Communal Forum BRANARA SILO 2025",
-    tag: "Materi Utama",
-  },
-  {
-    id: "doc-7",
-    src: "/dokumentasi/doc_7.jpg",
-    title: "Penyerahan Souvenir & Apresiasi Pembicara",
-    tag: "Apresiasi",
-  },
-  {
-    id: "doc-8",
-    src: "/dokumentasi/doc_8.jpg",
-    title: "Talkshow Interaktif Panggung Utama",
-    tag: "Talkshow",
-  },
-  {
-    id: "doc-9",
-    src: "/dokumentasi/doc_9.jpg",
-    title: "Semangat Mahasiswa Baru SILO UISI 2025",
-    tag: "Sorak & Antusiasme",
-  },
-  {
-    id: "doc-10",
-    src: "/dokumentasi/doc_10.jpg",
-    title: "Penyerahan Jas Almamater Seremonial Maba",
-    tag: "Simbolis Peresmian",
-  },
-  {
-    id: "doc-11",
-    src: "/dokumentasi/doc_11.jpg",
-    title: "Keseruan & Antusiasme Sesi Malam Inagurasi",
-    tag: "Malam Inagurasi",
-  },
-  {
-    id: "doc-12",
-    src: "/dokumentasi/doc_12.jpg",
-    title: "Penampilan Seni Budaya Reog & Tari Tradisional",
-    tag: "Seni Budaya",
-  },
-  {
-    id: "doc-13",
-    src: "/dokumentasi/doc_13.jpg",
-    title: "Sambutan Rektor & Pimpinan Kampus UISI",
-    tag: "Sambutan Rektor",
-  },
-  {
-    id: "doc-14",
-    src: "/dokumentasi/doc_14.jpg",
-    title: "Euforia & Yelyel Bersama Mahasiswa Baru",
+    src: "/dokumentasi/doc_1.webp",
+    title: "Keseruan & Antusiasme Mahasiswa Baru SILO UISI 2025",
     tag: "Euforia Maba",
   },
   {
-    id: "doc-15",
-    src: "/dokumentasi/doc_15.jpg",
-    title: "Parade Kebudayaan & Kostum Adat Panggung Utama",
-    tag: "Parade Budaya",
+    id: "doc-3",
+    src: "/dokumentasi/doc_3.webp",
+    title: "Upacara Pembukaan Opening Ceremony SILO 2025",
+    tag: "Upacara Utama",
+  },
+  {
+    id: "doc-4",
+    src: "/dokumentasi/doc_4.webp",
+    title: "Penampilan Seni Budaya Reog Ponorogo",
+    tag: "Seni Budaya",
+  },
+  {
+    id: "doc-5",
+    src: "/dokumentasi/doc_5.webp",
+    title: "Partisipasi Aktif & Pembekalan Mahasiswa Baru",
+    tag: "Materi Utama",
+  },
+  {
+    id: "doc-6",
+    src: "/dokumentasi/doc_6.webp",
+    title: "Atraksi Pencak Silat & Banner Selamat Datang Maba",
+    tag: "Atraksi & Seremonial",
+  },
+  {
+    id: "doc-7",
+    src: "/dokumentasi/doc_7.webp",
+    title: "Sesi Pembagian Merchandise & Briefing Mahasiswa",
+    tag: "Sesi Materi",
+  },
+  {
+    id: "doc-8",
+    src: "/dokumentasi/doc_8.webp",
+    title: "Kebersamaan & Kekompakan Rasi Mahasiswa Baru",
+    tag: "Kebersamaan Maba",
+  },
+  {
+    id: "doc-9",
+    src: "/dokumentasi/doc_9.webp",
+    title: "Fun Games & Lempar Bola Outbound SILO 2025",
+    tag: "Outbound Games",
+  },
+  {
+    id: "doc-10",
+    src: "/dokumentasi/doc_10.webp",
+    title: "Sesi Kepemimpinan & Pengarahan Instruktur Outbound",
+    tag: "Team Building",
+  },
+  {
+    id: "doc-11",
+    src: "/dokumentasi/doc_11.webp",
+    title: "Sambutan Rektor UISI di Panggung Inagurasi Malam",
+    tag: "Sambutan Rektor",
+  },
+  {
+    id: "doc-12",
+    src: "/dokumentasi/doc_12.webp",
+    title: "Orasi & Arahan Kebangsaan Rektor UISI",
+    tag: "Orasi Rektor",
+  },
+  {
+    id: "doc-13",
+    src: "/dokumentasi/doc_13.webp",
+    title: "Simulasi & Pelatihan Lapangan Mahasiswa Baru",
+    tag: "Simulasi Lapangan",
   },
 ];
 
@@ -180,10 +163,11 @@ export default function DokumentasiGallery() {
               onClick={() => setSelectedImage(item)}
             >
               <img
-                src={item.src}
+                src={getCloudinaryUrl(item.src, 600)}
                 alt={item.title}
                 className={styles.slideImage}
                 loading="lazy"
+                decoding="async"
               />
               <div className={styles.overlay}>
                 <span className={styles.itemTag}>{item.tag}</span>
@@ -233,7 +217,7 @@ export default function DokumentasiGallery() {
               ×
             </button>
             <img
-              src={selectedImage.src}
+              src={getCloudinaryUrl(selectedImage.src)}
               alt={selectedImage.title}
               className={styles.modalImage}
             />

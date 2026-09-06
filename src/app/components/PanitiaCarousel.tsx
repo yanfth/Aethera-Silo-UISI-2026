@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "./PanitiaCarousel.module.css";
+import { getCloudinaryUrl } from "@/utils/cloudinary";
 
 interface PanitiaPerson {
   id: string;
@@ -17,84 +18,84 @@ const PANITIA_PERSONS: PanitiaPerson[] = [
     name: "Nabil Qudsi Mas'ud",
     role: "Ketua Pelaksana",
     badge: "BPH",
-    image: "/nabil_qudsi.jpg",
+    image: "/nabil_qudsi.webp",
   },
   {
     id: "sek1",
     name: "M. Rosyid Ridlo",
     role: "Sekretaris 1",
     badge: "BPH",
-    image: "/rosyid_ridlo.jpg",
+    image: "/rosyid_ridlo.webp",
   },
   {
     id: "sek2",
     name: "Hillyatut Taqiya",
     role: "Sekretaris 2",
     badge: "BPH",
-    image: "/hillyatut_taqiya.jpg",
+    image: "/hillyatut_taqiya.webp",
   },
   {
     id: "bend1",
     name: "Zahra Naila Supriyono Putri",
     role: "Bendahara 1",
     badge: "BPH",
-    image: "/zahra_naila.jpg",
+    image: "/zahra_naila.webp",
   },
   {
     id: "bend2",
     name: "Putri Fara Diba",
     role: "Bendahara 2",
     badge: "BPH",
-    image: "/putri_fara.jpg",
+    image: "/putri_fara.webp",
   },
   {
     id: "ko-acara",
     name: "Jefranda Dinata",
     role: "Koordinator SC & Acara",
     badge: "Acara",
-    image: "/jefranda_dinata.jpg",
+    image: "/jefranda_dinata.webp",
   },
   {
     id: "wko-acara",
     name: "Khairun Niza",
     role: "Wakil Koordinator SC & Acara",
     badge: "Acara",
-    image: "/khairun_niza.jpg",
+    image: "/khairun_niza.webp",
   },
   {
     id: "ko-pdd",
     name: "Alfian Khusnul Fatoni",
     role: "Koordinator PDD",
     badge: "PDD",
-    image: "/alfian_fatoni.jpg",
+    image: "/alfian_fatoni.webp",
   },
   {
     id: "ko-logtrans",
     name: "Muhammad Faidza Airlangga",
     role: "Koordinator Logtrans",
     badge: "Logtrans",
-    image: "/faidza_airlangga.jpg",
+    image: "/faidza_airlangga.webp",
   },
   {
     id: "ko-medis",
     name: "Callysta Goesti Annayla S.",
     role: "Koordinator Medis",
     badge: "Medis",
-    image: "/callysta_goesti.jpg",
+    image: "/callysta_goesti.webp",
   },
   {
     id: "ko-mk",
     name: "M Arya Ivandy Rohman",
     role: "Koordinator MK",
     badge: "MK",
-    image: "/ivandy_rohman.jpg",
+    image: "/ivandy_rohman.webp",
   },
   {
     id: "wko-mk",
     name: "Dealova Fransisca Ferlianti",
     role: "Wakil Koordinator MK",
     badge: "MK",
-    image: "/dealova_fransisca.jpg",
+    image: "/dealova_fransisca.webp",
   },
 ];
 
@@ -185,9 +186,11 @@ export default function PanitiaCarousel() {
             >
               {/* Background Photo */}
               <img
-                src={person.image}
+                src={getCloudinaryUrl(person.image, 0)}
                 alt={person.name}
                 className={styles.cardPhoto}
+                loading="lazy"
+                decoding="async"
               />
 
               {/* Gradient Overlay */}
