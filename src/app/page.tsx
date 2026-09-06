@@ -10,8 +10,23 @@ import ClickSpark from "./components/ClickSpark";
 import SambutanSection from "./components/SambutanSection";
 import MapsSection from "./components/MapsSection";
 import VideoSection from "./components/VideoSection";
+import MerchCarousel from "./components/MerchCarousel";
 import { 
   Sparkles, 
+  Zap, 
+  Waves, 
+  Video, 
+  Image as ImageIcon, 
+  Palette, 
+  FileText, 
+  Book,
+  Download,
+  Folder,
+  Music, 
+  Megaphone, 
+  Shirt, 
+  ShoppingBag, 
+  Award,
   Camera, 
   MessageCircle, 
   Mail, 
@@ -47,8 +62,8 @@ export default function Home() {
               <Link href="#about" className={styles.ctaButton}>
                 Jelajahi Aethera
               </Link>
-              <Link href="#penugasan" className={styles.ctaButtonOutline}>
-                Lihat Penugasan
+              <Link href="#kebutuhan-acara" className={styles.ctaButtonOutline}>
+                Unduh Kebutuhan
               </Link>
             </div>
           </div>
@@ -56,11 +71,12 @@ export default function Home() {
           <div className={styles.heroVisual} data-aos="fade-left">
             <div className={styles.heroGeoBg}></div>
             <div className={styles.heroImageContainer}>
-              <Image
+              <img
                 src="/hero_rocket.png"
                 alt="Aethera Rocket Illustration"
                 width={480}
                 height={480}
+                style={{ width: "100%", height: "auto" }}
               />
             </div>
           </div>
@@ -86,12 +102,10 @@ export default function Home() {
               </p>
             </div>
             <div className={styles.aboutImage}>
-              <Image
-                src="/portfolio_phones.png"
-                alt="AETHERA SILO UISI 2026 Preview"
-                width={800}
-                height={600}
-                style={{ width: "100%", height: "auto", borderRadius: "1.5rem" }}
+              <img
+                src="/logo_aethera_title.png"
+                alt="AETHERA SILO UISI 2026 Logo"
+                style={{ width: "80%", height: "auto", objectFit: "contain", borderRadius: "1.5rem" }}
               />
             </div>
           </div>
@@ -115,6 +129,158 @@ export default function Home() {
 
         {/* ===== VIDEO DOKUMENTASI SILO ===== */}
         <VideoSection />
+
+        {/* ===== KEBUTUHAN ACARA ===== */}
+        <section id="kebutuhan-acara" className={styles.section} data-aos="fade-up">
+          <h2 className={styles.sectionTitle}>Kebutuhan Acara</h2>
+          <p className={styles.sectionSubtitle}>
+            Unduh seluruh dokumen, template, dan atribut penting untuk persiapan 
+            mengikuti rangkaian acara SILO UISI 2026.
+          </p>
+
+          <div className={styles.servicesGrid}>
+            {/* Guidebook */}
+            <div className={styles.card}>
+              <div
+                className={styles.cardIcon}
+                style={{
+                  background: "rgba(31,75,93,0.1)",
+                  color: "var(--lp-ocean-blue)",
+                }}
+              >
+                <Book size={24} />
+              </div>
+              <h3 className={styles.cardTitle}>Guidebook SILO</h3>
+              <p className={styles.cardDesc}>
+                Buku panduan lengkap berisi tata tertib, jadwal, dan informasi umum SILO UISI 2026.
+              </p>
+              <Link href="#" target="_blank" rel="noopener noreferrer" className={styles.downloadBtn}>
+                <Download size={16} /> Unduh Guidebook
+              </Link>
+            </div>
+
+            {/* Twibbon */}
+            <div className={styles.card}>
+              <div
+                className={styles.cardIcon}
+                style={{
+                  background: "rgba(104,207,235,0.1)",
+                  color: "var(--lp-aqua)",
+                }}
+              >
+                <ImageIcon size={24} />
+              </div>
+              <h3 className={styles.cardTitle}>Twibbon Peserta</h3>
+              <p className={styles.cardDesc}>
+                Frame Twibbon resmi untuk diunggah di Instagram sebagai tanda keikutsertaan.
+              </p>
+              <Link href="#" target="_blank" rel="noopener noreferrer" className={styles.downloadBtn}>
+                <Download size={16} /> Unduh Twibbon
+              </Link>
+            </div>
+
+            {/* Frame Penugasan */}
+            <div className={styles.card}>
+              <div
+                className={styles.cardIcon}
+                style={{
+                  background: "rgba(31,30,25,0.1)",
+                  color: "var(--lp-charcoal)",
+                }}
+              >
+                <Folder size={24} />
+              </div>
+              <h3 className={styles.cardTitle}>Frame Penugasan</h3>
+              <p className={styles.cardDesc}>
+                Template frame standar untuk pengumpulan tugas harian dan tugas kelompok.
+              </p>
+              <Link href="#" target="_blank" rel="noopener noreferrer" className={styles.downloadBtn}>
+                <Download size={16} /> Unduh Frame
+              </Link>
+            </div>
+
+            {/* Handbook */}
+            <div className={styles.card}>
+              <div
+                className={styles.cardIcon}
+                style={{
+                  background: "rgba(104,207,235,0.1)",
+                  color: "var(--lp-aqua)",
+                }}
+              >
+                <FileText size={24} />
+              </div>
+              <h3 className={styles.cardTitle}>Handbook Materi</h3>
+              <p className={styles.cardDesc}>
+                Modul materi dan lembar kerja untuk sesi pemaparan selama rangkaian acara.
+              </p>
+              <Link href="#" target="_blank" rel="noopener noreferrer" className={styles.downloadBtn}>
+                <Download size={16} /> Unduh Handbook
+              </Link>
+            </div>
+
+            {/* ID Card */}
+            <div className={styles.card}>
+              <div
+                className={styles.cardIcon}
+                style={{
+                  background: "rgba(31,75,93,0.1)",
+                  color: "var(--lp-ocean-blue)",
+                }}
+              >
+                <Award size={24} />
+              </div>
+              <h3 className={styles.cardTitle}>Template ID Card</h3>
+              <p className={styles.cardDesc}>
+                Format standar tanda pengenal (Co-Card) untuk dicetak dan digunakan saat offline.
+              </p>
+              <Link href="#" target="_blank" rel="noopener noreferrer" className={styles.downloadBtn}>
+                <Download size={16} /> Unduh ID Card
+              </Link>
+            </div>
+
+            {/* Virtual Background */}
+            <div className={styles.card}>
+              <div
+                className={styles.cardIcon}
+                style={{
+                  background: "rgba(31,30,25,0.1)",
+                  color: "var(--lp-charcoal)",
+                }}
+              >
+                <Camera size={24} />
+              </div>
+              <h3 className={styles.cardTitle}>Virtual Background</h3>
+              <p className={styles.cardDesc}>
+                Latar belakang virtual resmi yang wajib digunakan saat sesi pertemuan online.
+              </p>
+              <Link href="#" target="_blank" rel="noopener noreferrer" className={styles.downloadBtn}>
+                <Download size={16} /> Unduh Background
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== MERCHANDISE ===== */}
+        <section
+          id="merch"
+          className={styles.section}
+          style={{ overflow: "hidden" }}
+          data-aos="fade-up"
+        >
+          <MerchCarousel />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "0.5rem",
+            }}
+          >
+            <Link href="/merch" className={styles.merchButtonLink}>
+              Lihat Selengkapnya &rarr;
+            </Link>
+          </div>
+        </section>
 
         {/* ===== SPONSOR & MEDIA PARTNER ===== */}
         <SponsorSection />
@@ -140,7 +306,7 @@ export default function Home() {
       <footer className={styles.footer}>
         <div>
           <div className={styles.footerLogo} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <Image src="/logo_aethera.png" alt="Aethera Logo" width={26} height={26} style={{ height: "26px", width: "auto" }} />
+            <img src="/logo_aethera.png?v=4" alt="Aethera Logo" width={26} height={26} style={{ height: "26px", width: "auto" }} />
             <span>AETHERA SILO UISI 2026</span>
           </div>
           <p className={styles.footerDesc}>
@@ -155,35 +321,22 @@ export default function Home() {
         </div>
 
         <div>
-          <div className={styles.footerColTitle}>Menu</div>
+          <div className={styles.footerColTitle}>Tautan Cepat</div>
           <div className={styles.footerLinks}>
-            <Link href="#about">Tentang</Link>
-            <Link href="#sambutan">Sambutan</Link>
-            <Link href="#logo">Filosofi Logo</Link>
-            <Link href="#dokumentasi">Dokumentasi</Link>
-            <Link href="#video">Video</Link>
+            <Link href="#about">Tentang Kami</Link>
             <Link href="#panitia">Daftar Panitia</Link>
-            <Link href="#penugasan">Penugasan</Link>
+            <Link href="#kebutuhan-acara">Kebutuhan Acara</Link>
             <Link href="#kelompok">Kelompok</Link>
-            <Link href="#lokasi">Lokasi Kampus</Link>
           </div>
         </div>
 
         <div>
-          <div className={styles.footerColTitle}>Unduhan</div>
+          <div className={styles.footerColTitle}>Layanan &amp; Kontak</div>
           <div className={styles.footerLinks}>
-            <Link href="#">Twibbon</Link>
-            <Link href="#">Rundown</Link>
-            <Link href="#">Nametag</Link>
-          </div>
-        </div>
-
-        <div>
-          <div className={styles.footerColTitle}>Kontak</div>
-          <div className={styles.footerLinks}>
-            <Link href="#">Instagram</Link>
-            <Link href="#">Line</Link>
-            <Link href="#">WhatsApp</Link>
+            <Link href="#">Twibbon &amp; Panduan</Link>
+            <Link href="#">Rundown Acara</Link>
+            <Link href="#">WhatsApp Hubungi Kami</Link>
+            <Link href="#">Instagram Resmi</Link>
           </div>
         </div>
 

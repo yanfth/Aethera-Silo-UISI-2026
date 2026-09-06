@@ -189,13 +189,15 @@
 
 /* ===== HERO ===== */
 .hero {
-  padding: clamp(6rem, 8vw, 8rem) clamp(1.5rem, 5vw, 3rem) clamp(3rem, 5vw, 5rem);
+  padding: calc(clamp(2rem, 4vw, 4rem) - 20px) clamp(1.5rem, 5vw, 3rem) clamp(3rem, 5vw, 5rem);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(1.5rem, 4vw, 3rem);
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2rem;
   align-items: center;
   position: relative;
   overflow: hidden;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 .heroContent {
@@ -204,6 +206,7 @@
   gap: 1.25rem;
   position: relative;
   z-index: 2;
+  margin-left: calc(clamp(1rem, 4vw, 4rem) - 15px);
 }
 
 .heroTag {
@@ -376,16 +379,61 @@
   color: var(--lp-text-muted);
 }
 
+.downloadBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--lp-ocean-blue);
+  background: rgba(31, 75, 93, 0.08);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.downloadBtn:hover {
+  background: var(--lp-ocean-blue);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.downloadBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--lp-ocean-blue);
+  background: rgba(31, 75, 93, 0.08);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.downloadBtn:hover {
+  background: var(--lp-ocean-blue);
+  color: white;
+  transform: translateY(-2px);
+}
+
 .aboutImage {
   position: relative;
   border-radius: var(--radius-2xl);
-  overflow: hidden;
-  background: rgba(31,75,93,0.08); /* Ocean Blue opacity */
+  background: var(--lp-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--lp-glass-border);
   display: flex;
   align-items: center;
   justify-content: center;
   aspect-ratio: 1;
-  box-shadow: var(--lp-shadow-lg);
+  box-shadow: 0 16px 40px rgba(31, 75, 93, 0.1);
+  padding: 2rem;
 }
 
 /* ===== CARD GRID ===== */
@@ -596,7 +644,7 @@
   background: var(--lp-dark);
   color: var(--lp-text-light);
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr 1.5fr;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
   gap: 2rem;
   border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
   margin-top: 2rem;
@@ -730,6 +778,8 @@
   }
   .heroContent {
     align-items: center;
+    margin-left: 0;
+    margin-right: 0;
   }
   .heroTitle {
     font-size: clamp(2.5rem, 6vw, 3.25rem);

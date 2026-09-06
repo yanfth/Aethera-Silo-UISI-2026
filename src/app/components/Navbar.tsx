@@ -15,7 +15,8 @@ import {
   Sparkles, 
   Users, 
   BookOpen, 
-  Globe 
+  Globe,
+  LogIn 
 } from "lucide-react";
 
 export default function Navbar() {
@@ -83,12 +84,13 @@ export default function Navbar() {
       <div className={styles.navContainer}>
         {/* Brand Logo */}
         <Link href="/" className={styles.logo} onClick={() => setMobileMenuOpen(false)}>
-          <Image 
-            src="/logo_aethera.png" 
+          <img 
+            src="/logo_aethera.png?v=4" 
             alt="AETHERA Logo"
             width={32}
             height={32}
             className={styles.logoImg}
+            style={{ objectFit: "contain" }}
           />
           <span className={styles.logoTextFull}>AETHERA SILO UISI 2026</span>
           <span className={styles.logoTextMedium}>AETHERA SILO 2026</span>
@@ -136,6 +138,15 @@ export default function Navbar() {
               </Link>
             </div>
           </div>
+
+          {/* Tombol Login Header Paling Kanan */}
+          <Link
+            href="/login"
+            className={`${styles.loginBtn} ${isActive("/login") ? styles.activeLoginBtn : ""}`}
+          >
+            <LogIn size={16} />
+            <span>Masuk</span>
+          </Link>
         </div>
 
         {/* Mobile / Tablet Toggle Button (<= 1024px) */}
@@ -218,6 +229,18 @@ export default function Navbar() {
                 </Link>
               </div>
             )}
+          </div>
+
+          {/* Tombol Login Mobile */}
+          <div className={styles.mobileLoginWrapper}>
+            <Link
+              href="/login"
+              className={styles.mobileLoginBtn}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <LogIn size={19} />
+              <span>Masuk ke Akun</span>
+            </Link>
           </div>
         </div>
       </div>
