@@ -11,7 +11,39 @@ export class SessionModel {
       orderBy: { startSessions: "asc" },
       include: {
         _count: {
-          select: { attendances: true },
+          select: {
+            attendances: {
+              where: {
+                deletedAt: null,
+                maba: { deletedAt: null },
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
+  /**
+   * Mengambil sesi yang sedang berlangsung atau belum berakhir
+   */
+  static async getActiveSessions(now: Date = new Date()) {
+    return prisma.session.findMany({
+      where: {
+        deletedAt: null,
+        endSessions: { gte: now },
+      },
+      orderBy: { startSessions: "asc" },
+      include: {
+        _count: {
+          select: {
+            attendances: {
+              where: {
+                deletedAt: null,
+                maba: { deletedAt: null },
+              },
+            },
+          },
         },
       },
     });
@@ -48,6 +80,62 @@ export class SessionModel {
     return prisma.session.update({
       where: { id },
       data,
+    });
+  }
+
+  /**
+   * Upsert sesi kegiatan (berdasarkan id jika ada, atau name)
+   */
+  static async upsert(data: {
+    id?: number;
+    name: string;
+    startSessions: Date;
+    endSessions: Date;
+    toleransi?: number;
+  }): Promise<Session> {
+    if (data.id) {
+      return prisma.session.upsert({
+        where: { id: data.id },
+        update: {
+          name: data.name,
+          startSessions: data.startSessions,
+          endSessions: data.endSessions,
+          toleransi: data.toleransi ?? 0,
+          deletedAt: null,
+        },
+        create: {
+          id: data.id,
+          name: data.name,
+          startSessions: data.startSessions,
+          endSessions: data.endSessions,
+          toleransi: data.toleransi ?? 0,
+        },
+      });
+    }
+
+    const existing = await prisma.session.findFirst({
+      where: { name: data.name },
+    });
+
+    if (existing) {
+      return prisma.session.update({
+        where: { id: existing.id },
+        data: {
+          startSessions: data.startSessions,
+          endSessions: data.endSessions,
+          toleransi: data.toleransi ?? 0,
+          deletedAt: null,
+        },
+      });
+    }
+
+    return prisma.session.create({
+      data: {
+        name: data.name,
+        startSessions: data.startSessions,
+        endSessions: data.endSessions,
+        toleransi: data.toleransi ?? 0,
+      },
     });
   }
 

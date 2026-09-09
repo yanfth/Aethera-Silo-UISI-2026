@@ -16,6 +16,14 @@ export interface UserUpsertInput {
 
 export class UserModel {
   /**
+   * Helper generator QR token acak yang unik untuk maba
+   */
+  static generateQrToken(nim?: string | null): string {
+    const randomSuffix = Math.random().toString(36).substring(2, 8).toUpperCase();
+    return nim ? `QR-${nim}-${randomSuffix}` : `QR-${Date.now().toString(36).toUpperCase()}-${randomSuffix}`;
+  }
+
+  /**
    * Mengambil semua user aktif (deletedAt: null) dengan filter opsional (role / kelompok)
    */
   static async getAll(filter?: { role?: string; mGroupsId?: number }) {
@@ -85,11 +93,18 @@ export class UserModel {
   }
 
   /**
-   * Membuat user baru
+   * Membuat user baru (otomatis generate qrToken jika maba dan token kosong)
    */
   static async create(data: Prisma.UserCreateInput): Promise<User> {
+    const qrToken =
+      data.qrToken ??
+      (data.role === "maba" ? this.generateQrToken(data.nim) : undefined);
+
     return prisma.user.create({
-      data,
+      data: {
+        ...data,
+        qrToken,
+      },
     });
   }
 
@@ -106,10 +121,13 @@ export class UserModel {
   /**
    * Mekanisme INSERT OR UPDATE (Upsert) untuk User:
    * - Mencari user berdasarkan username (karena unik).
-   * - Jika username sudah terdaftar, data diupdate dan deletedAt di-reset ke null.
-   * - Jika username belum ada, dibuatkan data user baru.
+   * - Otomatis membuat qrToken jika user adalah maba dan token kosong.
    */
   static async upsert(data: UserUpsertInput): Promise<User> {
+    const token =
+      data.qrToken ??
+      (data.role === "maba" ? this.generateQrToken(data.nim ?? data.username) : null);
+
     return prisma.user.upsert({
       where: { username: data.username },
       update: {
@@ -119,7 +137,7 @@ export class UserModel {
         prodi: data.prodi,
         password: data.password,
         role: data.role,
-        qrToken: data.qrToken,
+        qrToken: data.qrToken || undefined,
         mGroupsId: data.mGroupsId,
         deletedAt: null,
       },
@@ -132,7 +150,7 @@ export class UserModel {
         prodi: data.prodi,
         password: data.password,
         role: data.role,
-        qrToken: data.qrToken,
+        qrToken: token,
         mGroupsId: data.mGroupsId,
       },
     });
@@ -148,6 +166,19 @@ export class UserModel {
       results.push(saved);
     }
     return results;
+  }
+
+  /**
+   * Regenerate QR Token baru untuk maba (misal jika co-card hilang/bocor)
+   */
+  static async regenerateQrToken(userId: number): Promise<User> {
+    const user = await this.getById(userId);
+    if (!user) throw new Error("User tidak ditemukan.");
+    const newToken = this.generateQrToken(user.nim ?? user.username);
+    return prisma.user.update({
+      where: { id: userId },
+      data: { qrToken: newToken },
+    });
   }
 
   /**
