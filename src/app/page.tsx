@@ -61,6 +61,7 @@ export default function Home() {
                 alt="Aethera Rocket Illustration"
                 width={480}
                 height={480}
+                priority
               />
             </div>
           </div>
