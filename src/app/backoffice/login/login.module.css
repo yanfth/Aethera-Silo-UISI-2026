@@ -1,52 +1,25 @@
 .loginContainer {
   min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
+  padding: 1.5rem 1rem;
+  padding-top: max(1.5rem, env(safe-area-inset-top, 1.5rem));
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 1.5rem));
   position: relative;
-  background-color: #FAFAFA;
-  overflow: hidden;
+  background-color: transparent;
+  overflow-y: auto;
+  overflow-x: hidden;
   font-family: 'Poppins', system-ui, -apple-system, sans-serif;
-}
-
-/* Ambient glowing orbs in background matching Aethera theme */
-.glowOrb1 {
-  position: absolute;
-  top: -10%;
-  right: -5%;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(104, 207, 235, 0.22) 0%, rgba(104, 207, 235, 0) 70%);
-  filter: blur(50px);
-  pointer-events: none;
-  animation: floatOrb 12s ease-in-out infinite alternate;
-}
-
-.glowOrb2 {
-  position: absolute;
-  bottom: -10%;
-  left: -5%;
-  width: 450px;
-  height: 450px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(31, 75, 93, 0.16) 0%, rgba(31, 75, 93, 0) 70%);
-  filter: blur(50px);
-  pointer-events: none;
-  animation: floatOrb 15s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes floatOrb {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(25px, 20px) scale(1.08); }
+  box-sizing: border-box;
 }
 
 /* Centered Form Card */
 .card {
   width: 100%;
-  max-width: 420px;
+  max-width: 440px;
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -59,7 +32,9 @@
     0 0 0 1px rgba(255, 255, 255, 0.8) inset;
   position: relative;
   z-index: 10;
+  margin: auto;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
 }
 
 .card:hover {

@@ -1,20 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { User, Lock, Eye, EyeOff, ArrowLeft, Loader2 } from "lucide-react";
-import LowPolyBackground from "../components/LowPolyBackground";
+import { User, Lock, Eye, EyeOff, ArrowLeft, Loader2, ShieldAlert } from "lucide-react";
+import LowPolyBackground from "@/app/components/LowPolyBackground";
 import styles from "./login.module.css";
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectParam = searchParams.get("redirect");
+  const errorParam = searchParams.get("error");
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(
+    errorParam === "unauthorized"
+      ? "Akses ditolak. Akun tidak ditemukan!"
+      : null
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,8 +48,25 @@ export default function LoginPage() {
         return;
       }
 
-      // Simpan session atau redirect ke dashboard/kelompok
-      router.push("/kelompok");
+      // Jika ada redirect param, utamakan redirect tersebut
+      if (redirectParam && redirectParam.startsWith("/")) {
+        router.push(redirectParam);
+        router.refresh();
+        return;
+      }
+
+      // Role-Based Redirection
+      const userRole = data.user?.role;
+      if (userRole === "admin" || userRole === "panitia") {
+        router.push("/admin");
+      } else if (userRole === "mentor") {
+        router.push("/mentor");
+      } else if (userRole === "maba") {
+        router.push("/maba");
+      } else {
+        router.push("/kelompok");
+      }
+      router.refresh();
     } catch (err) {
       console.error(err);
       setError("Tidak dapat terhubung ke server. Silakan coba lagi.");
@@ -53,10 +78,6 @@ export default function LoginPage() {
   return (
     <div className={styles.loginContainer}>
       <LowPolyBackground />
-
-      {/* Ambient background glows */}
-      <div className={styles.glowOrb1} />
-      <div className={styles.glowOrb2} />
 
       {/* Centered Login Card */}
       <div className={styles.card}>
@@ -75,7 +96,15 @@ export default function LoginPage() {
           <p className={styles.subtitle}>AETHERA SILO UISI 2026</p>
         </div>
 
-        {error && <div className={styles.errorMessage}>{error}</div>}
+        {error && (
+          <div
+            className={styles.errorMessage}
+            style={{ display: "flex", alignItems: "center", gap: "8px" }}
+          >
+            <ShieldAlert size={18} style={{ flexShrink: 0 }} />
+            <span>{error}</span>
+          </div>
+        )}
 
         <form className={styles.form} onSubmit={handleSubmit}>
           {/* Username Field */}
@@ -89,7 +118,7 @@ export default function LoginPage() {
                 id="username"
                 type="text"
                 className={styles.input}
-                placeholder="Masukkan username Anda: sNIM"
+                placeholder="Masukkan username atau NIM"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 autoComplete="username"
@@ -147,5 +176,13 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
+      <LoginForm />
+    </Suspense>
   );
 }
