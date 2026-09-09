@@ -11,10 +11,11 @@ import { PrismaClient, Prisma } from "@prisma/client";
  * }
  */
 export const groupsData: Prisma.GroupCreateInput[] = [
-  // Masukkan data kelompok di sini, contoh:
-  // { name: "Kelompok 01", description: "Cluster 01" },
-  // { name: "Kelompok 02", description: "Cluster 02" },
+  { name: "Kelompok 01 - Sirius", description: "Cluster Gugus Bintang Sirius" },
+  { name: "Kelompok 02 - Vega", description: "Cluster Gugus Bintang Vega" },
+  { name: "Kelompok 03 - Canopus", description: "Cluster Gugus Bintang Canopus" },
 ];
+
 
 export async function seedGroups(prisma: PrismaClient) {
   console.log("  📦 Seeding m_groups (Insert or Update)...");

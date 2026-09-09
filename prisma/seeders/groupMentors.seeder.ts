@@ -1,46 +1,53 @@
 import { PrismaClient } from "@prisma/client";
 
-export interface GroupMentorSeedItem {
-  mGroupsId: number; // ID kelompok dari tabel m_groups
-  mUsersId: number;  // ID user (mentor) dari tabel m_users
-  createdAt?: Date;
-  updatedAt?: Date;
-  deletedAt?: Date | null;
-}
-
-/**
- * Data seeder untuk tabel: groups_mentors (relasi kelompok dan mentor)
- * Silakan tambahkan relasi mentor-kelompok pada array di bawah ini.
- *
- * Contoh:
- * {
- *   mGroupsId: 1,
- *   mUsersId: 5,
- * }
- */
-export const groupMentorsData: GroupMentorSeedItem[] = [
-  // Masukkan relasi mentor dan kelompok di sini
-];
-
 export async function seedGroupMentors(prisma: PrismaClient) {
-  console.log("  🤝 Seeding groups_mentors...");
+  console.log("  🤝 Seeding groups_mentors (Dynamic Mentor-Group assignment)...");
 
-  if (groupMentorsData.length === 0) {
-    console.log("     ℹ️ Data groups_mentors masih kosong, dilewati.");
+  // Cari mentor dan groups yang ada
+  const mentors = await prisma.user.findMany({
+    where: { role: "mentor", deletedAt: null },
+  });
+
+  const groups = await prisma.group.findMany({
+    where: { deletedAt: null },
+  });
+
+  if (mentors.length === 0 || groups.length === 0) {
+    console.log("     ℹ️ Mentor atau kelompok belum tersedia, dilewati.");
     return;
   }
 
-  for (const item of groupMentorsData) {
-    await prisma.groupMentor.create({
-      data: {
-        mGroupsId: item.mGroupsId,
-        mUsersId: item.mUsersId,
-        createdAt: item.createdAt ?? undefined,
-        updatedAt: item.updatedAt ?? undefined,
-        deletedAt: item.deletedAt ?? undefined,
+  let assignedCount = 0;
+  for (const mentor of mentors) {
+    // Cari group yang sesuai: prioritaskan mGroupsId mentor, atau match keyword nama
+    let matchedGroup = groups.find((g) => g.id === mentor.mGroupsId);
+    if (!matchedGroup) {
+      if (mentor.nama.toLowerCase().includes("sirius")) {
+        matchedGroup = groups.find((g) => g.name.toLowerCase().includes("sirius"));
+      } else if (mentor.nama.toLowerCase().includes("vega")) {
+        matchedGroup = groups.find((g) => g.name.toLowerCase().includes("vega"));
+      }
+    }
+
+    const targetGroup = matchedGroup || groups[0];
+
+    const existing = await prisma.groupMentor.findFirst({
+      where: {
+        mUsersId: mentor.id,
+        mGroupsId: targetGroup.id,
       },
     });
+
+    if (!existing) {
+      await prisma.groupMentor.create({
+        data: {
+          mUsersId: mentor.id,
+          mGroupsId: targetGroup.id,
+        },
+      });
+      assignedCount++;
+    }
   }
 
-  console.log(`     ✅ Berhasil mengisi ${groupMentorsData.length} relasi ke groups_mentors.`);
+  console.log(`     ✅ Berhasil menghubungkan ${assignedCount} relasi mentor-kelompok.`);
 }

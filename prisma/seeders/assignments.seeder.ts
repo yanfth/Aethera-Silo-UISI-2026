@@ -13,21 +13,27 @@ export interface AssignmentSeedItem {
 }
 
 /**
- * Data seeder untuk tabel: m_assignments (Daftar Tugas)
- * Mendukung mekanisme insert or update (upsert).
- * Silakan tambahkan data penugasan pada array di bawah ini.
- *
- * Contoh:
- * {
- *   title: "Tugas 1 - Membuat Twibbon dan Esai Orientasi",
- *   description: "Buat twibbon resmi dan unggah link bukti serta esai motivasi.",
- *   attachmentUrl: "https://drive.google.com/templates/twibbon-silo-2026",
- *   dueDate: new Date("2026-09-12T23:59:59Z"),
- *   createdBy: 1,
- * }
+ * Data seeder untuk tabel: m_assignments (Daftar Tugas Orientasi)
  */
 export const assignmentsData: AssignmentSeedItem[] = [
-  // Masukkan data tugas di sini
+  {
+    title: "Tugas 1 - Resume Materi Nilai-Nilai SILO UISI",
+    description: "Tulis rangkuman esai 500 kata mengenai nilai-nilai luhur kepemimpinan, integritas, dan budaya kampus Universitas Internasional Semen Indonesia (UISI).",
+    attachmentUrl: "https://drive.google.com/templates/panduan-resume-silo-2026",
+    dueDate: new Date("2026-09-15T23:59:00.000Z"),
+  },
+  {
+    title: "Tugas 2 - Mind Mapping Rencana Studi & Karir Unggul",
+    description: "Rancang bagan mind mapping 4 tahun masa studi di UISI beserta target akademik, organisasi, dan sertifikasi keahlian.",
+    attachmentUrl: "https://drive.google.com/templates/mindmap-karir-uisi",
+    dueDate: new Date("2026-09-18T23:59:00.000Z"),
+  },
+  {
+    title: "Tugas 3 - Twibbon & Video Perkenalan Diri SILO 2026",
+    description: "Unggah link postingan video perkenalan dan twibbon resmi SILO 2026 ke akun Instagram/TikTok dengan hashtag #AetheraSILO2026 #UISIBangga.",
+    attachmentUrl: "https://twibbonize.com/silo-uisi-2026",
+    dueDate: new Date("2026-09-12T23:59:00.000Z"),
+  },
 ];
 
 export async function seedAssignments(prisma: PrismaClient) {
@@ -38,26 +44,28 @@ export async function seedAssignments(prisma: PrismaClient) {
     return;
   }
 
+  const admin = await prisma.user.findFirst({
+    where: { role: { in: ["admin", "panitia"] }, deletedAt: null },
+  });
+  const creatorId = admin?.id || null;
+
   for (const item of assignmentsData) {
-    // Cek apakah tugas dengan judul ini sudah ada
     const existing = await prisma.assignment.findFirst({
       where: { title: item.title },
     });
 
     if (existing) {
-      // UPDATE jika sudah ada
       await prisma.assignment.update({
         where: { id: existing.id },
         data: {
           description: item.description,
           attachmentUrl: item.attachmentUrl,
           dueDate: item.dueDate,
-          createdBy: item.createdBy,
+          createdBy: item.createdBy || creatorId,
           deletedAt: null,
         },
       });
     } else {
-      // INSERT jika belum ada
       await prisma.assignment.create({
         data: {
           ...(item.id ? { id: item.id } : {}),
@@ -65,7 +73,7 @@ export async function seedAssignments(prisma: PrismaClient) {
           description: item.description,
           attachmentUrl: item.attachmentUrl,
           dueDate: item.dueDate,
-          createdBy: item.createdBy,
+          createdBy: item.createdBy || creatorId,
           createdAt: item.createdAt ?? undefined,
           updatedAt: item.updatedAt ?? undefined,
           deletedAt: item.deletedAt ?? undefined,
