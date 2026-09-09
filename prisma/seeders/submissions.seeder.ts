@@ -17,34 +17,180 @@ export interface SubmissionSeedItem {
   deletedAt?: Date | null;
 }
 
-/**
- * Data seeder untuk tabel: t_submissions (Pengumpulan Tugas & Penilaian)
- * Mendukung mekanisme insert or update (upsert).
- * Silakan tambahkan data submission pada array di bawah ini.
- *
- * Contoh:
- * {
- *   assignmentId: 1,
- *   mabaId: 10,
- *   fileUrl: "https://drive.google.com/open?id=xyz...",
- *   notes: "Tugas sudah selesai sesuai instruksi panduan.",
- *   status: "submitted",
- * }
- */
-export const submissionsData: SubmissionSeedItem[] = [
-  // Masukkan data submission pengumpulan tugas di sini
-];
+export const submissionsData: SubmissionSeedItem[] = [];
 
 export async function seedSubmissions(prisma: PrismaClient) {
   console.log("  📤 Seeding t_submissions (Insert or Update)...");
 
-  if (submissionsData.length === 0) {
-    console.log("     ℹ️ Data t_submissions masih kosong, dilewati.");
-    return;
+  // Cari tugas dan maba secara dinamis
+  const tugas1 = await prisma.assignment.findFirst({ where: { title: { contains: "Resume" } } });
+  const tugas2 = await prisma.assignment.findFirst({ where: { title: { contains: "Mind Mapping" } } });
+  const tugas3 = await prisma.assignment.findFirst({ where: { title: { contains: "Twibbon" } } });
+
+  const mabaAditia = await prisma.user.findFirst({ where: { username: "302261001" } });
+  const mabaNabila = await prisma.user.findFirst({ where: { username: "302261002" } });
+  const mabaRizky = await prisma.user.findFirst({ where: { username: "302261003" } });
+  const mabaDewi = await prisma.user.findFirst({ where: { username: "302261004" } });
+  const mabaFajar = await prisma.user.findFirst({ where: { username: "302261005" } });
+  const mentorSarah = await prisma.user.findFirst({ where: { username: "mentor01" } });
+  const mentorDimas = await prisma.user.findFirst({ where: { username: "mentor02" } });
+
+  const dynamicItems: SubmissionSeedItem[] = [];
+
+  // 1. TUGAS 1 - Resume Nilai-Nilai SILO UISI
+  if (tugas1) {
+    if (mabaAditia) {
+      dynamicItems.push({
+        assignmentId: tugas1.id,
+        mabaId: mabaAditia.id,
+        fileUrl: "https://docs.google.com/document/d/1Aditia-Pratama-Resume-SILO-2026",
+        notes: "Berikut resume materi nilai-nilai orientasi kampus UISI oleh Aditia Pratama.",
+        status: "graded",
+        score: 92,
+        feedback: "Pemahaman materi nilai-nilai SILO sangat komprehensif, runtut, dan aplikatif. Pertahankan prestasinya!",
+        reviewedBy: mentorSarah?.id || null,
+        reviewedAt: new Date("2026-09-08T14:30:00.000Z"),
+        submittedAt: new Date("2026-09-07T10:15:00.000Z"),
+      });
+    }
+
+    if (mabaNabila) {
+      dynamicItems.push({
+        assignmentId: tugas1.id,
+        mabaId: mabaNabila.id,
+        fileUrl: "https://docs.google.com/document/d/1Nabila-Rahma-Resume-SILO-2026",
+        notes: "Tugas resume nilai kampus UISI sudah selesai disusun.",
+        status: "graded",
+        score: 88,
+        feedback: "Resume disusun dengan rapi dan mendalam. Contoh implementasi nilai integritas di dunia perkuliahan sangat kontekstual.",
+        reviewedBy: mentorSarah?.id || null,
+        reviewedAt: new Date("2026-09-08T15:00:00.000Z"),
+        submittedAt: new Date("2026-09-07T11:45:00.000Z"),
+      });
+    }
+
+    if (mabaRizky) {
+      dynamicItems.push({
+        assignmentId: tugas1.id,
+        mabaId: mabaRizky.id,
+        fileUrl: "https://drive.google.com/file/d/1Rizky-Firmansyah-Resume",
+        notes: "Mohon maaf terlambat mengumpulkan karena kendala teknis jaringan.",
+        status: "graded",
+        score: 80,
+        feedback: "Analisis nilai kearifan lokal UISI sudah bagus. Catatan: perhatikan ketepatan waktu pengumpulan ke depannya.",
+        reviewedBy: mentorDimas?.id || null,
+        reviewedAt: new Date("2026-09-08T16:15:00.000Z"),
+        submittedAt: new Date("2026-09-08T09:20:00.000Z"),
+      });
+    }
+
+    if (mabaFajar) {
+      dynamicItems.push({
+        assignmentId: tugas1.id,
+        mabaId: mabaFajar.id,
+        fileUrl: "https://drive.google.com/file/d/1Fajar-Nugraha-Resume-Vega",
+        notes: "Pengumpulan tugas resume nilai orientasi SILO 2026 oleh Fajar Nugraha (Kelompok Vega).",
+        status: "submitted",
+        score: null,
+        feedback: null,
+        submittedAt: new Date("2026-09-07T14:10:00.000Z"),
+      });
+    }
   }
 
-  for (const item of submissionsData) {
-    // Menggunakan mekanisme UPSERT berdasarkan assignmentId + mabaId
+  // 2. TUGAS 2 - Mind Mapping Rencana Studi & Karir Unggul
+  if (tugas2) {
+    if (mabaAditia) {
+      dynamicItems.push({
+        assignmentId: tugas2.id,
+        mabaId: mabaAditia.id,
+        fileUrl: "https://drive.google.com/file/d/1Aditia-MindMap-Karir-SILO",
+        notes: "Mind map rencana studi 8 semester dan rencana karier di bidang Sistem Informasi.",
+        status: "graded",
+        score: 95,
+        feedback: "Visualisasi peta pemikiran luar biasa kreatif dan terstruktur! Roadmap target semester dan karier unggul sangat jelas.",
+        reviewedBy: mentorSarah?.id || null,
+        reviewedAt: new Date("2026-09-09T10:00:00.000Z"),
+        submittedAt: new Date("2026-09-08T13:00:00.000Z"),
+      });
+    }
+
+    if (mabaRizky) {
+      dynamicItems.push({
+        assignmentId: tugas2.id,
+        mabaId: mabaRizky.id,
+        fileUrl: "https://drive.google.com/file/d/1Rizky-MindMap-Akuntansi-SILO",
+        notes: "Rancangan target akademik dan karier profesi Akuntan Publik.",
+        status: "graded",
+        score: 85,
+        feedback: "Rencana studi 4 tahun tersusun rapi dengan target sertifikasi profesi bidang akuntansi & manajemen keuangan.",
+        reviewedBy: mentorDimas?.id || null,
+        reviewedAt: new Date("2026-09-09T11:20:00.000Z"),
+        submittedAt: new Date("2026-09-08T15:30:00.000Z"),
+      });
+    }
+
+    if (mabaDewi) {
+      dynamicItems.push({
+        assignmentId: tugas2.id,
+        mabaId: mabaDewi.id,
+        fileUrl: "https://drive.google.com/file/d/1Dewi-Canopus-MindMap-SILO",
+        notes: "Berikut rancangan rencana studi 4 tahun di Manajemen UISI oleh Dewi Lestari.",
+        status: "submitted",
+        score: null,
+        feedback: null,
+        submittedAt: new Date("2026-09-08T18:00:00.000Z"),
+      });
+    }
+  }
+
+  // 3. TUGAS 3 - Twibbon & Video Perkenalan Diri SILO 2026
+  if (tugas3) {
+    if (mabaAditia) {
+      dynamicItems.push({
+        assignmentId: tugas3.id,
+        mabaId: mabaAditia.id,
+        fileUrl: "https://www.instagram.com/reel/aditia_silo2026",
+        notes: "Postingan twibbon dan video perkenalan Gugus Sirius.",
+        status: "graded",
+        score: 90,
+        feedback: "Video perkenalan diri sangat komunikatif, enerjik, dan pemakaian atribut twibbon sesuai panduan panitia.",
+        reviewedBy: mentorSarah?.id || null,
+        reviewedAt: new Date("2026-09-07T16:45:00.000Z"),
+        submittedAt: new Date("2026-09-06T13:00:00.000Z"),
+      });
+    }
+
+    if (mabaDewi) {
+      dynamicItems.push({
+        assignmentId: tugas3.id,
+        mabaId: mabaDewi.id,
+        fileUrl: "https://www.instagram.com/p/dewi_canopus_silo2026",
+        notes: "Twibbon resmi kelompok Canopus - Dewi Lestari.",
+        status: "late",
+        score: 76,
+        feedback: "Twibbon sudah terpasang dengan baik. Pengumpulan terlambat dari batas waktu yang ditetapkan panitia.",
+        reviewedBy: mentorSarah?.id || null,
+        reviewedAt: new Date("2026-09-09T09:00:00.000Z"),
+        submittedAt: new Date("2026-09-08T16:00:00.000Z"),
+      });
+    }
+
+    if (mabaFajar) {
+      dynamicItems.push({
+        assignmentId: tugas3.id,
+        mabaId: mabaFajar.id,
+        fileUrl: "https://www.tiktok.com/@fajar_silo2026/video/intro",
+        notes: "Video perkenalan diri dan motivasi kuliah di Teknik Logistik UISI.",
+        status: "submitted",
+        score: null,
+        feedback: null,
+        submittedAt: new Date("2026-09-07T08:30:00.000Z"),
+      });
+    }
+  }
+
+  for (const item of dynamicItems) {
     await prisma.submission.upsert({
       where: {
         assignmentId_mabaId: {
@@ -63,7 +209,6 @@ export async function seedSubmissions(prisma: PrismaClient) {
         deletedAt: null,
       },
       create: {
-        ...(item.id ? { id: item.id } : {}),
         assignmentId: item.assignmentId,
         mabaId: item.mabaId,
         fileUrl: item.fileUrl,
@@ -74,12 +219,9 @@ export async function seedSubmissions(prisma: PrismaClient) {
         reviewedBy: item.reviewedBy,
         reviewedAt: item.reviewedAt,
         submittedAt: item.submittedAt ?? new Date(),
-        createdAt: item.createdAt ?? undefined,
-        updatedAt: item.updatedAt ?? undefined,
-        deletedAt: item.deletedAt ?? undefined,
       },
     });
   }
 
-  console.log(`     ✅ Berhasil memproses ${submissionsData.length} data ke t_submissions (insert/update).`);
+  console.log(`     ✅ Berhasil memproses ${dynamicItems.length} data pengumpulan tugas ke t_submissions.`);
 }
