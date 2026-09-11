@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     shortcut: "/logo_aethera.webp?v=99",
     apple: "/logo_aethera.webp?v=99",
   },
+  other: {
+    google: "notranslate",
+  },
 };
 
 import AosInit from "./components/AosInit";
@@ -28,14 +31,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" data-scroll-behavior="smooth">
+    <html lang="id" data-scroll-behavior="smooth" translate="no" className="notranslate" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/logo_aethera.webp?v=99" type="image/webp" sizes="any" />
         <link rel="shortcut icon" href="/logo_aethera.webp?v=99" type="image/webp" />
         <link rel="apple-touch-icon" href="/logo_aethera.webp?v=99" />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <AosInit />
+        {children}
       </body>
     </html>
   );
