@@ -78,7 +78,7 @@ export default function KelompokDetailPage({
                 textTransform: "uppercase",
               }}
             >
-              BENUA {selectedCluster.continent.toUpperCase()} · KELOMPOK {selectedCluster.no}
+              BENUA {selectedCluster.continent.toUpperCase()}
             </div>
             <h1
               style={{
@@ -110,7 +110,7 @@ export default function KelompokDetailPage({
                 letterSpacing: "0.02em",
               }}
             >
-              🧑‍🏫 MENTOR KELOMPOK {selectedCluster.no}
+              🧑‍🏫 MENTOR NEGARA {selectedCluster.country.toUpperCase()}
             </h3>
 
             <div
@@ -162,7 +162,7 @@ export default function KelompokDetailPage({
                         borderRadius: "999px",
                       }}
                     >
-                      MENTOR KELOMPOK
+                      MENTOR NEGARA
                     </span>
                     <h4
                       style={{
@@ -225,7 +225,7 @@ export default function KelompokDetailPage({
             >
               <div>
                 <h3 style={{ fontSize: "1.25rem", fontWeight: 800, color: "#1f4b5d", margin: 0 }}>
-                  Daftar Anggota Kelompok {selectedCluster.no}
+                  Daftar Warga Negara {selectedCluster.country}
                 </h3>
                 <p style={{ fontSize: "0.85rem", color: "#6c757d", margin: "0.2rem 0 0 0" }}>
                   Total {groupDetails.anggota.length} Mahasiswa Peserta AETHERA SILO UISI 2026
@@ -337,9 +337,10 @@ export default function KelompokDetailPage({
         <div>
           <div className={styles.footerColTitle}>Kontak</div>
           <div className={styles.footerLinks}>
-            <span>Humas AETHERA SILO UISI 2026</span>
-            <span>Kampus UISI Gresik</span>
-            <span>Email: silo@uisi.ac.id</span>
+            <a href="https://www.instagram.com/silouisi2026?igsh=MThqZ2Z1YXAzcng1ZA==" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.tiktok.com/@branarasilouisi2025?_r=1&_t=ZS-98iD5zNgHEi" target="_blank" rel="noopener noreferrer">TikTok</a>
+            <a href="https://wa.me/6289667151265" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a href="mailto:pkkmb@uisi.ac.id">Email</a>
           </div>
         </div>
       </footer>

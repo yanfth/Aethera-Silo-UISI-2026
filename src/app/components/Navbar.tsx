@@ -130,12 +130,13 @@ export default function Navbar() {
       <div className={styles.navContainer}>
         {/* Brand Logo */}
         <Link href="/" className={styles.logo} onClick={() => setMobileMenuOpen(false)}>
-          <Image 
-            src="/logo_aethera.png" 
+          <img 
+            src="/logo_aethera.png?v=4" 
             alt="AETHERA Logo"
             width={32}
             height={32}
             className={styles.logoImg}
+            style={{ objectFit: "contain" }}
           />
           <span className={styles.logoTextFull}>AETHERA SILO UISI 2026</span>
           <span className={styles.logoTextMedium}>AETHERA SILO 2026</span>

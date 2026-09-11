@@ -185,8 +185,8 @@
 }
 
 .memberIconBox {
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   background: rgba(31, 75, 93, 0.08);
   color: var(--lp-ocean-blue);
@@ -194,14 +194,22 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 1px solid rgba(31, 75, 93, 0.15);
+  border: 2px solid rgba(104, 207, 235, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.memberAvatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .memberCard:hover .memberIconBox {
-  background: var(--lp-ocean-blue);
-  color: var(--lp-white);
-  border-color: var(--lp-ocean-blue);
+  border-color: var(--lp-aqua);
+  box-shadow: 0 0 12px rgba(104, 207, 235, 0.4);
 }
 
 .memberInfo {
@@ -262,6 +270,120 @@
   grid-column: 1 / -1;
 }
 
+/* Modal Pop Up Profile */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 1.5rem;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.modalContent {
+  position: relative;
+  background: #ffffff;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(104, 207, 235, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2.25rem 1.75rem 2rem 1.75rem;
+  animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(31, 75, 93, 0.08);
+  border: none;
+  color: var(--lp-ocean-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.closeBtn:hover {
+  background: var(--lp-ocean-blue);
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.modalImgContainer {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, var(--lp-ocean-blue), var(--lp-aqua));
+  box-shadow: 0 10px 25px rgba(31, 75, 93, 0.25);
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+}
+
+.modalImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--lp-white);
+}
+
+.modalInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modalName {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--lp-ocean-blue);
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+}
+
+.modalRole {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--lp-text-muted);
+  margin-bottom: 1rem;
+}
+
+.modalTags {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.9) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
 @media (max-width: 640px) {
   .divisionBanner {
     padding: 1.25rem;
@@ -270,6 +392,10 @@
   }
   .membersGrid {
     grid-template-columns: 1fr;
+  }
+  .modalImgContainer {
+    width: 170px;
+    height: 170px;
   }
 }
 
@@ -339,4 +465,172 @@
 .dotActive {
   background: #27272a;
   transform: scale(1.1);
+}
+
+/* Modal Popup */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.modalContent {
+  background: #ffffff;
+  border-radius: 32px;
+  border: 2px solid #e5e7eb; /* Soft border instead of purple */
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  position: relative;
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: row;
+  padding: 2.5rem;
+  box-sizing: border-box;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.closeBtn:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.modalPhotoContainer {
+  position: relative;
+  width: 250px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalPhotoBox {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  background: #f3f4f6;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.modalInfo {
+  padding: 1.5rem 2rem 1.5rem 3rem;
+  text-align: left;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modalName {
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.modalRole {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #6b7280;
+  margin: 0 0 1rem 0;
+}
+
+.modalTags {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.modalProdiTag, .modalDivTag {
+  background: #f3f4f6;
+  color: #4b5563;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .modalContent {
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1.5rem;
+    max-width: 360px;
+    border-radius: 24px;
+  }
+  .modalPhotoContainer {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  .modalPhotoBox {
+    margin: 0 auto;
+    width: 220px;
+    height: 260px;
+  }
+  .modalInfo {
+    padding: 0;
+    text-align: center;
+    align-items: center;
+  }
+  .modalName {
+    font-size: 1.5rem;
+  }
+  .modalRole {
+    font-size: 1.1rem;
+  }
+  .modalTags {
+    justify-content: center;
+  }
 }

@@ -14,7 +14,8 @@
     "db:seed": "prisma db seed",
     "db:seed:excel": "npx tsx prisma/seed-excel.ts",
     "excel:generate": "npx tsx prisma/excel/generate-excel-templates.ts",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "postinstall": "prisma generate"
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"
