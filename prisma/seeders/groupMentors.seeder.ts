@@ -26,6 +26,8 @@ export async function seedGroupMentors(prisma: PrismaClient) {
         matchedGroup = groups.find((g) => g.name.toLowerCase().includes("sirius"));
       } else if (mentor.nama.toLowerCase().includes("vega")) {
         matchedGroup = groups.find((g) => g.name.toLowerCase().includes("vega"));
+      } else if (mentor.nama.toLowerCase().includes("canopus")) {
+        matchedGroup = groups.find((g) => g.name.toLowerCase().includes("canopus"));
       }
     }
 

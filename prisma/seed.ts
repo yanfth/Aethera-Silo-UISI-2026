@@ -6,6 +6,7 @@ import { seedGroupMentors } from "./seeders/groupMentors.seeder";
 import { seedAttendances } from "./seeders/attendances.seeder";
 import { seedAssignments } from "./seeders/assignments.seeder";
 import { seedSubmissions } from "./seeders/submissions.seeder";
+import { seedAttributesRunner } from "./seeders/attributes.seeder";
 
 const prisma = new PrismaClient();
 
@@ -22,6 +23,7 @@ async function main() {
   await seedAttendances(prisma);
   await seedAssignments(prisma);
   await seedSubmissions(prisma);
+  await seedAttributesRunner(prisma);
 
   console.log("=========================================");
   console.log("✅ Seluruh proses seeding selesai.");

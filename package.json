@@ -12,6 +12,8 @@
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
     "db:seed": "prisma db seed",
+    "db:seed:excel": "npx tsx prisma/seed-excel.ts",
+    "excel:generate": "npx tsx prisma/excel/generate-excel-templates.ts",
     "db:studio": "prisma studio"
   },
   "prisma": {
@@ -38,7 +40,8 @@
     "react-globe.gl": "^2.38.0",
     "react-pageflip": "^2.0.3",
     "react-simple-maps": "^3.0.0",
-    "three": "^0.185.1"
+    "three": "^0.185.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",

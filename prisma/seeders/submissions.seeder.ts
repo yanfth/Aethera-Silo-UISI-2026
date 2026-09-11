@@ -32,8 +32,14 @@ export async function seedSubmissions(prisma: PrismaClient) {
   const mabaRizky = await prisma.user.findFirst({ where: { username: "302261003" } });
   const mabaDewi = await prisma.user.findFirst({ where: { username: "302261004" } });
   const mabaFajar = await prisma.user.findFirst({ where: { username: "302261005" } });
+  const mabaBagus = await prisma.user.findFirst({ where: { username: "302261006" } });
+  const mabaSiti = await prisma.user.findFirst({ where: { username: "302261007" } });
+  const mabaAndi = await prisma.user.findFirst({ where: { username: "302261008" } });
+  const mabaTri = await prisma.user.findFirst({ where: { username: "302261009" } });
+
   const mentorSarah = await prisma.user.findFirst({ where: { username: "mentor01" } });
   const mentorDimas = await prisma.user.findFirst({ where: { username: "mentor02" } });
+  const mentorPutri = await prisma.user.findFirst({ where: { username: "mentor03" } });
 
   const dynamicItems: SubmissionSeedItem[] = [];
 
@@ -69,6 +75,19 @@ export async function seedSubmissions(prisma: PrismaClient) {
       });
     }
 
+    if (mabaBagus) {
+      dynamicItems.push({
+        assignmentId: tugas1.id,
+        mabaId: mabaBagus.id,
+        fileUrl: "https://drive.google.com/file/d/1Bagus-Setiawan-Resume-Sirius",
+        notes: "Resume materi orientasi dan budaya integritas UISI.",
+        status: "submitted",
+        score: null,
+        feedback: null,
+        submittedAt: new Date("2026-09-08T11:30:00.000Z"),
+      });
+    }
+
     if (mabaRizky) {
       dynamicItems.push({
         assignmentId: tugas1.id,
@@ -96,6 +115,51 @@ export async function seedSubmissions(prisma: PrismaClient) {
         submittedAt: new Date("2026-09-07T14:10:00.000Z"),
       });
     }
+
+    if (mabaSiti) {
+      dynamicItems.push({
+        assignmentId: tugas1.id,
+        mabaId: mabaSiti.id,
+        fileUrl: "https://docs.google.com/document/d/1Siti-Aisyah-Resume-Vega",
+        notes: "Resume materi kepemimpinan dan integritas UISI 2026.",
+        status: "graded",
+        score: 90,
+        feedback: "Kajian nilai-nilai SILO sangat baik dan ditulis dengan sistematis.",
+        reviewedBy: mentorDimas?.id || null,
+        reviewedAt: new Date("2026-09-08T17:00:00.000Z"),
+        submittedAt: new Date("2026-09-07T16:20:00.000Z"),
+      });
+    }
+
+    if (mabaAndi) {
+      dynamicItems.push({
+        assignmentId: tugas1.id,
+        mabaId: mabaAndi.id,
+        fileUrl: "https://drive.google.com/file/d/1Andi-Wijaya-Resume-Canopus",
+        notes: "Tugas 1 resume nilai-nilai SILO UISI.",
+        status: "graded",
+        score: 85,
+        feedback: "Penjelasan nilai integritas sangat jelas dan relevan.",
+        reviewedBy: mentorPutri?.id || null,
+        reviewedAt: new Date("2026-09-08T18:00:00.000Z"),
+        submittedAt: new Date("2026-09-07T15:00:00.000Z"),
+      });
+    }
+
+    if (mabaTri) {
+      dynamicItems.push({
+        assignmentId: tugas1.id,
+        mabaId: mabaTri.id,
+        fileUrl: "https://docs.google.com/document/d/1Tri-Kurniawan-Resume-Canopus",
+        notes: "Resume lengkap materi pengenalan nilai dan budaya kampus.",
+        status: "graded",
+        score: 92,
+        feedback: "Analisis nilai kepemimpinan dan budaya inovasi UISI sangat mendalam.",
+        reviewedBy: mentorPutri?.id || null,
+        reviewedAt: new Date("2026-09-08T18:30:00.000Z"),
+        submittedAt: new Date("2026-09-07T12:00:00.000Z"),
+      });
+    }
   }
 
   // 2. TUGAS 2 - Mind Mapping Rencana Studi & Karir Unggul
@@ -112,6 +176,34 @@ export async function seedSubmissions(prisma: PrismaClient) {
         reviewedBy: mentorSarah?.id || null,
         reviewedAt: new Date("2026-09-09T10:00:00.000Z"),
         submittedAt: new Date("2026-09-08T13:00:00.000Z"),
+      });
+    }
+
+    if (mabaNabila) {
+      dynamicItems.push({
+        assignmentId: tugas2.id,
+        mabaId: mabaNabila.id,
+        fileUrl: "https://drive.google.com/file/d/1Nabila-MindMap-Informatika",
+        notes: "Rencana studi 4 tahun dan target karir Software Engineer.",
+        status: "graded",
+        score: 88,
+        feedback: "Rencana studi 4 tahun tertata rapi dan sasaran sertifikasi sangat relevan.",
+        reviewedBy: mentorSarah?.id || null,
+        reviewedAt: new Date("2026-09-09T10:30:00.000Z"),
+        submittedAt: new Date("2026-09-08T14:00:00.000Z"),
+      });
+    }
+
+    if (mabaBagus) {
+      dynamicItems.push({
+        assignmentId: tugas2.id,
+        mabaId: mabaBagus.id,
+        fileUrl: "https://drive.google.com/file/d/1Bagus-MindMap-Logistik",
+        notes: "Mind map rencana studi Teknik Logistik UISI.",
+        status: "submitted",
+        score: null,
+        feedback: null,
+        submittedAt: new Date("2026-09-08T16:00:00.000Z"),
       });
     }
 
@@ -142,6 +234,19 @@ export async function seedSubmissions(prisma: PrismaClient) {
         submittedAt: new Date("2026-09-08T18:00:00.000Z"),
       });
     }
+
+    if (mabaAndi) {
+      dynamicItems.push({
+        assignmentId: tugas2.id,
+        mabaId: mabaAndi.id,
+        fileUrl: "https://drive.google.com/file/d/1Andi-MindMap-Canopus",
+        notes: "Mind map masa studi dan karir Teknik Informatika.",
+        status: "submitted",
+        score: null,
+        feedback: null,
+        submittedAt: new Date("2026-09-08T19:00:00.000Z"),
+      });
+    }
   }
 
   // 3. TUGAS 3 - Twibbon & Video Perkenalan Diri SILO 2026
@@ -161,6 +266,36 @@ export async function seedSubmissions(prisma: PrismaClient) {
       });
     }
 
+    if (mabaNabila) {
+      dynamicItems.push({
+        assignmentId: tugas3.id,
+        mabaId: mabaNabila.id,
+        fileUrl: "https://www.instagram.com/p/nabila_silo2026",
+        notes: "Twibbon dan video perkenalan Gugus Sirius - Nabila Rahma.",
+        status: "graded",
+        score: 92,
+        feedback: "Twibbon dan video perkenalan sangat kreatif dan sesuai format resmi panitia.",
+        reviewedBy: mentorSarah?.id || null,
+        reviewedAt: new Date("2026-09-07T17:15:00.000Z"),
+        submittedAt: new Date("2026-09-06T14:30:00.000Z"),
+      });
+    }
+
+    if (mabaRizky) {
+      dynamicItems.push({
+        assignmentId: tugas3.id,
+        mabaId: mabaRizky.id,
+        fileUrl: "https://www.instagram.com/reel/rizky_silo2026",
+        notes: "Postingan video perkenalan Gugus Vega.",
+        status: "graded",
+        score: 88,
+        feedback: "Video perkenalan informatif dan antusias.",
+        reviewedBy: mentorDimas?.id || null,
+        reviewedAt: new Date("2026-09-07T18:00:00.000Z"),
+        submittedAt: new Date("2026-09-06T15:00:00.000Z"),
+      });
+    }
+
     if (mabaDewi) {
       dynamicItems.push({
         assignmentId: tugas3.id,
@@ -170,7 +305,7 @@ export async function seedSubmissions(prisma: PrismaClient) {
         status: "late",
         score: 76,
         feedback: "Twibbon sudah terpasang dengan baik. Pengumpulan terlambat dari batas waktu yang ditetapkan panitia.",
-        reviewedBy: mentorSarah?.id || null,
+        reviewedBy: mentorPutri?.id || null,
         reviewedAt: new Date("2026-09-09T09:00:00.000Z"),
         submittedAt: new Date("2026-09-08T16:00:00.000Z"),
       });
@@ -186,6 +321,34 @@ export async function seedSubmissions(prisma: PrismaClient) {
         score: null,
         feedback: null,
         submittedAt: new Date("2026-09-07T08:30:00.000Z"),
+      });
+    }
+
+    if (mabaSiti) {
+      dynamicItems.push({
+        assignmentId: tugas3.id,
+        mabaId: mabaSiti.id,
+        fileUrl: "https://www.instagram.com/p/siti_silo2026",
+        notes: "Video perkenalan dan twibbon resmi SILO 2026 oleh Siti Aisyah.",
+        status: "graded",
+        score: 88,
+        feedback: "Konten video menarik dan penggunaan twibbon rapi.",
+        reviewedBy: mentorDimas?.id || null,
+        reviewedAt: new Date("2026-09-07T19:00:00.000Z"),
+        submittedAt: new Date("2026-09-06T16:00:00.000Z"),
+      });
+    }
+
+    if (mabaTri) {
+      dynamicItems.push({
+        assignmentId: tugas3.id,
+        mabaId: mabaTri.id,
+        fileUrl: "https://www.instagram.com/reel/tri_canopus_silo2026",
+        notes: "Video perkenalan diri SILO 2026 Gugus Canopus.",
+        status: "submitted",
+        score: null,
+        feedback: null,
+        submittedAt: new Date("2026-09-07T17:00:00.000Z"),
       });
     }
   }

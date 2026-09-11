@@ -106,7 +106,7 @@ export default function MentorMonitoringPage() {
         if (Array.isArray(uData.data)) {
           mabaList = mentorGroupIds.length > 0
             ? uData.data.filter((m: any) => mentorGroupIds.includes(m.mGroupsId || m.group?.id))
-            : uData.data;
+            : [];
         }
       }
 
@@ -123,7 +123,6 @@ export default function MentorMonitoringPage() {
         const mabaUser = att.maba || att.user;
         const gId = mabaUser?.mGroupsId || mabaUser?.group?.id || att.groupsId;
         const isBelongToMentor =
-          mentorGroupIds.length === 0 ||
           mentorGroupIds.includes(gId) ||
           mabaIdSet.has(att.mabaId || mabaUser?.id) ||
           mabaNimSet.has(mabaUser?.nim || mabaUser?.username);
