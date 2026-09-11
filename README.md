@@ -119,14 +119,57 @@ Aplikasi menggunakan **Prisma ORM (v6)** dengan database PostgreSQL. Seluruh skr
 | `npm run db:generate` | Melakukan regenerasi client Prisma (`@prisma/client`) berdasarkan `prisma/schema.prisma`. |
 | `npm run db:push` | Mendorong perubahan skema `schema.prisma` langsung ke database PostgreSQL tanpa membuat file migrasi (sangat cocok untuk development cepat). |
 | `npm run db:migrate` | Membuat dan menerapkan migrasi database terkelola (`prisma migrate dev`). |
-| `npm run db:seed` | Menjalankan seeder master otomatis (`prisma/seed.ts`), meliputi grup/kelompok binaan, 3 sesi resmi, 14 akun pengguna terenkripsi bcrypt, relasi mentor, riwayat presensi, penugasan, pengumpulan tugas, dan 5 atribut perlengkapan harian beserta checklist-nya. |
+| `npm run db:seed` | Menjalankan seeder bawaan TypeScript (`prisma/seed.ts`), meliputi grup binaan, 3 sesi resmi, 14 akun pengguna terenkripsi bcrypt, relasi mentor, riwayat presensi, penugasan, pengumpulan tugas, dan atribut harian beserta checklist-nya. |
+| `npm run db:seed:excel` | **Import Seeder dari Excel**: Mengimpor seluruh data tabel dari file Excel (`prisma/excel/contoh_seeder_silo.xlsx` atau file kustom) secara otomatis ke PostgreSQL. |
+| `npm run excel:generate` | Menghasilkan ulang file template kosong (`template_seeder_silo.xlsx`) dan file contoh data lengkap (`contoh_seeder_silo.xlsx`). |
 | `npm run db:studio` | Membuka antarmuka grafis **Prisma Studio** di browser (`http://localhost:5555`) untuk melihat dan mengedit isi tabel database secara visual. |
+
+---
+
+### Seeder Import dari Excel (Terpisah dari Seeder Awal)
+
+Tersedia modul seeder khusus berbasis Excel yang terpisah dari seeder bawaan, terletak di file [`prisma/seed-excel.ts`](file:///c:/Project/Aethera-Silo-UISI-2026/prisma/seed-excel.ts).
+
+#### 1. Lokasi Template & Contoh Excel:
+Semua file lembar kerja Excel tersimpan di folder [`prisma/excel/`](file:///c:/Project/Aethera-Silo-UISI-2026/prisma/excel):
+- **Template Kosong Siap Diisi**: [`prisma/excel/template_seeder_silo.xlsx`](file:///c:/Project/Aethera-Silo-UISI-2026/prisma/excel/template_seeder_silo.xlsx) &rarr; Berisi header kolom resmi dan petunjuk validasi setiap field.
+- **Contoh Data Lengkap**: [`prisma/excel/contoh_seeder_silo.xlsx`](file:///c:/Project/Aethera-Silo-UISI-2026/prisma/excel/contoh_seeder_silo.xlsx) &rarr; Berisi contoh data realistis untuk 9 tabel/sheet.
+
+#### 2. Cara Menjalankan Import Excel:
+```bash
+# Opsi A: Import menggunakan file contoh bawaan
+npm run db:seed:excel
+
+# Opsi B: Import menggunakan file Excel kustom buatan Anda
+npx tsx prisma/seed-excel.ts "path/ke/file_data_anda.xlsx"
+```
+
+#### 3. Struktur 9 Sheet yang Didukung dalam 1 File Excel:
+| No | Nama Sheet | Tabel Terkait | Kolom yang Didukung |
+| :---: | :--- | :--- | :--- |
+| 1 | `groups` | `m_groups` | `name`, `description` |
+| 2 | `sessions` | `m_sessions` | `name`, `start_sessions`, `end_sessions`, `toleransi` |
+| 3 | `users` | `m_users` | `username`, `nim`, `nama`, `fakultas`, `prodi`, `password`, `role`, `qr_token`, `group_name` |
+| 4 | `group_mentors` | `groups_mentors` | `mentor_username`, `group_name` |
+| 5 | `assignments` | `m_assignments` | `title`, `description`, `attachment_url`, `due_date`, `created_by_username` |
+| 6 | `attendances` | `t_attendances` | `maba_username`, `session_name`, `scanned_by_username`, `status`, `scanned_at` |
+| 7 | `submissions` | `t_submissions` | `assignment_title`, `maba_username`, `file_url`, `notes`, `status`, `score`, `feedback`, `reviewed_by_username`, `submitted_at`, `reviewed_at` |
+| 8 | `attributes` | `m_attributes` | `name`, `description`, `target_date`, `type` (`individu`/`kelompok`), `created_by_username` |
+| 9 | `attribute_checks` | `t_attribute_checks` | `attribute_name`, `target_date`, `maba_username`, `group_name`, `checked_by_username`, `is_brought` (`TRUE`/`FALSE`), `notes`, `checked_at` |
+
+> [!NOTE]
+> - Password teks biasa yang dimasukkan pada sheet `users` akan otomatis dienkripsi dengan algoritma **Bcrypt** saat diimpor.
+> - Referensi antar tabel menggunakan nama/username yang mudah dibaca (misalnya `group_name` atau `mentor_username`), sehingga Anda tidak perlu menghafal integer ID database manual.
+
+---
 
 ### Alur Singkat Reset & Sinkronisasi Ulang Database:
 Jika ingin membersihkan dan menyinkronkan ulang seluruh data database agar 100% segar:
 ```bash
 npm run db:push -- --force-reset
 npm run db:seed
+# Atau jika ingin menggunakan data dari Excel:
+npm run db:seed:excel
 ```
 
 ---
