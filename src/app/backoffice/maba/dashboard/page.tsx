@@ -580,8 +580,8 @@ export default function MabaDashboardPage() {
               <QRCodeCanvas
                 value={user?.qr_token || "QR-SILO-MABA-2026"}
                 size={isZoomed ? 220 : 150}
-                level="H"
-                includeMargin={false}
+                level="M"
+                includeMargin={true}
               />
               <span
                 style={{

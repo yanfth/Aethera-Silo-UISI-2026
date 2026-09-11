@@ -11,15 +11,58 @@ import {
   Sun,
   ShieldCheck,
   CheckCircle2,
-  Copy,
   Info,
   Sparkles,
   Layers,
   Award,
+  Calendar,
+  Clock,
+  AlertTriangle,
+  XCircle,
+  RefreshCw,
 } from "lucide-react";
 import { QRCodeCanvas } from "qrcode.react";
 import { MobileShell } from "@/components/ui/mobile-shell";
 import { LoadingScreen } from "@/components/ui/loading-screen";
+
+interface SessionItem {
+  id: number;
+  name: string;
+  startSessions?: string;
+  start_sessions?: string;
+  endSessions?: string;
+  end_sessions?: string;
+  toleransi: number;
+  is_active?: boolean;
+}
+
+interface AttendanceRecord {
+  id: number;
+  sessionsId: number;
+  sessionId?: number;
+  status: string;
+  scannedAt: string;
+}
+
+const formatSessionDate = (dateVal?: any): string => {
+  if (!dateVal) return "-";
+  const d = new Date(dateVal);
+  if (isNaN(d.getTime())) return "-";
+  const day = d.getDate();
+  const months = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
+  const month = months[d.getMonth()];
+  const year = d.getFullYear();
+  return `${day} ${month} ${year}`;
+};
+
+const formatSessionTime = (dateVal?: any): string => {
+  if (!dateVal) return "-";
+  const d = new Date(dateVal);
+  if (isNaN(d.getTime())) return "-";
+  const hours = String(d.getHours()).padStart(2, "0");
+  const minutes = String(d.getMinutes()).padStart(2, "0");
+  return `${hours}:${minutes} WIB`;
+};
 
 interface UserProfile {
   id: number;
@@ -39,11 +82,41 @@ export default function MabaCardPage() {
   const [loading, setLoading] = useState(true);
   const [isFlipped, setIsFlipped] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
-  const [isCopied, setIsCopied] = useState(false);
   const [wakeLockActive, setWakeLockActive] = useState(false);
   const [brightnessBoost, setBrightnessBoost] = useState(true);
   const qrRef = useRef<HTMLDivElement>(null);
   const wakeLockRef = useRef<any>(null);
+
+  // Data Sesi & Riwayat Presensi Mahasiswa
+  const [sessions, setSessions] = useState<SessionItem[]>([]);
+  const [attendances, setAttendances] = useState<AttendanceRecord[]>([]);
+  const [loadingAttendance, setLoadingAttendance] = useState(false);
+
+  const fetchAttendanceData = useCallback(async (userId: number) => {
+    try {
+      setLoadingAttendance(true);
+      const [sessRes, attRes] = await Promise.all([
+        fetch("/api/sessions"),
+        fetch(`/api/attendance?mabaId=${userId}`),
+      ]);
+
+      if (sessRes.ok) {
+        const sessJson = await sessRes.json();
+        const rawSessions: SessionItem[] = Array.isArray(sessJson.data) ? sessJson.data : [];
+        setSessions(rawSessions);
+      }
+
+      if (attRes.ok) {
+        const attJson = await attRes.json();
+        const rawAtt: AttendanceRecord[] = Array.isArray(attJson.data) ? attJson.data : [];
+        setAttendances(rawAtt);
+      }
+    } catch (err) {
+      console.error("Gagal memuat data presensi sesi:", err);
+    } finally {
+      setLoadingAttendance(false);
+    }
+  }, []);
 
   // 1. Ambil data profil dari /api/auth/me
   const fetchProfile = useCallback(async () => {
@@ -56,6 +129,7 @@ export default function MabaCardPage() {
       const data = await res.json();
       if (data.success && data.user) {
         setUser(data.user);
+        fetchAttendanceData(data.user.id);
       } else {
         router.replace("/login");
       }
@@ -64,7 +138,7 @@ export default function MabaCardPage() {
     } finally {
       setLoading(false);
     }
-  }, [router]);
+  }, [router, fetchAttendanceData]);
 
   useEffect(() => {
     fetchProfile();
@@ -161,11 +235,6 @@ export default function MabaCardPage() {
     // Draw QR Code dari canvas
     ctx.drawImage(canvas, 160, 145, 280, 280);
 
-    // Label Token QR
-    ctx.fillStyle = "#1F4B5D";
-    ctx.font = "bold 15px monospace";
-    ctx.fillText(user?.qr_token || "QR_SILO_MABA_2026", 300, 430);
-
     // Info Mahasiswa
     ctx.fillStyle = "#FFFFFF";
     ctx.font = "bold 26px sans-serif";
@@ -211,14 +280,6 @@ export default function MabaCardPage() {
     link.download = `KARTU_SILO_2026_${user?.nim || "MABA"}.png`;
     link.href = exportCanvas.toDataURL("image/png");
     link.click();
-  };
-
-  // 4. Salin Token ke Clipboard
-  const handleCopyToken = () => {
-    if (!user?.qr_token) return;
-    navigator.clipboard.writeText(user.qr_token);
-    setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 2000);
   };
 
   if (loading) {
@@ -445,40 +506,20 @@ export default function MabaCardPage() {
                 transition: "box-shadow 0.3s ease",
               }}
             >
-              <QRCodeCanvas
-                value={user?.qr_token || "QR-SILO-MABA-2026"}
-                size={148}
-                level="H"
-                includeMargin={true}
-              />
               <div
-                style={{
-                  marginTop: "6px",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  padding: "3px 8px",
-                  borderRadius: "6px",
-                  backgroundColor: brightnessBoost ? "#F1F5F9" : "rgba(31, 75, 93, 0.08)",
-                  cursor: "pointer",
-                }}
-                onClick={handleCopyToken}
+                onClick={() => setIsZoomed(true)}
+                title="Ketuk untuk memperbesar QR Code"
+                style={{ cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center" }}
               >
-                <span
-                  style={{
-                    fontSize: "0.68rem",
-                    fontFamily: "monospace",
-                    fontWeight: 700,
-                    color: brightnessBoost ? "#0284C7" : "#1F4B5D",
-                  }}
-                >
-                  {user?.qr_token || "QR_CODE_ACTIVE"}
+                <QRCodeCanvas
+                  value={user?.qr_token || "QR-SILO-MABA-2026"}
+                  size={160}
+                  level="M"
+                  includeMargin={true}
+                />
+                <span style={{ fontSize: "0.62rem", color: "#64748B", marginTop: "4px", fontWeight: 600 }}>
+                  🔍 Ketuk untuk perbesar
                 </span>
-                {isCopied ? (
-                  <CheckCircle2 size={12} color="#059669" />
-                ) : (
-                  <Copy size={12} color={brightnessBoost ? "#0284C7" : "#1F4B5D"} />
-                )}
               </div>
             </div>
 
@@ -889,13 +930,354 @@ export default function MabaCardPage() {
           display: "flex",
           alignItems: "flex-start",
           gap: "12px",
-          marginBottom: "30px",
+          marginBottom: "20px",
         }}
       >
         <Info size={20} color="#1F4B5D" style={{ flexShrink: 0, marginTop: "2px" }} />
         <div style={{ fontSize: "0.78rem", lineHeight: 1.45, color: "rgba(31, 75, 93, 0.85)" }}>
           <strong style={{ color: "#1F4B5D" }}>Tips Presensi Cepat:</strong> Pastikan kecerahan layar diatur paling terang sebelum mendekatkan layar ke kamera mentor. Kartu yang diunduh juga dapat dicetak atau disimpan di galeri foto ponsel sebagai cadangan offline.
         </div>
+      </div>
+
+      {/* ======================================================== */}
+      {/* 📋 DAFTAR SESI PRESENSI & STATUS KEHADIRAN MAHASISWA    */}
+      {/* ======================================================== */}
+      <div style={{ marginBottom: "32px" }}>
+        {/* Header Section */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginBottom: "12px",
+          }}
+        >
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+              <ShieldCheck size={16} color="#0F766E" />
+              <span
+                style={{
+                  fontSize: "0.72rem",
+                  fontWeight: 700,
+                  color: "#0F766E",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.06em",
+                }}
+              >
+                Status Presensi Kegiatan
+              </span>
+            </div>
+            <h3 style={{ fontSize: "1.1rem", fontWeight: 800, color: "#1F4B5D", margin: "2px 0 0 0" }}>
+              Daftar Sesi Presensi
+            </h3>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => user?.id && fetchAttendanceData(user.id)}
+            disabled={loadingAttendance}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              padding: "7px 12px",
+              borderRadius: "10px",
+              backgroundColor: "#FFFFFF",
+              border: "1px solid rgba(31, 75, 93, 0.18)",
+              color: "#1F4B5D",
+              fontSize: "0.75rem",
+              fontWeight: 700,
+              cursor: "pointer",
+              boxShadow: "0 2px 6px rgba(0, 0, 0, 0.04)",
+            }}
+          >
+            <RefreshCw size={13} className={loadingAttendance ? "animate-spin" : ""} />
+            <span>{loadingAttendance ? "Memuat..." : "Segarkan"}</span>
+          </button>
+        </div>
+
+        {/* Ringkasan Statistik Singkat */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "8px",
+            marginBottom: "14px",
+          }}
+        >
+          {/* Hadir Tepat Waktu */}
+          <div
+            style={{
+              padding: "10px 12px",
+              borderRadius: "14px",
+              backgroundColor: "rgba(16, 185, 129, 0.08)",
+              border: "1px solid rgba(16, 185, 129, 0.2)",
+              textAlign: "center",
+            }}
+          >
+            <div style={{ fontSize: "0.68rem", fontWeight: 700, color: "#059669", textTransform: "uppercase" }}>
+              Tepat Waktu
+            </div>
+            <div style={{ fontSize: "1.25rem", fontWeight: 900, color: "#059669", marginTop: "2px" }}>
+              {attendances.filter((a) => a.status === "Hadir").length}
+            </div>
+          </div>
+
+          {/* Terlambat */}
+          <div
+            style={{
+              padding: "10px 12px",
+              borderRadius: "14px",
+              backgroundColor: "rgba(245, 158, 11, 0.08)",
+              border: "1px solid rgba(245, 158, 11, 0.2)",
+              textAlign: "center",
+            }}
+          >
+            <div style={{ fontSize: "0.68rem", fontWeight: 700, color: "#D97706", textTransform: "uppercase" }}>
+              Terlambat
+            </div>
+            <div style={{ fontSize: "1.25rem", fontWeight: 900, color: "#D97706", marginTop: "2px" }}>
+              {attendances.filter((a) => a.status === "Terlambat").length}
+            </div>
+          </div>
+
+          {/* Total Sesi */}
+          <div
+            style={{
+              padding: "10px 12px",
+              borderRadius: "14px",
+              backgroundColor: "rgba(31, 75, 93, 0.06)",
+              border: "1px solid rgba(31, 75, 93, 0.15)",
+              textAlign: "center",
+            }}
+          >
+            <div style={{ fontSize: "0.68rem", fontWeight: 700, color: "#1F4B5D", textTransform: "uppercase" }}>
+              Total Sesi
+            </div>
+            <div style={{ fontSize: "1.25rem", fontWeight: 900, color: "#1F4B5D", marginTop: "2px" }}>
+              {sessions.length}
+            </div>
+          </div>
+        </div>
+
+        {/* Daftar Item Sesi */}
+        {sessions.length === 0 ? (
+          <div
+            style={{
+              padding: "28px 16px",
+              textAlign: "center",
+              backgroundColor: "#FFFFFF",
+              borderRadius: "18px",
+              border: "1px solid rgba(31, 75, 93, 0.08)",
+              color: "rgba(31, 75, 93, 0.6)",
+              fontSize: "0.82rem",
+            }}
+          >
+            <Calendar size={28} color="#94A3B8" style={{ margin: "0 auto 8px" }} />
+            <div>Belum ada jadwal sesi kegiatan yang ditambahkan.</div>
+          </div>
+        ) : (
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            {sessions.map((sess) => {
+              const att = attendances.find((a) => (a.sessionsId || a.sessionId) === sess.id);
+              const now = new Date();
+              const startVal = sess.startSessions || sess.start_sessions;
+              const endVal = sess.endSessions || sess.end_sessions;
+              const startDate = startVal ? new Date(startVal) : null;
+              const endDate = endVal ? new Date(endVal) : null;
+
+              const isOngoing = startDate && endDate ? now >= startDate && now <= endDate : false;
+              const isPast = endDate ? now > endDate : false;
+
+              // Format waktu scan jika sudah hadir
+              const scanTimeStr = att?.scannedAt
+                ? new Date(att.scannedAt).toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }) + " WIB"
+                : null;
+
+              // Tentukan Badge & Status Text
+              let badgeBg = "#F1F5F9";
+              let badgeBorder = "#CBD5E1";
+              let badgeColor = "#475569";
+              let badgeText = "Belum Presensi";
+              let statusDesc = "";
+              let StatusIcon = Clock;
+
+              if (att) {
+                if (att.status === "Hadir") {
+                  badgeBg = "rgba(16, 185, 129, 0.12)";
+                  badgeBorder = "#10B981";
+                  badgeColor = "#059669";
+                  badgeText = "Hadir (Tepat Waktu)";
+                  statusDesc = `Presensi berhasil tercatat pada ${scanTimeStr}`;
+                  StatusIcon = CheckCircle2;
+                } else if (att.status === "Terlambat") {
+                  badgeBg = "rgba(245, 158, 11, 0.12)";
+                  badgeBorder = "#F59E0B";
+                  badgeColor = "#D97706";
+                  badgeText = "Terlambat";
+                  statusDesc = `Presensi tercatat pada ${scanTimeStr} (Melewati batas waktu toleransi)`;
+                  StatusIcon = AlertTriangle;
+                } else if (att.status === "Izin") {
+                  badgeBg = "rgba(2, 132, 199, 0.12)";
+                  badgeBorder = "#0284C7";
+                  badgeColor = "#0284C7";
+                  badgeText = "Izin";
+                  statusDesc = `Keterangan Izin tercatat pada ${scanTimeStr}`;
+                  StatusIcon = Info;
+                } else if (att.status === "Sakit") {
+                  badgeBg = "rgba(147, 51, 234, 0.12)";
+                  badgeBorder = "#9333EA";
+                  badgeColor = "#9333EA";
+                  badgeText = "Sakit";
+                  statusDesc = "Keterangan Sakit tercatat";
+                  StatusIcon = Info;
+                }
+              } else {
+                if (isOngoing) {
+                  badgeBg = "rgba(13, 148, 136, 0.12)";
+                  badgeBorder = "#0D9488";
+                  badgeColor = "#0F766E";
+                  badgeText = "Sedang Berlangsung";
+                  statusDesc = "Tunjukkan QR Code kartu di atas kepada Mentor untuk presensi sekarang";
+                  StatusIcon = Clock;
+                } else if (isPast) {
+                  badgeBg = "rgba(239, 68, 68, 0.1)";
+                  badgeBorder = "rgba(239, 68, 68, 0.35)";
+                  badgeColor = "#DC2626";
+                  badgeText = "Tidak Hadir";
+                  statusDesc = "Sesi telah berakhir dan presensi tidak tercatat";
+                  StatusIcon = XCircle;
+                } else {
+                  badgeBg = "#F1F5F9";
+                  badgeBorder = "rgba(31, 75, 93, 0.15)";
+                  badgeColor = "#64748B";
+                  badgeText = "Belum Dimulai";
+                  statusDesc = `Presensi akan dibuka pada ${startDate ? formatSessionTime(startDate) : "-"}`;
+                  StatusIcon = Calendar;
+                }
+              }
+
+              return (
+                <div
+                  key={sess.id}
+                  style={{
+                    backgroundColor: "#FFFFFF",
+                    borderRadius: "16px",
+                    padding: "14px 16px",
+                    border: isOngoing && !att ? "1.5px solid #0D9488" : "1px solid rgba(31, 75, 93, 0.1)",
+                    boxShadow:
+                      isOngoing && !att
+                        ? "0 4px 16px rgba(13, 148, 136, 0.12)"
+                        : "0 2px 8px rgba(0, 0, 0, 0.02)",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "8px",
+                  }}
+                >
+                  {/* Baris Atas: Nama Sesi & Badge Status */}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "8px",
+                    }}
+                  >
+                    <div style={{ minWidth: 0, flex: 1 }}>
+                      <div
+                        style={{
+                          fontSize: "0.9rem",
+                          fontWeight: 800,
+                          color: "#1F1E19",
+                          lineHeight: 1.3,
+                        }}
+                      >
+                        {sess.name}
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexWrap: "wrap",
+                          alignItems: "center",
+                          gap: "8px",
+                          marginTop: "4px",
+                          fontSize: "0.72rem",
+                          color: "rgba(31, 75, 93, 0.7)",
+                        }}
+                      >
+                        <span style={{ display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                          <Calendar size={12} color="#1F4B5D" />
+                          {formatSessionDate(startVal)}
+                        </span>
+                        <span>•</span>
+                        <span style={{ display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                          <Clock size={12} color="#1F4B5D" />
+                          {formatSessionTime(startVal)} - {formatSessionTime(endVal)}
+                        </span>
+                        {sess.toleransi > 0 && (
+                          <>
+                            <span>•</span>
+                            <span>Tol. {sess.toleransi}m</span>
+                          </>
+                        )}
+                      </div>
+                    </div>
+
+                    <div
+                      style={{
+                        padding: "4px 10px",
+                        borderRadius: "999px",
+                        backgroundColor: badgeBg,
+                        border: `1px solid ${badgeBorder}`,
+                        color: badgeColor,
+                        fontSize: "0.72rem",
+                        fontWeight: 800,
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "5px",
+                        flexShrink: 0,
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      <StatusIcon size={13} />
+                      <span>{badgeText}</span>
+                    </div>
+                  </div>
+
+                  {/* Baris Bawah: Detail / Keterangan Waktu */}
+                  {statusDesc && (
+                    <div
+                      style={{
+                        fontSize: "0.73rem",
+                        padding: "6px 10px",
+                        borderRadius: "8px",
+                        backgroundColor: att
+                          ? "rgba(31, 75, 93, 0.04)"
+                          : isOngoing
+                          ? "rgba(13, 148, 136, 0.06)"
+                          : "#F8FAFC",
+                        color:
+                          att?.status === "Hadir"
+                            ? "#065F46"
+                            : att?.status === "Terlambat"
+                            ? "#92400E"
+                            : isOngoing
+                            ? "#0F766E"
+                            : "#64748B",
+                        fontWeight: 600,
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "6px",
+                      }}
+                    >
+                      <span>{statusDesc}</span>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* ======================================================== */}
@@ -946,21 +1328,9 @@ export default function MabaCardPage() {
             <QRCodeCanvas
               value={user?.qr_token || "QR-SILO-MABA-2026"}
               size={260}
-              level="H"
-              includeMargin={false}
+              level="M"
+              includeMargin={true}
             />
-            <div
-              style={{
-                marginTop: "14px",
-                fontSize: "0.85rem",
-                fontFamily: "monospace",
-                fontWeight: 800,
-                color: "#1F4B5D",
-                letterSpacing: "0.04em",
-              }}
-            >
-              {user?.qr_token || "QR_CODE_ACTIVE"}
-            </div>
           </div>
 
           {/* Tombol Tutup Zoom */}

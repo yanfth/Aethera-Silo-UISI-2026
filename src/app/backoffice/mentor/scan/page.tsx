@@ -17,7 +17,7 @@ import {
   Sparkles,
   ArrowRight,
 } from "lucide-react";
-import { Html5Qrcode } from "html5-qrcode";
+import { LiveQrScanner, scanImageFileWithJsQR } from "@/utils/qr-scanner";
 import { MobileShell } from "@/components/ui/mobile-shell";
 import { LoadingScreen } from "@/components/ui/loading-screen";
 
@@ -29,6 +29,7 @@ interface SessionItem {
   startSessions?: string;
   endSessions?: string;
   toleransi: number;
+  is_active?: boolean;
 }
 
 const formatSessionDate = (dateVal?: any): string => {
@@ -82,7 +83,8 @@ export default function MentorScanPage() {
   const [showManualInput, setShowManualInput] = useState(false);
   const [manualNim, setManualNim] = useState("");
 
-  const html5QrCodeRef = useRef<Html5Qrcode | null>(null);
+  const liveScannerRef = useRef<LiveQrScanner | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // Audio feedback helper (Web Audio API)
@@ -151,9 +153,14 @@ export default function MentorScanPage() {
         const activeSessions = sessData.data || [];
         setSessions(activeSessions);
         if (activeSessions.length > 0) {
-          // Prioritaskan sesi yang sedang aktif saat ini jika ada
+          // Prioritaskan sesi yang sedang aktif saat ini jika ada, atau sesi paling baru
           const currentActive = activeSessions.find((s: any) => s.is_active);
-          setSelectedSessionId(currentActive ? currentActive.id : activeSessions[0].id);
+          const latestSession = [...activeSessions].sort(
+            (a: any, b: any) =>
+              new Date(b.startSessions || b.start_sessions || 0).getTime() -
+              new Date(a.startSessions || a.start_sessions || 0).getTime()
+          )[0];
+          setSelectedSessionId(currentActive ? currentActive.id : (latestSession ? latestSession.id : activeSessions[0].id));
         }
       }
     } catch (err) {
@@ -286,7 +293,7 @@ export default function MentorScanPage() {
     }
   };
 
-  // 3. Meminta Izin Kamera dan Menjalankan Scanner
+  // 3. Meminta Izin Kamera dan Menjalankan Scanner Live via jsQR
   const requestCameraAccess = useCallback(async () => {
     setPermissionError(null);
 
@@ -302,37 +309,20 @@ export default function MentorScanPage() {
     }
 
     try {
-      const element = document.getElementById("mentor-full-camera-reader");
-      if (!element) return;
+      if (!videoRef.current) return;
 
-      if (!html5QrCodeRef.current) {
-        html5QrCodeRef.current = new Html5Qrcode("mentor-full-camera-reader");
+      if (!liveScannerRef.current) {
+        liveScannerRef.current = new LiveQrScanner(videoRef.current, (decodedText) => {
+          handleProcessScan(decodedText);
+        });
       }
 
-      const scanner = html5QrCodeRef.current;
-      if (!scanner.isScanning) {
-        // scanner.start akan otomatis memicu permintaan izin kamera di browser HP
-        await scanner.start(
-          { facingMode: "environment" },
-          {
-            fps: 15,
-            qrbox: (viewfinderWidth: number, viewfinderHeight: number) => {
-              const edge = Math.floor(Math.min(viewfinderWidth, viewfinderHeight) * 0.72);
-              return { width: Math.max(edge, 180), height: Math.max(edge, 180) };
-            },
-            aspectRatio: 1.0,
-          },
-          (decodedText) => {
-            handleProcessScan(decodedText);
-          },
-          () => {}
-        );
-        setIsScanning(true);
-        setPermissionGranted(true);
-        setPermissionError(null);
-      }
+      await liveScannerRef.current.start();
+      setIsScanning(true);
+      setPermissionGranted(true);
+      setPermissionError(null);
     } catch (err: any) {
-      console.warn("Gagal inisialisasi scanner:", err);
+      console.warn("Gagal inisialisasi scanner live jsQR:", err);
       setIsScanning(false);
       setPermissionGranted(false);
 
@@ -349,36 +339,33 @@ export default function MentorScanPage() {
         );
       } else {
         setPermissionError(
-          "Gagal mengakses kamera scanner. Pastikan browser diizinkan mengakses kamera atau gunakan fitur 'Ambil Foto QR'."
+          err?.message || "Gagal mengakses kamera scanner. Pastikan browser diizinkan mengakses kamera atau gunakan fitur 'Ambil Foto QR'."
         );
       }
     }
   }, [handleProcessScan]);
 
-  // Scan via foto kamera HP langsung (kompatibel bahkan di HTTP)
+  // Scan via foto kamera HP langsung menggunakan jsQR 4-Pass Multi-Algorithm
   const handleFileScan = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     try {
       setIsProcessing(true);
-      if (html5QrCodeRef.current?.isScanning) {
-        try {
-          await html5QrCodeRef.current.stop();
-          setIsScanning(false);
-        } catch {}
+      if (liveScannerRef.current?.scanning) {
+        liveScannerRef.current.stop();
+        setIsScanning(false);
       }
-      if (!html5QrCodeRef.current) {
-        html5QrCodeRef.current = new Html5Qrcode("mentor-full-camera-reader");
-      }
-      const decodedText = await html5QrCodeRef.current.scanFile(file, false);
+
+      // Memindai foto menggunakan jsQR dengan multi-pass binarization (sangat akurat untuk foto layar monitor!)
+      const decodedText = await scanImageFileWithJsQR(file);
       handleProcessScan(decodedText);
     } catch (err: any) {
-      console.warn("Gagal scan dari foto:", err);
+      console.warn("Gagal scan dari foto via jsQR:", err);
       playBeep(false);
       setScanResult({
         type: "error",
-        title: "QR Tidak Terbaca",
-        message: "Tidak dapat mendeteksi QR Code dari foto. Pastikan posisi tegak, jelas, dan pencahayaan cukup.",
+        title: "QR Tidak Terdeteksi",
+        message: err?.message || "Tidak dapat mendeteksi QR Code dari foto. Pastikan posisi tegak, jelas, dan pencahayaan cukup.",
         time: new Date().toLocaleTimeString("id-ID"),
       });
     } finally {
@@ -398,17 +385,9 @@ export default function MentorScanPage() {
   // 4. Hentikan kamera saat unmount
   useEffect(() => {
     return () => {
-      if (html5QrCodeRef.current && html5QrCodeRef.current.isScanning) {
-        html5QrCodeRef.current
-          .stop()
-          .then(() => {
-            try {
-              if (document.getElementById("mentor-full-camera-reader")) {
-                html5QrCodeRef.current?.clear();
-              }
-            } catch {}
-          })
-          .catch(() => {});
+      if (liveScannerRef.current) {
+        liveScannerRef.current.stop();
+        liveScannerRef.current = null;
       }
     };
   }, []);
@@ -471,7 +450,7 @@ export default function MentorScanPage() {
               const timeFormatted = formatSessionTime(startVal);
               return (
                 <option key={sess.id} value={sess.id}>
-                  {sess.name} ({dateFormatted}, {timeFormatted}) - Tol. {sess.toleransi}m
+                  {sess.is_active ? "🟢 [AKTIF SEKARANG] " : ""}{sess.name} ({dateFormatted}, {timeFormatted}) - Tol. {sess.toleransi}m
                 </option>
               );
             })
@@ -567,26 +546,160 @@ export default function MentorScanPage() {
           </button>
         </div>
 
-        {/* Viewfinder Video Kamera html5-qrcode (selalu terpasang di DOM agar auto-start & izin browser berjalan lancar) */}
+        {/* Viewfinder Video Kamera jsQR */}
         <div
           style={{
             position: "relative",
             width: "100%",
-            minHeight: isScanning ? "260px" : "0px",
+            minHeight: "320px",
             backgroundColor: "#000000",
             borderRadius: "16px",
             overflow: "hidden",
-            display: isScanning ? "block" : "none",
+            marginBottom: "12px",
           }}
         >
-          <div id="mentor-full-camera-reader" style={{ width: "100%" }} />
+          {/* Target Video element untuk jsQR Live Scanner */}
+          <video
+            ref={videoRef}
+            playsInline
+            muted
+            autoPlay
+            style={{
+              width: "100%",
+              height: "100%",
+              minHeight: "320px",
+              objectFit: "cover",
+              display: "block",
+            }}
+          />
+
+          {/* Animasi Scanner Guide Reticle ketika kamera aktif */}
+          {isScanning && !isProcessing && (
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                pointerEvents: "none",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                zIndex: 4,
+              }}
+            >
+              <div
+                style={{
+                  width: "230px",
+                  height: "230px",
+                  border: "2px solid rgba(104, 207, 235, 0.7)",
+                  borderRadius: "16px",
+                  boxShadow: "0 0 0 9999px rgba(0, 0, 0, 0.32)",
+                  position: "relative",
+                }}
+              >
+                <span style={{ position: "absolute", top: "-2px", left: "-2px", width: "24px", height: "24px", borderTop: "4px solid #68CFEB", borderLeft: "4px solid #68CFEB", borderTopLeftRadius: "12px" }} />
+                <span style={{ position: "absolute", top: "-2px", right: "-2px", width: "24px", height: "24px", borderTop: "4px solid #68CFEB", borderRight: "4px solid #68CFEB", borderTopRightRadius: "12px" }} />
+                <span style={{ position: "absolute", bottom: "-2px", left: "-2px", width: "24px", height: "24px", borderBottom: "4px solid #68CFEB", borderLeft: "4px solid #68CFEB", borderBottomLeftRadius: "12px" }} />
+                <span style={{ position: "absolute", bottom: "-2px", right: "-2px", width: "24px", height: "24px", borderBottom: "4px solid #68CFEB", borderRight: "4px solid #68CFEB", borderBottomRightRadius: "12px" }} />
+              </div>
+            </div>
+          )}
+
+          {/* Overlay jika belum scanning atau ada error izin kamera */}
+          {!isScanning && (
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                backgroundColor: "#FFFFFF",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "20px 16px",
+                textAlign: "center",
+                zIndex: 6,
+              }}
+            >
+              <div
+                style={{
+                  width: "56px",
+                  height: "56px",
+                  borderRadius: "50%",
+                  backgroundColor: permissionError ? "rgba(239, 68, 68, 0.08)" : "rgba(31, 75, 93, 0.08)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "0 auto 12px",
+                  boxShadow: permissionError ? "0 0 0 6px rgba(239, 68, 68, 0.15)" : "0 0 0 6px rgba(104, 207, 235, 0.15)",
+                }}
+              >
+                {permissionError ? <AlertTriangle size={28} color="#EF4444" /> : <Camera size={28} color="#1F4B5D" />}
+              </div>
+
+              <h3 style={{ fontSize: "1rem", fontWeight: 800, color: "#1F1E19", margin: "0 0 6px 0" }}>
+                {permissionError ? "Izin Kamera Terkendala" : "Menghubungkan Kamera Scanner..."}
+              </h3>
+
+              <p style={{ fontSize: "0.78rem", lineHeight: 1.45, color: "rgba(31, 75, 93, 0.8)", margin: "0 0 16px 0", maxWidth: "300px" }}>
+                {permissionError || "Browser sedang mengaktifkan feed kamera. Harap ketuk 'Izinkan' (Allow) jika muncul notifikasi izin pada browser."}
+              </p>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%", maxWidth: "300px" }}>
+                <button
+                  type="button"
+                  onClick={requestCameraAccess}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "8px",
+                    padding: "12px",
+                    borderRadius: "12px",
+                    backgroundColor: "#1F4B5D",
+                    color: "#FFFFFF",
+                    fontWeight: 800,
+                    fontSize: "0.85rem",
+                    border: "none",
+                    cursor: "pointer",
+                    boxShadow: "0 4px 14px rgba(31, 75, 93, 0.2)",
+                  }}
+                >
+                  <RefreshCw size={16} />
+                  <span>Minta Izin & Buka Kamera</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "8px",
+                    padding: "12px",
+                    borderRadius: "12px",
+                    backgroundColor: "#0284C7",
+                    color: "#FFFFFF",
+                    fontWeight: 800,
+                    fontSize: "0.85rem",
+                    border: "none",
+                    cursor: "pointer",
+                    boxShadow: "0 4px 14px rgba(2, 132, 199, 0.2)",
+                  }}
+                >
+                  <Camera size={16} />
+                  <span>📸 Ambil Foto QR (Kamera HP Langsung)</span>
+                </button>
+              </div>
+            </div>
+          )}
 
           {isProcessing && (
             <div
               style={{
                 position: "absolute",
                 inset: 0,
-                backgroundColor: "rgba(31, 75, 93, 0.75)",
+                backgroundColor: "rgba(31, 75, 93, 0.8)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -603,83 +716,6 @@ export default function MentorScanPage() {
             </div>
           )}
         </div>
-
-        {/* Jika belum scanning atau ada error izin kamera */}
-        {!isScanning && (
-          <div style={{ textAlign: "center", padding: "12px 6px" }}>
-            <div
-              style={{
-                width: "64px",
-                height: "64px",
-                borderRadius: "50%",
-                backgroundColor: permissionError ? "rgba(239, 68, 68, 0.08)" : "rgba(31, 75, 93, 0.08)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                margin: "0 auto 12px",
-                boxShadow: permissionError ? "0 0 0 6px rgba(239, 68, 68, 0.15)" : "0 0 0 6px rgba(104, 207, 235, 0.15)",
-              }}
-            >
-              {permissionError ? <AlertTriangle size={30} color="#EF4444" /> : <Camera size={30} color="#1F4B5D" />}
-            </div>
-
-            <h3 style={{ fontSize: "1.05rem", fontWeight: 800, color: "#1F1E19", margin: "0 0 6px 0" }}>
-              {permissionError ? "Izin Kamera Terkendala" : "Meminta Izin Akses Kamera HP..."}
-            </h3>
-
-            <p style={{ fontSize: "0.8rem", lineHeight: 1.5, color: "rgba(31, 75, 93, 0.8)", margin: "0 0 16px 0" }}>
-              {permissionError || "Browser sedang meminta izin akses kamera ke ponsel Anda. Harap ketuk 'Izinkan' (Allow) pada pop-up di layar."}
-            </p>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: "10px", maxWidth: "320px", margin: "0 auto" }}>
-              <button
-                type="button"
-                onClick={requestCameraAccess}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "8px",
-                  padding: "13px",
-                  borderRadius: "14px",
-                  backgroundColor: "#1F4B5D",
-                  color: "#FFFFFF",
-                  fontWeight: 800,
-                  fontSize: "0.88rem",
-                  border: "none",
-                  cursor: "pointer",
-                  boxShadow: "0 4px 14px rgba(31, 75, 93, 0.2)",
-                }}
-              >
-                <RefreshCw size={18} />
-                <span>Minta Izin & Aktifkan Kamera</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "8px",
-                  padding: "13px",
-                  borderRadius: "14px",
-                  backgroundColor: "#0284C7",
-                  color: "#FFFFFF",
-                  fontWeight: 800,
-                  fontSize: "0.88rem",
-                  border: "none",
-                  cursor: "pointer",
-                  boxShadow: "0 4px 14px rgba(2, 132, 199, 0.2)",
-                }}
-              >
-                <Camera size={18} />
-                <span>📸 Ambil Foto QR (Kamera HP Langsung)</span>
-              </button>
-            </div>
-          </div>
-        )}
 
         {/* Hidden File Input untuk Ambil Foto Langsung via Kamera HP */}
         <input

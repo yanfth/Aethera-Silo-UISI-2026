@@ -54,8 +54,8 @@ export class AttendanceModel {
    * Logika Inti: Scan QR Token Maba oleh Mentor
    * - Memvalidasi token maba (mendukung qrToken, NIM, atau username)
    * - Memvalidasi sesi aktif (mendukung sesi uji coba & bypass jadwal untuk pengujian)
-   * - Menghitung keterlambatan berdasarkan startSessions + toleransi (menit)
-   * - Mencegah duplikasi presensi di sesi yang sama
+   * - Menghitung keterlambatan berdasarkan endSessions + toleransi (menit)
+   * - Memvalidasi jadwal sesi kegiatansi di sesi yang sama
    * - Mencatat data ke t_attendances
    */
   static async scanAndRecord(params: ScanAttendanceParams): Promise<ScanAttendanceResult> {
@@ -175,9 +175,10 @@ export class AttendanceModel {
       };
     }
 
-    // 5. Hitung Toleransi Waktu Keterlambatan
+    // 5. Hitung Batas Waktu Keterlambatan Presensi
+    // Mahasiswa tercatat "Hadir" (Tepat Waktu) jika presensi sebelum/hingga waktu selesai sesi + toleransi
     const toleranceMs = (session.toleransi ?? 0) * 60 * 1000;
-    const maxOnTime = new Date(session.startSessions.getTime() + toleranceMs);
+    const maxOnTime = new Date(session.endSessions.getTime() + toleranceMs);
     const status = isTestSession || scanTime <= maxOnTime ? "Hadir" : "Terlambat";
 
     // 6. Simpan ke database

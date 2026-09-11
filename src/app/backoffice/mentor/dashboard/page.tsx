@@ -5,7 +5,7 @@ import { MobileShell } from "@/components/ui/mobile-shell";
 import { LoadingScreen } from "@/components/ui/loading-screen";
 import { BottomSheet } from "@/components/ui/bottom-sheet";
 import { Fab } from "@/components/ui/fab";
-import { Html5Qrcode } from "html5-qrcode";
+import { LiveQrScanner, scanImageFileWithJsQR } from "@/utils/qr-scanner";
 import {
   QrCode,
   Users,
@@ -113,7 +113,8 @@ export default function MentorDashboardPage() {
   const [scanResult, setScanResult] = useState<ScanResultBanner | null>(null);
   const [isProcessingScan, setIsProcessingScan] = useState(false);
 
-  const html5QrCodeRef = useRef<Html5Qrcode | null>(null);
+  const liveScannerRef = useRef<LiveQrScanner | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const lastScanTimestampRef = useRef<number>(0);
   const lastScannedCodeRef = useRef<string>("");
@@ -216,10 +217,16 @@ export default function MentorDashboardPage() {
         const sessData = await sessRes.json();
         const list: SessionItem[] = sessData.data || [];
         setSessions(list);
-        const active = list.find((s) => s.is_active) || list[0];
-        if (active) {
-          activeSessId = active.id;
-          setSelectedSessionId(active.id);
+        const active = list.find((s) => s.is_active);
+        const latest = [...list].sort(
+          (a: any, b: any) =>
+            new Date(b.startSessions || b.start_sessions || 0).getTime() -
+            new Date(a.startSessions || a.start_sessions || 0).getTime()
+        )[0];
+        const selected = active || latest || list[0];
+        if (selected) {
+          activeSessId = selected.id;
+          setSelectedSessionId(selected.id);
         }
       }
 
@@ -391,13 +398,16 @@ export default function MentorDashboardPage() {
     }
   };
 
-  // 3. Memulai Kamera Scanner & Meminta Izin Akses ke HP
+  // 3. Memulai Kamera Scanner & Meminta Izin Akses ke HP (LiveQrScanner - jsQR)
   const startCamera = useCallback(async () => {
     setCameraError(null);
 
     // Cek Secure Context (Kamera live stream butuh HTTPS atau localhost di HP)
     if (typeof window !== "undefined") {
-      const isSecure = window.isSecureContext || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+      const isSecure =
+        window.isSecureContext ||
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1";
       if (!isSecure) {
         setCameraError(
           "Browser HP membatasi kamera live stream di jaringan HTTP lokal (bukan HTTPS). Gunakan tombol 'Ambil Foto QR (Kamera HP Langsung)' di bawah untuk memindai langsung menggunakan kamera HP Anda."
@@ -407,34 +417,17 @@ export default function MentorDashboardPage() {
     }
 
     try {
-      const readerElement = document.getElementById("mentor-qr-reader");
-      if (!readerElement) return;
+      if (!videoRef.current) return;
 
-      if (!html5QrCodeRef.current) {
-        html5QrCodeRef.current = new Html5Qrcode("mentor-qr-reader");
+      if (!liveScannerRef.current) {
+        liveScannerRef.current = new LiveQrScanner(videoRef.current, (decodedText: string) => {
+          processQrCode(decodedText);
+        });
       }
 
-      const scanner = html5QrCodeRef.current;
-      if (!scanner.isScanning) {
-        // scanner.start akan otomatis memicu permintaan izin kamera di browser HP
-        await scanner.start(
-          { facingMode: "environment" },
-          {
-            fps: 15,
-            qrbox: (viewfinderWidth: number, viewfinderHeight: number) => {
-              const edge = Math.floor(Math.min(viewfinderWidth, viewfinderHeight) * 0.72);
-              return { width: Math.max(edge, 180), height: Math.max(edge, 180) };
-            },
-            aspectRatio: 1.0,
-          },
-          (decodedText) => {
-            processQrCode(decodedText);
-          },
-          () => {}
-        );
-        setScannerActive(true);
-        setCameraError(null);
-      }
+      await liveScannerRef.current.start();
+      setScannerActive(true);
+      setCameraError(null);
     } catch (err: any) {
       console.warn("Gagal memulai kamera scanner:", err);
       setScannerActive(false);
@@ -447,36 +440,37 @@ export default function MentorDashboardPage() {
       } else if (errStr.includes("NotFoundError") || errStr.includes("DevicesNotFoundError")) {
         setCameraError("Kamera tidak terdeteksi pada perangkat ini.");
       } else if (errStr.includes("NotReadableError") || errStr.includes("TrackStartError")) {
-        setCameraError("Kamera sedang digunakan oleh aplikasi lain atau sistem HP sedang sibuk. Silakan tutup aplikasi kamera lain atau gunakan fitur 'Ambil Foto QR'.");
+        setCameraError(
+          "Kamera sedang digunakan oleh aplikasi lain atau sistem HP sedang sibuk. Silakan tutup aplikasi kamera lain atau gunakan fitur 'Ambil Foto QR'."
+        );
       } else {
         setCameraError("Gagal membuka kamera scanner. Silakan coba lagi atau gunakan tombol Ambil Foto QR.");
       }
     }
   }, [processQrCode]);
 
-  // Scan via foto kamera HP langsung (kompatibel bahkan di HTTP)
+  // Scan via foto kamera HP langsung menggunakan jsQR Multi-Pass (kompatibel bahkan di HTTP)
   const handleFileScan = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     try {
       setIsProcessingScan(true);
-      if (html5QrCodeRef.current?.isScanning) {
-        try {
-          await html5QrCodeRef.current.stop();
-          setScannerActive(false);
-        } catch {}
+      if (liveScannerRef.current) {
+        liveScannerRef.current.stop();
+        setScannerActive(false);
       }
-      if (!html5QrCodeRef.current) {
-        html5QrCodeRef.current = new Html5Qrcode("mentor-qr-reader");
-      }
-      const decodedText = await html5QrCodeRef.current.scanFile(file, false);
+
+      // 4-Pass multi-algorithm image detection (Full downscale, Center-crop, Contrast boost, Tight-crop)
+      const decodedText = await scanImageFileWithJsQR(file);
       processQrCode(decodedText);
-    } catch (err) {
+    } catch (err: any) {
       playBeep(false);
       setScanResult({
         type: "error",
         title: "QR Tidak Terdeteksi",
-        message: "Tidak dapat membaca QR Code dari foto. Pastikan posisi tegak, jelas, dan pencahayaan cukup.",
+        message:
+          err?.message ||
+          "Tidak dapat membaca QR Code dari foto. Pastikan posisi tegak, jelas, dan pencahayaan cukup.",
         time: new Date().toLocaleTimeString("id-ID"),
       });
     } finally {
@@ -485,44 +479,31 @@ export default function MentorDashboardPage() {
     }
   };
 
-  // Efek Lifecycle Kamera Scanner (html5-qrcode)
+  // Efek Lifecycle Kamera Scanner (LiveQrScanner - jsQR)
   useEffect(() => {
     let timer: NodeJS.Timeout;
 
     if (isScannerOpen) {
-      // Auto-start kamera dan picu pop-up izin browser HP saat scanner dibuka
+      // Auto-start kamera saat Bottom Sheet scanner dibuka
       timer = setTimeout(() => {
         startCamera();
       }, 300);
     } else {
       // Hentikan scanner saat Bottom Sheet ditutup
       setCameraError(null);
-      if (html5QrCodeRef.current && html5QrCodeRef.current.isScanning) {
-        html5QrCodeRef.current
-          .stop()
-          .then(() => {
-            try {
-              if (document.getElementById("mentor-qr-reader")) {
-                html5QrCodeRef.current?.clear();
-              }
-            } catch {}
-            setScannerActive(false);
-          })
-          .catch(() => {});
+      if (liveScannerRef.current) {
+        liveScannerRef.current.stop();
       }
+      setScannerActive(false);
     }
 
     return () => {
       clearTimeout(timer);
-      if (html5QrCodeRef.current && html5QrCodeRef.current.isScanning) {
-        html5QrCodeRef.current.stop().then(() => {
-          try {
-            if (document.getElementById("mentor-qr-reader")) {
-              html5QrCodeRef.current?.clear();
-            }
-          } catch {}
-        }).catch(() => {});
+      if (liveScannerRef.current) {
+        liveScannerRef.current.destroy();
+        liveScannerRef.current = null;
       }
+      setScannerActive(false);
     };
   }, [isScannerOpen, startCamera]);
 
@@ -950,7 +931,7 @@ export default function MentorDashboardPage() {
                   const startVal = sess.startSessions || sess.start_sessions;
                   return (
                     <option key={sess.id} value={sess.id}>
-                      {sess.name} ({formatSessionDate(startVal)}, {formatSessionTime(startVal)}) - Tol. {sess.toleransi}m
+                      {sess.is_active ? "🟢 [AKTIF SEKARANG] " : ""}{sess.name} ({formatSessionDate(startVal)}, {formatSessionTime(startVal)}) - Tol. {sess.toleransi}m
                     </option>
                   );
                 })
@@ -1002,31 +983,72 @@ export default function MentorDashboardPage() {
               borderRadius: "16px",
               overflow: "hidden",
               backgroundColor: "#11110E",
-              minHeight: scannerActive ? "240px" : "auto",
+              minHeight: "280px",
               border: "2px solid rgba(31, 75, 93, 0.2)",
               marginBottom: "12px",
             }}
           >
-            {/* Target DOM Container untuk Html5Qrcode - Selalu ter-mount agar kamera dapat attached */}
-            <div
-              id="mentor-qr-reader"
+            {/* Video element untuk LiveQrScanner (jsQR) */}
+            <video
+              ref={videoRef}
+              playsInline
+              muted
+              autoPlay
               style={{
                 width: "100%",
-                display: scannerActive ? "block" : "none",
+                height: "100%",
+                minHeight: "280px",
+                objectFit: "cover",
+                display: "block",
               }}
             />
+
+            {/* Animasi Guide Reticle ketika scanner aktif */}
+            {scannerActive && !isProcessingScan && (
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  pointerEvents: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  zIndex: 4,
+                }}
+              >
+                <div
+                  style={{
+                    width: "210px",
+                    height: "210px",
+                    border: "2px solid rgba(104, 207, 235, 0.7)",
+                    borderRadius: "16px",
+                    boxShadow: "0 0 0 9999px rgba(0, 0, 0, 0.32)",
+                    position: "relative",
+                  }}
+                >
+                  <span style={{ position: "absolute", top: "-2px", left: "-2px", width: "22px", height: "22px", borderTop: "4px solid #68CFEB", borderLeft: "4px solid #68CFEB", borderTopLeftRadius: "12px" }} />
+                  <span style={{ position: "absolute", top: "-2px", right: "-2px", width: "22px", height: "22px", borderTop: "4px solid #68CFEB", borderRight: "4px solid #68CFEB", borderTopRightRadius: "12px" }} />
+                  <span style={{ position: "absolute", bottom: "-2px", left: "-2px", width: "22px", height: "22px", borderBottom: "4px solid #68CFEB", borderLeft: "4px solid #68CFEB", borderBottomLeftRadius: "12px" }} />
+                  <span style={{ position: "absolute", bottom: "-2px", right: "-2px", width: "22px", height: "22px", borderBottom: "4px solid #68CFEB", borderRight: "4px solid #68CFEB", borderBottomRightRadius: "12px" }} />
+                </div>
+              </div>
+            )}
 
             {/* Jika kamera belum aktif atau ada error izin */}
             {!scannerActive && (
               <div
                 style={{
+                  position: "absolute",
+                  inset: 0,
                   backgroundColor: "#FFFFFF",
                   padding: "20px 16px",
                   textAlign: "center",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
+                  justifyContent: "center",
                   gap: "12px",
+                  zIndex: 6,
                 }}
               >
                 <div
@@ -1049,7 +1071,7 @@ export default function MentorDashboardPage() {
                   <h4 style={{ fontSize: "0.95rem", fontWeight: 800, color: "#1F1E19", margin: "0 0 4px 0" }}>
                     {cameraError ? "Izin Kamera Terkendala" : "Menghubungkan Kamera HP..."}
                   </h4>
-                  <p style={{ fontSize: "0.78rem", color: "rgba(31, 75, 93, 0.75)", lineHeight: 1.45, margin: 0 }}>
+                  <p style={{ fontSize: "0.78rem", color: "rgba(31, 75, 93, 0.75)", lineHeight: 1.45, margin: 0, maxWidth: "280px" }}>
                     {cameraError || "Browser sedang meminta izin untuk mengakses kamera ponsel Anda. Harap ketuk 'Izinkan' (Allow) pada pop-up di layar."}
                   </p>
                 </div>
