@@ -23,12 +23,16 @@
 # misc
 .DS_Store
 *.pem
+certificates/
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+walkthrough.md
+walkthrough-debug-qr.md
+scratch/*
 
 # env files (can opt-in for committing if needed)
 .env*
