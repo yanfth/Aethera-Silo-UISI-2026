@@ -3,6 +3,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import styles from "./AnggotaDivisi.module.css";
+import { getCloudinaryUrl } from "@/utils/cloudinary";
 import {
   Users,
   Shield,
@@ -100,15 +101,15 @@ const DIVISIONS: Division[] = [
 
 const MEMBERS: Member[] = [
   // BPH
-  { id: "1", name: "Nabil Qudsi Mas’ud", prodi: "Ekonomi Syariah", role: "Ketua Pelaksana", divisionId: "bph", divisionName: "BPH", image: "/nabil_qudsi.jpg" },
-  { id: "2", name: "M. Rosyid Ridlo", prodi: "Teknik Logistik", role: "Sekretaris 1", divisionId: "bph", divisionName: "BPH", image: "/rosyid_ridlo.jpg" },
-  { id: "3", name: "Hillyatut Taqiya", prodi: "Ekonomi Syariah", role: "Sekretaris 2", divisionId: "bph", divisionName: "BPH", image: "/hillyatut_taqiya.jpg" },
-  { id: "4", name: "Zahra Naila Supriyono Putri", prodi: "Akuntansi", role: "Bendahara 1", divisionId: "bph", divisionName: "BPH", image: "/zahra_naila.jpg" },
-  { id: "5", name: "Putri Fara Diba", prodi: "Ekonomi Syariah", role: "Bendahara 2", divisionId: "bph", divisionName: "BPH", image: "/putri_fara.jpg" },
+  { id: "1", name: "Nabil Qudsi Mas’ud", prodi: "Ekonomi Syariah", role: "Ketua Pelaksana", divisionId: "bph", divisionName: "BPH", image: "/nabil_qudsi.webp" },
+  { id: "2", name: "M. Rosyid Ridlo", prodi: "Teknik Logistik", role: "Sekretaris 1", divisionId: "bph", divisionName: "BPH", image: "/rosyid_ridlo.webp" },
+  { id: "3", name: "Hillyatut Taqiya", prodi: "Ekonomi Syariah", role: "Sekretaris 2", divisionId: "bph", divisionName: "BPH", image: "/hillyatut_taqiya.webp" },
+  { id: "4", name: "Zahra Naila Supriyono Putri", prodi: "Akuntansi", role: "Bendahara 1", divisionId: "bph", divisionName: "BPH", image: "/zahra_naila.webp" },
+  { id: "5", name: "Putri Fara Diba", prodi: "Ekonomi Syariah", role: "Bendahara 2", divisionId: "bph", divisionName: "BPH", image: "/putri_fara.webp" },
 
   // SC & Acara
-  { id: "6", name: "Jefranda Dinata", prodi: "Ekonomi Syariah", role: "Koordinator SC & Acara", divisionId: "acara", divisionName: "SC & Acara", image: "/jefranda_dinata.jpg" },
-  { id: "7", name: "Khairun Niza", prodi: "Manajemen", role: "Wakil Koordinator SC & Acara", divisionId: "acara", divisionName: "SC & Acara", image: "/khairun_niza.jpg" },
+  { id: "6", name: "Jefranda Dinata", prodi: "Ekonomi Syariah", role: "Koordinator SC & Acara", divisionId: "acara", divisionName: "SC & Acara", image: "/jefranda_dinata.webp" },
+  { id: "7", name: "Khairun Niza", prodi: "Manajemen", role: "Wakil Koordinator SC & Acara", divisionId: "acara", divisionName: "SC & Acara", image: "/khairun_niza.webp" },
   { id: "8", name: "Melly Mutiara", prodi: "Manajemen", role: "Anggota SC", divisionId: "acara", divisionName: "SC & Acara" , image: "/fotoAnggota/SC&Acara/Melly Mutiara.JPG" },
   { id: "9", name: "Muhaemit", prodi: "Manajemen", role: "Anggota SC", divisionId: "acara", divisionName: "SC & Acara" , image: "/fotoAnggota/SC&Acara/Muhaemit.jpg" },
   { id: "10", name: "Novi Risma Ameliasari", prodi: "Teknik Kimia", role: "Anggota SC", divisionId: "acara", divisionName: "SC & Acara" , image: "/fotoAnggota/SC&Acara/Novi Risma Amelia Sari.jpg" },
@@ -123,7 +124,7 @@ const MEMBERS: Member[] = [
   { id: "19", name: "Dhea Safira Rahmawati", prodi: "Teknologi Industri Pertanian", role: "Anggota Acara", divisionId: "acara", divisionName: "SC & Acara" , image: "/fotoAnggota/SC&Acara/Dhea Safira Rahmawati.jpg" },
 
   // PDD
-  { id: "30", name: "Alfian Khusnul Fatoni", prodi: "Informatika", role: "Koordinator PDD", divisionId: "pdd", divisionName: "PDD", image: "/alfian_fatoni.jpg" },
+  { id: "30", name: "Alfian Khusnul Fatoni", prodi: "Informatika", role: "Koordinator PDD", divisionId: "pdd", divisionName: "PDD", image: "/alfian_fatoni.webp" },
   { id: "31", name: "Salwa Mufidah Hayati", prodi: "Eksyar", role: "Anggota PDD", divisionId: "pdd", divisionName: "PDD" , image: "/fotoAnggota/PDD/Salwa Mufidah Hayati.JPG" },
   { id: "32", name: "Wanda Adelya Pratiwi", prodi: "Akuntansi", role: "Anggota PDD", divisionId: "pdd", divisionName: "PDD" , image: "/fotoAnggota/PDD/Wanda Adelya Pratiwi.JPG" },
   { id: "33", name: "Mohammad Fathir Ubaidillah Al Azubi", prodi: "Manajemen", role: "Anggota PDD", divisionId: "pdd", divisionName: "PDD" , image: "/fotoAnggota/PDD/Mohammad Fathir Ubaidillah Al Azubi.JPG" },
@@ -133,7 +134,7 @@ const MEMBERS: Member[] = [
   { id: "37", name: "Lelly Michela Aprilindo", prodi: "DKV", role: "Anggota PDD", divisionId: "pdd", divisionName: "PDD" , image: "/fotoAnggota/PDD/Lelly Michela Aprilindo.JPG" },
 
   // Logtrans
-  { id: "38", name: "Muhammad Faidza Airlangga", prodi: "Informatika", role: "Koordinator Logtrans", divisionId: "logtrans", divisionName: "Logtrans", image: "/faidza_airlangga.jpg" },
+  { id: "38", name: "Muhammad Faidza Airlangga", prodi: "Informatika", role: "Koordinator Logtrans", divisionId: "logtrans", divisionName: "Logtrans", image: "/faidza_airlangga.webp" },
   { id: "39", name: "Agil Boy Ahmada", prodi: "DKV", role: "Anggota Logtrans", divisionId: "logtrans", divisionName: "Logtrans" , image: "/fotoAnggota/Logtrans/Agil Boy Ahmada.jpg" },
   { id: "40", name: "Galan Gantari", prodi: "Ekonomi Syariah", role: "Anggota Logtrans", divisionId: "logtrans", divisionName: "Logtrans" , image: "/fotoAnggota/Logtrans/Galan Gantari.jpg" },
   { id: "41", name: "M. Abdillah Malik", prodi: "Ekonomi Syariah", role: "Anggota Logtrans", divisionId: "logtrans", divisionName: "Logtrans" , image: "/fotoAnggota/Logtrans/M Abdillah Malik.jpg" },
@@ -153,7 +154,7 @@ const MEMBERS: Member[] = [
   { id: "55", name: "Rio Al Kaseno", prodi: "Informatika", role: "Anggota Logtrans", divisionId: "logtrans", divisionName: "Logtrans" , image: "/fotoAnggota/Logtrans/Rio Al Kaseno.jpg" },
 
   // Medis
-  { id: "56", name: "Callysta Goesti Annayla Sumarlin", prodi: "Akuntansi", role: "Kepala Divisi Medis", divisionId: "medis", divisionName: "Medis", image: "/callysta_goesti.jpg" },
+  { id: "56", name: "Callysta Goesti Annayla Sumarlin", prodi: "Akuntansi", role: "Kepala Divisi Medis", divisionId: "medis", divisionName: "Medis", image: "/callysta_goesti.webp" },
   { id: "57", name: "Faza Sazkiyah", prodi: "Akuntansi", role: "Anggota Medis", divisionId: "medis", divisionName: "Medis" , image: "/fotoAnggota/Medis/Faza Sazkiyah.jpg" },
   { id: "58", name: "Reynata Hartani", prodi: "Teknik Kimia", role: "Anggota Medis", divisionId: "medis", divisionName: "Medis" , image: "/fotoAnggota/Medis/Reynata Hartani.jpg" },
   { id: "59", name: "Raditya Fahrezi Putra Ahsan", prodi: "Informatika", role: "Anggota Medis", divisionId: "medis", divisionName: "Medis" , image: "/fotoAnggota/Medis/Raditya Fahrezi Putra A.jpg" },
@@ -171,8 +172,8 @@ const MEMBERS: Member[] = [
   { id: "71", name: "Amirul Hakim", prodi: "Teknik Kimia", role: "Anggota Medis", divisionId: "medis", divisionName: "Medis" , image: "/fotoAnggota/Medis/Amirul Hakim.jpg" },
 
   // Mentor Kelompok
-  { id: "72", name: "Muhammad Ivandy Rohman", prodi: "Informatika", role: "Koordinator Mentor kelompok", divisionId: "mentor", divisionName: "Mentor", image: "/ivandy_rohman.jpg" },
-  { id: "73", name: "Dealova Fransisca Ferlianti", prodi: "Teknik Logistik", role: "Wakil Koordinator Mentor kelompok", divisionId: "mentor", divisionName: "Mentor", image: "/dealova_fransisca.jpg" },
+  { id: "72", name: "Muhammad Ivandy Rohman", prodi: "Informatika", role: "Koordinator Mentor kelompok", divisionId: "mentor", divisionName: "Mentor", image: "/ivandy_rohman.webp" },
+  { id: "73", name: "Dealova Fransisca Ferlianti", prodi: "Teknik Logistik", role: "Wakil Koordinator Mentor kelompok", divisionId: "mentor", divisionName: "Mentor", image: "/dealova_fransisca.webp" },
   { id: "74", name: "Achmad Ricky Hariono", prodi: "Informatika", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Achmad Ricky Hariono.jpg" },
   { id: "75", name: "Isnanda Saputra", prodi: "Teknologi Industri Pertanian", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/Isnanda Saputra.jpg" },
   { id: "76", name: "In’am Faadilah Ramadhani Tavisyach", prodi: "Sistem Informasi", role: "Anggota Mentor Kelompok", divisionId: "mentor", divisionName: "Mentor" , image: "/fotoAnggota/Mentor Kelompok/In’am Faadilah Ramadhani T.jpg" },
@@ -222,6 +223,7 @@ export default function AnggotaDivisi() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
+  const [selectedMember, setSelectedMember] = useState<Member | null>(null);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 640);
@@ -287,7 +289,7 @@ export default function AnggotaDivisi() {
             onClick={() => setSelectedDivisionId("all")}
           >
             <Users size={16} /> Semua Divisi
-            <span className={styles.badgeCount}>{MEMBERS.length}</span>
+            <span className={styles.badgeCount}>{MEMBERS.length + 10}</span>
           </button>
 
           {DIVISIONS.map((div) => {
@@ -305,6 +307,10 @@ export default function AnggotaDivisi() {
               </button>
             );
           })}
+          <div className={styles.tabBtn} style={{ cursor: "default" }}>
+            <GraduationCap size={16} /> IC
+            <span className={styles.badgeCount}>10</span>
+          </div>
         </div>
       </div>
 
@@ -324,11 +330,23 @@ export default function AnggotaDivisi() {
       {/* Members Grid */}
       <div className={styles.membersGrid}>
         {displayedMembers.length > 0 ? (
-          displayedMembers.map((member) => (
-            <div key={member.id} className={styles.memberCard}>
+          displayedMembers.map((member) => {
+            const memberImageSrc = member.image?.startsWith("/fotoAnggota") 
+              ? member.image 
+              : member.image 
+                ? getCloudinaryUrl(member.image, 0) 
+                : "";
+
+            return (
+            <div 
+              key={member.id} 
+              className={styles.memberCard} 
+              onClick={() => setSelectedMember(member)}
+              style={{ cursor: "pointer" }}
+            >
               <div className={styles.memberIconBox} style={member.image ? { padding: 0, overflow: 'hidden', border: 'none' } : {}}>
                 {member.image ? (
-                  <Image src={member.image} alt={member.name} width={200} height={200} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+                  <Image src={memberImageSrc} alt={member.name} width={200} height={200} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
                 ) : (
                   <User size={18} />
                 )}
@@ -342,7 +360,8 @@ export default function AnggotaDivisi() {
                 </div>
               </div>
             </div>
-          ))
+            );
+          })
         ) : (
           <div className={styles.emptySearch}>
             Tidak ditemukan panitia dengan kata kunci &ldquo;{searchQuery}&rdquo;.
@@ -378,6 +397,39 @@ export default function AnggotaDivisi() {
           >
             <ChevronRight size={20} />
           </button>
+        </div>
+      )}
+
+      {/* Modal Popup */}
+      {selectedMember && (
+        <div className={styles.modalOverlay} onClick={() => setSelectedMember(null)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.closeBtn} onClick={() => setSelectedMember(null)}>
+              ×
+            </button>
+            <div className={styles.modalPhotoContainer}>
+              <div className={styles.modalPhotoBox}>
+                {selectedMember.image ? (
+                  <Image 
+                    src={selectedMember.image.startsWith("/fotoAnggota") ? selectedMember.image : getCloudinaryUrl(selectedMember.image, 0)} 
+                    alt={selectedMember.name} 
+                    fill
+                    style={{ objectFit: 'cover', objectPosition: 'top' }} 
+                  />
+                ) : (
+                  <User size={80} color="rgba(255,255,255,0.2)" />
+                )}
+              </div>
+            </div>
+            <div className={styles.modalInfo}>
+              <h3 className={styles.modalName}>{selectedMember.name}</h3>
+              <p className={styles.modalRole}>{selectedMember.role}</p>
+              <div className={styles.modalTags}>
+                <span className={styles.modalProdiTag}>{selectedMember.prodi}</span>
+                <span className={styles.modalDivTag}>{selectedMember.divisionName}</span>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>

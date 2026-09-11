@@ -14,7 +14,11 @@ import {
   Megaphone,
   Camera, 
   MessageCircle, 
-  Mail 
+  Mail,
+  Book,
+  Download,
+  Folder,
+  Award
 } from "lucide-react";
 
 export const metadata = {
@@ -96,6 +100,137 @@ export default function PenugasanPage() {
               <p className={styles.cardDesc}>
                 Membuat video kampanye edukasi isu sosial secara berkelompok sesuai arahan panitia.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== KEBUTUHAN ACARA ===== */}
+        <section id="kebutuhan-acara" className={styles.section} data-aos="fade-up">
+          <h2 className={styles.sectionTitle}>Kebutuhan Acara</h2>
+          <p className={styles.sectionSubtitle}>
+            Unduh seluruh dokumen, template, dan atribut penting untuk persiapan 
+            mengikuti rangkaian acara SILO UISI 2026.
+          </p>
+
+          <div className={styles.servicesGrid}>
+            {/* Guidebook */}
+            <div className={styles.card}>
+              <div
+                className={styles.cardIcon}
+                style={{
+                  background: "rgba(31,75,93,0.1)",
+                  color: "var(--lp-ocean-blue)",
+                }}
+              >
+                <Book size={24} />
+              </div>
+              <h3 className={styles.cardTitle}>Guidebook SILO</h3>
+              <p className={styles.cardDesc}>
+                Buku panduan lengkap berisi tata tertib, jadwal, dan informasi umum SILO UISI 2026.
+              </p>
+              <Link href="#" target="_blank" rel="noopener noreferrer" className={styles.downloadBtn}>
+                <Download size={16} /> Unduh Guidebook
+              </Link>
+            </div>
+
+            {/* Twibbon */}
+            <div className={styles.card}>
+              <div
+                className={styles.cardIcon}
+                style={{
+                  background: "rgba(104,207,235,0.1)",
+                  color: "var(--lp-aqua)",
+                }}
+              >
+                <ImageIcon size={24} />
+              </div>
+              <h3 className={styles.cardTitle}>Twibbon Peserta</h3>
+              <p className={styles.cardDesc}>
+                Frame Twibbon resmi untuk diunggah di Instagram sebagai tanda keikutsertaan.
+              </p>
+              <Link href="#" target="_blank" rel="noopener noreferrer" className={styles.downloadBtn}>
+                <Download size={16} /> Unduh Twibbon
+              </Link>
+            </div>
+
+            {/* Frame Penugasan */}
+            <div className={styles.card}>
+              <div
+                className={styles.cardIcon}
+                style={{
+                  background: "rgba(31,30,25,0.1)",
+                  color: "var(--lp-charcoal)",
+                }}
+              >
+                <Folder size={24} />
+              </div>
+              <h3 className={styles.cardTitle}>Frame Penugasan</h3>
+              <p className={styles.cardDesc}>
+                Template frame standar untuk pengumpulan tugas harian dan tugas kelompok.
+              </p>
+              <Link href="#" target="_blank" rel="noopener noreferrer" className={styles.downloadBtn}>
+                <Download size={16} /> Unduh Frame
+              </Link>
+            </div>
+
+            {/* Handbook */}
+            <div className={styles.card}>
+              <div
+                className={styles.cardIcon}
+                style={{
+                  background: "rgba(104,207,235,0.1)",
+                  color: "var(--lp-aqua)",
+                }}
+              >
+                <FileText size={24} />
+              </div>
+              <h3 className={styles.cardTitle}>Handbook Materi</h3>
+              <p className={styles.cardDesc}>
+                Modul materi dan lembar kerja untuk sesi pemaparan selama rangkaian acara.
+              </p>
+              <Link href="#" target="_blank" rel="noopener noreferrer" className={styles.downloadBtn}>
+                <Download size={16} /> Unduh Handbook
+              </Link>
+            </div>
+
+            {/* ID Card */}
+            <div className={styles.card}>
+              <div
+                className={styles.cardIcon}
+                style={{
+                  background: "rgba(31,75,93,0.1)",
+                  color: "var(--lp-ocean-blue)",
+                }}
+              >
+                <Award size={24} />
+              </div>
+              <h3 className={styles.cardTitle}>Template ID Card</h3>
+              <p className={styles.cardDesc}>
+                Format standar tanda pengenal (Co-Card) untuk dicetak dan digunakan saat offline.
+              </p>
+              <Link href="#" target="_blank" rel="noopener noreferrer" className={styles.downloadBtn}>
+                <Download size={16} /> Unduh ID Card
+              </Link>
+            </div>
+
+            {/* Virtual Background */}
+            <div className={styles.card}>
+              <div
+                className={styles.cardIcon}
+                style={{
+                  background: "rgba(31,30,25,0.1)",
+                  color: "var(--lp-charcoal)",
+                }}
+              >
+                <Camera size={24} />
+              </div>
+              <h3 className={styles.cardTitle}>Virtual Background</h3>
+              <p className={styles.cardDesc}>
+                Latar belakang virtual resmi yang wajib digunakan saat sesi pertemuan online.
+              </p>
+              <Link href="#" target="_blank" rel="noopener noreferrer" className={styles.downloadBtn}>
+                <Download size={16} /> Unduh Background
+              </Link>
             </div>
           </div>
         </section>

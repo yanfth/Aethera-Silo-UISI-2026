@@ -43,7 +43,7 @@ export default function LogoPage() {
           >
             <div style={{ textAlign: "center" }}>
               <img 
-                src={getCloudinaryUrl("/logo_aethera.webp")} 
+                src="/logo_aethera.png?v=4" 
                 alt="Logo Resmi AETHERA SILO UISI 2026" 
                 style={{ 
                   width: "260px", 
