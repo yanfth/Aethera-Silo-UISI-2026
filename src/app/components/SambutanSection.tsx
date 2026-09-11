@@ -4,6 +4,8 @@ import React from "react";
 import styles from "./SambutanSection.module.css";
 import { getCloudinaryUrl } from "@/utils/cloudinary";
 
+import rektorImg from "./Rektor.jpg";
+
 interface SambutanItem {
   id: string;
   imagePosition: "left" | "right";
@@ -12,6 +14,7 @@ interface SambutanItem {
   name: string;
   title: string;
   image: string;
+  isLocal?: boolean;
   paragraphs: string[];
 }
 
@@ -23,7 +26,8 @@ const SAMBUTAN_DATA: SambutanItem[] = [
     badgeBanner: "REKTOR UISI",
     name: "Dr. Eka Ananta Sidharta, S.E., M.M., Ak., CA.",
     title: "Rektor Universitas Internasional Semen Indonesia (UISI)",
-    image: "/ketua_dosen.webp",
+    image: rektorImg.src,
+    isLocal: true,
     paragraphs: [
       "Assalamualaikum warahmatullahi wabarakatuh, Selamat Pagi dan Salam Sejahtera bagi Kita Semua.",
       "Selamat datang Generasi Muda Aethera di Kampus Perjuangan dan Karya, Universitas Internasional Semen Indonesia (UISI). SILO 2026 merupakan gerbang pembuka perjalanan akademis dan pembentukan karakter dalam lingkungan perguruan tinggi yang adaptif, unggul, dan berintegritas tinggi.",
@@ -76,7 +80,7 @@ export default function SambutanSection() {
                 <div className={styles.photoBoxWrapper}>
                   <div className={styles.photoFrame}>
                     <img
-                      src={getCloudinaryUrl(item.image, 1000)}
+                      src={item.isLocal ? item.image : getCloudinaryUrl(item.image, 1000)}
                       alt={item.name}
                       className={styles.portraitPhoto}
                       loading="lazy"
@@ -138,7 +142,7 @@ export default function SambutanSection() {
                 <div className={styles.photoBoxWrapper}>
                   <div className={styles.photoFrame}>
                     <img
-                      src={getCloudinaryUrl(item.image, 1000)}
+                      src={item.isLocal ? item.image : getCloudinaryUrl(item.image, 1000)}
                       alt={item.name}
                       className={styles.portraitPhoto}
                       loading="lazy"
