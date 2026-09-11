@@ -5,3 +5,4 @@ export * from "./groupMentor.model";
 export * from "./attendance.model";
 export * from "./assignment.model";
 export * from "./submission.model";
+export * from "./attribute.model";

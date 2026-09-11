@@ -451,3 +451,36 @@
   transform: scale(0.98);
 }
 
+/* Logged-in Active Session Buttons */
+.userActiveBtn {
+  background: linear-gradient(135deg, #0F766E 0%, #1F4B5D 100%) !important;
+  border: 1.5px solid #68CFEB !important;
+  box-shadow: 0 4px 16px rgba(15, 118, 110, 0.35), 0 0 10px rgba(104, 207, 235, 0.25) !important;
+}
+
+.userActiveBtn:hover {
+  background: linear-gradient(135deg, #115E59 0%, #173d4d 100%) !important;
+  box-shadow: 0 6px 20px rgba(15, 118, 110, 0.45), 0 0 18px rgba(104, 207, 235, 0.45) !important;
+  transform: translateY(-2px);
+}
+
+.usernameText {
+  font-weight: 700;
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+.userIcon {
+  color: #68CFEB;
+  flex-shrink: 0;
+}
+
+.mobileUserActiveBtn {
+  background: linear-gradient(135deg, #0F766E 0%, #1F4B5D 100%) !important;
+  border: 1.5px solid #68CFEB !important;
+  box-shadow: 0 6px 18px rgba(15, 118, 110, 0.35), 0 0 12px rgba(104, 207, 235, 0.25) !important;
+}
+

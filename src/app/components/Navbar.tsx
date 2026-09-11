@@ -16,7 +16,8 @@ import {
   Users, 
   BookOpen, 
   Globe,
-  LogIn 
+  LogIn,
+  User
 } from "lucide-react";
 
 export default function Navbar() {
@@ -24,7 +25,52 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [jelajahDropdownOpen, setJelajahDropdownOpen] = useState(false);
   const [mobileJelajahOpen, setMobileJelajahOpen] = useState(true);
+  const [currentUser, setCurrentUser] = useState<{
+    id: number;
+    username: string;
+    nama: string;
+    role: string;
+  } | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Ambil sesi user yang sedang aktif secara otomatis
+  useEffect(() => {
+    let isMounted = true;
+    async function checkUserSession() {
+      try {
+        const res = await fetch("/api/auth/me");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success && data.user && isMounted) {
+            setCurrentUser(data.user);
+          } else if (isMounted) {
+            setCurrentUser(null);
+          }
+        } else if (isMounted) {
+          setCurrentUser(null);
+        }
+      } catch {
+        if (isMounted) setCurrentUser(null);
+      }
+    }
+    checkUserSession();
+    return () => {
+      isMounted = false;
+    };
+  }, [pathname]);
+
+  const getDashboardUrl = (role?: string) => {
+    const r = (role || "").toLowerCase();
+    if (r === "admin" || r === "panitia") return "/admin";
+    if (r === "mentor") return "/mentor";
+    if (r === "maba") return "/maba";
+    return "/login";
+  };
+
+  const getShortUsername = (username?: string) => {
+    if (!username) return "Akun";
+    return username.length > 12 ? `${username.slice(0, 10)}..` : username;
+  };
 
   const isActive = (path: string) => {
     if (path === "/" && pathname === "/") return true;
@@ -138,14 +184,27 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Tombol Login Header Paling Kanan */}
-          <Link
-            href="/login"
-            className={`${styles.loginBtn} ${isActive("/login") ? styles.activeLoginBtn : ""}`}
-          >
-            <LogIn size={16} />
-            <span>Masuk</span>
-          </Link>
+          {/* Tombol Login / User Dashboard Header Paling Kanan */}
+          {currentUser ? (
+            <Link
+              href={getDashboardUrl(currentUser.role)}
+              className={`${styles.loginBtn} ${styles.userActiveBtn}`}
+              title={`Akun: ${currentUser.nama} (@${currentUser.username}) - Buka Dashboard`}
+            >
+              <User size={16} className={styles.userIcon} />
+              <span className={styles.usernameText}>
+                {getShortUsername(currentUser.username)}
+              </span>
+            </Link>
+          ) : (
+            <Link
+              href="/login"
+              className={`${styles.loginBtn} ${isActive("/login") ? styles.activeLoginBtn : ""}`}
+            >
+              <LogIn size={16} />
+              <span>Masuk</span>
+            </Link>
+          )}
         </div>
 
         {/* Mobile / Tablet Toggle Button (<= 1024px) */}
@@ -230,16 +289,30 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Tombol Login Mobile */}
+          {/* Tombol Login / Dashboard Mobile */}
           <div className={styles.mobileLoginWrapper}>
-            <Link
-              href="/login"
-              className={styles.mobileLoginBtn}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <LogIn size={19} />
-              <span>Masuk ke Akun</span>
-            </Link>
+            {currentUser ? (
+              <Link
+                href={getDashboardUrl(currentUser.role)}
+                className={`${styles.mobileLoginBtn} ${styles.mobileUserActiveBtn}`}
+                onClick={() => setMobileMenuOpen(false)}
+                title={`Dashboard ${currentUser.nama}`}
+              >
+                <User size={19} />
+                <span>
+                  {getShortUsername(currentUser.username)} &bull; Dashboard
+                </span>
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className={styles.mobileLoginBtn}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <LogIn size={19} />
+                <span>Masuk ke Akun</span>
+              </Link>
+            )}
           </div>
         </div>
       </div>
