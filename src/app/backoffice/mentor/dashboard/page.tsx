@@ -24,6 +24,8 @@ import {
   X,
   User,
   ExternalLink,
+  ChevronRight,
+  PackageCheck,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -204,7 +206,7 @@ export default function MentorDashboardPage() {
               groupIds.includes(m.mGroupsId || m.group?.id)
             );
           } else {
-            mabas = uData.data;
+            mabas = [];
           }
         }
       }
@@ -741,6 +743,54 @@ export default function MentorDashboardPage() {
           <Camera size={16} />
           Mulai Pindai Presensi Maba
         </button>
+      </div>
+
+      {/* 2.5. Kartu Akses Cepat Pengecekan Atribut Maba */}
+      <div
+        onClick={() => router.push("/mentor/atribut")}
+        style={{
+          background: "linear-gradient(135deg, rgba(15, 118, 110, 0.08) 0%, rgba(31, 75, 93, 0.04) 100%)",
+          borderRadius: "18px",
+          padding: "16px 18px",
+          marginBottom: "18px",
+          border: "1.5px solid rgba(15, 118, 110, 0.2)",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "14px",
+          boxShadow: "0 4px 16px rgba(15, 118, 110, 0.05)",
+          transition: "transform 0.15s ease",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <div
+            style={{
+              width: "42px",
+              height: "42px",
+              borderRadius: "12px",
+              backgroundColor: "#0F766E",
+              color: "#FFFFFF",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+              boxShadow: "0 4px 12px rgba(15, 118, 110, 0.25)",
+            }}
+          >
+            <PackageCheck size={22} />
+          </div>
+          <div>
+            <div style={{ fontWeight: 800, fontSize: "0.92rem", color: "#1F4B5D" }}>
+              Pemeriksaan Atribut Maba
+            </div>
+            <div style={{ fontSize: "0.75rem", color: "rgba(31, 75, 93, 0.7)", marginTop: "2px" }}>
+              Checklist visual barang bawaan maba binaan &rarr;
+            </div>
+          </div>
+        </div>
+
+        <ChevronRight size={20} color="#0F766E" />
       </div>
 
       {/* 3. Daftar Tugas Masuk Yang Perlu Direview */}

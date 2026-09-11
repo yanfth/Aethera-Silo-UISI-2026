@@ -20,6 +20,8 @@ import {
   Link as LinkIcon,
   Download,
   FileSpreadsheet,
+  PackageCheck,
+  ChevronRight,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -420,6 +422,53 @@ export default function AdminDashboardPage() {
           </a>
         </div>
       </div>
+
+      {/* Pintasan Cepat: Manajemen Atribut Maba */}
+      <Link
+        href="/admin/atribut"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "14px",
+          background: "linear-gradient(135deg, rgba(15, 118, 110, 0.08) 0%, rgba(31, 75, 93, 0.04) 100%)",
+          borderRadius: "18px",
+          padding: "16px 18px",
+          marginBottom: "18px",
+          border: "1.5px solid rgba(15, 118, 110, 0.2)",
+          textDecoration: "none",
+          boxShadow: "0 4px 16px rgba(15, 118, 110, 0.05)",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <div
+            style={{
+              width: "42px",
+              height: "42px",
+              borderRadius: "12px",
+              backgroundColor: "#0F766E",
+              color: "#FFFFFF",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+              boxShadow: "0 4px 12px rgba(15, 118, 110, 0.25)",
+            }}
+          >
+            <PackageCheck size={22} />
+          </div>
+          <div>
+            <div style={{ fontWeight: 800, fontSize: "0.92rem", color: "#1F4B5D" }}>
+              Kelola Atribut &amp; Bawaan Maba
+            </div>
+            <div style={{ fontSize: "0.75rem", color: "rgba(31, 75, 93, 0.7)", marginTop: "2px" }}>
+              Atur perlengkapan harian &amp; pantau checklist mentor &rarr;
+            </div>
+          </div>
+        </div>
+
+        <ChevronRight size={20} color="#0F766E" />
+      </Link>
 
       {/* 2. Statistik Global Kehadiran & Tugas */}
       <h3

@@ -20,6 +20,7 @@ import {
   Award,
   ChevronRight,
   XCircle,
+  PackageCheck,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -385,6 +386,54 @@ export default function MabaDashboardPage() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* 2.5. Card Pintasan Cepat Atribut & Perlengkapan Maba */}
+      <div
+        onClick={() => router.push("/maba/atribut")}
+        style={{
+          background: "linear-gradient(135deg, rgba(15, 118, 110, 0.08) 0%, rgba(31, 75, 93, 0.04) 100%)",
+          borderRadius: "18px",
+          padding: "16px 18px",
+          marginBottom: "18px",
+          border: "1.5px solid rgba(15, 118, 110, 0.2)",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "14px",
+          boxShadow: "0 4px 16px rgba(15, 118, 110, 0.05)",
+          transition: "transform 0.15s ease",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <div
+            style={{
+              width: "42px",
+              height: "42px",
+              borderRadius: "12px",
+              backgroundColor: "#0F766E",
+              color: "#FFFFFF",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+              boxShadow: "0 4px 12px rgba(15, 118, 110, 0.25)",
+            }}
+          >
+            <PackageCheck size={22} />
+          </div>
+          <div>
+            <div style={{ fontWeight: 800, fontSize: "0.92rem", color: "#1F4B5D" }}>
+              Atribut & Barang Bawaan
+            </div>
+            <div style={{ fontSize: "0.75rem", color: "rgba(31, 75, 93, 0.7)", marginTop: "2px" }}>
+              Cek daftar perlengkapan wajib hari ini &rarr;
+            </div>
+          </div>
+        </div>
+
+        <ChevronRight size={20} color="#0F766E" />
       </div>
 
       {/* 3. Ringkasan Status Penugasan */}
