@@ -1,97 +1,347 @@
-import React from "react";
-import { Crown, Award, ShieldCheck, Gem, Radio } from "lucide-react";
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { Award, ShieldCheck, Gem, Radio } from "lucide-react";
 import { getCloudinaryUrl } from "@/utils/cloudinary";
 
 interface SponsorItem {
   name: string;
   category: string;
-  logoSrc: string;
+  logoSrc?: string;
+  type: "PLATINUM" | "GOLD" | "SILVER" | "MEDIA";
 }
 
-const PLATINUM_SPONSORS: SponsorItem[] = [
+const SPONSORS: SponsorItem[] = [
+  // PLATINUM
   {
     name: "PT Semen Indonesia (Persero) Tbk (SIG)",
     category: "Main Platinum Sponsor",
     logoSrc: "/sponsors/sig.webp",
+    type: "PLATINUM"
   },
   {
     name: "Bank Mandiri",
     category: "Official Banking Partner",
     logoSrc: "/sponsors/mandiri.webp",
+    type: "PLATINUM"
   },
-];
-
-const GOLD_SPONSORS: SponsorItem[] = [
+  // GOLD
   {
     name: "Telkomsel",
     category: "Telecommunication Partner",
     logoSrc: "/sponsors/telkomsel.svg",
+    type: "GOLD"
   },
   {
     name: "Indofood",
     category: "Food & Beverage Partner",
     logoSrc: "/sponsors/indofood.svg",
+    type: "GOLD"
   },
   {
     name: "Kahf Official",
     category: "Grooming Partner",
     logoSrc: "/sponsors/kahf.svg",
+    type: "GOLD"
   },
-];
-
-const SILVER_SPONSORS: SponsorItem[] = [
+  // SILVER
   {
     name: "Teh Botol Sosro",
     category: "Beverage Partner",
     logoSrc: "/sponsors/sosro.svg",
+    type: "SILVER"
   },
   {
     name: "Le Minerale",
     category: "Mineral Water Partner",
     logoSrc: "/sponsors/leminerale.svg",
+    type: "SILVER"
   },
   {
     name: "Grab Indonesia",
     category: "Mobility Partner",
     logoSrc: "/sponsors/grab.svg",
+    type: "SILVER"
   },
   {
     name: "Gojek Indonesia",
     category: "Superapp Partner",
     logoSrc: "/sponsors/gojek.svg",
+    type: "SILVER"
   },
 ];
 
-const MEDIA_PARTNERS: { name: string; category: string }[] = [
+const MEDIA_PARTNERS: SponsorItem[] = [
   {
     name: "UISI Media Center",
     category: "Campus Official Media",
+    type: "MEDIA"
   },
   {
     name: "Event Surabaya & Gresik",
     category: "Regional Event Partner",
+    type: "MEDIA"
   },
   {
     name: "Info Kampus Indonesia",
     category: "Education Media",
+    type: "MEDIA"
   },
   {
     name: "Mahasiswa Surabaya",
     category: "Student Community",
+    type: "MEDIA"
   },
 ];
 
+const SponsorCard = ({ item, isCenter }: { item: SponsorItem, isCenter: boolean }) => {
+  const isPlatinum = item.type === "PLATINUM";
+  const isGold = item.type === "GOLD";
+  const isSilver = item.type === "SILVER";
+  const isMedia = item.type === "MEDIA";
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center",
+        padding: "1.5rem",
+        background: isCenter ? "#fff" : "transparent",
+        borderRadius: "20px",
+        boxShadow: isCenter ? "0 10px 40px rgba(31,75,93,0.1)" : "none",
+        transition: "all 0.5s cubic-bezier(0.25, 1, 0.5, 1)",
+        minWidth: "200px",
+      }}
+    >
+      {/* Badge based on type */}
+      {isPlatinum && (
+        <div style={{
+          display: "inline-flex", alignItems: "center", gap: "0.4rem", background: "linear-gradient(135deg, #1f4b5d 0%, #0F172A 100%)", color: "#E2E8F0", padding: "0.3rem 0.8rem", borderRadius: "999px", fontSize: "0.65rem", fontWeight: 800, letterSpacing: "0.1em", marginBottom: "1.2rem"
+        }}>
+          <Gem size={12} /> PLATINUM
+        </div>
+      )}
+      {isGold && (
+        <div style={{
+          display: "inline-flex", alignItems: "center", gap: "0.4rem", background: "rgba(217, 119, 6, 0.12)", color: "#B45309", padding: "0.3rem 0.8rem", borderRadius: "999px", fontSize: "0.65rem", fontWeight: 800, letterSpacing: "0.1em", marginBottom: "1.2rem"
+        }}>
+          <Award size={12} /> GOLD
+        </div>
+      )}
+      {isSilver && (
+        <div style={{
+          display: "inline-flex", alignItems: "center", gap: "0.4rem", background: "rgba(100, 116, 139, 0.12)", color: "#475569", padding: "0.3rem 0.8rem", borderRadius: "999px", fontSize: "0.65rem", fontWeight: 800, letterSpacing: "0.1em", marginBottom: "1.2rem"
+        }}>
+          <ShieldCheck size={12} /> SILVER
+        </div>
+      )}
+      {isMedia && (
+        <div style={{
+          display: "inline-flex", alignItems: "center", gap: "0.4rem", background: "rgba(31, 75, 93, 0.08)", color: "#1f4b5d", padding: "0.3rem 0.8rem", borderRadius: "999px", fontSize: "0.65rem", fontWeight: 800, letterSpacing: "0.1em", marginBottom: "1.2rem"
+        }}>
+          <Radio size={12} /> MEDIA
+        </div>
+      )}
+
+      {/* Logo or Icon */}
+      {item.logoSrc ? (
+        <img
+          src={getCloudinaryUrl(item.logoSrc)}
+          alt={item.name}
+          style={{
+            height: isPlatinum ? "55px" : isGold ? "40px" : "30px",
+            width: "auto",
+            maxWidth: isPlatinum ? "180px" : "140px",
+            objectFit: "contain",
+            marginBottom: "0.75rem",
+            filter: isPlatinum ? "drop-shadow(0 4px 12px rgba(0,0,0,0.06))" : "none",
+          }}
+        />
+      ) : (
+        <Radio size={40} color="#1f4b5d" style={{ marginBottom: "0.75rem" }} />
+      )}
+
+      {/* Text */}
+      <div style={{ fontSize: isPlatinum ? "0.95rem" : isGold ? "0.88rem" : "0.82rem", fontWeight: 800, color: "#1E293B", marginBottom: "0.15rem" }}>
+        {item.name}
+      </div>
+      <div style={{ fontSize: isPlatinum ? "0.78rem" : isGold ? "0.74rem" : "0.7rem", fontWeight: 600, color: "#64748B" }}>
+        {item.category}
+      </div>
+    </div>
+  );
+};
+
+const Carousel = ({ items, windowWidth }: { items: SponsorItem[], windowWidth: number }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const total = items.length;
+
+  // Swipe / drag state
+  const [dragStartX, setDragStartX] = useState<number | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % total);
+    }, 2000);
+    return () => clearInterval(timer);
+  }, [isPaused, total]);
+
+  // Touch handlers
+  const onTouchStart = (e: React.TouchEvent) => {
+    setDragStartX(e.touches[0].clientX);
+    setIsPaused(true);
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (dragStartX === null) return;
+    const diff = e.changedTouches[0].clientX - dragStartX;
+    if (Math.abs(diff) > 40) {
+      if (diff < 0) {
+        setActiveIndex((prev) => (prev + 1) % total);
+      } else {
+        setActiveIndex((prev) => (prev - 1 + total) % total);
+      }
+    }
+    setDragStartX(null);
+    setIsPaused(false);
+  };
+
+  // Mouse drag handlers
+  const onMouseDown = (e: React.MouseEvent) => {
+    setDragStartX(e.clientX);
+    setIsDragging(true);
+    setIsPaused(true);
+  };
+  const onMouseUp = (e: React.MouseEvent) => {
+    if (dragStartX === null) return;
+    const diff = e.clientX - dragStartX;
+    if (Math.abs(diff) > 40) {
+      if (diff < 0) {
+        setActiveIndex((prev) => (prev + 1) % total);
+      } else {
+        setActiveIndex((prev) => (prev - 1 + total) % total);
+      }
+    }
+    setDragStartX(null);
+    setIsDragging(false);
+    setIsPaused(false);
+  };
+  const onMouseLeave = () => {
+    if (isDragging) {
+      setDragStartX(null);
+      setIsDragging(false);
+    }
+    setIsPaused(false);
+  };
+
+  return (
+    <div 
+      style={{ position: "relative", width: "100%", paddingBottom: "2rem", userSelect: "none" }}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={onMouseLeave}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
+    >
+      <div style={{ position: "relative", width: "100%", height: "280px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "grab" }}>
+        {/* Track */}
+        <div style={{ position: "relative", width: "100%", height: "100%", margin: "0 auto", overflow: "hidden" }}>
+          {items.map((item, i) => {
+            let offset = i - activeIndex;
+
+            const half = Math.floor(total / 2);
+            if (offset < -half) offset += total;
+            if (offset > half) offset -= total;
+
+            const isCenter = offset === 0;
+            const absOffset = Math.abs(offset);
+
+            // Distance configured to fit 2-columns (50vw width each)
+            const offsetDistance =
+              windowWidth <= 768
+                ? 160
+                : windowWidth <= 1024
+                  ? 150
+                  : 180;
+            const xOffset = offset * offsetDistance;
+            const scale = isCenter ? 1.05 : 1 - absOffset * 0.15;
+            const zIndex = 50 - absOffset;
+            const opacity = absOffset > 1 ? 0 : isCenter ? 1 : 0.4;
+            
+            return (
+              <div
+                key={i}
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: `translate(calc(-50% + ${xOffset}px), -50%) scale(${scale})`,
+                  zIndex: zIndex,
+                  opacity: opacity,
+                  visibility: opacity === 0 ? "hidden" : "visible",
+                  transition: "all 0.5s cubic-bezier(0.25, 1, 0.5, 1)",
+                  cursor: isCenter ? "default" : "pointer",
+                  pointerEvents: isDragging ? "none" : "auto",
+                }}
+                onClick={() => {
+                  if (!isCenter && !isDragging) setActiveIndex(i);
+                }}
+              >
+                <SponsorCard item={item} isCenter={isCenter} />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Dots */}
+      <div style={{ display: "flex", justifyContent: "center", gap: "6px", marginTop: "1rem" }}>
+        {items.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActiveIndex(i)}
+            style={{
+              width: i === activeIndex ? "20px" : "6px",
+              height: "6px",
+              borderRadius: "3px",
+              background: i === activeIndex ? "var(--lp-ocean-blue)" : "rgba(31, 75, 93, 0.2)",
+              border: "none",
+              cursor: "pointer",
+              transition: "all 0.3s ease"
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 export default function SponsorSection() {
+  const [windowWidth, setWindowWidth] = useState(1200);
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <section
       id="sponsor"
       style={{
-        padding: "clamp(4rem, 7vw, 7rem) clamp(1rem, 5vw, 2rem)",
+        padding: "clamp(4rem, 7vw, 7rem) 0",
         background: "transparent",
         position: "relative",
+        overflow: "hidden"
       }}
     >
-      <div style={{ maxWidth: "1150px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "1250px", margin: "0 auto", padding: "0 clamp(1rem, 5vw, 2rem)" }}>
         {/* Section Header */}
         <div style={{ textAlign: "center", marginBottom: "4rem" }}>
           <h2
@@ -119,337 +369,23 @@ export default function SponsorSection() {
           </p>
         </div>
 
-        {/* ================= 💎 PLATINUM SPONSOR (BESAR) ================= */}
-        <div style={{ marginBottom: "4.5rem", textAlign: "center" }}>
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              background: "linear-gradient(135deg, #1f4b5d 0%, #0F172A 100%)",
-              color: "#E2E8F0",
-              padding: "0.4rem 1.1rem",
-              borderRadius: "999px",
-              fontSize: "0.78rem",
-              fontWeight: 800,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              marginBottom: "2.5rem",
-              boxShadow: "0 4px 15px rgba(31,75,93,0.2)",
-            }}
-          >
-            <span><Gem size={15} style={{ verticalAlign: "middle" }} /></span> PLATINUM SPONSOR
+        {/* 2 Columns Grid */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: windowWidth <= 900 ? "1fr" : "1fr 1fr",
+          gap: "4rem",
+          alignItems: "start"
+        }}>
+          {/* Column 1: Sponsors */}
+          <div style={{ position: "relative" }}>
+            <h3 style={{ textAlign: "center", color: "#1A1A1A", fontSize: "1.2rem", fontWeight: 800, marginBottom: "2rem" }}>Official Sponsors</h3>
+            <Carousel items={SPONSORS} windowWidth={windowWidth} />
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "3.5rem 6rem",
-            }}
-          >
-            {PLATINUM_SPONSORS.map((item, i) => (
-              <div
-                key={i}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  textAlign: "center",
-                  transition: "transform 0.3s ease",
-                }}
-              >
-                {/* Logo Besar Platinum (Height ~70px) */}
-                <img
-                  src={getCloudinaryUrl(item.logoSrc)}
-                  alt={item.name}
-                  style={{
-                    height: "70px",
-                    width: "auto",
-                    maxWidth: "240px",
-                    objectFit: "contain",
-                    marginBottom: "0.75rem",
-                    filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.06))",
-                  }}
-                />
-
-                <div
-                  style={{
-                    fontSize: "0.95rem",
-                    fontWeight: 800,
-                    color: "#0F172A",
-                    marginBottom: "0.15rem",
-                  }}
-                >
-                  {item.name}
-                </div>
-
-                <div
-                  style={{
-                    fontSize: "0.78rem",
-                    fontWeight: 600,
-                    color: "#64748B",
-                  }}
-                >
-                  {item.category}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div
-          style={{
-            height: "1px",
-            background: "rgba(0,0,0,0.06)",
-            maxWidth: "800px",
-            margin: "0 auto 4rem",
-          }}
-        />
-
-        {/* ================= 🥇 GOLD SPONSOR (SEDANG) ================= */}
-        <div style={{ marginBottom: "4.5rem", textAlign: "center" }}>
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.4rem",
-              background: "rgba(217, 119, 6, 0.12)",
-              color: "#B45309",
-              padding: "0.35rem 0.95rem",
-              borderRadius: "999px",
-              fontSize: "0.75rem",
-              fontWeight: 800,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              marginBottom: "2rem",
-            }}
-          >
-            <span><Award size={15} style={{ verticalAlign: "middle" }} /></span> GOLD SPONSOR
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "2.5rem 4.5rem",
-            }}
-          >
-            {GOLD_SPONSORS.map((item, i) => (
-              <div
-                key={i}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  textAlign: "center",
-                }}
-              >
-                {/* Logo Sedang Gold (Height ~48px) */}
-                <img
-                  src={getCloudinaryUrl(item.logoSrc)}
-                  alt={item.name}
-                  style={{
-                    height: "48px",
-                    width: "auto",
-                    maxWidth: "180px",
-                    objectFit: "contain",
-                    marginBottom: "0.6rem",
-                  }}
-                />
-
-                <div
-                  style={{
-                    fontSize: "0.88rem",
-                    fontWeight: 800,
-                    color: "#1E293B",
-                    marginBottom: "0.1rem",
-                  }}
-                >
-                  {item.name}
-                </div>
-
-                <div
-                  style={{
-                    fontSize: "0.74rem",
-                    fontWeight: 600,
-                    color: "#64748B",
-                  }}
-                >
-                  {item.category}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div
-          style={{
-            height: "1px",
-            background: "rgba(0,0,0,0.06)",
-            maxWidth: "800px",
-            margin: "0 auto 4rem",
-          }}
-        />
-
-        {/* ================= 🥈 SILVER SPONSOR (KECIL) ================= */}
-        <div style={{ marginBottom: "4.5rem", textAlign: "center" }}>
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.4rem",
-              background: "rgba(100, 116, 139, 0.12)",
-              color: "#475569",
-              padding: "0.35rem 0.95rem",
-              borderRadius: "999px",
-              fontSize: "0.75rem",
-              fontWeight: 800,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              marginBottom: "1.75rem",
-            }}
-          >
-            <span><ShieldCheck size={15} style={{ verticalAlign: "middle" }} /></span> SILVER SPONSOR
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "2rem 3rem",
-            }}
-          >
-            {SILVER_SPONSORS.map((item, i) => (
-              <div
-                key={i}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  textAlign: "center",
-                }}
-              >
-                {/* Logo Kecil Silver (Height ~32px) */}
-                <img
-                  src={getCloudinaryUrl(item.logoSrc)}
-                  alt={item.name}
-                  style={{
-                    height: "34px",
-                    width: "auto",
-                    maxWidth: "140px",
-                    objectFit: "contain",
-                    marginBottom: "0.4rem",
-                    opacity: 0.9,
-                  }}
-                />
-
-                <div
-                  style={{
-                    fontSize: "0.82rem",
-                    fontWeight: 700,
-                    color: "#334155",
-                    marginBottom: "0.1rem",
-                  }}
-                >
-                  {item.name}
-                </div>
-
-                <div
-                  style={{
-                    fontSize: "0.7rem",
-                    fontWeight: 600,
-                    color: "#94A3B8",
-                  }}
-                >
-                  {item.category}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div
-          style={{
-            height: "1px",
-            background: "rgba(0,0,0,0.06)",
-            maxWidth: "800px",
-            margin: "0 auto 4rem",
-          }}
-        />
-
-        {/* ================= 📻 MEDIA PARTNER ================= */}
-        <div style={{ textAlign: "center" }}>
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.4rem",
-              background: "rgba(31, 75, 93, 0.08)",
-              color: "#1f4b5d",
-              padding: "0.35rem 0.95rem",
-              borderRadius: "999px",
-              fontSize: "0.75rem",
-              fontWeight: 800,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              marginBottom: "1.75rem",
-            }}
-          >
-            <span><Radio size={15} style={{ verticalAlign: "middle" }} /></span> MEDIA PARTNER
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              gap: "2rem 3rem",
-              alignItems: "center",
-            }}
-          >
-            {MEDIA_PARTNERS.map((item, i) => (
-              <div
-                key={i}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.75rem",
-                }}
-              >
-                <span style={{ display: "inline-flex", alignItems: "center", color: "#1f4b5d" }}>
-                  <Radio size={18} />
-                </span>
-                <div style={{ textAlign: "left" }}>
-                  <div
-                    style={{
-                      fontSize: "0.88rem",
-                      fontWeight: 800,
-                      color: "#1E293B",
-                      lineHeight: 1.2,
-                    }}
-                  >
-                    {item.name}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "0.72rem",
-                      fontWeight: 600,
-                      color: "#64748B",
-                      marginTop: "0.1rem",
-                    }}
-                  >
-                    {item.category}
-                  </div>
-                </div>
-              </div>
-            ))}
+          {/* Column 2: Media Partners */}
+          <div style={{ position: "relative" }}>
+            <h3 style={{ textAlign: "center", color: "#1A1A1A", fontSize: "1.2rem", fontWeight: 800, marginBottom: "2rem" }}>Media Partners</h3>
+            <Carousel items={MEDIA_PARTNERS} windowWidth={windowWidth} />
           </div>
         </div>
       </div>

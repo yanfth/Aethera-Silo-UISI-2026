@@ -9,7 +9,7 @@ import { Hexagon, Camera, MessageCircle, Mail } from "lucide-react";
 
 export const metadata = {
   title: "Daftar Panitia - AETHERA SILO UISI 2026",
-  description: "Daftar Lengkap BPH, Koordinator Divisi, dan 113 Anggota Panitia AETHERA SILO UISI 2026.",
+  description: "Daftar Lengkap BPH, Koordinator Divisi, dan 112 Anggota Panitia AETHERA SILO UISI 2026.",
 };
 
 export default function PanitiaPage() {
@@ -26,7 +26,7 @@ export default function PanitiaPage() {
             Daftar <span className={styles.titleGradient}>Panitia</span>
           </h2>
           <p className={styles.sectionSubtitle}>
-            BPH, Koordinator Divisi &amp; 113 Anggota Panitia AETHERA SILO UISI 2026
+            BPH, Koordinator Divisi &amp; 112 Anggota Panitia AETHERA SILO UISI 2026
           </p>
 
           <PanitiaCarousel />

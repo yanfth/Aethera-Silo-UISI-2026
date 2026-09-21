@@ -1,8 +1,14 @@
-'use client';
+"use client";
 
 import React from "react";
 import styles from "./MapsSection.module.css";
-import { MapPin, Navigation, Clock, Building2, ExternalLink } from "lucide-react";
+import {
+  MapPin,
+  Navigation,
+  Clock,
+  Building2,
+  ExternalLink,
+} from "lucide-react";
 
 export default function MapsSection() {
   const googleMapsUrl =
@@ -13,10 +19,12 @@ export default function MapsSection() {
       {/* Header */}
       <div className={styles.header}>
         <h2 className={styles.title}>
-          Lokasi <span className={styles.titleGradient}>Kampus UISI Gresik</span>
+          Lokasi{" "}
+          <span className={styles.titleGradient}>Kampus UISI Gresik</span>
         </h2>
         <p className={styles.subtitle}>
-          Titik lokasi utama pelaksanaan kegiatan AETHERA SILO UISI 2026. Temukan petunjuk arah dan akses transportasi menuju lokasi kampus.
+          Titik lokasi utama pelaksanaan kegiatan AETHERA SILO UISI 2026.
+          Temukan petunjuk arah dan akses transportasi menuju lokasi kampus.
         </p>
       </div>
 
@@ -31,7 +39,8 @@ export default function MapsSection() {
             <div className={styles.infoContent}>
               <h3 className={styles.infoTitle}>Alamat Utama Kampus</h3>
               <p className={styles.infoText}>
-                Kompleks PT. Semen Indonesia, Jl. Veteran, Tuban Barat, Tlogobendung, Kec. Gresik, Kabupaten Gresik, Jawa Timur 61122
+                Kompleks PT. Semen Indonesia, Jl. Veteran, Tuban Barat,
+                Tlogobendung, Kec. Gresik, Kabupaten Gresik, Jawa Timur 61122
               </p>
             </div>
           </div>
@@ -44,7 +53,7 @@ export default function MapsSection() {
             <div className={styles.infoContent}>
               <h3 className={styles.infoTitle}>Pusat Kegiatan SILO 2026</h3>
               <p className={styles.infoText}>
-                Lapangan Utama Kampus, Auditorium Utama, dan Hall Serbaguna UISI Gresik.
+                Kampus B UISI & Wisma Djendral Ahmad Yani.
               </p>
             </div>
           </div>
@@ -57,7 +66,8 @@ export default function MapsSection() {
             <div className={styles.infoContent}>
               <h3 className={styles.infoTitle}>Aksesibilitas &amp; Rute</h3>
               <p className={styles.infoText}>
-                Dapat diakses 10 menit dari Pintu Tol Kebomas/Romokalisari, dekat Stasiun Indro Gresik &amp; Terminal Bunder.
+                Dapat diakses 10 menit dari Pintu Tol Kebomas/Romokalisari,
+                dekat Stasiun Indro Gresik &amp; Terminal Bunder.
               </p>
             </div>
           </div>

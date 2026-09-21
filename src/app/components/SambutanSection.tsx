@@ -15,6 +15,7 @@ interface SambutanItem {
   title: string;
   image: string;
   isLocal?: boolean;
+  objectPosition?: string;
   paragraphs: string[];
 }
 
@@ -28,9 +29,10 @@ const SAMBUTAN_DATA: SambutanItem[] = [
     title: "Rektor Universitas Internasional Semen Indonesia (UISI)",
     image: rektorImg.src,
     isLocal: true,
+    objectPosition: "center 15%",
     paragraphs: [
       "Assalamualaikum warahmatullahi wabarakatuh, Selamat Pagi dan Salam Sejahtera bagi Kita Semua.",
-      "Selamat datang Generasi Muda Aethera di Kampus Perjuangan dan Karya, Universitas Internasional Semen Indonesia (UISI). SILO 2026 merupakan gerbang pembuka perjalanan akademis dan pembentukan karakter dalam lingkungan perguruan tinggi yang adaptif, unggul, dan berintegritas tinggi.",
+      "Selamat datang Generasi Muda Aethera di Universitas Internasional Semen Indonesia. SILO 2026 merupakan gerbang pembuka perjalanan akademis dan pembentukan karakter dalam lingkungan perguruan tinggi yang adaptif, unggul, dan berintegritas tinggi.",
       "Di UISI, kalian diajak untuk mengasah keilmuan, berinovasi, dan memberikan dampak nyata bagi masyarakat global. Manfaatkan setiap momen di SILO 2026 ini dengan semangat belajar tinggi, keterbukaan pikiran, dan nilai-nilai kebersamaan.",
       "Selamat berjuang dan mulailah perjalanan emas kalian bersama Universitas Internasional Semen Indonesia!",
     ],
@@ -43,9 +45,10 @@ const SAMBUTAN_DATA: SambutanItem[] = [
     name: "Nabil Qudsi Mas'ud",
     title: "Ketua Pelaksana Panitia Mahasiswa AETHERA SILO UISI 2026",
     image: "/nabil_qudsi.webp?v=2",
+    objectPosition: "center 20%",
     paragraphs: [
       "Salam Semangat Ksatria Aethera 2026!",
-      "Selamat datang di kampus pergerakan dan karya, Universitas Internasional Semen Indonesia (UISI)! Kami atas nama seluruh jajaran Panitia Mahasiswa AETHERA SILO UISI 2026 mengucapkan selamat atas keberhasilan rekan-rekan sekalian menembus gerbang perguruan tinggi ini.",
+      "Selamat datang di Universitas Internasional Semen Indonesia ! Kami atas nama seluruh jajaran Panitia Mahasiswa AETHERA SILO UISI 2026 mengucapkan selamat atas keberhasilan rekan-rekan sekalian menembus gerbang perguruan tinggi ini.",
       "Mengusung nama Aethera, AETHERA SILO UISI 2026 membawa filosofi energi membara, keberanian, dan persatuan. Orientasi ini dirancang bukan untuk membebani, melainkan untuk menempa mentalitas tangguh, mempererat tali persaudaraan antar rasi kelompok, dan memperkenalkan budaya apresiatif serta kolaboratif di lingkungan kampus.",
       "Jangan pernah ragu melangkah keluar dari zona nyaman. Manfaatkan kesempatan ini untuk mengeksplorasi potensi diri, mengasah rasa kepedulian sosial, dan menyerap nilai-nilai kebersamaan. Mari kita ukir jejak karya pertama yang membanggakan bersama di AETHERA SILO UISI 2026!",
     ],
@@ -71,96 +74,54 @@ export default function SambutanSection() {
           <div
             key={item.id}
             className={`${styles.sambutanBlock} ${
-              item.imagePosition === "left" ? styles.imageLeftBlock : ""
+              item.imagePosition === "right" ? styles.imageRight : ""
             }`}
           >
-            {item.imagePosition === "left" ? (
-              <>
-                {/* Photo Box on Left */}
-                <div className={styles.photoBoxWrapper}>
-                  <div className={styles.photoFrame}>
-                    <img
-                      src={item.isLocal ? item.image : getCloudinaryUrl(item.image, 1000)}
-                      alt={item.name}
-                      className={styles.portraitPhoto}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-
-                  {/* Ornate Ribbon Badge */}
-                  <div className={styles.bannerRibbon}>
-                    <span className={styles.ribbonOrnate}>✦</span>
-                    <span className={styles.ribbonText}>
-                      {item.badgeBanner}
-                    </span>
-                    <span className={styles.ribbonOrnate}>✦</span>
-                  </div>
+              {/* Photo Box */}
+              <div className={styles.photoBoxWrapper}>
+                <div className={styles.photoFrame}>
+                  <img
+                    src={
+                      item.isLocal
+                        ? item.image
+                        : getCloudinaryUrl(item.image, 1000)
+                    }
+                    alt={item.name}
+                    className={styles.portraitPhoto}
+                    style={{ objectPosition: item.objectPosition || "top center" }}
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
 
-                {/* Speech Box on Right */}
-                <div className={styles.speechBox}>
-                  <div className={styles.quoteMark}>&ldquo;</div>
-                  <h2 className={styles.speechTitle}>{item.sectionTitle}</h2>
-
-                  <div className={styles.paragraphList}>
-                    {item.paragraphs.map((p, idx) => (
-                      <p key={idx} className={styles.paragraphItem}>
-                        {p}
-                      </p>
-                    ))}
-                  </div>
-
-                  <div className={styles.authorFooter}>
-                    <h4 className={styles.authorName}>{item.name}</h4>
-                    <p className={styles.authorTitle}>{item.title}</p>
-                  </div>
+                {/* Ornate Ribbon Badge */}
+                <div className={styles.bannerRibbon}>
+                  <span className={styles.ribbonOrnate}>✦</span>
+                  <span className={styles.ribbonText}>
+                    {item.badgeBanner}
+                  </span>
+                  <span className={styles.ribbonOrnate}>✦</span>
                 </div>
-              </>
-            ) : (
-              <>
-                {/* Speech Box on Left */}
-                <div className={styles.speechBox}>
-                  <div className={styles.quoteMark}>&ldquo;</div>
-                  <h2 className={styles.speechTitle}>{item.sectionTitle}</h2>
+              </div>
 
-                  <div className={styles.paragraphList}>
-                    {item.paragraphs.map((p, idx) => (
-                      <p key={idx} className={styles.paragraphItem}>
-                        {p}
-                      </p>
-                    ))}
-                  </div>
+              {/* Speech Box */}
+              <div className={styles.speechBox}>
+                <div className={styles.quoteMark}>&ldquo;</div>
+                <h2 className={styles.speechTitle}>{item.sectionTitle}</h2>
 
-                  <div className={styles.authorFooter}>
-                    <h4 className={styles.authorName}>{item.name}</h4>
-                    <p className={styles.authorTitle}>{item.title}</p>
-                  </div>
+                <div className={styles.paragraphList}>
+                  {item.paragraphs.map((p, idx) => (
+                    <p key={idx} className={styles.paragraphItem}>
+                      {p}
+                    </p>
+                  ))}
                 </div>
 
-                {/* Photo Box on Right */}
-                <div className={styles.photoBoxWrapper}>
-                  <div className={styles.photoFrame}>
-                    <img
-                      src={item.isLocal ? item.image : getCloudinaryUrl(item.image, 1000)}
-                      alt={item.name}
-                      className={styles.portraitPhoto}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-
-                  {/* Ornate Ribbon Badge */}
-                  <div className={styles.bannerRibbon}>
-                    <span className={styles.ribbonOrnate}>✦</span>
-                    <span className={styles.ribbonText}>
-                      {item.badgeBanner}
-                    </span>
-                    <span className={styles.ribbonOrnate}>✦</span>
-                  </div>
+                <div className={styles.authorFooter}>
+                  <h4 className={styles.authorName}>{item.name}</h4>
+                  <p className={styles.authorTitle}>{item.title}</p>
                 </div>
-              </>
-            )}
+              </div>
           </div>
         ))}
       </div>
