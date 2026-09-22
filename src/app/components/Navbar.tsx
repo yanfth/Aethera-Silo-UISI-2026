@@ -177,7 +177,7 @@ export default function Navbar() {
                 <Users size={16} className={styles.dropdownIcon} /> Panitia SILO
               </Link>
               <Link href="/penugasan" className={styles.dropdownItem} onClick={() => setJelajahDropdownOpen(false)}>
-                <BookOpen size={16} className={styles.dropdownIcon} /> Penugasan &amp; Guidebook
+                <BookOpen size={16} className={styles.dropdownIcon} /> Guidebook
               </Link>
               <Link href="/kelompok" className={styles.dropdownItem} onClick={() => setJelajahDropdownOpen(false)}>
                 <Globe size={16} className={styles.dropdownIcon} /> Cluster Kelompok
@@ -277,7 +277,7 @@ export default function Navbar() {
                   className={`${styles.mobileSubLink} ${isActive("/penugasan") ? styles.mobileActiveSubLink : ""}`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <BookOpen size={17} style={{ color: "var(--lp-aqua)" }} /> Penugasan &amp; Guidebook
+                  <BookOpen size={17} style={{ color: "var(--lp-aqua)" }} /> Guidebook
                 </Link>
                 <Link
                   href="/kelompok"
