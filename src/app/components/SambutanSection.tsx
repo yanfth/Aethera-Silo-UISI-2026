@@ -16,6 +16,7 @@ interface SambutanItem {
   image: string;
   isLocal?: boolean;
   objectPosition?: string;
+  imageScale?: number;
   paragraphs: string[];
 }
 
@@ -46,6 +47,7 @@ const SAMBUTAN_DATA: SambutanItem[] = [
     title: "Ketua Pelaksana Panitia Mahasiswa AETHERA SILO UISI 2026",
     image: "/nabil_qudsi.webp?v=2",
     objectPosition: "center 20%",
+    imageScale: 1.35,
     paragraphs: [
       "Salam Semangat Ksatria Aethera 2026!",
       "Selamat datang di Universitas Internasional Semen Indonesia ! Kami atas nama seluruh jajaran Panitia Mahasiswa AETHERA SILO UISI 2026 mengucapkan selamat atas keberhasilan rekan-rekan sekalian menembus gerbang perguruan tinggi ini.",
@@ -88,7 +90,10 @@ export default function SambutanSection() {
                     }
                     alt={item.name}
                     className={styles.portraitPhoto}
-                    style={{ objectPosition: item.objectPosition || "top center" }}
+                    style={{ 
+                      objectPosition: item.objectPosition || "top center",
+                      "--img-scale": item.imageScale || 1
+                    } as React.CSSProperties}
                     loading="lazy"
                     decoding="async"
                   />

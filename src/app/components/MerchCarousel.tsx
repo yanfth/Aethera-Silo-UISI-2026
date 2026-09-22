@@ -175,7 +175,14 @@ export default function MerchCarousel() {
                   </div>
                   {/* Price & Cart */}
                   <div className={styles.priceRow}>
-                    <span className={styles.price}>{item.price}</span>
+                    <div className={styles.priceCol}>
+                      <span className={styles.priceCurrency}>
+                        {item.price.split(" ")[0]}
+                      </span>
+                      <span className={styles.priceValue}>
+                        {item.price.split(" ").slice(1).join(" ")}
+                      </span>
+                    </div>
                     {isCenter && (
                       <a
                         href="https://docs.google.com/forms/d/e/1FAIpQLSdEwUkcCb-dL2PYjVbKn6E95NEmCbOHrbrX9d06GZJY572hkQ/viewform?usp=publish-editor"

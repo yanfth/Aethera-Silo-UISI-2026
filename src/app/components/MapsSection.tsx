@@ -11,16 +11,14 @@ import {
 } from "lucide-react";
 
 export default function MapsSection() {
-  const googleMapsUrl =
-    "https://maps.google.com/?q=Kompleks+PT.+Semen+Indonesia,+Jl.+Veteran,+Tuban+Barat,+Tlogobendung,+Kec.+Gresik,+Kabupaten+Gresik,+Jawa+Timur+61122";
+  const googleMapsUrl = "https://maps.app.goo.gl/Em8jmhah1ujrv3D89";
 
   return (
     <section id="lokasi" className={styles.section} data-aos="fade-up">
       {/* Header */}
       <div className={styles.header}>
         <h2 className={styles.title}>
-          Lokasi{" "}
-          <span className={styles.titleGradient}>Kampus UISI Gresik</span>
+          Lokasi <span className={styles.titleGradient}>Kampus UISI</span>
         </h2>
         <p className={styles.subtitle}>
           Titik lokasi utama pelaksanaan kegiatan AETHERA SILO UISI 2026.
