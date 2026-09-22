@@ -139,8 +139,8 @@ export default function Navbar() {
             style={{ objectFit: "contain" }}
           />
           <span className={styles.logoTextFull}>AETHERA SILO UISI 2026</span>
-          <span className={styles.logoTextMedium}>AETHERA SILO 2026</span>
-          <span className={styles.logoTextShort}>AETHERA SILO</span>
+          <span className={styles.logoTextMedium}>SILO UISI 2026</span>
+          <span className={styles.logoTextShort}>SILO UISI 2026</span>
         </Link>
 
         {/* Desktop Nav Links (> 1024px) */}
