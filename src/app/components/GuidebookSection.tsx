@@ -19,7 +19,7 @@ const GuidebookFlipbook = dynamic(() => import("./GuidebookFlipbook"), {
 
 export default function GuidebookSection() {
   return (
-    <section id="guidebook" className={styles.section} data-aos="fade-up">
+    <section id="guidebook" className={styles.section} data-aos="fade-up" suppressHydrationWarning>
       <div className={styles.container}>
         <div className={styles.header}>
           <h2 className={styles.title}>

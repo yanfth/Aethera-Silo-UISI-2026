@@ -51,7 +51,7 @@ export default function Footer() {
         <div className={styles.footerLinks}>
           <Link href="/#about">Tentang Kami</Link>
           <Link href="/panitia">Daftar Panitia</Link>
-          <Link href="/penugasan">Guidebook dan Penugasan</Link>
+          <Link href="/penugasan">Guidebook</Link>
           <Link href="/kelompok">Cluster</Link>
         </div>
       </div>
