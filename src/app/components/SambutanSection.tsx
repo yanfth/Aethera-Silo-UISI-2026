@@ -3,6 +3,7 @@
 import React from "react";
 import styles from "./SambutanSection.module.css";
 import { getCloudinaryUrl } from "@/utils/cloudinary";
+import { ImageWithLoading } from "@/components/ui/image-with-loading";
 
 import rektorImg from "./Rektor.jpg";
 
@@ -75,58 +76,59 @@ export default function SambutanSection() {
         {SAMBUTAN_DATA.map((item) => (
           <div
             key={item.id}
-            className={`${styles.sambutanBlock} ${
-              item.imagePosition === "right" ? styles.imageRight : ""
-            }`}
+            className={`${styles.sambutanBlock} ${item.imagePosition === "right" ? styles.imageRight : ""
+              }`}
           >
-              {/* Photo Box */}
-              <div className={styles.photoBoxWrapper}>
-                <div className={styles.photoFrame}>
-                  <img
-                    src={
-                      item.isLocal
-                        ? item.image
-                        : getCloudinaryUrl(item.image, 1000)
-                    }
-                    alt={item.name}
-                    className={styles.portraitPhoto}
-                    style={{ 
-                      objectPosition: item.objectPosition || "top center",
-                      "--img-scale": item.imageScale || 1
-                    } as React.CSSProperties}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-
-                {/* Ornate Ribbon Badge */}
-                <div className={styles.bannerRibbon}>
-                  <span className={styles.ribbonOrnate}>✦</span>
-                  <span className={styles.ribbonText}>
-                    {item.badgeBanner}
-                  </span>
-                  <span className={styles.ribbonOrnate}>✦</span>
-                </div>
+            {/* Photo Box */}
+            <div className={styles.photoBoxWrapper}>
+              <div className={styles.photoFrame}>
+                <ImageWithLoading
+                  src={
+                    item.isLocal
+                      ? item.image
+                      : getCloudinaryUrl(item.image, 1000)
+                  }
+                  alt={item.name}
+                  className={styles.portraitPhoto}
+                  style={{
+                    objectPosition: item.objectPosition || "top center",
+                    "--img-scale": item.imageScale || 1
+                  } as React.CSSProperties}
+                  wrapperStyle={{ width: '100%', height: '100%' }}
+                  loading="lazy"
+                  decoding="async"
+                  showIndicator
+                />
               </div>
 
-              {/* Speech Box */}
-              <div className={styles.speechBox}>
-                <div className={styles.quoteMark}>&ldquo;</div>
-                <h2 className={styles.speechTitle}>{item.sectionTitle}</h2>
-
-                <div className={styles.paragraphList}>
-                  {item.paragraphs.map((p, idx) => (
-                    <p key={idx} className={styles.paragraphItem}>
-                      {p}
-                    </p>
-                  ))}
-                </div>
-
-                <div className={styles.authorFooter}>
-                  <h4 className={styles.authorName}>{item.name}</h4>
-                  <p className={styles.authorTitle}>{item.title}</p>
-                </div>
+              {/* Ornate Ribbon Badge */}
+              <div className={styles.bannerRibbon}>
+                <span className={styles.ribbonOrnate}>✦</span>
+                <span className={styles.ribbonText}>
+                  {item.badgeBanner}
+                </span>
+                <span className={styles.ribbonOrnate}>✦</span>
               </div>
+            </div>
+
+            {/* Speech Box */}
+            <div className={styles.speechBox}>
+              <div className={styles.quoteMark}>&ldquo;</div>
+              <h2 className={styles.speechTitle}>{item.sectionTitle}</h2>
+
+              <div className={styles.paragraphList}>
+                {item.paragraphs.map((p, idx) => (
+                  <p key={idx} className={styles.paragraphItem}>
+                    {p}
+                  </p>
+                ))}
+              </div>
+
+              <div className={styles.authorFooter}>
+                <h4 className={styles.authorName}>{item.name}</h4>
+                <p className={styles.authorTitle}>{item.title}</p>
+              </div>
+            </div>
           </div>
         ))}
       </div>

@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import styles from "./DokumentasiGallery.module.css";
 import { getCloudinaryUrl } from "@/utils/cloudinary";
+import { ImageWithLoading } from "@/components/ui/image-with-loading";
 
 interface DocItem {
   id: string;
@@ -162,12 +163,14 @@ export default function DokumentasiGallery() {
               className={styles.slideCard}
               onClick={() => setSelectedImage(item)}
             >
-              <img
+              <ImageWithLoading
                 src={getCloudinaryUrl(item.src, 600)}
                 alt={item.title}
                 className={styles.slideImage}
+                wrapperClassName={styles.slideImageWrapper}
                 loading="lazy"
                 decoding="async"
+                showIndicator
               />
               <div className={styles.overlay}>
                 <span className={styles.itemTag}>{item.tag}</span>
@@ -216,10 +219,12 @@ export default function DokumentasiGallery() {
             >
               ×
             </button>
-            <img
+            <ImageWithLoading
               src={getCloudinaryUrl(selectedImage.src)}
               alt={selectedImage.title}
               className={styles.modalImage}
+              wrapperClassName={styles.modalImageWrapper}
+              showIndicator
             />
           </div>
         </div>
