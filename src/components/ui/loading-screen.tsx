@@ -35,10 +35,11 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
       <div className="silo-bounce-wrapper">
         <div className="silo-bounce-logo">
           <Image
-            src="/icon.png"
+            src="/logo_aethera.png"
             alt="Logo AETHERA SILO UISI"
             width={76}
             height={76}
+            priority
             style={{
               width: "76px",
               height: "76px",
