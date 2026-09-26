@@ -1,13 +1,12 @@
 "use client";
 import { useEffect } from 'react';
+import 'aos/dist/aos.css';
 
 export default function AosInit() {
   useEffect(() => {
-    // Delay AOS initialization until React client hydration is 100% complete
-    const timer = setTimeout(async () => {
+    const initAOS = async () => {
       try {
         const AOS = (await import('aos')).default;
-        await import('aos/dist/aos.css');
         AOS.init({
           duration: 800,
           once: true,
@@ -16,9 +15,9 @@ export default function AosInit() {
       } catch (err) {
         console.error("Gagal inisialisasi AOS:", err);
       }
-    }, 250);
+    };
 
-    return () => clearTimeout(timer);
+    initAOS();
   }, []);
   
   return null;
