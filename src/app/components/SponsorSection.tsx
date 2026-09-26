@@ -18,6 +18,12 @@ const SPONSORS: SponsorItem[] = [
     type: "PLATINUM",
   },
   {
+    name: "Bali PP Tour & Travel",
+    category: "Official Sponsor",
+    logoSrc: "/Sponsor/BALI PP TOUR & TRAVEL.png",
+    type: "GOLD",
+  },
+  {
     name: "BLU BCA",
     category: "Official Sponsor",
     logoSrc: "/Sponsor/BLU BCA.jpg",
