@@ -39,7 +39,6 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
             alt="Logo AETHERA SILO UISI"
             width={76}
             height={76}
-            priority
             style={{
               width: "76px",
               height: "76px",
