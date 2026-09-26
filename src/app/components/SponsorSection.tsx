@@ -60,7 +60,7 @@ const SPONSORS: SponsorItem[] = [
     type: "SILVER",
   },
   {
-    name: "Decoratic",
+    name: "Decorartic",
     category: "Official Sponsor",
     logoSrc: "/Sponsor/Decoratic.jpg",
     type: "PLATINUM",
@@ -68,7 +68,7 @@ const SPONSORS: SponsorItem[] = [
   {
     name: "Almee Studio",
     category: "Official Sponsor",
-    logoSrc: "/Sponsor/Almee Studio Silver.png",
+    logoSrc: "/Sponsor/Almee Studio Silvser.png",
     type: "SILVER",
   },
   {
