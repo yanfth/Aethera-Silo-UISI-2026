@@ -42,6 +42,12 @@ const SPONSORS: SponsorItem[] = [
     type: "GOLD",
   },
   {
+    name: "Sinergi Mitra Investama",
+    category: "Official Sponsor",
+    logoSrc: "/Sponsor/Sinergi Mitra Investama.png",
+    type: "GOLD",
+  },
+  {
     name: "Swabina Gatra",
     category: "Official Sponsor",
     logoSrc: "/Sponsor/Swabina Gatra.png",
@@ -74,7 +80,7 @@ const SPONSORS: SponsorItem[] = [
   {
     name: "Almee Studio",
     category: "Official Sponsor",
-    logoSrc: "/Sponsor/Almee Studio Silvser.png",
+    logoSrc: "/Sponsor/Almee Studio Silver.png",
     type: "SILVER",
   },
   {
